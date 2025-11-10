@@ -315,6 +315,9 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
   }
 
   onClearFilters(): void {
+    this.answeredControl.reset();
+  this.entityControl.reset();
+  this.brokerControl.reset();
     this.selectedAnswered = '';
     this.selectedEntity = '';
     this.selectedUser = '';

@@ -87,15 +87,7 @@
 
       <!-- Paginator Section - Desktop -->
       <div class="notification-tray__paginator-container notification-tray__paginator-container--desktop" *ngIf="paginatedData && paginatedData.length > 0">
-        <div class="notification-tray__rows-per-page">
-          <select class="notification-tray__rows-select" [(ngModel)]="itemsPerPage" (ngModelChange)="onItemsPerPageChange($event)">
-            <option [value]="10">10</option>
-            <option [value]="25">25</option>
-            <option [value]="50">50</option>
-            <option [value]="100">100</option>
-          </select>
-        </div>
-
+        
         <app-paginator
           *ngIf="showPaginator"
           class="notification-tray__paginator"
@@ -119,14 +111,7 @@
 
       <!-- Paginator Section - Mobile -->
       <div class="notification-tray__paginator-container notification-tray__paginator-container--mobile" *ngIf="paginatedData && paginatedData.length > 0">
-        <div class="notification-tray__rows-per-page">
-          <select class="notification-tray__rows-select" [(ngModel)]="itemsPerPage" (ngModelChange)="onItemsPerPageChange($event)">
-            <option [value]="10">10</option>
-            <option [value]="25">25</option>
-            <option [value]="50">50</option>
-            <option [value]="100">100</option>
-          </select>
-        </div>
+       
 
         <app-paginator
           *ngIf="showPaginator"

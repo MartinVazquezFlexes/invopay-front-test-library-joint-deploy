@@ -8,6 +8,8 @@ import IpSelectInputOption from '../../../../../../base/src/lib/interfaces/ip-se
 import { forkJoin, Subscription, combineLatest } from 'rxjs';
 import { Broker } from '../../interface/broker';
 import { NotificationItem, NotificationTrayConfig } from '../../interface/notification-tray.models';
+import { MatDialog } from '@angular/material/dialog';
+import { IpNotificationModalFilterMobileComponent } from '../../components/ip-notification-modal-filter-mobile/ip-notification-modal-filter-mobile.component';
 
 @Component({
   selector: 'app-insurance-notification-tray',
@@ -19,6 +21,7 @@ export class InsuranceNotificationTrayComponent implements OnInit, OnDestroy {
   private readonly router = inject(Router);
   private readonly notificationService = inject(NotificationInsuranceService);
   private subscription = new Subscription();
+  private readonly dialog = inject(MatDialog);
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -215,6 +218,61 @@ export class InsuranceNotificationTrayComponent implements OnInit, OnDestroy {
     this.subscription.add(sub);
   }
 
+
+// Replace the onMobileFiltersOpened method with this:
+onMobileFiltersOpened(): void {
+  const dialogRef = this.dialog.open(IpNotificationModalFilterMobileComponent, {
+    data: {
+      entities: this.notificationTrayConfig.entities.map(e => ({ 
+        label: e, 
+        value: e 
+      })),
+      users: this.brokerOptions,  
+      currentFilters: {
+        answered: this.selectedAnswered,
+        entity: this.selectedEntity,
+        user: this.selectedUser
+      },
+      mode: 'insurance' 
+    }
+  });
+  const sub = dialogRef.componentInstance.applyFilters.subscribe((filters: any) => {
+    this.onSearchPerformed(filters);
+    dialogRef.close();
+  });
+
+  dialogRef.componentInstance.clearFilters.subscribe(() => {
+    this.onFiltersCleared();
+    dialogRef.close();
+  });
+
+  dialogRef.afterClosed().subscribe(() => {
+    sub.unsubscribe();
+  });
+}
+onSearchPerformed(filters: any): void {
+  console.log('Search filters received:', filters);
+  
+  this.selectedAnswered = filters.answered || '';
+  this.selectedEntity = filters.entity || '';
+  this.selectedUser = filters.user || '';
+
+  if (filters.user) {
+    this.selectedBrokerId = Number(filters.user);
+  } else {
+    this.selectedBrokerId = null;
+  }
+  
+  console.log('Selected broker ID:', this.selectedBrokerId);
+  
+  const entityType = this.getEntityType(filters.entity || '');
+  console.log('Entity type for API call:', entityType);
+  
+  this.loadNotifications(entityType, {
+    ...filters,
+    user: this.selectedBrokerId?.toString() || filters.user
+  });
+}
   onBrokerSelected(event: any): void {
     this.selectedBrokerId = event ? Number(event) : null;
   }
@@ -322,39 +380,6 @@ export class InsuranceNotificationTrayComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSearchPerformed(filters: any): void {
-    console.log('Search filters received:', filters);
-    
-    this.selectedAnswered = filters.answered || '';
-    this.selectedEntity = filters.entity || '';
-    this.selectedUser = filters.user || '';
-  
-    if (filters.user) {
-      if (!isNaN(filters.user)) {
-        this.selectedBrokerId = Number(filters.user);
-      } else {
-        const broker = this.brokers.find(b => 
-          b.username.toLowerCase() === filters.user.toLowerCase()
-        );
-        if (broker) {
-          this.selectedBrokerId = broker.id;
-        }
-      }
-    } else {
-      this.selectedBrokerId = null;
-    }
-    
-    console.log('Selected broker ID:', this.selectedBrokerId);
-    
-    const entityType = this.getEntityType(filters.entity || '');
-    console.log('Entity type for API call:', entityType);
-    
-    this.loadNotifications(entityType, {
-      ...filters,
-      user: this.selectedBrokerId?.toString() || filters.user
-    });
-  }
-
   onFiltersCleared(): void {
     this.selectedAnswered = '';
     this.selectedEntity = '';
@@ -379,9 +404,7 @@ export class InsuranceNotificationTrayComponent implements OnInit, OnDestroy {
     this.selectedUser = (event.target as HTMLInputElement).value;
   }
 
-  onMobileFiltersOpened(): void {
-    this.showMobileFiltersModal = true;
-  }
+ 
 
   onMobileSearch(): void {
     const filters = {

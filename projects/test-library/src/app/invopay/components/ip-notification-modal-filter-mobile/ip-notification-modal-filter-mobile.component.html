@@ -1,6 +1,6 @@
 <app-ip-modal-mobile
     [title]="'IP.NOTIFICATIONS.FILTERS.TITLE' | translate"
-    (close)="showMobileFiltersModal = false">
+    (close)="closeModal.emit()">
 
   <div class="mobile-filters-content">
     <div class="notification-tray__filter-group">
@@ -21,13 +21,23 @@
       </app-ip-select-input>
     </div>
 
-    <div class="notification-tray__filter-group">
+    <!-- User input/select - conditionally rendered based on mode -->
+    <div class="notification-tray__filter-group" *ngIf="mode === 'broker'">
       <app-ip-input
         [label]="'IP.NOTIFICATIONS.FILTERS.USER' | translate"
         [control]="userControl"
         [placeholder]="'IP.NOTIFICATIONS.FILTERS.USER_PLACEHOLDER' | translate"
         (changed)="onUserChanged($event)">
       </app-ip-input>
+    </div>
+
+    <div class="notification-tray__filter-group" *ngIf="mode === 'insurance'">
+      <app-ip-select-input
+        [options]="userOptions"
+        [labelCode]="'IP.NOTIFICATIONS.FILTERS.USER'"
+        [control]="userControl"
+        (selectEmitter)="selectedUser = $event">
+      </app-ip-select-input>
     </div>
 
     <div class="mobile-filters-content__actions">

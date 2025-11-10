@@ -25,7 +25,6 @@ export class BrokerNotificationTrayComponent implements OnInit,OnDestroy {
   private readonly notificationBrokerService = inject(NotificationBrokerService);
   private readonly router=inject(Router)  
   notificationData: NotificationItem[] = [];
-  originalNotificationData: NotificationItem[] = [];
   notificationUpdate:NotificationRead={
     notificationId:0
   }
@@ -43,10 +42,11 @@ export class BrokerNotificationTrayComponent implements OnInit,OnDestroy {
   /*
   Mobile filters state
   */
-  selectedAnswered = '';
-  selectedEntity = '';
-  selectedUser = '';
-  hasMobileSearched = false;
+  selectedAnswered: string = '';
+selectedEntity: string = '';
+selectedUser: string = '';
+hasMobileSearched: boolean = false;
+private originalNotificationData: any[] = [];
 
   /*
   Mobile filters state
@@ -168,6 +168,87 @@ export class BrokerNotificationTrayComponent implements OnInit,OnDestroy {
     }));
   }
 
+onMobileFiltersOpened(): void {
+  
+   const entityOptions = this.notificationTrayConfig.entities.map(entity => ({
+    label: entity,
+    value: entity
+  }));
+
+  const userOptions = this.notificationTrayConfig.users.map(user => ({
+    label: user,
+    value: user
+  }));
+
+  const dialogRef = this.matdialog.open(IpNotificationModalFilterMobileComponent, {
+    data: {
+      entities: entityOptions, 
+      users: userOptions,      
+      currentFilters: {
+        answered: this.selectedAnswered,
+        entity: this.selectedEntity,
+        user: this.selectedUser
+      },
+      mode: 'broker'
+    }
+  });
+
+  const sub = dialogRef.componentInstance.applyFilters.subscribe((filters: any) => {
+    this.selectedAnswered = filters.answered;
+    this.selectedEntity = filters.entity;
+    this.selectedUser = filters.user;
+    this.applyFilters(filters);
+  });
+
+  dialogRef.componentInstance.clearFilters.subscribe(() => {
+    this.clearFilters();
+  });
+
+  dialogRef.afterClosed().subscribe(() => {
+    sub.unsubscribe();
+  });
+}
+
+// 3. Add these helper methods
+private applyFilters(filters: any): void {
+  if (!this.originalNotificationData.length) {
+    this.originalNotificationData = [...this.notificationData];
+  }
+
+  let filteredData = [...this.originalNotificationData];
+
+  if (filters.answered) {
+    const answeredValue = filters.answered === 'si';
+    filteredData = filteredData.filter(item => 
+      item._rawData.answered === answeredValue
+    );
+  }
+
+  if (filters.entity) {
+    filteredData = filteredData.filter(item => 
+      item.entity === filters.entity
+    );
+  }
+
+  if (filters.user) {
+    filteredData = filteredData.filter(item => 
+      item.brokerName.toLowerCase().includes(filters.user.toLowerCase())
+    );
+  }
+
+  this.notificationData = filteredData;
+}
+
+private clearFilters(): void {
+  if (this.originalNotificationData.length) {
+    this.notificationData = [...this.originalNotificationData];
+  }
+  this.selectedAnswered = '';
+  this.selectedEntity = '';
+  this.selectedUser = '';
+  
+}
+
   /*
    Output handlers
    */
@@ -202,45 +283,6 @@ export class BrokerNotificationTrayComponent implements OnInit,OnDestroy {
     }
   }
 
-  onSearchPerformed(filters: any): void {
-    this.selectedAnswered = filters.answered || '';
-    this.selectedEntity = filters.entity || '';
-    this.selectedUser = filters.user || '';
-
-    let filteredData = [...this.originalNotificationData];
-
-    if (filters.answered) {
-      const answeredValue = filters.answered === 'si';
-      filteredData = filteredData.filter(item =>
-        item._rawData.answered === answeredValue
-      );
-    }
-
-    if (filters.entity) {
-      filteredData = filteredData.filter(item =>
-        item.entity === filters.entity
-      );
-    }
-
-    if (filters.user) {
-      filteredData = filteredData.filter(item =>
-        item.brokerName.toLowerCase().includes(filters.user.toLowerCase())
-      );
-    }
-
-    this.notificationData = filteredData;
-  }
-
-  onFiltersCleared(): void {
-    this.selectedAnswered = '';
-    this.selectedEntity = '';
-    this.selectedUser = '';
-    this.hasMobileSearched = false;
-    this.notificationData = [...this.originalNotificationData];
-    this.answeredControl.reset();
-    this.entityControl.reset();
-    this.userControl.reset();
-  }
 
   get isMobileSearchDisabled(): boolean {
     return !this.selectedAnswered && !this.selectedEntity && !this.selectedUser;
@@ -254,9 +296,50 @@ export class BrokerNotificationTrayComponent implements OnInit,OnDestroy {
     this.selectedUser = (event.target as HTMLInputElement).value;
   }
 
-  onMobileFiltersOpened(): void {
-    const dialogRef=this.matdialog.open(IpNotificationModalFilterMobileComponent)
+
+  public onSearchPerformed(filters: any): void {
+  if (!this.originalNotificationData.length) {
+    this.originalNotificationData = [...this.notificationData];
   }
+
+  this.selectedAnswered = filters.answered || '';
+  this.selectedEntity = filters.entity || '';
+  this.selectedUser = filters.user || '';
+
+  let filteredData = [...this.originalNotificationData];
+
+  if (this.selectedAnswered) {
+    const answeredValue = this.selectedAnswered === 'si';
+    filteredData = filteredData.filter(item => 
+      item._rawData.answered === answeredValue
+    );
+  }
+
+  if (this.selectedEntity) {
+    filteredData = filteredData.filter(item => 
+      item.entity === this.selectedEntity
+    );
+  }
+
+  if (this.selectedUser) {
+    filteredData = filteredData.filter(item => 
+      item.brokerName.toLowerCase().includes(this.selectedUser.toLowerCase())
+    );
+  }
+
+  this.notificationData = filteredData;
+  this.hasMobileSearched = true;
+}
+
+public onFiltersCleared(): void {
+  if (this.originalNotificationData.length) {
+    this.notificationData = [...this.originalNotificationData];
+  }
+  this.selectedAnswered = '';
+  this.selectedEntity = '';
+  this.selectedUser = '';
+  this.hasMobileSearched = false;
+}
 
   onMobileSearch(): void {
     let filteredData = [...this.originalNotificationData];

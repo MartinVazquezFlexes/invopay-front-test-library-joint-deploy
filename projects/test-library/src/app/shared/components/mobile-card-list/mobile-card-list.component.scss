@@ -60,6 +60,18 @@
     min-width: 120px;
     z-index: 1000;
     margin-top: 4px;
+    &::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      right: 5px;  
+      width: 10px;
+      height: 10px;
+      background: white;
+      transform: rotate(45deg);
+      box-shadow: -1px -1px 1px rgba(0,0,0,0.05);
+      z-index: -1; // Place it behind the dropdown content
+    }
   }
 
   &__dropdown-item {
