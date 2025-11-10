@@ -1,0 +1,146 @@
+<form >
+<app-title-page 
+[title]="title"
+[showBackButton]="true"
+(backButtonClick)="onBackButtonClick()"
+></app-title-page>
+
+
+<div  class="card-container">
+    
+  <div  class="card">
+    <div class="card-header">
+      <span class="card-title">{{'NEW_VAR.INF_GENERAL' | translate}}</span>
+    </div>
+    <div class="card-body">
+      <div class="inner-card">
+        <label>{{'IP.SALES.PAY_IN.saleDate' | translate}}</label>
+        <span>{{dataShow.saleDate}}</span>
+      </div>
+      
+      <div class="inner-card">
+        <label>{{'IP.CARD_TABLE.SALES.PRODUCTNAME' | translate}}</label>
+        <span>{{dataShow.productName}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'NEW_VAR.POLICY_NUMER_EXTEND' | translate}}</label>
+        <span>{{dataShow.policyNumber}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'NEW_VAR.POLICY_VALUE' | translate}}</label>
+        <span>{{dataShow.policyValue}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'NEW_VAR.PREMIUM_AMOUNT' | translate}}</label>
+        <span>{{dataShow.premiumValue}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'NEW_VAR.PERCENTAJE_BROKER' | translate}}</label>
+        <span> {{dataShow.brokerCommissionPercent}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'NEW_VAR.PERCENTAJE_BROKER' | translate}}</label>
+        <span>{{dataShow.brokerCommissionARS}} </span>
+      </div>
+      <div class="inner-card">
+        <label>{{'NEW_VAR.AMOUNT_PAY' | translate}}</label>
+        <span>{{dataShow.premiumInstallments}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="card-container" >
+  <div  class="card">
+    <div class="card-header">
+      <span class="card-title">{{'NEW_VAR.CLIENT_INF' | translate}}</span>
+    </div>
+    <div class="card-body">
+      <div class="inner-card">
+        <label>{{'IP.COST_CENTER.NAME' | translate}}</label>
+        <span>{{dataShow.customerName}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'IP.CARD_TABLE.SUPPLIER.USERNAME' | translate}}</label>
+        <span>{{dataShow.customerEmail}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'IP.CARD_TABLE.SUBSIDIARIES.CONTACTNUMBER' | translate}}</label>
+        <span>{{dataShow.customerPhone}}</span>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="card-container" >
+      <div *ngIf="!isMobile" class="card-2">
+        <div class="card-header" >
+         <span class="card-title">{{'NEW_VAR.PAYMENT_PLAN' | translate}}</span>
+        </div>
+                        <app-table
+                        [keyTranslate]="''"
+                        [propertyOrder]="columnsHeaders"
+                        [data]="dataShow.installmentPlan"
+                        [actions]="[]"
+                        [tableStyle]="'invopay'"
+                        [isForSelectItem]="false"
+                        [scroll]="true"
+                        [keyTranslate]="''"
+                        [titlesFile]="titlesMap"
+                    ></app-table>
+                <app-no-data *ngIf="dataShow.installmentPlan.length<1"></app-no-data>
+          
+      </div>
+      <div *ngIf="isMobile" class="card-2">
+        <div class="card-header">
+         <span class="card-title">{{'NEW_VAR.PAYMENT_PLAN' | translate}}</span>
+        </div>
+               <div  class="card-mobile">
+                  <div   class="payment-card-mobile-container" *ngFor="let item of dataShow.installmentPlan; let i = index">
+                      <div class="payment-card-mobile-data">
+                      <div class="card-header-mobile">
+                        
+                      <span class="card-id-mobile">{{'NEW_VAR.INSTALLMENT_NUMBER'|translate}} {{ item.number }}</span>
+                      </div>
+                      <div class="card-body-mobile">
+                      <div class="info-row-mobile">
+                        
+                          <span class="info-label-mobile">{{'NEW_VAR.PAYMENT_VALUE'|translate}}</span>
+                          <span class="info-value-mobile">{{ item.amount }}</span>
+                      </div>
+                      <div class="info-row-mobile">
+                          <span class="info-label-mobile">{{'IP.ASSIGN-PROJECTS.EXPIRATION'|translate}}</span>
+                          <span class="info-value-mobile"
+                          >{{item.dueDate}}</span>
+                      </div>
+                      <div class="info-row-mobile">
+                          <span class="info-label-mobile">{{'IP.ASSIGN-PROJECTS.STATUS'|translate}}</span>
+                          <span class="info-value-mobile"
+                          >{{item.state}}</span>
+                      </div>
+                      <div class="info-row-mobile">
+                          <span class="info-label-mobile">{{'NEW_VAR.PERCENTAJE_BROKER'|translate}}</span>
+                        <span class="info-value-mobile"
+                        >{{item.commissionValue}} </span>
+                      </div> 
+                      <div class="info-row-mobile">
+                          <span class="info-label-mobile">{{'IP.PAYMENTS.DATE'|translate}}</span>
+                        <span class="info-value-mobile"
+                        >{{item.paymentDate}} </span>
+                      </div> 
+
+                      </div>
+                  </div>
+                  <app-no-data *ngIf="dataShow.installmentPlan.length < 1"></app-no-data>
+                  </div>
+              </div> 
+
+              
+      </div>
+</div>
+  
+
+</form>
+

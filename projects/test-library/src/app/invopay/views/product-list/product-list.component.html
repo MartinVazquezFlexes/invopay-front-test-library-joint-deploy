@@ -1,0 +1,349 @@
+<section class="product-list page">
+
+  <div class="ip-title-mobile">
+    <div class="ip-title-mobile__title">
+      {{ 'IP.PRODUCTS.LIST.TITLE' | translate }}
+    </div>
+  </div>
+
+  <section class="product-list__table" *ngIf="!isHandset">
+    <app-ip-drag-scroll>
+      <div class="drag-scroll-container product-list-table">
+        <app-table 
+            [data]="products" 
+            [propertyOrder]="[
+              'logoUrl',
+              'name',
+              'descriptionShort',
+              'statusText'
+            ]" 
+            [titlesFile]="titlesFile" 
+            [actions]="['detail', 'edit', 'delete']" 
+            [tableStyle]="'invopay'" 
+            [isForSelectItem]="false" 
+            [initTable]="false" 
+            keyTranslate="" 
+            (sort)="onSort($event)" 
+            (action)="onRowAction($event)"
+            [showAddButtonInHeader]="true"
+            [addButtonTooltipText]="'IP.PRODUCTS.TABLE.ADD_TOOLTIP' | translate"
+            (addAction)="onAddNewProduct()">
+        </app-table>
+      </div>
+    </app-ip-drag-scroll>
+  </section>
+
+  <section class="product-list__cards" *ngIf="isHandset" role="list" [attr.aria-label]="'IP.PRODUCTS.CARDS.ARIA_LABEL' | translate">
+    <ng-container *ngIf="products?.length; else noData">
+      <article class="product-card" role="listitem" *ngFor="let p of products">
+
+        <header class="product-card__header">
+          <img [src]="p.logoUrl | safe" [alt]="p.name" class="product-card__logo" *ngIf="p.logoUrl">
+          <div class="product-card__name">{{ p.name }}</div>
+
+          <div class="product-card__menu-container" #menuRef [attr.data-id]="p.id">
+            <button type="button" class="product-card__menu-btn" (click)="toggleMenu(p.id!)" aria-haspopup="menu"
+              [attr.aria-expanded]="openMenuId === p.id">
+              <img src="../../../../assets/icons/more-icon.svg" [alt]="'IP.PRODUCTS.CARDS.MENU_ALT' | translate">
+            </button>
+
+            <div class="product-card__menu" role="menu" *ngIf="openMenuId === p.id">
+              <button type="button" role="menuitem" class="product-card__menu-item"
+                (click)="openMenuId = null; onRowAction({ event: 'detail', dataField: p })">
+                {{ 'IP.PRODUCTS.CARDS.ACTIONS.VIEW' | translate }}
+              </button>
+              <button type="button" role="menuitem" class="product-card__menu-item"
+                (click)="openMenuId = null; onRowAction({ event: 'edit', dataField: p })">
+                {{ 'IP.PRODUCTS.CARDS.ACTIONS.EDIT' | translate }}
+              </button>
+              <button type="button" role="menuitem" class="product-card__menu-item product-card__menu-item--delete"
+                (click)="openMenuId = null; onRowAction({ event: 'delete', dataField: p })">
+                {{ 'IP.PRODUCTS.CARDS.ACTIONS.DELETE' | translate }}
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="product-card__body">
+          <div class="product-card__row is-description">
+            <span class="product-card__label">{{ 'IP.PRODUCTS.CARDS.LABELS.DESCRIPTION' | translate }}</span>
+            <span class="product-card__value">{{ p.descriptionShort }}</span>
+          </div>
+          <div class="product-card__row">
+            <span class="product-card__label">{{ 'IP.PRODUCTS.CARDS.LABELS.ACTIVE' | translate }}</span>
+            <span class="product-card__value" [class.status--active]="p.isActive"
+              [class.status--inactive]="!p.isActive">
+              {{ p.statusText }}
+            </span>
+          </div>
+        </div>
+      </article>
+    </ng-container>
+
+    <ng-template #noData>
+      <div class="product-card__empty">{{ 'IP.PRODUCTS.CARDS.NO_DATA' | translate }}</div>
+    </ng-template>
+  </section>
+
+  <footer class="product-list__paginator" *ngIf="!isHandset">
+    <div class="page-size">
+      <span>{{ 'IP.PRODUCTS.PAGINATOR.ROWS_PER_PAGE' | translate }}</span>
+      <select [value]="pageSize" (change)="onPageSizeChange($any($event.target)?.value)">
+        <option [value]="10">10</option>
+        <option [value]="20">20</option>
+        <option [value]="25">25</option>
+        <option [value]="50">50</option>
+        <option [value]="100">100</option>
+      </select>
+    </div>
+    <ng-container *ngIf="!paginatorReload">
+      <app-paginator [totalItems]="total" [itemsPerPage]="pageSize" [currentPages]="pageIndex + 1"
+        (pageChange)="onPageChange($event)">
+      </app-paginator>
+    </ng-container>
+  </footer>
+
+  <footer class="product-list__paginator--mobile" *ngIf="isHandset">
+    <app-paginator [totalItems]="total" [itemsPerPage]="10" [currentPages]="mobilePageIndex + 1"
+      (pageChange)="onMobilePageChange($event)">
+    </app-paginator>
+  </footer>
+
+
+  <div class="overlay" *ngIf="isViewModalOpen">
+    <div class="overlay__center" (click)="$event.stopPropagation()">
+      <app-ip-modal-mobile [title]="'IP.PRODUCTS.VIEW_MODAL.TITLE' | translate" [showTitle]="true" [showCloseModal]="true"
+        (close)="onViewModalClose()">
+        <ng-container *ngIf="selectedProduct as p">
+          <div class="product-details">
+
+            <div class="product-details__header">
+              <img [src]="p.logoUrl | safe" [alt]="p.name" class="product-details__logo" *ngIf="p.logoUrl">
+              <div class="product-details__header-info">
+                <span class="product-details__code">{{ p.code }}</span>
+                <h3 class="product-details__name">{{ p.name }}</h3>
+                <span class="product-details__status" [class.status--active]="p.isActive"
+                  [class.status--inactive]="!p.isActive">
+                  {{ p.statusText }}
+                </span>
+              </div>
+            </div>
+
+            <div class="product-details__section" *ngIf="p.descriptionShort">
+              <label>{{ 'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_SHORT' | translate }}</label>
+              <p>{{ p.descriptionShort }}</p>
+            </div>
+            <div class="product-details__section" *ngIf="p.descriptionDetailed">
+              <label>{{ 'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_DETAILED' | translate }}</label>
+              <p>{{ p.descriptionDetailed }}</p>
+            </div>
+
+          </div>
+          <div class="product-details__actions">
+            <app-ip-button-modal typeBtn="action" (clicked)="onViewModalClose()">
+              {{ 'IP.PRODUCTS.VIEW_MODAL.BUTTONS.CLOSE' | translate }}
+            </app-ip-button-modal>
+          </div>
+        </ng-container>
+      </app-ip-modal-mobile>
+    </div>
+  </div>
+
+  <div class="overlay" *ngIf="isDeleteModalOpen">
+    <div class="overlay__center" (click)="$event.stopPropagation()">
+      <app-ip-modal-mobile [title]="'IP.PRODUCTS.DELETE_MODAL.TITLE' | translate" [showTitle]="true" [showCloseModal]="true"
+        (close)="onDeleteModalClose()">
+        <ng-container *ngIf="selectedProduct as p">
+          <div class="product-delete-confirm">
+            <p>{{ 'IP.PRODUCTS.DELETE_MODAL.CONFIRM_MESSAGE' | translate }} <strong>"{{ p.name }}"</strong>?</p>
+            <p class="product-delete-confirm__note">
+              {{ 'IP.PRODUCTS.DELETE_MODAL.NOTE' | translate }}
+            </p>
+          </div>
+          <div class="product-details__actions">
+            <app-ip-button-modal typeBtn="cancel" (clicked)="onDeleteModalClose()" [disabled]="deleteBusy">
+              {{ 'IP.PRODUCTS.BUTTONS.CANCEL' | translate }}
+            </app-ip-button-modal>
+            <app-ip-button-modal typeBtn="action" (clicked)="onConfirmDelete()" [disabled]="deleteBusy">
+              <ng-container *ngIf="!deleteBusy; else deleting">
+                {{ 'IP.PRODUCTS.BUTTONS.CONFIRM' | translate }}
+              </ng-container>
+              <ng-template #deleting>
+                {{ 'IP.PRODUCTS.BUTTONS.DELETING' | translate }}
+              </ng-template>
+            </app-ip-button-modal>
+          </div>
+        </ng-container>
+      </app-ip-modal-mobile>
+    </div>
+  </div>
+
+  <div class="overlay" *ngIf="isCreateModalOpen">
+    <div class="overlay__center" (click)="$event.stopPropagation()">
+      <app-ip-modal-mobile [title]="'IP.PRODUCTS.CREATE_MODAL.TITLE' | translate" [showTitle]="true" [showCloseModal]="true"
+        (close)="onCreateModalClose()">
+        
+        <form class="product-details" [formGroup]="createForm">
+          
+          <div class="product-details__section">
+            <label for="create-code">{{ 'IP.PRODUCTS.FORM.CODE.LABEL' | translate }}</label>
+            <input type="text" id="create-code" class="form-control" formControlName="code">
+          </div>
+
+          <div class="product-details__section">
+            <label>{{ 'IP.PRODUCTS.FORM.LOGO.LABEL' | translate }}</label>
+            <div class="logo-preview-container" *ngIf="createForm.get('logoUrl')?.value">
+              <img [src]="createForm.get('logoUrl')?.value | safe" [alt]="'IP.PRODUCTS.FORM.LOGO.PREVIEW_ALT' | translate">
+            </div>
+            <button type="button" class="file-upload-btn" (click)="logoUploaderCreate.click()">
+              {{ 'IP.PRODUCTS.FORM.LOGO.UPLOAD_BUTTON' | translate }}
+            </button>
+            <input type="file" 
+                   class="file-upload-input" 
+                   #logoUploaderCreate
+                   accept="image/png, image/jpeg, image/svg+xml"
+                   (change)="onFileSelected($event, createForm, 'logoUrl')">
+          </div>
+
+          <div class="product-details__section">
+            <label for="create-name">{{ 'IP.PRODUCTS.FORM.NAME.LABEL' | translate }}</label>
+            <input type="text" id="create-name" class="form-control" formControlName="name">
+          </div>
+
+          <div class="product-details__section">
+            <label for="create-type">{{ 'IP.PRODUCTS.FORM.TYPE.LABEL' | translate }}</label>
+            <select id="create-type" class="form-control" formControlName="type">
+              <option value="INDIVIDUAL">INDIVIDUAL</option>
+              <option value="ENTREPRISE">ENTREPRISE</option>
+            </select>
+          </div>
+
+          <div class="product-details__section">
+            <label for="create-desc">{{ 'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate }}</label>
+            <textarea id="create-desc" class="form-control" formControlName="description" rows="3"></textarea>
+          </div>
+
+          <div class="product-details__section">
+            <label for="create-long-desc">{{ 'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate }}</label>
+            <textarea id="create-long-desc" class="form-control" formControlName="longDescription" rows="5"></textarea>
+          </div>
+
+          <div class="product-details__section">
+            <label for="create-externalId">{{ 'IP.PRODUCTS.FORM.EXTERNAL_ID.LABEL' | translate }}</label>
+            <input type="text" id="create-externalId" class="form-control" formControlName="externalId">
+          </div>
+
+          <div class="product-details__section">
+            <label for="create-enterprise">{{ 'IP.PRODUCTS.FORM.ENTERPRISE.LABEL' | translate }}</label>
+            <input type="text" id="create-enterprise" class="form-control" formControlName="insuranceEnterprise">
+          </div>
+          
+          <div class="product-details__section is-toggle">
+            <label for="create-isActive">{{ 'IP.PRODUCTS.FORM.IS_ACTIVE.LABEL' | translate }}</label>
+            <input type="checkbox" id="create-isActive" class="form-check" formControlName="isActive">
+          </div>
+          
+          <div class="product-details__actions">
+            <app-ip-button-modal typeBtn="cancel" (clicked)="onCreateModalClose()" [disabled]="createBusy">
+              {{ 'IP.PRODUCTS.BUTTONS.CANCEL' | translate }}
+            </app-ip-button-modal>
+            <app-ip-button-modal typeBtn="action" (clicked)="onConfirmCreate()" [disabled]="createForm.invalid || createBusy">
+              <ng-container *ngIf="!createBusy; else saving">
+                {{ 'IP.PRODUCTS.CREATE_MODAL.BUTTONS.SAVE' | translate }}
+              </ng-container>
+              <ng-template #saving>
+                {{ 'IP.PRODUCTS.BUTTONS.SAVING' | translate }}
+              </ng-template>
+            </app-ip-button-modal>
+          </div>
+
+        </form>
+      </app-ip-modal-mobile>
+    </div>
+  </div>
+
+  <div class="overlay" *ngIf="isEditModalOpen">
+    <div class="overlay__center" (click)="$event.stopPropagation()">
+      <app-ip-modal-mobile [title]="'IP.PRODUCTS.EDIT_MODAL.TITLE' | translate" [showTitle]="true"
+        [showCloseModal]="true" (close)="onEditModalClose()">
+        
+        <form class="product-details" [formGroup]="editForm">
+          
+          <div class="product-details__section">
+            <label>{{ 'IP.PRODUCTS.FORM.CODE.LABEL_READONLY' | translate }}</label>
+            <input type="text" class="form-control-disabled" formControlName="code" readonly>
+          </div>
+
+          <div class="product-details__section">
+            <label>{{ 'IP.PRODUCTS.FORM.LOGO.LABEL' | translate }}</label>
+            <div class="logo-preview-container" *ngIf="editForm.get('logoUrl')?.value">
+              <img [src]="editForm.get('logoUrl')?.value | safe" [alt]="'IP.PRODUCTS.FORM.LOGO.PREVIEW_ALT' | translate">
+            </div>
+            <button type="button" class="file-upload-btn" (click)="logoUploaderEdit.click()">
+              {{ 'IP.PRODUCTS.FORM.LOGO.UPLOAD_BUTTON' | translate }}
+            </button>
+            <input type="file" 
+                   class="file-upload-input" 
+                   #logoUploaderEdit
+                   accept="image/png, image/jpeg, image/svg+xml"
+                   (change)="onFileSelected($event, editForm, 'logoUrl')">
+          </div>
+
+          <div class="product-details__section">
+            <label for="edit-name">{{ 'IP.PRODUCTS.FORM.NAME.LABEL' | translate }}</label>
+            <input type="text" id="edit-name" class="form-control" formControlName="name">
+          </div>
+          
+          <div class="product-details__section">
+            <label for="edit-type">{{ 'IP.PRODUCTS.FORM.TYPE.LABEL' | translate }}</label>
+            <select id="edit-type" class="form-control" formControlName="type">
+              <option value="INDIVIDUAL">INDIVIDUAL</option>
+              <option value="ENTREPRISE">ENTREPRISE</option>
+            </select>
+          </div>
+
+          <div class="product-details__section">
+            <label for="edit-desc-short">{{ 'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate }}</label>
+            <textarea id="edit-desc-short" class="form-control" formControlName="description" rows="3"></textarea>
+          </div>
+
+          <div class="product-details__section">
+            <label for="edit-long-desc">{{ 'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate }}</label>
+            <textarea id="edit-long-desc" class="form-control" formControlName="longDescription" rows="5"></textarea>
+          </div>
+
+          <div class="product-details__section">
+            <label for="edit-externalId">{{ 'IP.PRODUCTS.FORM.EXTERNAL_ID.LABEL' | translate }}</label>
+            <input type="text" id="edit-externalId" class="form-control" formControlName="externalId">
+          </div>
+
+          <div class="product-details__section">
+            <label for="edit-enterprise">{{ 'IP.PRODUCTS.FORM.ENTERPRISE.LABEL' | translate }}</label>
+            <input type="text" id="edit-enterprise" class="form-control" formControlName="insuranceEnterprise">
+          </div>
+
+          <div class="product-details__section is-toggle">
+            <label for="edit-isActive">{{ 'IP.PRODUCTS.FORM.IS_ACTIVE.LABEL' | translate }}</label>
+            <input type="checkbox" id="edit-isActive" class="form-check" formControlName="isActive">
+          </div>
+          
+          <div class="product-details__actions">
+            <app-ip-button-modal typeBtn="cancel" (clicked)="onEditModalClose()" [disabled]="editBusy">
+              {{ 'IP.PRODUCTS.BUTTONS.CANCEL' | translate }}
+            </app-ip-button-modal>
+            
+            <app-ip-button-modal typeBtn="action" (clicked)="onConfirmEdit()" [disabled]="editForm.invalid || editBusy">
+              <ng-container *ngIf="!editBusy; else saving">
+                {{ 'IP.PRODUCTS.EDIT_MODAL.BUTTONS.SAVE' | translate }}
+              </ng-container>
+              <ng-template #saving>
+                {{ 'IP.PRODUCTS.BUTTONS.SAVING' | translate }}
+              </ng-template>
+            </app-ip-button-modal>
+          </div>
+        </form>
+      </app-ip-modal-mobile>
+    </div>
+  </div>
+
+</section>

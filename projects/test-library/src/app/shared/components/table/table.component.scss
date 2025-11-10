@@ -2,10 +2,6 @@
 @import "../../../shared/mixins/generalText.scss";
 @import "../../../shared/mixins/sizes.scss";
 
-table {
-  table-layout: fixed;
-}
-
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -13,16 +9,11 @@ table {
   margin: 0;
   background-color: $background-tables;
   &__head {
-    position: sticky; 
-    top: 0;
-    z-index: 10;
-    background-color: $background-tables;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 
-              0 -1px 0 rgba(0, 0, 0, 0.2);
     &-row {
       &-item:last-child {
         min-width: 7.5rem;
-        text-align: center;
+        align-items: center;
+        justify-content: center;
       }
       &-item:first-child {
         padding-left: 1.5rem;
@@ -35,7 +26,6 @@ table {
         width: max-content;
         white-space: nowrap;
         user-select: none;
-        background-color: $background-tables;
 
         border-top: thin solid $table-lines;
         border-bottom: thin solid $table-lines;
@@ -78,6 +68,35 @@ table {
           &-down--fill {
             fill: #d2d9de;
             transition: all 0.2s;
+          }
+        }
+         &__actions-content { 
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        &__actions-add {
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          margin: 0;
+          line-height: 1;
+
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          
+          margin-left: 0.35rem;
+
+          img {
+            width: 12px;
+            height: 12px;
+            filter: brightness(0);
+          }
+
+          &:hover {
+            opacity: 0.7;
           }
         }
         &:hover &-sort path {
@@ -161,18 +180,6 @@ table {
         &-status {
           width: 0.875rem;
           height: 0.875rem;
-        }
-        &-avatar{
-          width: 2rem;
-          height: 2rem;
-          border-radius: 50%;
-          object-fit: cover;
-          image-rendering: -webkit-optimize-contrast;
-          image-rendering: crisp-edges;
-          @include medias(sm, md, lg){
-            width: 1.5rem;
-            height: 1.5rem;
-          }
         }
       }
       &-actions {
@@ -287,35 +294,6 @@ table {
     width: 100%;
     max-height: calc(100vh - 12rem);
     height: 100%;
-    & > .table{
-      & > .table__head{
-        & > .table__head-row{
-          & > .table__head-row-item{
-            &:first-child{
-              position: sticky;
-              z-index: 10;
-              left: 0;
-              background: $background-tables;
-              justify-content: center;
-            }
-          }
-        }
-      }
-      & > .table__body{
-        & > .table__body-row{
-          & > .table__body-row-item{
-            &:first-child{
-              position: sticky;
-              z-index: 5;
-              left: 0;
-              background: $background-tables;
-              justify-content: center;
-              padding: 0 0.7rem;
-            }
-          }
-        }
-      }
-    }
   }
 
   &-sticky-right{

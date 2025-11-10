@@ -12,7 +12,12 @@ import { BrokerNotificationTrayComponent } from './views/broker-notification-tra
 
 import { Template1Component } from './views/template1/template1.component';
 import { SchemesListComponent } from './views/schemes-list/schemes-list.component';
-
+import { ProductListComponent } from './views/product-list/product-list.component';
+import { SalesListComponent } from './views/sales-list/sales-list.component';
+import { SalesDetailsComponent } from './views/sales-details/sales-details.component';
+import { RevenuesListComponent } from './views/revenues-list/revenues-list.component';
+import { RevenueDetailComponent } from './views/revenue-detail/revenue-detail.component';
+import { PendingSalesComponent } from './views/pending-sales/pending-sales.component';
 
 const routes: Routes = [
   {
@@ -23,44 +28,62 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'home',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'home',
         component: HomeComponent,
       },
-     
+
       {
         path: 'payments-entities',
-        component: PaymentsEntitiesListComponent
+        component: PaymentsEntitiesListComponent,
       },
       {
         path: 'insurance-notification-tray',
-        component: InsuranceNotificationTrayComponent
+        component: InsuranceNotificationTrayComponent,
       },
       {
         path: 'broker-notification-tray',
-        component: BrokerNotificationTrayComponent
+        component: BrokerNotificationTrayComponent,
       },
       {
         path: 'schemes-list',
-        component: SchemesListComponent
+        component: SchemesListComponent,
       },
-    ]
+      {
+        path: 'product-list',
+        component: ProductListComponent,
+      },
+      { path: 'sales-list', component: SalesListComponent },
+      { path: 'sales-detail/:id', component: SalesDetailsComponent },
+      { path: 'revenues-list', component: RevenuesListComponent },
+      { path: 'revenue-detail/:id', component: RevenueDetailComponent },
+      {
+        path: 'assurance/pending-sales-list',
+        component: PendingSalesComponent,
+        data: { type: 'pending' },
+      },
+      {
+        path: 'assurance/expiry-sales-list',
+        component: PendingSalesComponent,
+        data: { type: 'expired' },
+      },
+    ],
   },
   {
     path: 'login-admin',
     component: IpLoginComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'login-broker',
     component: IpLoginComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'revenues',
-    component: Template1Component
+    component: Template1Component,
   },
 ];
 
@@ -68,4 +91,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class InvopayRoutingModule { }
+export class InvopayRoutingModule {}

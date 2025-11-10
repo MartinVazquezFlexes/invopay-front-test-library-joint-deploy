@@ -1,0 +1,169 @@
+<form >
+<app-title-page 
+[title]="'NEW_VAR.DETAIL_RECAUDATION' | translate"
+[showBackButton]="true"
+(backButtonClick)="onBackButtonClick()"
+></app-title-page>
+
+
+<div  class="card-container">
+  <div  class="card">
+    <div class="card-header">
+      <span class="card-title">{{'NEW_VAR.INF_GENERAL'|translate}}</span>
+    </div>
+    <div *ngIf="dataShow?.transactionData" class="card-body">
+      <div class="inner-card">
+        <label>{{'NEW_VAR.PAYMENT_DATE'|translate}}</label>
+        <span>{{dataShow?.transactionData?.revenueDate}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'NEW_VAR.PAYMEN_CHANNEL'|translate}}</label>
+        <span>{{dataShow?.transactionData?.paymentChannel}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'NEW_VAR.PAYMENT_PROVIDER'|translate}}</label>
+        <span>{{dataShow?.transactionData?.paymentProvider}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'IP.CURRENCY'|translate}}</label>
+        <span>{{dataShow?.transactionData?.currency}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'NEW_VAR.COLLECTED_AMOUNT'|translate}}</label>
+        <span>{{dataShow?.transactionData?.amount}}</span>
+      </div>
+      <div class="inner-card">
+        <label >{{'IP.OBSERVATIONS.TITLE'|translate}}</label>
+          <!-- si se quiere scrolleable
+          <textarea class="floating-textarea" readonly tabindex="0" aria-label="Observaciones" readonly>
+            Observaciones de la transaccion
+          </textarea> 
+          -->
+
+        <span> {{dataShow?.transactionData?.transactionObservations}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="dataShow?.conciliationData"  class="card-container" >
+  <div  *ngIf="dataShow?.conciliationData?.isConsolidated && dataShow?.policyData && dataShow?.transactionData" class="card">
+    <div class="card-header">
+      <span class="card-title">{{'NEW_VAR.CONSILIATION_DATA'|translate}} </span>
+    </div>
+    <div class="card-body">
+      <div class="inner-card">
+        <label>{{'NEW_VAR.CONSOLIDATED'|translate}}</label>
+        <span>{{dataShow?.conciliationData?.isConsolidated}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME'|translate}}</label>
+        <span>{{dataShow?.conciliationData?.productName}}</span>
+      </div>
+      <div class="inner-card">
+        <label>{{'NEW_VAR.POLICY_NUMBER'|translate}}</label>
+        <span>{{dataShow?.policyData?.number}}</span>
+      </div>
+       <div class="inner-card">
+        <label>{{'NEW_VAR.COLLECTED_AMOUNT'|translate}}</label>
+        <span>{{dataShow?.transactionData?.currency}} {{dataShow?.policyData?.amount}}</span>
+      </div>
+      <div class="inner-card">
+        <label> {{'IP.CONSOLIDATED.PAYMENT_NUMBER'|translate}}</label>
+        <span>{{dataShow?.conciliationData?.paymentNumber}}</span>
+      </div>
+       <div class="inner-card">
+        <label> {{'NEW_VAR.PAYMENT_VALUE'|translate}}</label>
+        <span>{{dataShow?.transactionData?.currency}} {{dataShow?.conciliationData?.paymentValue}}</span>
+      </div>
+
+      <div class="inner-card">
+        <label> 
+          {{'IP.CARD_TABLE.INVOICE.BROKERFULLNAME'|translate}}
+        </label>
+        <span>{{dataShow?.conciliationData?.brokerName}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="dataShow?.conciliationData"  class="card-container" >
+  <div   *ngIf="dataShow?.conciliationData?.isConsolidated && dataShow?.policyData " class="card">
+    
+    <div class="card-header">
+      <span class="card-title">{{'NEW_VAR.POLICY_DATA'|translate}}</span>
+    </div>
+    <div class="card-body">
+      <div class="inner-card">
+        <label>  {{'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME'|translate}} </label>
+        <span> {{dataShow?.policyData?.productName}}</span>
+      </div>
+         <div class="inner-card">
+        <label>{{'NEW_VAR.POLICY_NUMBER'|translate}}</label>
+        <span> {{dataShow?.policyData?.number}}</span>
+      </div>   
+      <div class="inner-card">
+        <label>{{'IP.SETTLEMENTS.DETAILS.DATE_SALE'|translate}}</label>
+        <span> {{dataShow?.policyData?.saleDate}}</span>
+      </div>   <div class="inner-card">
+        <label>{{'NEW_VAR.POLICY_AMOUNT'|translate}}</label>
+        <span> {{dataShow?.policyData?.amount}}</span>
+      </div> 
+     <div class="inner-card">
+        <label> {{'NEW_VAR.PREMIUM_AMOUNT'|translate}}</label>
+        <span> {{dataShow?.policyData?.premiumAmount}}</span>
+     </div>
+          <div *ngIf="!isMobile"  class="card-2">
+             <div class="card-table">
+                    <label> {{'NEW_VAR.PREMIUM_PLAN_PAYMENT'|translate}}</label>
+                    <app-table
+                    [keyTranslate]="''"
+                    [propertyOrder]="columnsHeaders"
+                    [data]="dataShow.policyData.premiumPaymentPlan"
+                    [actions]="[]"
+                    [tableStyle]="'invopay'"
+                    [isForSelectItem]="false"
+                    [scroll]="true"
+                    [keyTranslate]="''"
+                    [titlesFile]="titlesMap"
+                    ></app-table>
+                <app-no-data *ngIf="dataShow.policyData.premiumPaymentPlan.length<1"></app-no-data>
+             </div>
+            </div>
+             
+             <div *ngIf="isMobile" class="card-2">
+              <div class="card-table">
+              <label> {{'NEW_VAR.PREMIUM_PLAN_PAYMENT'|translate}}</label>
+               <div  class="card-mobile">
+                  <div   class="payment-card-mobile-container" *ngFor="let item of dataShow.policyData.premiumPaymentPlan; let i = index">
+                      <div class="payment-card-mobile-data">
+                      <div class="card-header-mobile">
+                      <span class="card-id-mobile">#{{ item?.installmentNumber }}</span>
+                      </div>
+                      <div class="card-body-mobile">
+                      <div class="info-row-mobile">
+                          <span class="info-label-mobile">{{'NEW_VAR.PAYMENT_VALUE'|translate}}</span>
+                          <span class="info-value-mobile">{{dataShow?.transactionData?.currency}} {{ item?.amount }}</span>
+                      </div>
+                      <div class="info-row-mobile">
+                        <span class="info-label-mobile">{{'IP.BILL_DETAILS.EXPIRY_DATE'|translate}}</span>
+                        <span class="info-value-mobile">{{item?.dueDate}}</span>
+                      </div>
+                      </div>
+                  </div>
+                  <app-no-data *ngIf="dataShow?.policyData?.premiumPaymentPlan?.length < 1"></app-no-data>
+                  </div>
+              </div>                   
+            </div>
+            </div>
+
+
+     </div>
+
+  </div>
+</div>
+  
+
+</form>
+

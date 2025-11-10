@@ -1,0 +1,90 @@
+@import "../../../shared/mixins/sizes.scss";
+@import "../../../shared/mixins/generalText.scss";
+@import "../../../shared/mixins/variables/color.scss";
+
+
+
+.title-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+
+.ip-title-mobile {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 5px 15px 0px hsla(0, 0%, 0%, 0.07);
+  border-radius: 0.7rem;
+  justify-content: space-between;
+  height: 4rem;
+  padding: 1rem 2.5rem;
+
+  &__title {
+    @include mainTitleText();
+    display: flex;
+    align-items: center;
+
+   
+  }
+
+}.back-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 0.75rem; /* Espacio entre el ícono y el título */
+  margin-left: -0.5rem; /* Lo empuja un poco más a la izquierda */
+
+  .back {
+    width: 1.5rem;
+    height: 1.5rem;
+    filter: invert(59%) sepia(81%) saturate(1574%) hue-rotate(180deg) brightness(98%) contrast(101%);
+  }
+
+  &:hover .back {
+    opacity: 0.8;
+  }
+}
+
+/* Para mobile: versión transparente y alineada a la izquierda */
+.title-container.mobile {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.ip-title-mobile.mobile {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* alinea todo a la izquierda */
+  background-color: transparent; /* transparente */
+  box-shadow: none; /* elimina la sombra */
+  border-radius: 0; /* sin bordes redondeados */
+  height: auto; /* altura ajustable según contenido */
+  padding: 0.5rem 1rem; /* padding más compacto */
+}
+
+.ip-title-mobile.mobile__title {
+  @include mainTitleText();
+  display: flex;
+  align-items: center;
+  color: #1976d2; /* opcional: color de texto para mobile */
+}
+
+.back-button.mobile {
+  margin-left: 0; /* empuja a la izquierda */
+  margin-right: 0.5rem; /* espacio con el texto */
+  
+  .back {
+    width: 1.25rem;
+    height: 1.25rem;
+    filter: invert(0%);
+  }
+}

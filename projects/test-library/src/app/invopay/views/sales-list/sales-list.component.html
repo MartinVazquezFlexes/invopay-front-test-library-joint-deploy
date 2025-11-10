@@ -1,0 +1,243 @@
+<form [formGroup]="controlsForm">
+
+
+
+
+   <app-title-page *ngIf="!isMobile" [isMobile]="isMobile" [title]="'IP.SIDENAV.OPTIONS.SALES' | translate"></app-title-page>
+    <div *ngIf="isMobile" class="mobile-header">
+            <app-title-page [isMobile]="isMobile" [title]="'IP.SIDENAV.OPTIONS.SALES' | translate"></app-title-page>
+            <button *ngIf="this.selectedTab==='all'" class="search-mobile" (click)="onClickFiltredSearchMobile()">
+                <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg" />
+                    {{'IP.FILTERS_MODAL.FILTER' | translate}}
+            </button>
+    </div>
+
+
+    <div class="card-row-tab">
+                <div 
+                    class="card-tab" 
+                    [class.active]="this.selectedTab === 'all'"
+                    (click)="selectedTab = 'all'">
+                <span>{{'NEW_VAR.ALL_SALES_TAB'|translate}}</span>
+                </div>
+                <div 
+                    class="card-tab" 
+                    [class.active]="selectedTab === 'pending'"
+                    (click)="selectedTab = 'pending'">
+                <span>{{'NEW_VAR.PENDING_SALES_TAB'|translate}}</span>
+                </div>
+                <div 
+                    class="card-tab" 
+                    [class.active]="selectedTab === 'expired'"
+                    (click)="selectedTab = 'expired'">
+                    <span>{{'NEW_VAR.EXPIRY_SALES_TAB'|translate}}</span>
+                </div>
+    </div>
+
+<div *ngIf="selectedTab==='all'" class="sales-tab-selected">
+    <div class="card-table-filters">
+        <div class="card-body">
+            <div class="card-filtros">
+                <div *ngIf="!isMobile" class="card-filtros__actions">
+                   <div class="filters-container">
+
+                    <div class="select-wrapper">
+                        <label class="placeholder">{{'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate}}</label>
+                        <div class="custom-select-container">
+                            <select formControlName="productFilter" class="custom-select">
+                                <option value="">{{'NEW_VAR.SELECT_PRODUCT' | translate}}</option>
+                                <option *ngFor="let item of this.products" value={{item}}>{{item}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="select-wrapper">
+                        <label class="placeholder">{{'IP.SETTLEMENTS.DETAILS.BROKER_NAME' | translate}}</label>
+                        <div class="custom-select-container">
+                            <select formControlName="brokerFilter" class="custom-select">
+                                <option value="">{{'IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.SELECT_BROKER' | translate}}</option>
+                                <option *ngFor="let item of this.brokers" value={{item}}>{{item}}</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="date-wrapper">
+                        <label style="margin-left: 10px;" class="placeholder">{{'IP.FROM' | translate}}</label>
+                        <app-ip-date-input [control]="controlsForm.controls.dateStart" [max]="maxStart"
+                            (changed)="onStartDatechange($event)">
+                        </app-ip-date-input>
+                    </div>
+
+                    <div class="date-wrapper">
+                        <label style="margin-left: 10px;" class="placeholder">{{'IP.TO' | translate}}</label>
+                        <app-ip-date-input [control]="controlsForm.controls.dateEnd" [max]="maxEnd" [min]="minEnd"
+                            (changed)="onEndDateChange($event)">
+                        </app-ip-date-input>
+                    </div>
+                 </div>
+
+                    <div class="date-wrapper">
+                        <button class="search" (click)="onClickFiltredSearch()">
+                            <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
+                        </button>
+                    </div>
+                </div>
+           
+            </div>
+        </div>
+        <div class="card-table" *ngIf="!isMobile">
+            <app-table [keyTranslate]="'IP.ADMIN_TABLE'" [propertyOrder]="columnsHeaders" [data]="tableSalesDto"
+                [actions]="['detail']" [tableStyle]="'invopay'" [isForSelectItem]="false" [scroll]="true"
+                [titlesFile]="titlesMap" (action)="onTableAction($event)"
+                (selectedItemsChange)="onSelectedItems($event)"></app-table>
+            <app-no-data *ngIf="sales.length<1"></app-no-data>
+        </div>
+        <div *ngIf="isMobile" class="card-mobile">
+            <div class="payment-card-mobile-container" *ngFor="let sale of tableSalesDto; let i = index">
+                <div class="payment-card-mobile-data">
+                    <div class="card-header-mobile">
+                        <span class="card-id-mobile">#{{ sale.id }}</span>
+                        <div class="icon-movil-container">
+                            <button class="menu-icon-mobile" (click)="toggleMobileMenu(i)">
+                                ⋮
+                            </button>
+                            <ul *ngIf="showMobileMenuIndex === i" class="menu-movil">
+                                <li (click)="onMobileMenuAction('detail', sale)">{{'IP.ACTIONS_TOOLTIP.SEARCH' | translate}}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body-mobile">
+
+                        <div class="info-row-mobile">
+                            <span class="info-label-mobile">{{'NEW_VAR.PAYMENT_DATE' | translate}}</span>
+                            <span class="info-value-mobile">{{ sale.fecha }}</span>
+                        </div>
+                        <div class="info-row-mobile">
+                            <span class="info-label-mobile">{{'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate}}</span>
+                            
+                            <span class="info-value-mobile" 
+                            [title]="sale.producto?.length > 20 ? sale.producto : null">
+                              {{ sale.producto | slice:0:20 }}{{ sale.producto.length > 20 ? ' ...' : '' }}
+                            </span>
+
+                        </div>
+
+                        <div class="info-row-mobile">
+                            <span class="info-label-mobile">{{'IP.SETTLEMENTS.DETAILS.BROKER_NAME' | translate}}</span>
+                            <span class="info-value-mobile">{{ sale.broker}}</span>
+                        </div>
+                         <div class="info-row-mobile">
+                            <span class="info-label-mobile">{{'NEW_VAR.CLIENT' | translate}}</span>
+                            <span class="info-value-mobile">{{ sale.cliente}}</span>
+                        </div>
+                        <div class="info-row-mobile">
+                            <span class="info-label-mobile">{{'NEW_VAR.POLICY_AMOUNT' | translate}}</span>
+                            <span class="info-value-mobile">{{ sale.montoPoliza }}</span>
+                        </div>
+                    </div>
+                </div>
+                <app-no-data *ngIf="sales.length < 1"></app-no-data>
+            </div>
+        </div>
+
+
+        <div class="card-paginator"  *ngIf="sales.length>5" >
+            <div class="paginator-controls">
+                <select class="page-size-select" formControlName="rowPaginator" title="Filas por pagina">
+                    <option [value]="5">5</option>
+                    <option [value]="10">10</option>
+                    <option [value]="20">20</option>
+                    <option [value]="50">50</option>
+                </select>
+                <app-paginator (pageChange)="onPageChange($event)" 
+                    [totalItems]="sales.length"
+                    [itemsPerPage]="itemsPerpage" 
+                    [currentPages]="currentPages">
+                </app-paginator>
+            </div>
+        </div>
+    </div>
+</div>
+    <div *ngIf="selectedTab==='expired'" class="sales-tab-selected">
+        <app-pending-sales [saleType]="'expired'"></app-pending-sales>
+    </div>
+    <div *ngIf="selectedTab==='pending'" class="sales-tab-selected">
+        <app-pending-sales [saleType]="'pending'"></app-pending-sales>
+    </div>
+</form>
+
+
+
+<div *ngIf="selectedTab==='all'" class="sales-tab-selected">
+<!-- MODAL DE FILTROS MOBILE -->
+<app-filter-modal-mobile  
+  *ngIf="isMobile"
+  [isOpen]="isModalOpen" 
+  (closed)="isModalOpen = false">
+  
+  <div class="modal-filters-content">
+    <p style="margin-bottom: 6vh;margin-left: 3vh; color: rgb(110, 109, 106);" class="modal-title">
+        {{'IP.FILTERS_MODAL.FILTER' | translate}}
+        {{'IP.SIDENAV.OPTIONS.SALES' | translate}}
+    </p>
+
+    <!-- broker -->
+    <div class="select-wrapper" style="margin-bottom: 3vh;">
+      <label class="placeholder">{{'IP.SETTLEMENTS.DETAILS.BROKER_NAME' | translate}}</label>
+      <div class="custom-select-container">
+        <select [formControl]="controlsForm.controls.brokerFilter" class="custom-select">
+          <option value="">{{'IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.SELECT_BROKER' | translate}}</option>
+          <option *ngFor="let item of brokers" [value]="item">
+            {{item}}
+          </option>
+        </select>
+      </div>
+    </div>
+        <!-- Producto -->
+    <div class="select-wrapper" style="margin-bottom: 3vh;">
+      <label class="placeholder">{{'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate}}</label>
+      <div class="custom-select-container">
+        <select [formControl]="controlsForm.controls.productFilter" class="custom-select">
+          <option value="">{{'NEW_VAR.SELECT_PRODUCT' | translate}}</option>
+          <option *ngFor="let item of products" [value]="item">
+            {{item}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="date-row">
+
+    <div class="date-wrapper">
+        <label class="placeholder">{{'IP.FROM' | translate}}</label>
+      <app-ip-date-input 
+        [control]="controlsForm.controls.dateStart"
+        [max]="maxStart"
+        (changed)="onStartDatechange($event)">
+      </app-ip-date-input>
+    </div>
+
+    <!-- Fecha hasta -->
+    <div class="date-wrapper">
+        <label class="placeholder">{{'IP.TO' | translate}}</label>
+      <app-ip-date-input
+        [control]="controlsForm.controls.dateEnd"
+        [max]="maxEnd"
+        [min]="minEnd"
+        (changed)="onEndDateChange($event)">
+      </app-ip-date-input>
+    </div>
+    </div>
+    <!-- Botones de acción -->
+    <div class="modal-actions">
+
+      <button class="search" (click)="onClickFiltredSearch()">
+                <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
+      </button>
+    </div>
+  </div>
+
+</app-filter-modal-mobile>
+</div>

@@ -27,6 +27,7 @@ import { MobileCardListComponent } from '../shared/components/mobile-card-list/m
 import { HomeComponent } from './views/home/home.component';
 import { Template1Component } from './views/template1/template1.component';
 import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
+import { ProductListComponent } from './views/product-list/product-list.component';
 
 
 @NgModule({
@@ -35,7 +36,9 @@ import { NotificationModalComponent } from './components/notification-modal/noti
         MobileCardListComponent,
         HomeComponent,
         Template1Component,
-        NotificationModalComponent
+        NotificationModalComponent,
+        ProductListComponent,
+
     ],
     imports: [
         CommonModule,

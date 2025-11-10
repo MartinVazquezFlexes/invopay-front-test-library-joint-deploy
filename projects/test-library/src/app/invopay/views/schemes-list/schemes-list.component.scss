@@ -252,17 +252,30 @@ body {
     line-height: 1;
   }
 
-  .schemes__menu-dropdown {
+.schemes__menu-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 120px;
+  z-index: 10;
+  margin-top: 8px;
+  
+  // flecha
+  &::before {
+    content: "";
     position: absolute;
-    right: 0;
-    top: 100%;
+    top: -6px; // posición vertical (ajustá según necesites)
+    right: 5px; // alineación horizontal (ajustá según tu botón)
+    width: 10px;
+    height: 10px;
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    min-width: 120px;
-    z-index: 10;
-    margin-top: 4px;
+    transform: rotate(45deg);
+    box-shadow: -1px -1px 1px rgba(0,0,0,0.05);
   }
+}
 
   .schemes__menu-item {
     width: 100%;

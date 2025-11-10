@@ -1,0 +1,470 @@
+form {
+  padding: 1rem; /* padding del padre */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0; /* elimina cualquier margen */
+  padding: 0; /* sin padding propio para respetar el del padre */
+  margin-bottom: 1vh;
+
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  margin-top: 1rem; /* espacio entre el título y la card */
+}
+
+.card-2 {
+  background-color: #ffffff;
+ 
+  width: 100%;
+  position: relative;
+
+  margin-top: 1rem; /* espacio entre el título y la card */
+  margin-bottom: 2rem;
+  min-width: calc(100% - 0.5rem);
+  flex: 0 1 calc(100% - 0.5rem);
+  
+}
+.card-2 .card-table {
+  box-sizing: border-box;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  flex: 0 1 100%;   /* ocupa toda la fila */
+  max-width: 100%;  /* ancho máximo total */
+  min-width: 100%;  /* ancho mínimo total */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+.card-2 label {
+  display: block;               /* para ocupar toda la fila */
+  text-align: center;           /* centra el texto horizontalmente */
+  background-color: #efebeb;   /* fondo gris */
+  margin: 0 auto 1rem auto;    /* centra el bloque y margen inferior */
+  color: #1c1a1a;
+  padding-top: 5px;
+
+}
+
+.card-header {
+position: absolute;
+  top: 0.5rem;
+  left: 2rem;
+  background-color: #ffffff;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 4rem);
+  border-radius: 0.5rem;
+}
+.card-header span {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;   /* igual que el header */
+  font-size: 1rem;    /* mismo tamaño */
+  color: #333;        /* o el color del header */
+}
+
+.card-title {
+  display: block;
+  color: rgb(51, 47, 47)
+
+}
+
+.card-body {
+  display: flex; /* cambio a flexbox */
+  flex-wrap: wrap; /* permite que las cards se envuelvan */
+  gap: 1rem;
+  margin-top: 2.5rem;
+  width: 100%;
+}
+
+.inner-card {
+  background-color: #f2f3f7;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  padding-top: 1.2rem; /* espacio extra arriba para el label flotante */
+  padding-bottom: 0.2rem;/*sobrescribo el paddig bottom para achicar el tamaño total del input*/
+  display: inline-flex; /* se ajusta al contenido */
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: calc(25% - 0.75rem); /* ancho mínimo del 25% para forzar máximo 4 columnas */
+  max-width: 300px; /* ancho máximo antes de romper línea */
+  flex: 0 1 calc(25% - 0.75rem); /* no crece, puede encogerse hasta el min-width */
+  position: relative; /* necesario para posicionar el label */
+  margin-top: 0.2rem; /* espacio para que el label no se corte */
+
+}
+
+.inner-card label {
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  background-color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  color: #555;
+  font-weight: 400;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+}
+
+/* Oculta scrollbar en Chrome, Edge, Safari */
+.inner-card textarea::-webkit-scrollbar {
+  display: none;
+}
+.inner-card span {
+ font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  color: #5f6a7d;
+  word-wrap: break-word; /* rompe palabras largas */
+  overflow-wrap: break-word; /* rompe en el límite del contenedor */
+  line-height: 1.4; /* mejor legibilidad */
+  font-size: 0.95rem; /* 👈 achica el texto */
+
+}
+
+/* MEDIA QUERIES PARA RESPONSIVIDAD */
+
+/* Tablets grandes - máximo 3 columnas */
+@media (max-width: 1200px) {
+  .inner-card {
+    min-width: calc(33.333% - 0.75rem);
+    flex: 0 1 calc(33.333% - 0.75rem);
+  }
+}
+
+/* Tablets - máximo 2 columnas */
+@media (max-width: 768px) {
+  .inner-card {
+    min-width: calc(50% - 0.5rem);
+    flex: 0 1 calc(50% - 0.5rem);
+  }
+  
+  .card {
+    padding: 1.5rem;
+  }
+  
+  .card-2 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* Móviles - 1 columna */
+@media (max-width: 550px) {
+  .inner-card {
+    min-width: 100%;
+    flex: 0 1 100%;
+    max-width: 100%;
+  }
+  
+  .card {
+    padding: 1rem;
+  }
+  
+  .card-2 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .card-header {
+    left: 1rem;
+    max-width: calc(100% - 2rem);
+    font-size: 0.9rem;
+  }
+  .card-2 .card-table{
+     flex: 0 1 calc(100% - 0.5rem); /* ocupa la mitad de la card-2 */
+     max-width: calc(100% - 0.5rem);
+     min-width: calc(100% - 0.5rem);
+
+  }
+}
+
+
+
+
+
+
+/* NUEVOS ESTILOS PARA LA card de la TABLA -*/
+
+/* Contenedor de tabla dentro de inner-card */
+.inner-card:has(app-table) {
+  min-width: 100%; /* la tabla ocupa todo el ancho */
+  max-width: 100%;
+  flex: 0 1 100%;
+  padding: 0; /* sin padding para que la tabla use todo el espacio */
+  background-color: transparent; /* sin fondo gris */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ajustar el label cuando hay una tabla */
+.inner-card:has(app-table) label {
+  position: relative; /* cambiar a relativo */
+  top: auto;
+  left: auto;
+  margin-bottom: 1rem;
+  background-color: #ffffff;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: #000;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  align-self: flex-start;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+/* Estilos para la tabla */
+.inner-card app-table {
+  width: 100%;
+  overflow-x: auto; /* scroll horizontal si es necesario */
+}
+
+/* Estilos para que la tabla se vea como en la imagen */
+.inner-card app-table ::ng-deep table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #ffffff;
+}
+
+.inner-card app-table ::ng-deep thead {
+  background-color: #f8f9fa;
+}
+
+.inner-card app-table ::ng-deep thead th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #555;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.inner-card app-table ::ng-deep tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.inner-card app-table ::ng-deep tbody tr:last-child {
+  border-bottom: none;
+}
+
+.inner-card app-table ::ng-deep tbody td {
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: #333;
+  background-color: #fafafa;
+}
+
+.inner-card app-table ::ng-deep tbody tr:nth-child(even) td {
+  background-color: #f5f5f5;
+}
+
+/* Ajustar app-no-data */
+.inner-card app-no-data {
+  padding: 2rem;
+  text-align: center;
+}
+
+/* RESPONSIVIDAD PARA LA TABLA */
+@media (max-width: 768px) {
+  .inner-card:has(app-table) {
+    padding: 0.5rem;
+  }
+  
+  .inner-card app-table ::ng-deep table {
+    font-size: 0.75rem;
+  }
+  
+  .inner-card app-table ::ng-deep thead th,
+  .inner-card app-table ::ng-deep tbody td {
+    padding: 0.5rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* textarea flotante, visualmente igual al label */
+.inner-card .floating-textarea {
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  background-color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  color: #555;
+  font-weight: 400;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border: none;
+  outline: none;
+  resize: none;
+
+  /* VISUAL: que parezca una sola línea (igual al label) */
+  line-height: 1.4rem;         /* altura de línea */
+  height: 1.6rem;              /* altura visible = 1 línea (ajusta si hace falta) */
+  width: calc(100% - 2rem);    /* deja margen respecto al inner-card */
+  max-width: calc(100% - 2rem);
+
+  /* LÓGICA: envolver texto internamente y permitir scroll vertical oculto */
+  white-space: pre-wrap;       /* permite wrap manteniendo saltos de línea */
+  overflow-y: auto;            /* scroll vertical cuando sobrepasa el alto */
+  overflow-x: hidden;
+
+  /* Ocultar scrollbars en la mayoría de navegadores */
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE 10+ */
+}
+.inner-card .floating-textarea::-webkit-scrollbar {
+  display: none;               /* Chrome, Edge, Safari */
+}
+
+/* Para que el usuario perciba que se puede scrollear, opcional: mostrar un sutil indicador */
+.inner-card .floating-textarea:focus {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+
+
+
+
+
+
+// TODO PARA LA CARD MOBILE
+.card-mobile {
+width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.payment-card-mobile-container{
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  transition: box-shadow 0.2s ease;
+  margin-bottom: 3vh;
+}
+
+.payment-card-mobile-data {
+  display: block;              // asegura que no se comporte como inline o flex item raro
+  width: 100% !important;      // ocupa todo el ancho del padre
+  max-width: 100% !important;  // evita que se pase del padre
+  flex: 1 1 auto;              // si está dentro de un flex, se adapta
+  align-self: stretch;         // si el padre tiene display:flex, se estira al ancho total
+  box-sizing: border-box;      // incluye padding/border dentro del ancho
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+
+
+  .card-header-mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1vh;
+
+    .card-id-mobile {
+      color: #666;
+      font-size: 0.8125rem;
+      font-weight: 400;
+
+    }
+
+    .menu-icon-mobile {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: #666;
+      padding: 0;
+      line-height: 1;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+
+  .card-body-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1vh;
+
+  }
+
+.info-row-mobile {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem;
+
+  .info-label-mobile {
+    color: #1976d2;
+    font-weight: 500;
+    font-size: 0.875rem;
+    justify-self: start; 
+  }
+
+  .info-value-mobile {
+    color: #333;
+    font-weight: 400;
+    font-size: 0.875rem;
+    justify-self: end; // 
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+  }
+}
+
+
+}

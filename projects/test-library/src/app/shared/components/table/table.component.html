@@ -64,6 +64,12 @@
       <div class="table__head-row-item--text" *ngIf="actionKey && !actionBtnLabel">
         {{ actionKey + ".ACTIONS" | translate }}
       </div>
+      <ng-container *ngIf="showAddButtonInHeader">
+            <button type="button" class="table__head-row-item__actions-add" (click)="onAddClick() "
+              [matTooltip]="addButtonTooltipText">
+              <img src="../../../../assets/icons/plus.svg" alt="Agregar">
+            </button>
+          </ng-container>
       <app-ip-button-modal
         *ngIf="actionBtnLabel"
         [typeBtn]="'action'"
@@ -103,6 +109,14 @@
           [ngStyle]="getRowStyle('dataRow', key, i)"
         >
           <!-- <span *ngIf="key.includes('id') || key.includes('Id')">#</span> -->
+          <img *ngIf="key === 'logoUrl' && dataField[key]" [src]="dataField[key] | safe" [alt]="dataField.name || 'Logo'"
+              style="
+                display: block;
+                height: 36px;
+                max-height: 40px;
+                width: auto;
+                margin: 0 auto;
+                object-fit: contain;" />
           <img
             *ngIf="key === 'cardNumber' && dataField.cardNetwork === 'VISA'"
             src="../../../../assets/new-styles/img/card-visa-blue.png"
@@ -121,7 +135,7 @@
             class="table__body-row-item-avatar"
           />
           <span
-            *ngIf="dataField[key] !== true && dataField[key] !== false"
+            *ngIf="dataField[key] !== true && key !== 'logoUrl' && dataField[key] !== false"
             [matTooltip]="generateTooltip(dataField[key], key, keyTranslate)"
             [matTooltipDisabled]="!generateTooltip(dataField[key], key, keyTranslate)"
             [style.word-break]="

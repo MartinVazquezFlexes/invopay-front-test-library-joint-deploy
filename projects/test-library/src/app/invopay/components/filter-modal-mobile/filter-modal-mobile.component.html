@@ -1,0 +1,9 @@
+<div class="backdrop" *ngIf="isOpen" (click)="closeModal()"></div>
+<div class="bottom-modal" *ngIf="isOpen">
+  <div class="modal-header">
+    <div class="modal-handle"></div>
+  </div>
+  <div class="modal-body">
+    <ng-content></ng-content>
+  </div>
+</div>

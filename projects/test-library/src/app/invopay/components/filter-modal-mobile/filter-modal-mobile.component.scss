@@ -1,0 +1,226 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.bottom-modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.35s ease forwards;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+}
+
+.modal-handle {
+  width: 3rem;
+  height: 0.3rem;
+  background-color: #ccc;
+  border-radius: 999px;
+}
+
+.modal-body {
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+:host ::ng-deep {
+
+  // Contenedor para las fechas lado a lado
+  .date-row {
+    display: flex;
+    gap: 1.5rem; // Espacio entre los inputs de fecha
+    margin-bottom: 3vh;
+    
+    .date-wrapper {
+      flex: 1;
+      min-width: 0; // permite que los elementos se ajusten
+    }
+  }
+
+  .search {
+    height: 1.75rem;
+    padding: 0 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: rgb(33, 107, 245);
+    color: white;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 0.875rem;
+      height: 0.875rem;
+      display: block;
+    }
+
+    &:hover {
+      background-color: rgb(5, 53, 143);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    &::after {
+      content: "BUSCAR";
+      position: absolute;
+      top: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(27, 25, 25, 0.8);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+    
+  .select-wrapper, .date-wrapper {
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .placeholder {
+      position: absolute;
+      top: -0.9rem;
+      left: 0.55rem;
+      background-color: white;
+      padding: 0 0.25rem;
+      font-weight: 200;
+      font-size: 12px;
+      color: #333;
+      z-index: 1;
+    }
+
+    .custom-select-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: 2.5rem;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 0.5rem;
+      background-color: white;
+
+      .custom-select {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: transparent;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: #1f2937;
+        padding: 0 2rem 0 0.75rem;
+        outline: none;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.5rem center;
+      }
+    }
+  }
+
+  // Estilos específicos para date-wrapper dentro de date-row
+  .date-row .date-wrapper {
+    min-width: 0; // anula el min-width de 200px
+    flex: 1; // ocupa el espacio disponible equitativamente
+  }
+
+  app-ip-date-input {
+    width: 100%;       
+    min-width: 100%;
+    max-width: 100%;
+
+    ::ng-deep .form-floating {
+      width: 92%; 
+      display: flex;
+      align-items: center;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 0.5rem;
+      height: 2.3rem; // Altura ajustada para que coincida con los selects
+      padding: 0 0.5rem;
+
+
+      .form-control {
+        border: none;
+        background: transparent;
+        font-size: 0.8125rem;
+        color: #1f2937;
+        height: 100%;
+      }
+
+      label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #6b7280;
+      }
+       // ⭐ AGREGAR AQUÍ - Estilos específicos para el input date
+    input[type="date"] {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      position: relative;
+      width: 100%;
+      padding-right: 2.5rem;
+      text-align: left;
+      
+      // Usar background porque ::after no funciona en inputs
+      background: #fff url(../../../../assets/new-styles/icons/datepicker-icon.svg) no-repeat right 0.6rem center;
+      background-size: 1rem 1rem;
+      
+      // Ocultar ícono nativo
+      &::-webkit-calendar-picker-indicator {
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        width: 2.5rem;
+        height: 100%;
+        cursor: pointer;
+      }
+    }
+    }
+  }
+
+  // Estilos para modal-actions
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end; // Alinea el botón a la derecha
+    margin-top: 2vh;
+  }
+}

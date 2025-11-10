@@ -1,0 +1,204 @@
+<form [formGroup]="controlsForm">
+  <app-title-page *ngIf="!isMobile" [isMobile]="isMobile" [title]="'IP.SIDENAV.OPTIONS.PAY_IN' | translate"></app-title-page>
+
+        <div *ngIf="isMobile" class="mobile-header">
+            <app-title-page  [isMobile]="isMobile" [title]="'IP.SIDENAV.OPTIONS.PAY_IN' | translate"></app-title-page>
+            <button  class="search-mobile" (click)="onClickFiltredSearchMobile()">
+                <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg" />
+                {{'IP.FILTERS_MODAL.FILTER' | translate}}    
+            </button>
+        </div>
+
+
+
+  <div class="card-table-filters">
+    <div class="card-body">
+        <!--FILTROS-->
+      <div class="card-filtros">
+
+        <div *ngIf="!isMobile" class="card-filtros__actions">
+          
+          <div class="select-wrapper">
+            <label class="placeholder">{{'NEW_VAR.PAYMEN_CHANNEL'|translate}}</label>
+            <div class="custom-select-container">
+              <select formControlName="chanelPayment" class="custom-select">
+                <option  value="">{{'IP.SETTLEMENTS.SALE-PAYMENT.PAYMENT_METHOD'|translate}}</option>
+                <option *ngFor="let item of paymentChannels" value="{{item.value}}">{{item.label}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="date-wrapper">
+            <label  class="placeholder">{{'IP.FILTERS.DATE.FROM' | translate}}</label>
+            <app-ip-date-input 
+              [control]="controlsForm.controls.dateStart"
+              [max]="maxStart"
+              (changed)="onStartDatechange($event)">
+            </app-ip-date-input>
+          </div>
+
+          <div class="date-wrapper">
+            <label class="placeholder">{{'IP.FILTERS.DATE.TO' | translate}}</label>
+            <app-ip-date-input
+              [control]="controlsForm.controls.dateEnd"
+              [max]="maxEnd"
+              [min]="minEnd"
+              (changed)="onEndDateChange($event)">
+            </app-ip-date-input>
+          </div>
+
+          <div class="date-wrapper">
+            <button class="search" (click)="onClickFiltredSearch()">
+              <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
+            </button>
+          </div>
+          
+        </div>
+
+
+
+      </div>
+    </div>
+    
+    <!--TABLA-->
+    <div *ngIf="!isMobile" class="card-table">     
+      <app-table
+        [keyTranslate]="'IP.ADMIN_TABLE'"
+        [propertyOrder]="columnsHeaders"
+        [data]="tableRevDto"
+        [actions]="['detail']"
+        [tableStyle]="'invopay'"
+        [isForSelectItem]="false"
+        [scroll]="true"
+        [titlesFile]="titlesMap"
+        (action)="onTableAction($event)"
+        (selectedItemsChange)="onSelectedItems($event)">
+      </app-table>
+       <app-no-data *ngIf="revenues.length<1"></app-no-data>
+
+
+    </div>
+    <div *ngIf="isMobile" class="card-mobile">
+        <div   class="payment-card-mobile-container" *ngFor="let revenue of tableRevDto; let i = index">
+            <div class="payment-card-mobile-data">
+            <div class="card-header-mobile">
+            <span class="card-id-mobile">#{{ revenue.id }}</span>
+            <div class="icon-movil-container">
+                    <button class="menu-icon-mobile" (click)="toggleMobileMenu(i)">
+                        ⋮
+                    </button>
+                    <ul *ngIf="showMobileMenuIndex === i" class="menu-movil">
+                        <li (click)="onMobileMenuAction('detail', revenue)"> {{'IP.ACTIONS_TOOLTIP.SEARCH' | translate}}</li>
+                    </ul>
+            </div>
+            </div>
+            <div class="card-body-mobile">
+
+            <div class="info-row-mobile">
+                <span class="info-label-mobile">{{'IP.TABLE.CONSOLIDATED.PAY_IN.DATEPAYIN' | translate}}</span>
+                <span class="info-value-mobile">{{ revenue.fecha }}</span>
+            </div>
+
+            <div class="info-row-mobile">
+                <span class="info-label-mobile">{{'NEW_VAR.PAYMEN_CHANNEL' | translate}}</span>
+                <span class="info-value-mobile"
+                 [title]="revenue.canalPago?.length > 20 ? revenue.canalPago : null">
+                    {{ revenue.canalPago | slice:0:20 }}{{ revenue.canalPago.length > 20 ? '...' : '' }}
+                </span> 
+            </div>
+
+            <div class="info-row-mobile">
+                <span class="info-label-mobile">{{'IP.CARD_TABLE.INVOICE.SUPPLIERNAME' | translate}}</span>
+                <span class="info-value-mobile"
+                [title]="revenue.proveedorPago?.length > 20 ? revenue.proveedorPago : null">
+                 {{ revenue.proveedorPago | slice:0:20 }}{{ revenue.proveedorPago.length > 20 ? '...' : '' }}
+                </span>
+            </div>
+            <div class="info-row-mobile">
+                <span class="info-label-mobile">{{'IP.TABLE.CONSOLIDATED.PAY_IN.AMOUNT' | translate}}</span>
+                <span class="info-value-mobile"
+                >{{revenue.moneda}} {{ revenue.montoRecaudado }}</span>
+            </div>
+            </div>
+        </div>
+        <app-no-data *ngIf="revenues.length < 1"></app-no-data>
+        </div>
+    </div>
+ 
+  
+    <div class="card-paginator"  *ngIf="revenues.length>5">
+      <div class="paginator-controls">
+        <select class="page-size-select" formControlName="rowPaginator" title="Filas por pagina">
+          <option [value]="5">5</option>
+          <option [value]="10">10</option>
+          <option [value]="20">20</option>
+          <option [value]="50">50</option>
+        </select>
+
+        <app-paginator
+          (pageChange)="onPageChange($event)"
+          [totalItems]="revenues.length"
+          [itemsPerPage]="itemsPerpage"
+          [currentPages]="currentPages">
+        </app-paginator>
+     </div>
+    </div>
+  </div>
+</form>
+
+<!-- MODAL DE FILTROS MOBILEasds -->
+<app-filter-modal-mobile  
+  *ngIf="isMobile"
+  [isOpen]="isModalOpen" 
+  (closed)="isModalOpen = false">
+  
+  <div class="modal-filters-content">
+    <p style="margin-bottom: 6vh;margin-left: 3vh; color: rgb(110, 109, 106);" class="modal-title">
+     {{'IP.FILTERS_MODAL.FILTER' | translate}} {{'IP.SIDENAV.OPTIONS.PAY_IN' | translate | lowercase}}
+    </p>
+
+    <!-- Canal de pago -->
+    <div class="select-wrapper" style="margin-bottom: 3vh;">
+      <label class="placeholder">{{'NEW_VAR.PAYMEN_CHANNEL' | translate}}</label>
+      <div class="custom-select-container">
+        <select [formControl]="controlsForm.controls.chanelPayment" class="custom-select">
+          <option value="">{{'IP.SETTLEMENTS.SALE-PAYMENT.PAYMENT_METHOD'|translate}}</option>
+          <option *ngFor="let item of paymentChannels" [value]="item.value">
+            {{item.label}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="date-row">
+
+    <div class="date-wrapper">
+      <label class="placeholder">{{'IP.FILTERS.DATE.FROM' | translate}}</label>
+      <app-ip-date-input 
+        [control]="controlsForm.controls.dateStart"
+        [max]="maxStart"
+        (changed)="onStartDatechange($event)">
+      </app-ip-date-input>
+    </div>
+
+    <!-- Fecha hasta -->
+    <div class="date-wrapper">
+      <label class="placeholder">{{'IP.FILTERS.DATE.TO' | translate}}</label>
+      <app-ip-date-input
+        [control]="controlsForm.controls.dateEnd"
+        [max]="maxEnd"
+        [min]="minEnd"
+        (changed)="onEndDateChange($event)">
+      </app-ip-date-input>
+    </div>
+    </div>
+    <!-- Botones de acción -->
+    <div class="modal-actions">
+
+      <button class="search" (click)="onClickFiltredSearch()">
+                <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
+      </button>
+    </div>
+  </div>
+
+</app-filter-modal-mobile>

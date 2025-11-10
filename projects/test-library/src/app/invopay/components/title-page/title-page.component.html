@@ -1,0 +1,22 @@
+<div *ngIf="!isMobile" class="title-container">
+  <div class="ip-title-mobile">
+    <div class="ip-title-mobile__title">
+      <button *ngIf="showBackButton" (click)="onClickButton()" class="back-button">
+        <img class="back" src="../../../../assets/img/header/ep_back.svg" alt="" />
+      </button>
+      {{ title }}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isMobile" class="title-container mobile">
+  <div class="ip-title-mobile mobile">
+    <div class="ip-title-mobile__title mobile">
+      <button *ngIf="showBackButton" (click)="onClickButton()" class="back-button mobile">
+        <img class="back" src="../../../../assets/img/header/ep_back.svg" alt="" />
+      </button>
+      {{ title }}
+    </div>
+  </div>
+</div>
+

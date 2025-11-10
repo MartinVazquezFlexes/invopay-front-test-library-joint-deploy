@@ -1,4 +1,47 @@
 {
+  "NEW_VAR":{
+      "INF_GENERAL":"Información general",
+      "PAYMEN_CHANNEL": "Canal de pago",
+      "PAYMENT_DATE": "Fecha",
+      "COLLECTED_AMOUNT": "Monto Recaudado",
+      "PAYMENT_PROVIDER": "Proveedor Pago",
+      "CONSOLIDATED": "Consolidada",
+      "POLICY_NUMBER": "Nro Póliza",
+      "POLICY_NUMER_EXTEND" :"Número de póliza",
+      "POLICY":"Póliza",
+      "POLICY_VALUE":"Valor de póliza",
+      "DETAIL_RECAUDATION":"Detalles de la recaudacion",
+      "TRANSACCION_DATA" :"Datos de la transacción",
+      "CONSILIATION_DATA":"Datos de conciliación",
+      "PAYMENT_VALUE":"Valor del pago",
+      "POLICY_DATA":"Datos de póliza",
+      "POLICY_AMOUNT":"Monto poliza",
+      "PREMIUM_AMOUNT":"Monto prima",
+      "PAYMENT_PLAN":"Plan de pago",
+      "PREMIUM_PLAN_PAYMENT":"Plan de pago de la prima",
+      "INSTALLMENT_NUMBER":"Cuota N°",
+      "SELECT_PRODUCT": "Seleccione una producto",
+      "CLIENT":"Cliente",
+      "PERCENTAJE_BROKER":"Comisión Broker",
+      "AMOUNT_PAY": "Cantidad de pagos",
+      "CLIENT_INF":"Información del cliente",
+
+      "ASSURANCE_NOTIF":"Notificaciones de la aseguradora",
+
+      "RESPONSED": "Respondinda",
+      "REPLY":"Responder",
+      "ENTITY":"Entidad",
+      "SELECT_SUPPLIER_OR_BROKER":"Seleccione proveedor o corredor",
+      "CONSULT":"Consulta",
+
+      "PENDING_SALES":"Ventas a cobrar pendientes",
+      "PENDING_EXPIRY_SALES":"Ventas a cobrar vencidas",
+
+      "PENDING_SALES_TAB":"Cobro pendiente",
+      "EXPIRY_SALES_TAB": "Cobro Vencido",
+      "ALL_SALES_TAB":"Todas"
+
+  },
   "IP": {
     "CURRENCY": "Moneda",
     "CURRENCY_TYPES": "Tipos de cambio utilizados:",
@@ -2595,6 +2638,96 @@
         "PREMIUMAMOUNT": "Monto prima",
         "BROKERNAME": "Agente de ventas"
 
+      }
+    }
+  },
+  "PRODUCTS": {
+    "LIST": {
+      "TITLE": "Productos"
+    },
+    "TABLE": {
+      "ADD_TOOLTIP": "Agregar Producto"
+    },
+    "CARDS": {
+      "ARIA_LABEL": "Listado de productos",
+      "MENU_ALT": "Menú",
+      "ACTIONS": {
+        "VIEW": "Ver",
+        "EDIT": "Editar",
+        "DELETE": "Eliminar"
+      },
+      "LABELS": {
+        "DESCRIPTION": "Descripción",
+        "ACTIVE": "Activo"
+      },
+      "NO_DATA": "No se encontraron productos."
+    },
+    "PAGINATOR": {
+      "ROWS_PER_PAGE": "Filas por página: "
+    },
+    "BUTTONS": {
+      "CANCEL": "Cancelar",
+      "CONFIRM": "Confirmar",
+      "DELETING": "Eliminando...",
+      "SAVING": "Guardando..."
+    },
+    "VIEW_MODAL": {
+      "TITLE": "Detalle del Producto",
+      "LABELS": {
+        "DESC_SHORT": "Descripción Breve",
+        "DESC_DETAILED": "Descripción Detallada"
+      },
+      "BUTTONS": {
+        "CLOSE": "Cerrar"
+      }
+    },
+    "DELETE_MODAL": {
+      "TITLE": "Confirmar Eliminación",
+      "CONFIRM_MESSAGE": "¿Está seguro que desea eliminar el producto",
+      "NOTE": "Esta acción realizará una eliminación lógica y el producto se mostrará como \"Inactivo\"."
+    },
+    "CREATE_MODAL": {
+      "TITLE": "Agregar Nuevo Producto",
+      "BUTTONS": {
+        "SAVE": "Guardar Producto"
+      }
+    },
+    "EDIT_MODAL": {
+      "TITLE": "Editar Producto",
+      "BUTTONS": {
+        "SAVE": "Guardar Cambios"
+      }
+    },
+    "FORM": {
+      "CODE": {
+        "LABEL": "Código del Producto",
+        "LABEL_READONLY": "Código del Producto (Solo Lectura)"
+      },
+      "LOGO": {
+        "LABEL": "Logo del Producto",
+        "PREVIEW_ALT": "Vista previa del Logo",
+        "UPLOAD_BUTTON": "Subir Archivo..."
+      },
+      "NAME": {
+        "LABEL": "Nombre del Producto"
+      },
+      "TYPE": {
+        "LABEL": "Tipo"
+      },
+      "DESCRIPTION": {
+        "LABEL": "Descripción (Breve)"
+      },
+      "LONG_DESCRIPTION": {
+        "LABEL": "Descripción Larga"
+      },
+      "EXTERNAL_ID": {
+        "LABEL": "ID Externo"
+      },
+      "ENTERPRISE": {
+        "LABEL": "Empresa Aseguradora"
+      },
+      "IS_ACTIVE": {
+        "LABEL": "Activo"
       }
     }
   }

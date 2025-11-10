@@ -39,12 +39,19 @@ import { DecryptionInterceptor } from './shared/interceptors/decryption.intercep
 import { NotificationTrayComponent } from './invopay/components/notification-tray/notification-tray.component';
 import { SchemesListComponent } from './invopay/views/schemes-list/schemes-list.component';
 import { ModalSchemaComponent } from './invopay/components/modal-schema/modal-schema.component';
+import { TitlePageComponent } from './invopay/components/title-page/title-page.component';
+import { FilterModalMobileComponent } from './invopay/components/filter-modal-mobile/filter-modal-mobile.component';
+import { RevenueDetailComponent } from './invopay/views/revenue-detail/revenue-detail.component';
+import { RevenuesListComponent } from './invopay/views/revenues-list/revenues-list.component';
+import { SalesListComponent } from './invopay/views/sales-list/sales-list.component';
+import { SalesDetailsComponent } from './invopay/views/sales-details/sales-details.component';
+import { PendingSalesComponent } from './invopay/views/pending-sales/pending-sales.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent,NavbarComponent,SidebarComponent,MainLayoutComponent, PaymentsEntitiesListComponent, InsuranceNotificationTrayComponent, NotificationTrayComponent, NotificationTrayComponent, BrokerNotificationTrayComponent, SchemesListComponent, ModalSchemaComponent],
+  declarations: [AppComponent,NavbarComponent,SidebarComponent,MainLayoutComponent, PaymentsEntitiesListComponent, InsuranceNotificationTrayComponent, NotificationTrayComponent, NotificationTrayComponent, BrokerNotificationTrayComponent, SchemesListComponent, ModalSchemaComponent,TitlePageComponent,FilterModalMobileComponent,RevenueDetailComponent,RevenuesListComponent,SalesListComponent,SalesDetailsComponent,PendingSalesComponent],
 
   imports: [
     BrowserModule,

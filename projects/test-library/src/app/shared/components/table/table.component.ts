@@ -49,6 +49,9 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() actionBtnLabel?: string; 
   @Output() actionBtn: EventEmitter<TableEvent> = new EventEmitter<TableEvent>();
   @Input() columnWidths?: { [key: string]: string };
+  @Input() showAddButtonInHeader: boolean = false;
+  @Output() addAction = new EventEmitter<void>();
+  @Input() addButtonTooltipText: string = '';
 
   selectedItems: Set<any> = new Set();
   selectSomeChecked = false;
@@ -91,7 +94,9 @@ export class TableComponent implements OnInit, OnChanges {
     });
   }
 
-
+  onAddClick(): void {
+    this.addAction.emit();
+  }
 
   private setTableHeads(): any {
     let headerArray = [];

@@ -6,7 +6,7 @@
         <img src="../../../assets/new-styles/icons/sidebar/home-icon.svg" alt="Inicio">
         <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.SIDENAV.HOME' | translate }}</span>
       </a>
-        <a class="menu-item" routerLink="/invopay/sell-list" routerLinkActive="active" title="Ventas">
+        <a class="menu-item" routerLink="/invopay/sales-list" routerLinkActive="active" title="Ventas">
         <img src="../../../assets/icons/sell.svg" alt="Ventas">
         <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.SIDENAV.OPTIONS.SALES' | translate }}</span>
       </a>
@@ -18,7 +18,7 @@
         </div>
         
         <div class="submenu" *ngIf="revenueSubmenuOpen && !isCollapsed">
-          <a class="menu-item" routerLink="/invopay/revenue-list" routerLinkActive="active" title="Listado">
+          <a class="menu-item" routerLink="/invopay/revenues-list" routerLinkActive="active" title="Listado">
             <span class="label">Listado</span>
           </a>
           <a class="menu-item" routerLink="/invopay/payments-entities" routerLinkActive="active" title="Proveedores">
@@ -43,6 +43,10 @@
           </a>
         </div>
       </div>
+      <a class="menu-item"  title="Productos" routerLink="/invopay/product-list" routerLinkActive="active">
+        <img src="../../../assets/icons/sell.svg" alt="Productos">
+        <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">Productos</span>
+      </a>
 
       <a class="menu-item"  title="Esquemas" routerLink="/invopay/schemes-list" routerLinkActive="active">
         <img src="../../../assets/new-styles/icons/status-transitions.svg" alt="Esquemas">
