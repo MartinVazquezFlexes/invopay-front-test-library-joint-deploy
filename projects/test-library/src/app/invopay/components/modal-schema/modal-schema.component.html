@@ -14,24 +14,20 @@
       <div class="modal__section">
         <div class="modal__inputs" [ngClass]="{'modal__inputs--status': context === 'status'}">
           <div class="modal__input-wrapper">
-            <label class="modal__label" for="schemeName">{{
-              "IP.ADMIN_TABLE.SCHEMENAME" | translate
-            }}</label>
+
             <app-ip-input
               inputId="schemeName"
               [control]="getControl('schemeName')"
-              label=""
+              [label]="'IP.ADMIN_TABLE.SCHEMENAME' | translate"
               type="text"
             ></app-ip-input>
           </div>
 
           <div class="modal__input-wrapper">
-            <label class="modal__label" for="schemaStatus">{{
-              "IP.SCHEMES.ACTUALSTATUS" | translate
-            }}</label>
             <app-ip-input
               inputId="schemaStatus"
               [control]="getControl('schemaStatus')"
+              [label]="'IP.SCHEMES.ACTUALSTATUS' | translate"
               type="text"
             ></app-ip-input>
           </div>
@@ -51,11 +47,9 @@
             class="modal__input-wrapper modal__input-wrapper--full"
             *ngIf="context == 'detail'"
           >
-            <label class="modal__label" for="fullDescription">{{
-              "IP.ADMIN_TABLE.DESCRIPTION" | translate
-            }}</label>
             <app-ip-text-area-input
               inputId="fullDescription"
+              [label]="'IP.ADMIN_TABLE.DESCRIPTION' | translate"
               [control]="getControl('fullDescription')"
             ></app-ip-text-area-input>
           </div>

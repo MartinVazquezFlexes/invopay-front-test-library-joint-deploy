@@ -28,6 +28,7 @@ import { HomeComponent } from './views/home/home.component';
 import { Template1Component } from './views/template1/template1.component';
 import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 import { ProductListComponent } from './views/product-list/product-list.component';
+import { IpNotificationModalFilterMobileComponent } from './components/ip-notification-modal-filter-mobile/ip-notification-modal-filter-mobile.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { ProductListComponent } from './views/product-list/product-list.componen
         Template1Component,
         NotificationModalComponent,
         ProductListComponent,
+        IpNotificationModalFilterMobileComponent,
 
     ],
     imports: [

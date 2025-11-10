@@ -32,7 +32,7 @@
         <label>{{'NEW_VAR.COLLECTED_AMOUNT'|translate}}</label>
         <span>{{dataShow?.transactionData?.amount}}</span>
       </div>
-      <div class="inner-card">
+      <div *ngIf="dataShow?.transactionData?.transactionObservations?.length!=0" class="inner-card">
         <label >{{'IP.OBSERVATIONS.TITLE'|translate}}</label>
           <!-- si se quiere scrolleable
           <textarea class="floating-textarea" readonly tabindex="0" aria-label="Observaciones" readonly>

@@ -28,6 +28,7 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
   @Output() mobileFiltersOpened = new EventEmitter<void>();
   @Output() replyNotification = new EventEmitter<NotificationItem>();
 
+
   originalData: NotificationItem[] = [];
   
   // Form Controls

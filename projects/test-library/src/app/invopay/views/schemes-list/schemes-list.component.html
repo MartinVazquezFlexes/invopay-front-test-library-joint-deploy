@@ -1,8 +1,3 @@
-<div class="schemes">
-  <div class="schemes__header">
-    <h2 class="schemes__title">{{ "IP.SCHEMES.TITLE" | translate }}</h2>
-  </div>
-
   <app-modal-schema
     *ngIf="showModal"
     [schemaId]="schemaId"
@@ -11,6 +6,11 @@
     (updateTable)="updateTable()"
   >
   </app-modal-schema>
+
+<div class="schemes">
+  <div class="schemes__header">
+    <h2 class="schemes__title">{{ "IP.SCHEMES.TITLE" | translate }}</h2>
+  </div>
 
   <div class="schemes__card">
     <div class="schemes__table-view">
@@ -90,6 +90,15 @@
         }}</span><!--*ngIf="item.isActive" cuando ande el endpoint-->
       </div>
     </div>
+
+    <!--    <div class="schemes__card-view" *ngFor="let item of pagedData">
+<app-mobile-card-list
+  [data]="preparedData"
+  [config]="cardConfig"
+  [showNoData]="pagedData.length === 0"
+  (cardAction)="handleCardAction($event)">
+</app-mobile-card-list>
+    </div>-->
 
     <div class="schemes__pagination">
       <div class="schemes__pagination-center" *ngIf="optPages">

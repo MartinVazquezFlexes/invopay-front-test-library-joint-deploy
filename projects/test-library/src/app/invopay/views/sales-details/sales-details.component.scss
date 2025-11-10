@@ -72,16 +72,16 @@ form {
 }
 
 .inner-card {
-  background-color: #f2f3f7;
-  border-radius: 0.5rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
   padding: 1rem;
   padding-top: 1.2rem; /* espacio extra arriba para el label flotante */
-  padding-bottom: 0.2rem;/*sobrescribo el paddig bottom para achicar el tamaño total del input*/ 
+  padding-bottom: 0.6rem;/*sobrescribo el paddig bottom para achicar el tamaño total del input*/ 
   display: inline-flex; /* se ajusta al contenido */
   flex-direction: column;
   box-sizing: border-box;
-  min-width: calc(25% - 0.75rem); /* ancho mínimo del 25% para forzar máximo 4 columnas */
-  max-width: 300px; /* ancho máximo antes de romper línea */
+  min-width: calc(33% - 0.75rem); /* ancho mínimo del 25% para forzar máximo 4 columnas */
+  max-width: 250px; /* ancho máximo antes de romper línea */
   flex: 0 1 calc(25% - 0.75rem); /* no crece, puede encogerse hasta el min-width */
   position: relative; /* necesario para posicionar el label */
   margin-top: 0.2rem; /* espacio para que el label no se corte */

@@ -86,16 +86,6 @@
   </section>
 
   <footer class="product-list__paginator" *ngIf="!isHandset">
-    <div class="page-size">
-      <span>{{ 'IP.PRODUCTS.PAGINATOR.ROWS_PER_PAGE' | translate }}</span>
-      <select [value]="pageSize" (change)="onPageSizeChange($any($event.target)?.value)">
-        <option [value]="10">10</option>
-        <option [value]="20">20</option>
-        <option [value]="25">25</option>
-        <option [value]="50">50</option>
-        <option [value]="100">100</option>
-      </select>
-    </div>
     <ng-container *ngIf="!paginatorReload">
       <app-paginator [totalItems]="total" [itemsPerPage]="pageSize" [currentPages]="pageIndex + 1"
         (pageChange)="onPageChange($event)">

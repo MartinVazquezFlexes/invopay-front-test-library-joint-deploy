@@ -82,14 +82,16 @@
         <div   class="payment-card-mobile-container" *ngFor="let revenue of tableRevDto; let i = index">
             <div class="payment-card-mobile-data">
             <div class="card-header-mobile">
-            <span class="card-id-mobile">#{{ revenue.id }}</span>
+            <span class="card-id-mobile">#{{ revenue.fila }}</span>
             <div class="icon-movil-container">
                     <button class="menu-icon-mobile" (click)="toggleMobileMenu(i)">
                         ⋮
                     </button>
                     <ul *ngIf="showMobileMenuIndex === i" class="menu-movil">
                         <li (click)="onMobileMenuAction('detail', revenue)"> {{'IP.ACTIONS_TOOLTIP.SEARCH' | translate}}</li>
+                        <li (click)="onMobileMenuAction('detail', revenue)"> {{'IP.ACTIONS_TOOLTIP.SEARCH' | translate}}</li>
                     </ul>
+            
             </div>
             </div>
             <div class="card-body-mobile">

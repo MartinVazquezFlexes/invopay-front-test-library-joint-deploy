@@ -8,15 +8,14 @@ import { Router } from '@angular/router';
 import { combineLatest, forkJoin, Subscription } from 'rxjs';
 import { NotificationItem, NotificationTrayConfig } from '../../interface/notification-tray.models';
 import { MatDialog } from '@angular/material/dialog';
-import { IpNotificationModalFilterMobileComponent } from '../../components/ip-notification-modal-filter-mobile/ip-notification-modal-filter-mobile.component';
 
 @Component({
-  selector: 'app-broker-notification-tray',
-  templateUrl: './broker-notification-tray.component.html',
-  styleUrls: ['./broker-notification-tray.component.scss']
+  selector: 'app-ip-notification-modal-filter-mobile',
+  templateUrl: './ip-notification-modal-filter-mobile.component.html',
+  styleUrls: ['./ip-notification-modal-filter-mobile.component.scss']
 })
-export class BrokerNotificationTrayComponent implements OnInit,OnDestroy {
-  private subscription=new Subscription();
+export class IpNotificationModalFilterMobileComponent {
+private subscription=new Subscription();
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

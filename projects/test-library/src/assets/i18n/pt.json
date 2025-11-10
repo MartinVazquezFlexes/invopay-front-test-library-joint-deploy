@@ -1,4 +1,42 @@
 {
+  "NEW_VAR":{
+      "INF_GENERAL":"Informações gerais",
+      "PAYMEN_CHANNEL": "Canal de pagamento",
+      "PAYMENT_DATE": "Data",
+      "COLLECTED_AMOUNT": "Valor Arrecadado",
+      "PAYMENT_PROVIDER": "Provedor de Pagamento",
+      "CONSOLIDATED": "Consolidada",
+      "POLICY_NUMBER": "Nº Apólice",
+      "POLICY_NUMER_EXTEND" :"Número de apólice",
+      "POLICY":"Apólice",
+      "POLICY_VALUE":"Valor da apólice",
+      "DETAIL_RECAUDATION":"Detalhes da arrecadação",
+      "TRANSACCION_DATA" :"Dados da transação",
+      "CONSILIATION_DATA":"Dados de conciliação",
+      "PAYMENT_VALUE":"Valor do pagamento",
+      "POLICY_DATA":"Dados da apólice",
+      "POLICY_AMOUNT":"Valor da apólice",
+      "PREMIUM_AMOUNT":"Valor do prêmio",
+      "PAYMENT_PLAN":"Plano de pagamento",
+      "PREMIUM_PLAN_PAYMENT":"Plano de pagamento do prêmio",
+      "INSTALLMENT_NUMBER":"Parcela N°",
+      "SELECT_PRODUCT": "Selecione um produto",
+      "CLIENT":"Cliente",
+      "PERCENTAJE_BROKER":"Comissão Corretor",
+      "AMOUNT_PAY": "Quantidade de pagamentos",
+      "CLIENT_INF":"Informações do cliente",
+      "ASSURANCE_NOTIF":"Notificações da seguradora",
+      "RESPONSED": "Respondida",
+      "REPLY":"Responder",
+      "ENTITY":"Entidade",
+      "SELECT_SUPPLIER_OR_BROKER":"Selecione fornecedor ou corretor",
+      "CONSULT":"Consulta",
+      "PENDING_SALES":"Vendas a receber pendentes",
+      "PENDING_EXPIRY_SALES":"Vendas a receber vencidas",
+      "PENDING_SALES_TAB":"Cobrança pendente",
+      "EXPIRY_SALES_TAB": "Cobrança Vencida",
+      "ALL_SALES_TAB":"Todas"
+  },
   "IP": {
     "SALES": {
       "IMPORT": {
@@ -71,19 +109,19 @@
       "TITLE": "Usuário",
       "USERNAME": "NOME DE USUÁRIO",
       "USERSTATUS": "ESTADO",
-      "SCHEMENAME":"Nome Esquema",
-      "ISSCHEMAACTIVE":"Ativo",
+      "SCHEMENAME": "Nome Esquema",
+      "ISSCHEMAACTIVE": "Ativo",
       "DESCRIPTION": "Descrição"
     },
-    "SCHEMES":{
-      "TITLE":"Esquemas",
-      "MODAL_TITLE":"Detalhe Esquema",
-      "SHORTDESCRIPTION":"Breve Descrição",
+    "SCHEMES": {
+      "TITLE": "Esquemas",
+      "MODAL_TITLE": "Detalhe Esquema",
+      "SHORTDESCRIPTION": "Breve Descrição",
       "ACTIVE": "Ativar",
-      "DEACTIVED":"Desativar",
-      "MESSAGE":"Deseja alterar o estado deste esquema de comissões?",
-      "ACTUALSTATUS":"Estado Atual",
-      "SEE":"Ver"
+      "DEACTIVED": "Desativar",
+      "MESSAGE": "Deseja alterar o estado deste esquema de comissões?",
+      "ACTUALSTATUS": "Estado Atual",
+      "SEE": "Ver"
     },
     "ADMIN_TABLE_ENTERPRISE": {
       "ACTIONS": "Ações",
@@ -1376,7 +1414,7 @@
         "CLEAR": "Limpar filtros"
       }
     },
-    "NOTIFICATIONS":{
+    "NOTIFICATIONS": {
       "TITLE": "Caixa de Notificações",
       "MODAL": {
         "TITLE": "Notificação"
@@ -1405,6 +1443,96 @@
         "COMMISSION": "Comissão",
         "INVOICE": "Fatura",
         "PAYMENT": "Pagamento"
+      }
+    },
+    "PRODUCTS": {
+      "LIST": {
+        "TITLE": "Produtos"
+      },
+      "TABLE": {
+        "ADD_TOOLTIP": "Adicionar produto"
+      },
+      "CARDS": {
+        "ARIA_LABEL": "Lista de produtos",
+        "MENU_ALT": "Menu",
+        "ACTIONS": {
+          "VIEW": "Ver",
+          "EDIT": "Editar",
+          "DELETE": "Eliminar"
+        },
+        "LABELS": {
+          "DESCRIPTION": "Descrição",
+          "ACTIVE": "Ativo"
+        },
+        "NO_DATA": "Não foram encontrados produtos."
+      },
+      "PAGINATOR": {
+        "ROWS_PER_PAGE": "Linhas por página: "
+      },
+      "BUTTONS": {
+        "CANCEL": "Cancelar",
+        "CONFIRM": "Confirmar",
+        "DELETING": "A eliminar...",
+        "SAVING": "A guardar..."
+      },
+      "VIEW_MODAL": {
+        "TITLE": "Detalhes do produto",
+        "LABELS": {
+          "DESC_SHORT": "Descrição breve",
+          "DESC_DETAILED": "Descrição detalhada"
+        },
+        "BUTTONS": {
+          "CLOSE": "Fechar"
+        }
+      },
+      "DELETE_MODAL": {
+        "TITLE": "Confirmar eliminação",
+        "CONFIRM_MESSAGE": "Tem a certeza de que deseja eliminar o produto?",
+        "NOTE": "Esta ação realizará uma eliminação lógica e o produto será apresentado como \"Inativo\"."
+      },
+      "CREATE_MODAL": {
+        "TITLE": "Adicionar novo produto",
+        "BUTTONS": {
+          "SAVE": "Guardar produto"
+        }
+      },
+      "EDIT_MODAL": {
+        "TITLE": "Editar produto",
+        "BUTTONS": {
+          "SAVE": "Guardar alterações"
+        }
+      },
+      "FORM": {
+        "CODE": {
+          "LABEL": "Código do produto",
+          "LABEL_READONLY": "Código do produto (somente leitura)"
+        },
+        "LOGO": {
+          "LABEL": "Logótipo do produto",
+          "PREVIEW_ALT": "Pré-visualização do logótipo",
+          "UPLOAD_BUTTON": "Carregar ficheiro..."
+        },
+        "NAME": {
+          "LABEL": "Nome do produto"
+        },
+        "TYPE": {
+          "LABEL": "Tipo"
+        },
+        "DESCRIPTION": {
+          "LABEL": "Descrição (breve)"
+        },
+        "LONG_DESCRIPTION": {
+          "LABEL": "Descrição longa"
+        },
+        "EXTERNAL_ID": {
+          "LABEL": "ID externo"
+        },
+        "ENTERPRISE": {
+          "LABEL": "Empresa Seguradora"
+        },
+        "IS_ACTIVE": {
+          "LABEL": "Ativo"
+        }
       }
     }
   }

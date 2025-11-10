@@ -373,3 +373,13 @@ input[type=checkbox]{
 input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
   display: none;}
+  .form-floating>.form-control:not(:placeholder-shown)~label::after{
+  height: 0.5rem;
+  @include xl{
+    height: 1rem;
+  }
+}
+
+.mat-mdc-select-disabled{
+  background-color: #e9ecef;
+}

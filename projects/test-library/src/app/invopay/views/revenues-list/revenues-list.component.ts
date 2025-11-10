@@ -282,6 +282,7 @@ export class RevenuesListComponent {
         console.log(this.revenues)
         console.log(filteredRevenues)
         this.tableRevDto = [...filteredRevenues.map((item, index) => ({
+          fila:index+1,
           id: item.id,
           fecha: this.formatDate2(item.revenueDate),
           moneda:item.currency,

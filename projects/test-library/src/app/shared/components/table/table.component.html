@@ -4,141 +4,94 @@
   </app-ip-drag-scroll>
   <ng-container *ngIf="!scroll">
     <ng-container *ngTemplateOutlet="table"></ng-container>
-  </ng-container> 
+  </ng-container>
 </div>
 <ng-template #table>
-<table class="table" *ngIf="data" >
-  <!-- headers -->
-  <thead class="table__head">
-    <tr class="table__head-row">
-      <th
-        class="table__head-row-item"
-        [ngStyle]="getTableStyle(tableStyle, 'dataHead')"
-        *ngIf="isForSelectItem"
-      >
-        <div class="table__head-row-item--text table__head-row-item--text__check">
-          <input
-            class="table__body-row-item__check"
-            type="checkbox"
-            [indeterminate]="selectSomeChecked && !selectAllChecked"
-            [checked]="selectAllChecked"
-            (change)="toggleSelectAllItems()"
-          >
-        </div>
-      </th>
-      <th
-        class="table__head-row-item"
-        *ngFor="let key of keyColumns; let i = index"
-        [ngStyle]="getRowStyle('dataHead', key, i)"
-        [ngClass]="{ 'table__head-row-itemSortable': this.isSortable(key) }"
-        (click)="onSort($event, key)"
-      >
-        <div class="table__head-row-item--text">
-          {{ tableHeads[key] }}
-          <ng-container *ngIf="this.isSortable(key)">
-            <ng-container *ngTemplateOutlet="sort"></ng-container>
-          </ng-container>
-        </div>
-      </th>
-
-      <ng-container *ngIf="hasExtraData() && showExtraData">
-        <th
-          class="table__head-row-item"
-          [ngStyle]="getRowStyle('dataHead', key.name, i)"
-          *ngFor="let key of extraDataKeys | async; let i = index">
-          <div class="table__head-row-item--text">
-            {{ key.name }}
+  <table class="table" *ngIf="data">
+    <!-- headers -->
+    <thead class="table__head">
+      <tr class="table__head-row">
+        <th class="table__head-row-item" [ngStyle]="getTableStyle(tableStyle, 'dataHead')" *ngIf="isForSelectItem">
+          <div class="table__head-row-item--text table__head-row-item--text__check">
+            <input class="table__body-row-item__check" type="checkbox"
+              [indeterminate]="selectSomeChecked && !selectAllChecked" [checked]="selectAllChecked"
+              (change)="toggleSelectAllItems()">
           </div>
         </th>
-      </ng-container>
+        <th class="table__head-row-item" *ngFor="let key of keyColumns; let i = index"
+          [ngStyle]="getRowStyle('dataHead', key, i)"
+          [ngClass]="{ 'table__head-row-itemSortable': this.isSortable(key) }" (click)="onSort($event, key)">
+          <div class="table__head-row-item--text">
+            {{ tableHeads[key] }}
+            <ng-container *ngIf="this.isSortable(key)">
+              <ng-container *ngTemplateOutlet="sort"></ng-container>
+            </ng-container>
+          </div>
+        </th>
 
-      <th
-        class="table__head-row-item"
-        *ngIf="actions.length"
-        [ngStyle]="getTableStyle(tableStyle, 'dataHead')"
-        [ngClass]="{'table-sticky-right': scroll}"
-      >
-      <div class="table__head-row-item--text" *ngIf="!actionKey && !actionBtnLabel">
-        {{ keyTranslate + ".ACTIONS" | translate }}
-      </div>
-      <div class="table__head-row-item--text" *ngIf="actionKey && !actionBtnLabel">
-        {{ actionKey + ".ACTIONS" | translate }}
-      </div>
-      <ng-container *ngIf="showAddButtonInHeader">
-            <button type="button" class="table__head-row-item__actions-add" (click)="onAddClick() "
-              [matTooltip]="addButtonTooltipText">
-              <img src="../../../../assets/icons/plus.svg" alt="Agregar">
-            </button>
-          </ng-container>
-      <app-ip-button-modal
-        *ngIf="actionBtnLabel"
-        [typeBtn]="'action'"
-        (clicked)="onActionBtnEmit('create')"
-        [size]="'table'"
-        >
-        {{ actionBtnLabel }}
-      </app-ip-button-modal>
-      </th>
-    </tr>
-  </thead>
-  <!-- body fields -->
-  <tbody class="table__body">
-    <ng-container *ngFor="let dataField of data, trackBy: trackByDataField">
-      <tr class="table__body-row">
-        <td
-          class="table__body-row-item"
-          [ngStyle]="getTableStyle(tableStyle, 'dataRow')"
-          *ngIf="isForSelectItem">
-          <input
-            class="table__body-row-item__check"
-            type="checkbox"
-            [checked]="isItemSelected(dataField)"
-            (change)="toggleItemSelection(dataField)"
-            *ngIf="!disableCheck(dataField)"
-          />
-          <input
-            class="table__body-row-item__check"
-            type="checkbox"
-            [disabled]="true"
-            *ngIf="disableCheck(dataField)"
-          />
-        </td>
-        <td
-          class="table__body-row-item"
-          *ngFor="let key of keyColumns; let i = index, trackBy: trackByKey"
-          [ngStyle]="getRowStyle('dataRow', key, i)"
-        >
-          <!-- <span *ngIf="key.includes('id') || key.includes('Id')">#</span> -->
-          <img *ngIf="key === 'logoUrl' && dataField[key]" [src]="dataField[key] | safe" [alt]="dataField.name || 'Logo'"
-              style="
+        <ng-container *ngIf="hasExtraData() && showExtraData">
+          <th class="table__head-row-item" [ngStyle]="getRowStyle('dataHead', key.name, i)"
+            *ngFor="let key of extraDataKeys | async; let i = index">
+            <div class="table__head-row-item--text">
+              {{ key.name }}
+            </div>
+          </th>
+        </ng-container>
+
+        <th class="table__head-row-item" *ngIf="actions.length" [ngStyle]="getTableStyle(tableStyle, 'dataHead')"
+          [ngClass]="{'table-sticky-right': scroll}">
+          <div class="table__head-row-item__actions-content">
+            <div class="table__head-row-item--text" *ngIf="!actionKey && !actionBtnLabel">
+              {{ keyTranslate + ".ACTIONS" | translate }}
+            </div>
+            <div class="table__head-row-item--text" *ngIf="actionKey && !actionBtnLabel">
+              {{ actionKey + ".ACTIONS" | translate }}
+            </div>
+            <ng-container *ngIf="showAddButtonInHeader">
+              <button type="button" class="table__head-row-item__actions-add" (click)="onAddClick() "
+                [matTooltip]="addButtonTooltipText">
+                <img src="../../../../assets/icons/plus.svg" alt="Agregar">
+              </button>
+            </ng-container>
+          </div>
+          <app-ip-button-modal *ngIf="actionBtnLabel" [typeBtn]="'action'" (clicked)="onActionBtnEmit('create')"
+            [size]="'table'">
+            {{ actionBtnLabel }}
+          </app-ip-button-modal>
+        </th>
+      </tr>
+    </thead>
+    <!-- body fields -->
+    <tbody class="table__body">
+      <ng-container *ngFor="let dataField of data, trackBy: trackByDataField">
+        <tr class="table__body-row">
+          <td class="table__body-row-item" [ngStyle]="getTableStyle(tableStyle, 'dataRow')" *ngIf="isForSelectItem">
+            <input class="table__body-row-item__check" type="checkbox" [checked]="isItemSelected(dataField)"
+              (change)="toggleItemSelection(dataField)" *ngIf="!disableCheck(dataField)" />
+            <input class="table__body-row-item__check" type="checkbox" [disabled]="true"
+              *ngIf="disableCheck(dataField)" />
+          </td>
+          <td class="table__body-row-item" *ngFor="let key of keyColumns; let i = index, trackBy: trackByKey"
+            [ngStyle]="getRowStyle('dataRow', key, i)">
+            <!-- <span *ngIf="key.includes('id') || key.includes('Id')">#</span> -->
+            <img *ngIf="key === 'logoUrl' && dataField[key]" [src]="dataField[key] | safe"
+              [alt]="dataField.name || 'Logo'" style="
                 display: block;
                 height: 36px;
                 max-height: 40px;
                 width: auto;
                 margin: 0 auto;
                 object-fit: contain;" />
-          <img
-            *ngIf="key === 'cardNumber' && dataField.cardNetwork === 'VISA'"
-            src="../../../../assets/new-styles/img/card-visa-blue.png"
-            class="table__body-row-item-visa"
-          />
-          <img
-            *ngIf="
+            <img *ngIf="key === 'cardNumber' && dataField.cardNetwork === 'VISA'"
+              src="../../../../assets/new-styles/img/card-visa-blue.png" class="table__body-row-item-visa" />
+            <img *ngIf="
               key === 'cardNumber' && dataField.cardNetwork === 'MASTER_CARD'
-            "
-            src="../../../../assets/new-styles/img/card-master.png"
-            class="table__body-row-item-mastercard"
-          />
-          <img
-            *ngIf="key === 'avatar'"
-            [src]="dataField[key] ?? '/assets/icons/default_avatar.svg'"
-            class="table__body-row-item-avatar"
-          />
-          <span
-            *ngIf="dataField[key] !== true && key !== 'logoUrl' && dataField[key] !== false"
-            [matTooltip]="generateTooltip(dataField[key], key, keyTranslate)"
-            [matTooltipDisabled]="!generateTooltip(dataField[key], key, keyTranslate)"
-            [style.word-break]="
+            " src="../../../../assets/new-styles/img/card-master.png" class="table__body-row-item-mastercard" />
+            <img *ngIf="key === 'avatar'" [src]="dataField[key] ?? '/assets/icons/default_avatar.svg'"
+              class="table__body-row-item-avatar" />
+            <span *ngIf="dataField[key] !== true && key !== 'logoUrl' && dataField[key] !== false"
+              [matTooltip]="generateTooltip(dataField[key], key, keyTranslate)"
+              [matTooltipDisabled]="!generateTooltip(dataField[key], key, keyTranslate)" [style.word-break]="
                 key.includes('amount') || key.includes('Amount') 
                 ? 'normal' 
                 : key.includes('id') 
@@ -146,98 +99,65 @@
                   || key.includes('date') 
                   || key.includes('Date') ? 
                   'keep-all' : 'inherit'
-            "
-          >
-            {{ dataField[key] | transformDataTable : key : keyTranslate }}
-          </span>
+            ">
+              {{ dataField[key] | transformDataTable : key : keyTranslate }}
+            </span>
 
-          <!-- Boolean values -->
-          <span *ngIf="dataField[key] === true || dataField[key] === false">
-            {{ getBooleanDisplayValue(key, dataField[key], dataField) }}
-          </span>
+            <!-- Boolean values -->
+            <span *ngIf="dataField[key] === true || dataField[key] === false">
+              {{ getBooleanDisplayValue(key, dataField[key], dataField) }}
+            </span>
 
-          <img
-            *ngIf="key === 'cardNumber' && dataField.cardStatus === 'ACTIVE'"
-            src="../../../../assets/new-styles/img/card-active.png"
-            class="table__body-row-item-status"
-          />
-          <img
-            *ngIf="key === 'cardNumber' && dataField.cardStatus === 'BLOCKED'"
-            src="../../../../assets/new-styles/img/card-blocked.png"
-            class="table__body-row-item-status"
-          />
-        </td>
-
-        <ng-container *ngIf="hasExtraData() && showExtraData">
-          <td
-            *ngFor="let key of extraDataKeys | async; let i = index"
-            class="table__body-row-item"
-            [ngStyle]="getRowStyle('dataRow', key.name, i)" >
-            {{ dataField.extraData[key.name]
-            ? dataField.extraData[key.name].length > 30
-            ? dataField.extraData[key.name].slice(0,30) + '...'
-            : dataField.extraData[key.name]
-            : '-' }}
+            <img *ngIf="key === 'cardNumber' && dataField.cardStatus === 'ACTIVE'"
+              src="../../../../assets/new-styles/img/card-active.png" class="table__body-row-item-status" />
+            <img *ngIf="key === 'cardNumber' && dataField.cardStatus === 'BLOCKED'"
+              src="../../../../assets/new-styles/img/card-blocked.png" class="table__body-row-item-status" />
           </td>
-        </ng-container>
 
-        <td
-          class="table__body-row-actions"
-          *ngIf="actions.length"
-          [ngStyle]="getTableStyle(tableStyle, 'dataRow')"
-          [ngClass]="{'table-sticky-right': scroll}"
-        >
-          <ul class="table__body-row-actions-list">
-            <ng-container *ngFor="let action of actions">
-              <span
-                class="table__body-row-actions-list-item"
-                (click)="onAction(action, dataField)"
-                [matTooltip]="getTooltipText(action, dataField)"
-                [ngStyle]="{
+          <ng-container *ngIf="hasExtraData() && showExtraData">
+            <td *ngFor="let key of extraDataKeys | async; let i = index" class="table__body-row-item"
+              [ngStyle]="getRowStyle('dataRow', key.name, i)">
+              {{ dataField.extraData[key.name]
+              ? dataField.extraData[key.name].length > 30
+              ? dataField.extraData[key.name].slice(0,30) + '...'
+              : dataField.extraData[key.name]
+              : '-' }}
+            </td>
+          </ng-container>
+
+          <td class="table__body-row-actions" *ngIf="actions.length" [ngStyle]="getTableStyle(tableStyle, 'dataRow')"
+            [ngClass]="{'table-sticky-right': scroll}">
+            <ul class="table__body-row-actions-list">
+              <ng-container *ngFor="let action of actions">
+                <span class="table__body-row-actions-list-item" (click)="onAction(action, dataField)"
+                  [matTooltip]="getTooltipText(action, dataField)" [ngStyle]="{
                   'background-image': this.checkAction(dataField, action).icon,
                   'pointer-events': this.checkAction(dataField, action)
                     .pointerEvents
-                }"
-              ></span>
-            </ng-container>
-          </ul>
-        </td>
-      </tr>
-    </ng-container>
-  </tbody>
-</table>
-<div *ngIf="initTable" class="table__init">...</div>
+                }"></span>
+              </ng-container>
+            </ul>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <div *ngIf="initTable" class="table__init">...</div>
 </ng-template>
 <!-- sort icon -->
 <ng-template #sort>
   <span class="table__head-row-item-sort">
-    <svg
-      class="table__head-row-item-sort-up"
-      xmlns="http://www.w3.org/2000/svg"
-      width="6"
-      height="4"
-      viewBox="0 0 6 4"
-      fill="none"
-    >
-      <path
-        class="table__head-row-item-sort-down--fill"
+    <svg class="table__head-row-item-sort-up" xmlns="http://www.w3.org/2000/svg" width="6" height="4" viewBox="0 0 6 4"
+      fill="none">
+      <path class="table__head-row-item-sort-down--fill"
         d="M5.70867 3.28674H0.289317C0.0328653 3.28674 -0.0977798 2.97707 0.0860911 2.79319L2.79577 0.0835173C2.90706 -0.027773 3.09093 -0.027773 3.20227 0.0835173L5.91195 2.79319C6.09577 2.97707 5.96512 3.28674 5.70867 3.28674Z"
-        fill="#CFD9DF"
-      />
+        fill="#CFD9DF" />
     </svg>
-    <svg
-      class="table__head-row-item-sort-down"
-      xmlns="http://www.w3.org/2000/svg"
-      width="6"
-      height="4"
-      viewBox="0 0 6 4"
-      fill="none"
-    >
-      <path
-        class="table__head-row-item-sort-down--fill"
+    <svg class="table__head-row-item-sort-down" xmlns="http://www.w3.org/2000/svg" width="6" height="4"
+      viewBox="0 0 6 4" fill="none">
+      <path class="table__head-row-item-sort-down--fill"
         d="M5.70867 0.713257H0.289317C0.0328653 0.713257 -0.0977798 1.02293 0.0860911 1.20681L2.79577 3.91648C2.90706 4.02777 3.09093 4.02777 3.20227 3.91648L5.91195 1.20681C6.09577 1.02293 5.96512 0.713257 5.70867 0.713257Z"
-        fill="#CFD9DF"
-      />
+        fill="#CFD9DF" />
     </svg>
   </span>
 </ng-template>
