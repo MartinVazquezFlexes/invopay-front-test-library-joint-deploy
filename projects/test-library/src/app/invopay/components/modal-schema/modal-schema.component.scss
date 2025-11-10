@@ -1,0 +1,406 @@
+@import "../../../shared/mixins/generalText.scss";
+@import "../../../shared/mixins/sizes.scss";
+@import "../../../shared/mixins/utils.scss";
+
+html,
+body {
+  overflow-x: hidden;
+}
+* {
+  box-sizing: border-box;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal__content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  z-index: 1001;
+  width: min(860px, 95%);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+p {
+  padding-top: 0px;
+  @include subTitleText();
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid #e0e0e0;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.modal__header h4 {
+  margin: 0;
+  color: rgb(62, 62, 62);
+  @include subTitleText();
+}
+
+.modal__header button {
+  background: #ffffff;
+  border-radius: 15px;
+  border: 1px solid white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.modal__header button img {
+  width: 15px;
+  height: 15px;
+}
+
+.modal__body {
+  padding: 0;
+  width: 100%;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.modal__sections-titles {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding: 0px;
+  width: 100%;
+}
+
+.modal__section-title {
+  color: #0071ce;
+  @include mainTabText();
+  margin: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.modal__section-title:hover {
+  background: #cbe2f8;
+  color: #005a9e;
+  border-radius: 4px;
+}
+
+.modal__section-title--active {
+  color: #0071ce;
+  background: #f0f7ff;
+  padding: 8px 16px;
+  margin: 0;
+  border-bottom: 2px solid #0071ce;
+  border-radius: 0;
+}
+
+.modal__section {
+  width: 100%;
+}
+
+.modal__inputs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.modal__inputs--status {
+  height: 5vh;
+}
+
+p{
+    text-align: center;
+}
+
+.modal__input-wrapper {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal__label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background: #ffffff;
+  color: #333;
+  padding: 0 5px;
+  @include labelGeneralText();
+  color: #999;
+  z-index: 1;
+}
+
+.modal__input-wrapper app-ip-input {
+  width: 95% !important;
+  display: block !important;
+  height: 40px !important;
+}
+
+.modal__input-wrapper app-ip-input input {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+::ng-deep .modal__input-wrapper app-ip-input input {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 10px !important;
+  height: 40px !important;
+}
+
+::ng-deep .modal__input-wrapper app-ip-input .ip-input-wrapper {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.modal__input-wrapper--full {
+  grid-column: span 2;
+  width: 100%;
+}
+
+::ng-deep .modal__input-wrapper--full app-ip-text-area-input textarea {
+  width: 98% !important;
+  box-sizing: border-box !important;
+  padding: 10px !important;
+  min-height: 80px !important;
+  max-height: 80px !important;
+  resize: none !important;
+}
+
+::ng-deep .modal__input-wrapper--full app-ip-text-area-input .ip-input-wrapper {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+
+.modal__body select {
+  cursor: pointer;
+}
+
+.modal__buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+::ng-deep .modal__buttons .btn--clean button.ip-button,
+::ng-deep .modal__buttons .btn--close button.ip-button {
+  background: rgb(238, 235, 235) !important;
+  color: #333 !important;
+}
+
+::ng-deep .modal__buttons .btn--clean button.ip-button:hover:enabled,
+::ng-deep .modal__buttons .btn--close button.ip-button:hover:enabled {
+  background: rgb(220, 217, 217) !important;
+}
+
+.modal__table-view {
+  display: block;
+}
+
+.modal__card-view {
+  display: none;
+}
+
+/*mobile*/
+@include sm {
+  .modal__table-view {
+    display: none;
+  }
+
+  .modal__card-view {
+    display: block;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2px 10px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 
+                0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .modal__card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #0071ce;
+  }
+
+  .modal__card-id {
+    color: #0071ce;
+    @include cardText();
+  }
+
+    .modal__card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+
+  .modal__card-label {
+    color: #0071CE;
+    @include generalInputText();
+  }
+
+  .modal__card-value {
+    color: #333;
+    @include generalInputText();
+  }
+
+  .modal__card-value--date {
+    color: #666;
+    @include generalInputText();
+  }
+
+  .modal__content {
+    width: 90%;
+    max-width: 90%;
+    min-width: 300px;
+    padding: 20px 15px;
+  }
+
+  .modal__body {
+    padding: 15px 0;
+    margin: 0;
+    height: 25vh;
+  }
+  .modal__body--status{
+    padding-top: 15px;
+    padding-bottom: 5px;
+    height: auto;
+  }
+  p{
+    padding-top: 10px;
+    margin: 0;
+  }
+
+  .modal__inputs {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    height: auto;
+  }
+
+  .modal__input-wrapper {
+    max-width: 100%;
+  }
+
+  .modal__input-wrapper--full {
+    grid-column: span 1;
+  }
+
+  ::ng-deep .modal__input-wrapper--full app-ip-text-area-input textarea {
+    width: 95% !important;
+  }
+
+  .modal__buttons {
+    display: flex;
+    gap: 8px;
+  }
+
+
+  .modal__sections-titles {
+    gap: 15px;
+  }
+
+  .modal__section-title {
+    padding: 6px 12px;
+  }
+
+}
+
+@include sm {
+  .modal__table-view {
+    display: none;
+  }
+
+  .modal__card-view {
+    display: block;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2px 10px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 
+                0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .modal__card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #0071ce;
+  }
+
+  .modal__card-id {
+    color: #0071ce;
+    @include cardText();
+  }
+
+    .modal__card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+
+  .modal__card-label {
+    color: #0071CE;
+    @include generalInputText();
+  }
+
+  .modal__card-value {
+    color: #333;
+    @include generalInputText();
+  }
+
+  .modal__card-value--date {
+    color: #666;
+    @include generalInputText();
+  }
+
+  .modal__content {
+    width: 95%;
+    min-width: 300px;
+    padding: 15px;
+  }
+
+  .modal__body {
+    padding: 10px 0;
+  }
+
+  .modal__buttons {
+    display: flex;
+    gap: 8px;
+  }
+
+
+}

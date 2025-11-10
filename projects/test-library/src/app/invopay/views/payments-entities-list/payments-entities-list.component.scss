@@ -1,0 +1,225 @@
+@import "../../../shared/mixins/generalText.scss";
+@import "../../../shared/mixins/utils.scss";
+@import "../../../shared/mixins/sizes.scss";
+
+$backgrounds-color: #D9D9D9;
+
+.payment-entities {
+  background: transparent;
+  width: 100%;
+  min-height: calc(100vh - 45px); 
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  &__card {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0; 
+    box-sizing: border-box;
+  }
+
+  &__title-section {
+    text-align: left;
+    width: 100%;
+    background: $app-white;
+    border-radius: $card-border-radius;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 30px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+
+  &__title {
+    @include mainTitleText();
+    color: $primary-color;
+    margin: 0;
+  }
+
+  &__table-container {
+    background: $app-white;
+    border-radius: $card-border-radius;
+    width: 100%;
+    padding: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+    &--desktop {
+      display: block;
+    }
+  }
+
+  &__cards-container {
+    display: none;
+
+    &--mobile {
+      @include sm {
+        display: block;
+      }
+    }
+  }
+
+  &__body {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  &__paginator-container {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
+
+  &__paginator-container--desktop {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__paginator-container--mobile {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__rows-per-page {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    span {
+      @include labelGeneralText();
+      color: $primary-color-text;
+    }
+  }
+
+  &__paginator {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+    ::ng-deep .ip-paginator {
+      padding: 0 !important;
+      height: auto !important;
+      align-items: center !important;
+    }
+  }
+
+  &__rows-select {
+    @include generalInputText();
+    padding: 8px 12px;
+    border: $input-border;
+    border-radius: 6px;
+    color: $primary-color-text;
+    background: $input-bg-color;
+    cursor: pointer;
+    min-width: 70px;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+
+  @include mmd {
+    &__card {
+      padding: 15px;
+    }
+  }
+
+  @include sm {
+    &__card {
+      padding: 10px;
+      gap: 10px;
+    }
+
+    &__title-section {
+      padding: 15px 20px;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    &__title {
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    &__table-container--desktop {
+      display: none;
+    }
+
+    &__rows-per-page {
+      position: static;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+// Mobile card list overrides for payments-entities
+::ng-deep .payment-entities__cards-container--mobile {
+  .mobile-card-list {
+    &__value {
+      font-size: 12px !important;
+    }
+  }
+}
+
+::ng-deep .table__body-row-item:first-child,
+::ng-deep .table__header-item:first-child {
+  text-align: center !important;
+  width: 100px !important;
+  padding: 8px !important;
+}
+
+::ng-deep .provider-logo {
+  max-width: 60px !important;
+  max-height: 45px !important;
+  object-fit: contain !important;
+  border-radius: 4px !important;
+  display: block !important;
+  margin: 0 auto !important;
+  background: $app-white !important;
+}
+
+::ng-deep .table__body-row-item button.btn-eye {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform 0.2s ease !important;
+}
+
+::ng-deep .table__body-row-item button.btn-eye svg {
+  width: 13px !important;
+  height: 13px !important;
+  fill: black !important;
+}
+
+::ng-deep .table__body-row-item button.btn-eye:hover {
+  transform: scale(1.1) !important;
+}
+
+::ng-deep .table__body-row-item button.btn-eye:hover svg {
+  fill: black !important;
+}
+
+::ng-deep .table__body-row-item:last-child {
+  text-align: center !important;
+  vertical-align: middle !important;
+}

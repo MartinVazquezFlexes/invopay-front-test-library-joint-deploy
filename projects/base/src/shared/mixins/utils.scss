@@ -1,0 +1,54 @@
+@import "../mixins/variables/color.scss";
+@import "../mixins/sizes.scss";
+
+@function get-responsive-value($map, $breakpoint, $axis) {
+  @return map-get(map-get($map, $breakpoint), $axis);
+}
+
+@function get-gap($axis, $breakpoint) {
+  @return get-responsive-value($app-component-gap, $breakpoint, $axis);
+}
+
+@function get-card-padding($axis, $breakpoint) {
+  @return get-responsive-value($app-card-padding, $breakpoint, $axis);
+}
+
+@mixin set-responsive-spacing($getter-fn-name, $y: null, $x: null, $property: gap) {
+  $getter-fn: get-function($getter-fn-name);
+  $xl-y: if($y != null, $y, call($getter-fn, y, xl));
+  $xl-x: if($x != null, $x, call($getter-fn, x, xl));
+  #{$property}: #{$xl-y} #{$xl-x};
+
+  @include lg() {
+    $lg-y: if($y != null, $y, call($getter-fn, y, lg));
+    $lg-x: if($x != null, $x, call($getter-fn, x, lg));
+    #{$property}: #{$lg-y} #{$lg-x};
+  }
+
+  @include md() {
+    $md-y: if($y != null, $y, call($getter-fn, y, md));
+    $md-x: if($x != null, $x, call($getter-fn, x, md));
+    #{$property}: #{$md-y} #{$md-x};
+  }
+
+  @include sm() {
+    $sm-y: if($y != null, $y, call($getter-fn, y, sm));
+    $sm-x: if($x != null, $x, call($getter-fn, x, sm));
+    #{$property}: #{$sm-y} #{$sm-x};
+  }
+
+  @include esm() {
+    $esm-y: if($y != null, $y, call($getter-fn, y, esm));
+    $esm-x: if($x != null, $x, call($getter-fn, x, esm));
+    #{$property}: #{$esm-y} #{$esm-x};
+  }
+}
+
+
+@mixin set-responsive-gap($gap-y: null, $gap-x: null) {
+  @include set-responsive-spacing(get-gap, $gap-y, $gap-x, gap);
+}
+
+@mixin set-responsive-card-padding($padding-y: null, $padding-x: null) {
+  @include set-responsive-spacing(get-card-padding, $padding-y, $padding-x, padding);
+}

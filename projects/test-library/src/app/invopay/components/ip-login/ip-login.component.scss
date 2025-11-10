@@ -1,0 +1,652 @@
+@import "../../../shared/mixins/generalText.scss";
+@import "../../../shared/mixins/sizes.scss";
+@import "../../../shared/mixins/variables/color.scss";
+
+* {
+  margin: 0;
+}
+
+.ip-login {
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow-y: auto;
+  background-image: $login-bg-image,
+    url(../../../../assets/new-styles/img/login-background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 80% 100%;
+  background-attachment: fixed;
+  @include sm() {
+    padding: 2rem 0;
+    flex-direction: column;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  &__background{
+    &-admin{
+      background-image: $login-bg-image,
+        url(../../../../assets/new-styles/img/login-admin.jpg);
+      background-size: cover;
+      @media (min-width: 1300px){
+        background-size: contain;
+      }
+    }
+    &-supplier{
+      background-image: $login-bg-image,
+      url(../../../../assets/new-styles/img/login-supplier.jpg);
+      background-size: cover;
+      @media (min-width: 1500px){
+        background-size: contain;
+      }
+    }
+    &-broker{
+      background-image: $login-bg-image,
+      url(../../../../assets/new-styles/img/login-broker.jpg);
+      background-size: cover;
+      @media (min-width: 1300px){
+        background-size: contain;
+      }
+    }
+    &-employee{
+      background-image: $login-bg-image,
+      url(../../../../assets/new-styles/img/login-employee.jpg);
+      background-size: cover;
+      @media (min-width: 1500px){
+        background-size: contain;
+      }
+    }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $login-bg-image-effect;
+    z-index: 1;
+  }
+
+  &__welcome {
+    flex: 1 1 55%;
+    display: flex;
+    z-index: 100;
+    justify-content: center;
+    @include lg() {
+      flex: 1 1 45%;
+    }
+    @include sm() {
+      display: none;
+    }
+    &-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      max-width: 80%;
+      &-title {
+        @include titleLoginText();
+
+      }
+      &-paragraph {
+        @include paragraphText();
+        font-size: 1.3rem;
+
+        @include lg() {
+          font-size: 0.9rem;
+        }
+      }
+      &-item {
+        display: flex;
+
+        &__texts {
+          display: flex;
+          flex-direction: column;
+          margin-left: 0.7rem;
+
+          &-title {
+            @include itemsText();
+          }
+          &-subtitle {
+            @include itemsSubText();
+          }
+        }
+
+        &-ico {
+          img {
+            width: 1.5rem;
+          }
+        }
+      }
+    }
+    &-title{
+      display: flex;
+      height: 4rem;
+      align-items: center;
+    }
+  }
+  &__content {
+    flex: 1 1 45%;
+    display: flex;
+    z-index: 100;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $login-bg-form;
+    border-radius: 2rem 0rem 0rem 2rem;
+    height: 100vh;
+    padding: 0 8.6rem;
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+      .mdc-text-field__input {
+      @include phoneInputValueLoginText();
+      color: $background-color !important;
+    }
+
+    .mdc-text-field:not(.mdc-text-field-disabled) .mdc-floating-label {
+      color: white !important;
+      font-family: $font-family-primary !important;
+      font-weight: 400 !important;
+    }
+
+    @include md() {
+      padding: 0 3rem;
+    }
+    @include lg() {
+      padding: 0 3rem;
+    }
+    @include sm() {
+      background-color: transparent;
+      z-index: 100;
+      padding: 0 3rem;
+      justify-content: flex-start;
+    }
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+      width: 100%;
+      height: 100%;
+          @include sm{
+            color:$text-white;
+          }
+      &-back {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        &-icon {
+          margin-right: 0.5rem;
+          @media (width <= 1366px) {
+            margin-right: 0.375rem;
+            width: 1.25rem;
+            height: 1.25rem;
+          }
+          @include sm{
+            filter: brightness(0) saturate(100%) invert(99%) sepia(88%) saturate(0%) hue-rotate(174deg) brightness(110%) contrast(97%);
+          }
+        }
+        &-text {
+          opacity: 0.6;
+          @media (width <= 1366px) {
+            font-size: 0.875rem;
+          }
+          @include sm{
+            color:$text-white;
+          }
+        }
+      }
+      &-title {
+        @include welcomeText();
+        margin-bottom: 0;
+        @include sm() {
+          @include phoneWelcomeText();
+        }
+
+        &--bolder {
+          @include companyNameText();
+          @include lg() {
+            font-size: 2rem;
+          }
+          @include sm() {
+            @include phoneCompanyNameText();
+          }
+        }
+      }
+      &-subtitle {
+        margin-top: 1rem;
+        @include loginPortalText();
+        margin-bottom: 0;
+        @include sm() {
+          display: none;
+        }
+        &-bold{
+          font-weight: 600;
+        }
+      }
+      &-subtitlesm {
+        display: none;
+        @include lg() {
+          display: flex;
+          margin-top: 1rem;
+          @include userTypePortalTxt();
+          font-size: 1.3rem;
+          color: $login-bg-form;
+          margin-bottom: 0;
+        }
+        @include sm() {
+          display: flex;
+          margin-top: 1rem;
+          @include userTypePortalTxt();
+          font-size: 1.3rem;
+          color: $login-bg-form;
+          margin-bottom: 0;
+        }
+      }
+      &-msgsm {
+        display: none;
+        @include sm() {
+          display: flex;
+          margin-top: 1rem;
+          @include itemsSubText();
+          letter-spacing: 0.04rem;
+          text-align: start;
+          color: $login-bg-form;
+          margin-bottom: 0;
+        }
+      }
+      &-link {
+        @include portalLinkTxt();
+
+        text-decoration: none;
+
+        @include lg() {
+          font-size: 0.9rem;
+        }
+
+        @include sm() {
+          display: none;
+        }
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      &-linksm {
+        display: none;
+        @include sm() {
+          display: flex;
+          @include phonePortalLinkTxt();
+
+          text-decoration: none;
+          img {
+            filter: invert(1000%) sepia(0%) saturate(0%) hue-rotate(0deg)
+              brightness(1000%) contrast(100%);
+          }
+        }
+      }
+      &-new {
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+        @media screen and (max-width: 1024px) {
+          text-decoration: underline;
+        }
+      }
+      &-form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 2rem;
+
+        &-floating {
+          &__incorrect-user {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+          }
+          &-input {
+            border-radius: 0.75rem;
+            border: 1px solid $table-lines;
+            @include inputValueLoginText();
+            // margin-bottom: 0.5rem;
+            padding-left: 1rem;
+
+            @include sm() {
+              @include phoneInputValueLoginText();
+              border-radius: 1.1rem;
+              border: 0.1rem solid #dcdbdd;
+              background-color: transparent;
+
+              &:focus {
+                @include phoneInputValueLoginText();
+                border: 1px solid #dcdbdd;
+                background-color: transparent;
+                outline: none;
+              }
+            }
+            &--is-not-valid {
+              border: solid 1px #dc3545;
+            }
+            &--password {
+              padding-right: 40px;
+              @media (width <= 1366px) {
+                padding-right: 36px;
+              }
+            }
+            &:focus {
+              border: 1px solid $table-lines;
+              outline: none;
+            }
+          }
+
+          &-label {
+            @include inputLabelLoginText();
+
+            transform: translateY(5%);
+
+            @include sm() {
+              @include phoneInputLabelLoginTxt();
+            }
+          }
+
+          &-visible {
+            position: relative;
+            text-align: end;
+            &-ico {
+              position: absolute;
+              top: -2.5rem;
+              @include lg{
+                top: -2.3rem;
+              }
+              @include md{
+                top: -2.3rem;
+              }
+              svg path {
+                fill: $table-text; /* Cambia aquí al color que desees */
+              }
+              right: 1.5rem;
+              &:hover {
+                cursor: pointer;
+              }
+            }
+          }
+          &-validator {
+            font-size: 0.8rem;
+            font-family: "Inter";
+            @media (width <= 1366px) {
+              font-size: 0.75rem;
+            }
+            &-suggest {
+              font-size: 0.8rem;
+              color: #84818a;
+              a {
+                color: #4e4e4e;
+              }
+            }
+          }
+        }
+
+        &-submit {
+          display: flex;
+          align-items: center;
+
+          @include sm() {
+            flex-direction: column-reverse;
+            justify-content: center;
+            gap: 1.2rem;
+          }
+
+          &-forgotten {
+            @include forgottenPassText();
+            text-decoration: none;
+
+            @include lg() {
+              font-size: 0.8rem;
+            }
+
+            @include sm() {
+              color: $background-color;
+              font-weight: 400;
+            }
+            &:hover {
+              cursor: pointer;
+            }
+          }
+          &-button {
+            height: 4rem;
+            width: 15rem;
+            border-radius: 0.75rem;
+            background: $app-btn-main-bg-color;
+            border: 0;
+            padding: 0.8rem 2.2rem;
+            margin-left: auto;
+
+            @include lg() {
+              height: 3rem;
+              width: 10rem;
+              border-radius: 0.75rem;
+              font-size: 0.9rem;
+            }
+
+            @include sm() {
+              margin: 0;
+              height: 3rem;
+              width: 12rem;
+              border-radius: 1rem;
+            }
+            @include generalBtnTxt();
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+    &-signup {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 15%;
+      @include sm() {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      &-text {
+        @include portalLinkTxt();
+        text-decoration: none;
+        cursor: pointer;
+
+        @include sm() {
+          @include phonePortalLinkTxt();
+        }
+      }
+    }
+    &-signupsm {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 15%;
+
+      &-text {
+        text-decoration: none;
+        cursor: pointer;
+
+        @include phonePortalLinkTxt();
+      }
+    }
+    &-policy {
+      @include policyLoginTxt();
+
+      @include lg() {
+        font-size: 0.9rem;
+      }
+      @include sm() {
+        @include phonePolicyLoginTxt();
+      }
+      &__highlight {
+        @include policyHighlightTxt();
+
+        @include lg() {
+          font-size: 0.9rem;
+        }
+        @include sm() {
+          @include phonePolicyHighlightTxt();
+        }
+      }
+    }
+  }
+  &__img {
+        max-width: 7rem;
+        margin-right: 1rem;
+        @include lg() {
+          max-width: 4.5rem;
+        }
+        @include md() {
+          max-width: 4.5rem;
+        }
+        @include sm() {
+          max-width: 4.5rem;
+        }
+      }
+}
+
+.error{
+  font-size: 0.6rem;
+}
+
+.phone {
+  display: none;
+
+  @include sm() {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0 0 0;
+  }
+}
+
+.desktop {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  @include sm() {
+    display: none;
+  }
+}
+
+.mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__leading {
+  border-top-left-radius: 1rem !important;
+  border-bottom-left-radius: 1rem !important;
+}
+
+.mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__trailing {
+  border-top-right-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled)
+  .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled)
+  .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled)
+  .mdc-notched-outline__trailing {
+  border-color: white !important;
+  --mat-mdc-form-field-floating-label-scale: 1;
+  --mdc-outlined-text-field-focus-outline-width: 1px;
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled)
+  .mdc-text-field__input::placeholder {
+  color: $table-text !important;
+}
+
+.mat-mdc-form-field
+  .mdc-text-field--outlined
+  .mdc-notched-outline--upgraded
+  .mdc-floating-label--float-above {
+  transform: translateY(-2.6rem);
+}
+
+.mdc-floating-label--required:not(
+    .mdc-floating-label--hide-required-marker
+  )::after {
+  display: none !important;
+}
+
+.mdc-text-field .mdc-text-field__input {
+  caret-color: white !important;
+}
+
+.mdc-text-field--outlined .mdc-notched-outline {
+  border-radius: 2rem;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  @include sm() {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: $primary-color-text !important;
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+  }
+}
+
+/* Firefox */
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+  background-color: transparent !important;
+  box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: $primary-color-text !important;
+}
+
+.ip-change-pass-success-dialog {
+  .mdc-button__label {
+    color: $secondary-color;
+  }
+}
+
+.form-floating>.form-control{
+  min-height: 3.5rem;
+  @include lg{
+    min-height: 3rem;
+    height: 3rem;
+  }
+  @include md{
+    min-height: 3rem;
+    height: 3rem;
+  }
+  @include sm{
+    min-height: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.form-floating>label{
+  padding: 1rem 0.75rem;
+  @include lg{
+    padding: 0.75rem;
+  }
+  @include md{
+    padding: 0.75rem;
+  }
+  @include sm{
+    padding: 0.75rem;
+  }
+}

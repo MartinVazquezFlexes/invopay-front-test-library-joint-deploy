@@ -1,0 +1,75 @@
+<div class="ip-paginator" [ngStyle]="{ 'background-color': backgroundColor }">
+  <button
+    class="ip-paginator__botton"
+    (click)="changePage(1)"
+    [disabled]="currentPage === 1"
+    [ngClass]="{ disabled: currentPage === 1 }"
+  >
+    <img src="assets\img\paginator\First.svg" />
+  </button>
+  <button
+    class="ip-paginator__botton"
+    (click)="changePage(currentPage - 1)"
+    [disabled]="currentPage === 1"
+    [ngClass]="{ disabled: currentPage === 1 }"
+  >
+    <img src="assets\img\paginator\Prev.svg" />
+  </button>
+  <div *ngIf="currentPage - 1 > 1" class="ip-paginator__elipsis">...</div>
+
+  <button
+    *ngIf="currentPage > 1"
+    class="ip-paginator__botton"
+    (click)="changePage(currentPage - 1)"
+  >
+    {{ currentPage - 1 }}
+  </button>
+  <button
+    *ngIf="currentPage < totalPages"
+    class="ip-paginator__botton selected"
+    (click)="changePage(currentPage)"
+  >
+    {{ currentPage }}
+  </button>
+  <button
+    *ngIf="nextPage < totalPages"
+    class="ip-paginator__botton"
+    (click)="changePage(nextPage)"
+  >
+    {{ nextPage }}
+  </button>
+  <button
+    *ngIf="nextnextPage < totalPages"
+    class="ip-paginator__botton"
+    (click)="changePage(nextnextPage)"
+  >
+    {{ nextnextPage }}
+  </button>
+  <div *ngIf="currentPage < totalPages - 3" class="ip-paginator__elipsis">
+    ...
+  </div>
+  <button
+    class="ip-paginator__botton"
+    (click)="changePage(totalPages)"
+    [ngClass]="{ selected: currentPage === totalPages }"
+  >
+    {{ totalPages }}
+  </button>
+
+  <button
+    class="ip-paginator__botton"
+    (click)="changePage(currentPage + 1)"
+    [disabled]="currentPage === totalPages"
+    [ngClass]="{ disabled: currentPage === totalPages }"
+  >
+    <img src="assets\img\paginator\Next.svg" />
+  </button>
+  <button
+    class="ip-paginator__botton"
+    (click)="changePage(totalPages)"
+    [disabled]="currentPage === totalPages"
+    [ngClass]="{ disabled: currentPage === totalPages }"
+  >
+    <img src="assets\img\paginator\Last.svg" />
+  </button>
+</div>

@@ -1,0 +1,1132 @@
+@import "../mixins/variables/color.scss";
+
+@mixin mainTitleText() {
+  font-family: $font-family-primary;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.6rem;
+  color: $secondary-color;
+  @include lg() {
+    font-size: 1.2rem;
+    line-height: 1.3rem;
+  }
+  @include md() {
+    font-size: 1.2rem;
+    line-height: 1.3rem;
+  }
+  @include sm() {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+  }
+}
+
+@mixin subTitleText() {
+  font-family: $font-family-primary;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 18px;
+  color: $primary-color-text;
+  @include lg() {
+    font-size: 1rem;
+  }
+  @include md() {
+    font-size: 1rem;
+  }
+  @include sm() {
+    font-size: 1rem;
+  }
+}
+
+@mixin subSubTitleText() {
+  @include subTitleText();
+  font-weight: 400;
+}
+
+@mixin mainTabText(){
+  @include subSubTitleText;
+  color: $secondary-color !important;
+}
+
+@mixin labelGeneralText() {
+  font-family: $font-family-primary;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 18px;
+  color: $secondary-color-text;
+  @include lg() {
+    font-size: 0.65625rem;
+  }
+  @include md() {
+    font-size: 0.65625rem;
+  }
+  @include sm() {
+    font-size: 0.625rem;
+  }
+}
+
+@mixin mainLabelGeneralText() {
+  @include labelGeneralText();
+  color: $primary-color-text;
+}
+
+@mixin generalTextValue() {
+  font-family: $font-family-primary;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 18px;
+  color: $secondary-color-text;
+  @include md() {
+    font-size: 0.6rem;
+  }
+  @include lg() {
+    font-size: 0.6rem;
+  }
+  @include sm() {
+    font-size: 0.625rem;
+  }
+}
+
+@mixin generalTextInfo() {
+  font-family: $font-family-primary;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 18px;
+  color: $primary-color-text;
+  @include lg() {
+    font-size: 0.65625rem;
+  }
+  @include md() {
+    font-size: 0.65625rem;
+  }
+  @include sm() {
+    font-size: 0.625rem;
+  }
+}
+
+@mixin btnGeneralText() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.3rem;
+  @include lg() {
+    font-size: 0.8rem;
+    line-height: 1.15rem;
+  }
+  @include md() {
+    font-size: 0.8rem;
+    line-height: 1.125rem;
+  }
+  @include sm() {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+  }
+}
+
+@mixin generalInputText() {
+  font-family: $font-family-sec;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 18px;
+  @include lg() {
+    font-size: 0.65rem;
+  }
+  @include md() {
+    font-size: 0.65rem;
+  }
+  @include sm() {
+    font-size: 0.6rem;
+  }
+}
+
+@mixin errorText() {
+  font-family: $font-family-sec;
+  font-size: 0.6rem;
+  font-weight: 400;
+  line-height: 0.8rem;
+  color: $error-color;
+  @include lg() {
+    font-size: 0.5rem;
+    line-height: 0.7rem;
+  }
+  @include md() {
+    font-size: 0.5rem;
+    line-height: 0.7rem;
+  }
+  @include sm() {
+    font-size: 0.4rem;
+    line-height: 0.6rem;
+  }
+}
+
+@mixin statusTxt() {
+  font-family: $font-family-sec;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.2rem;
+  color: $primary-color;
+  @include lg() {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+  @include md() {
+    font-size: 0.7rem;
+    line-height: 0.9rem;
+  }
+  @include sm() {
+    font-size: 0.8rem;
+    line-height: 0.85rem;
+  }
+}
+
+/*
+    Sidenav
+*/
+
+@mixin textLabel() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 21px;
+  color: $sidenav-item-not-selected-text-color;
+  @include lg() {
+    font-size: 0.8rem;
+    line-height: 1rem;
+  }
+  @include md() {
+    font-size: 0.7rem;
+    line-height: 0.9rem;
+  }
+  @include sm() {
+    font-size: 0.65rem;
+    line-height: 0.85rem;
+  }
+}
+
+@mixin sidenavTextLabel() {
+  font-family: $font-family-primary;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  color: $sidenav-item-selected-text-color;
+  @include lg() {
+    font-size: 0.875rem;
+  }
+  @include md() {
+    font-size: 0.875rem;
+  }
+  @include sm() {
+    font-size: 0.875rem;
+  }
+}
+
+@mixin activeTextLabel() {
+  @include textLabel();
+  color: $sidenav-item-selected-text-color;
+  font-weight: 600;
+}
+
+@mixin sidenavActiveTextLabel() {
+  @include sidenavTextLabel();
+  color: $sidenav-item-selected-text-color;
+  font-weight: 600;
+}
+
+@mixin subTexts() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 18px;
+  color: $secondary-color;
+  @include lg() {
+    font-size: 0.8rem;
+    line-height: 1rem;
+  }
+  @include md() {
+    font-size: 0.7rem;
+    line-height: 0.9rem;
+  }
+  @include sm() {
+    font-size: 0.65rem;
+    line-height: 0.85rem;
+  }
+}
+
+@mixin sidenavSubTextLabel() {
+  @include subTexts();
+}
+
+@mixin sidenavActiveSubTextLabel() {
+  @include subTexts();
+  color: $sidenav-item-selected-text-color;
+  font-weight: 600;
+}
+
+@mixin activeSubTexts() {
+  font-family: $font-family-primary;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1rem;
+  color: $secondary-color;
+  @include lg() {
+    font-size: 0.6rem;
+    line-height: 0.9rem;
+  }
+  @include md() {
+    font-size: 0.6rem;
+    line-height: 0.9rem;
+  }
+  @include sm() {
+    font-size: 0.5rem;
+    line-height: 0.85rem;
+  }
+}
+
+@mixin companyNameHeaderText() {
+  font-family: $font-family-primary;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 18px;
+  color: $header-text-color;
+  @include lg() {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+  @include md() {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+  @include sm() {
+    font-size: 0.8rem;
+    line-height: 0.85rem;
+  }
+}
+
+@mixin licenseText() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 21px;
+  color: $header-text-color;
+  @include lg() {
+    font-size: 0.8rem;
+    line-height: 1rem;
+  }
+  @include md() {
+    font-size: 0.7rem;
+    line-height: 0.9rem;
+  }
+  @include sm() {
+    font-size: 0.65rem;
+    line-height: 0.85rem;
+  }
+}
+
+@mixin tableHeaderText() {
+  font-family: $font-family-sec;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1rem;
+  color: $table-header-text-color;
+  @include lg() {
+    font-size: 0.7rem;
+    line-height: 0.8rem;
+  }
+  @include md() {
+    font-size: 0.7rem;
+    line-height: 0.8rem;
+  }
+  @include sm() {
+    font-size: 0.65rem;
+    line-height: 0.8rem;
+  }
+}
+
+@mixin rowText() {
+  font-family: $font-family-sec;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 16.94px;
+  color: $table-text;
+  @include lg() {
+    font-size: 0.6rem;
+  }
+  @include md() {
+    font-size: 0.6rem;
+  }
+  @include sm() {
+    font-size: 0.6rem;
+  }
+}
+
+@mixin tableRowText() {
+  font-family: $font-family-sec;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 16.94px;
+  color: $table-text;
+  @include lg() {
+    font-size: 0.6rem;
+  }
+  @include md() {
+    font-size: 0.6rem;
+  }
+  @include sm() {
+    font-size: 0.6rem;
+  }
+}
+
+@mixin titleLoginText() {
+  font-family: $font-family-primary;
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 58px;
+  color: $propisory-white;
+  @include lg() {
+    font-size: 1.8rem;
+    line-height: 2rem;
+  }
+  @include md() {
+    font-size: 1.7rem;
+    line-height: 1.9rem;
+  }
+  @include sm() {
+    font-size: 1.65rem;
+    line-height: 1.85rem;
+  }
+}
+
+@mixin paragraphText() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 24px;
+  color: $propisory-white;
+  @include lg() {
+    font-size: 1rem;
+  }
+  @include md() {
+    font-size: 0.9rem;
+  }
+  @include sm() {
+    font-size: 0.9rem;
+  }
+}
+
+@mixin activeTabFiltersText {
+  font-family: $font-family-sec;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 14.52px;
+  color: $btn-filters-selected-text-color;
+  background-color: $btn-filters-selected-bg-color;
+  @include lg() {
+    font-size: 0.7rem;
+  }
+  @include md() {
+    font-size: 0.7rem;
+  }
+  @include sm() {
+    font-size: 0.7rem;
+  }
+}
+
+@mixin tabFiltersText {
+  font-family: $font-family-sec;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 14.52px;
+  color: $btn-filters-not-selected-text-color;
+  opacity: 0.5;
+  background-color: $btn-filters-not-selected-bg-color;
+  @include lg() {
+    font-size: 0.7rem;
+  }
+  @include md() {
+    font-size: 0.7rem;
+  }
+  @include sm() {
+    font-size: 0.7rem;
+  }
+}
+
+@mixin itemsText() {
+  font-family: $font-family-primary;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 21px;
+  color: $propisory-white;
+  @include lg() {
+    font-size: 0.9rem;
+  }
+  @include md() {
+    font-size: 0.9rem;
+  }
+  @include sm() {
+    font-size: 0.9rem;
+  }
+}
+
+@mixin formSubTitleText() {
+  font-family: $font-family-primary;
+  font-size: 0,875rem;
+  font-weight: 500;
+  line-height: 1.4rem;
+  color: $label-input-text-color;
+  @include lg() {
+    font-size: 0.75rem;
+  }
+  @include md() {
+    font-size: 0.75rem;
+  }
+  @include sm() {
+    font-size: 0.75rem;
+  }
+}
+
+@mixin buttonText() {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: normal;
+  @include sm() {
+    font-size: 0.7rem;
+  }
+  @include md() {
+    font-size: 0.7rem;
+  }
+  @include lg() {
+    font-size: 0.7rem;
+  }
+}
+
+@mixin cardText() {
+  font-size: 0.85rem;
+  font-family: $font-family-sec;
+  font-weight: 400;
+  line-height: 0.95rem;
+  color: $secondary-color-text;
+}
+
+/*
+  Errors;
+*/
+@mixin errorTxt() {
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  font-weight: 400;
+  font-family: $font-family-primary;
+}
+
+/*
+  Dashboard
+*/
+@mixin routeText() {
+  font-family: $font-family-primary;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 36px;
+  color: $header-text-color;
+}
+
+@mixin generalTitles() {
+  @include subTitleText();
+  font-family: $font-family-primary;
+  font-weight: 600;
+  line-height: 18px;
+  color: $primary-color-text;
+}
+
+@mixin generalText() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 24px;
+  color: $primary-color-text;
+}
+
+@mixin secondaryText() {
+  font-family: $font-family-sec;
+  font-weight: 400;
+  font-size: 1rem;
+  color: $primary-color-text;
+}
+
+@mixin gradientTexts() {
+  font-family: $font-family-primary;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 30px;
+  background: $gradient-dashboard-text;
+  -webkit-background-clip: text; // Esto aplica el fondo al texto
+  -webkit-text-fill-color: transparent; // Esto hace que el texto sea transparente para que se vea el gradiente
+  background-clip: text; // Clip para otros navegadores
+  text-fill-color: transparent;
+}
+
+/*
+  Login
+*/
+
+@mixin welcomeText() {
+  font-family: $font-family-sec;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 34.44px;
+  color: $primary-color-text;
+  @include lg{
+    font-size: 1.6rem
+  }
+  @include md{
+    font-size: 1.6rem
+  }
+  @include sm{
+    font-size: 1.6rem
+  }
+}
+
+@mixin phoneWelcomeText() {
+  @include welcomeText();
+  color: $propisory-white;
+  font-size: 2.1rem;
+}
+
+@mixin companyNameText() {
+  @include welcomeText();
+  background: $secondary-color;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+@mixin phoneCompanyNameText() {
+  @include companyNameText();
+  font-size: 2.3rem;
+  -webkit-text-fill-color: $propisory-white;
+}
+
+@mixin loginPortalText() {
+  font-family: $font-family-sec;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 34.44px;
+  color: $primary-color-text;
+  @include lg{
+    font-size: 1.2rem
+  }
+  @include md{
+    font-size: 1.2rem
+  }
+  @include sm{
+    font-size: 1.2rem
+  }
+}
+
+@mixin itemsSubText() {
+  font-family: $font-family-primary;
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 20px;
+  color: $propisory-white;
+  @include lg{
+    font-size: 0.8rem
+  }
+  @include md{
+    font-size: 0.8rem
+  }
+  @include sm{
+    font-size: 0.8rem
+  }
+}
+
+@mixin inputLabelLoginText() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 17px;
+  color: $table-text;
+  @include lg{
+    font-size: 0.8rem
+  }
+  @include md{
+    font-size: 0.8rem
+  }
+  @include sm{
+    font-size: 0.8rem
+  }
+}
+
+@mixin phoneInputLabelLoginTxt() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 17px;
+  color: $background-color;
+}
+
+@mixin inputValueLoginText() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 21px;
+  color: $primary-color-text;
+  @include lg{
+    font-size: 0.8rem
+  }
+  @include md{
+    font-size: 0.8rem
+  }
+  @include sm{
+    font-size: 0.8rem
+  }
+}
+
+@mixin simpleCardTitleText() {
+  color: $secondary-color-text;
+  font-family: $font-family-sec;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+  @include lg() {
+    font-size: 1rem;
+    line-height: 1.3rem;
+  }
+  @include md() {
+    font-size: 1rem;
+    line-height: 1.3rem;
+  }
+  @include sm() {
+    font-size: 1rem;
+    line-height: 1.3rem;
+  }
+}
+
+@mixin simpleCardSubTitleText() {
+  color: $primary-color-text;
+  font-family: $font-family-sec;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: unset;
+  @include lg() {
+    font-size: 1rem;
+    line-height: 1.3rem;
+  }
+  @include md() {
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+  }
+  @include sm() {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+  }
+}
+
+@mixin phoneInputValueLoginText() {
+  @include inputValueLoginText();
+  color: $background-color;
+}
+
+@mixin userTypePortalTxt() {
+  font-family: $font-family-primary;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 36px;
+  text-align: left;
+  color: $primary-color-text;
+}
+
+@mixin portalLinkTxt() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 36px;
+  text-align: left;
+  color: $secondary-color;
+}
+
+@mixin phonePortalLinkTxt() {
+  @include portalLinkTxt();
+  color: $background-color;
+}
+
+@mixin policyLoginTxt() {
+  font-family: $font-family-primary;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 36px;
+  text-align: left;
+  color: $table-text;
+}
+
+@mixin phonePolicyLoginTxt() {
+  @include policyLoginTxt();
+  color: $background-color;
+  font-size: 0.9rem;
+}
+
+@mixin policyHighlightTxt() {
+  @include policyLoginTxt();
+  color: $primary-color;
+}
+
+@mixin phonePolicyHighlightTxt() {
+  @include policyLoginTxt();
+  font-size: 0.9rem;
+  text-decoration: underline;
+  color: $background-color;
+}
+
+@mixin forgottenPassText() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 17px;
+  color: $table-text;
+}
+
+/*
+    Modals
+*/
+
+@mixin modalTitleText() {
+  @include subTitleText();
+}
+
+@mixin titleModal() {
+  color: $primary-color-text;
+  font-family: $font-family-primary;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+/*
+  Forms;
+*/
+@mixin titleFormTxt() {
+  @include titleModal();
+  font-weight: 600;
+}
+
+@mixin phoneTitleFormTxt() {
+  @include titleFormTxt();
+  font-size: 0.9rem;
+}
+
+@mixin placeholderInputTxt() {
+  font-family: $font-family-primary;
+  color: $input-text-hint;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+@mixin selectOptionsTxt() {
+  @include placeholderInputTxt();
+  color: $input-text-color-active;
+}
+
+@mixin phoneSelectOptionsTxt() {
+  @include selectOptionsTxt();
+  font-size: 0.9rem;
+}
+
+//Tabs or titles;
+@mixin titlesText() {
+  color: $primary-color-text;
+  font-family: $font-family-primary;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+@mixin titleTextMobile() {
+  color: $primary-color-text;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+@mixin subtitleTextMobile() {
+  color: $primary-color-text;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+@mixin textMobile() {
+  color: $primary-color-text;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.4rem;
+}
+
+@mixin labelText() {
+  font-family: $font-family-primary;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22.3px;
+  color: $label-input-text-color;
+}
+
+@mixin phoneLabelTxt() {
+  @include labelText();
+  font-size: 0.8rem;
+}
+
+@mixin generalDescText() {
+  font-family: $font-family-primary;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: $table-text;
+}
+
+@mixin generalModalText() {
+  font-family: $font-family-primary;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: $primary-color-text;
+}
+
+@mixin generalModalSubtext() {
+  font-family: $font-family-primary;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+@mixin tableHeaders() {
+  font-family: $font-family-primary;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 22.3px;
+}
+
+/*
+  Sections header mobile;
+*/
+@mixin phoneSectionTitleTxt() {
+  font-family: $font-family-primary;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 21px;
+  color: $secondary-color;
+}
+
+/*
+    Tables
+*/
+
+@mixin tableTitleText {
+  font-family: $font-family-primary;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+@mixin tableOptionalTitletxt {
+  @include tableTitleText();
+  font-size: 1.4rem;
+  line-height: 36px;
+}
+
+@mixin mobileTableOptionalTxt() {
+  @include tableOptionalTitletxt();
+  font-size: 1.2rem;
+  line-height: 24px;
+}
+
+/*
+  Cards
+*/
+@mixin idCardTxt() {
+  font-family: $font-family-sec;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1rem;
+  color: $table-text;
+}
+
+@mixin usernameCardTxt() {
+  font-family: $font-family-sec;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 0.8rem;
+  color: $table-text;
+}
+
+@mixin supplierUserCardTxt() {
+  font-family: $font-family-sec;
+  font-size: 1; // ??
+  font-weight: 400;
+  color: $table-text;
+}
+
+@mixin keyCardTxt() {
+  font-family: $font-family-sec;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 14.52px;
+  color: $table-text;
+}
+
+@mixin datesCardTxt() {
+  font-family: $font-family-sec;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 14.52px;
+  color: $table-text;
+}
+
+@mixin expiredDatesCardTxt() {
+  @include datesCardTxt();
+  font-weight: 600;
+}
+
+@mixin statusCardTxt() {
+  font-family: $font-family-sec;
+  font-size: 0.9rem;
+  line-height: 1rem;
+  font-weight: 600;
+  color: $primary-color;
+}
+
+@mixin keyStatusCardTxt() {
+  color: $primary-color;
+  font-size: 0.9rem;
+  line-height: 1rem;
+  font-family: $font-family-sec;
+}
+
+@mixin amountCardTxt() {
+  font-size: 0.95rem;
+  font-family: $font-family-sec;
+  color: $primary-color-text;
+  font-weight: 600;
+  line-height: 1rem;
+}
+
+@mixin menuActionsTxt() {
+  @include policyLoginTxt();
+  font-size: 0.9rem;
+  line-height: 16px;
+}
+
+@mixin menuActionsTxtHover() {
+  background-color: $hover-button;
+  cursor: pointer;
+}
+
+/*
+  Chart
+*/
+@mixin dashboardTooltip() {
+  font-family: $font-family-sec;
+  font-size: 0.6rem;
+  font-weight: 400;
+  line-height: 16.94px;
+  color: $table-text;
+}
+
+@mixin dashboardTooltipValue() {
+  font-family: $font-family-sec;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 16.94px;
+  color: $primary-color-text;
+}
+
+@mixin chartXAxis() {
+  font-family: $font-family-sec;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 16.94px;
+  color: $table-text;
+}
+
+@mixin chartYAxis() {
+  font-family: $font-family-sec;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 16.94px;
+  color: $table-text;
+}
+
+/*
+    Buttons
+*/
+@mixin generalBtnTxt() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 21px;
+  color: $propisory-white;
+}
+
+@mixin phoneGeneralBtnTxt() {
+  @include generalBtnTxt();
+  font-size: 0.9rem;
+}
+
+@mixin modalBtnTxt() {
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 21px;
+  color: $propisory-white;
+}
+
+@mixin filtersBtnTxt() {
+  font-family: $font-family-primary;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 18px;
+  color: $table-text;
+}
+
+//Buttons without background;
+@mixin strokeBtnTxt() {
+  font-family: $font-family-primary;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: $secondary-color;
+}
+
+@mixin strokeBtnGradientTxt() {
+  @include gradientTexts();
+  font-family: $font-family-primary;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+@mixin backRouteBtnTxt() {
+  @include strokeBtnGradientTxt();
+  color: $secondary-color;
+}
+
+/*
+  Paginator
+*/
+
+@mixin paginatorText() {
+  font-family: $font-family-sec;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15.73px;
+  color: $primary-color-text;
+}
+
+/*
+  Ellipsis
+*/
+@mixin hideLongTexts() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/*
+  Filters Table
+*/

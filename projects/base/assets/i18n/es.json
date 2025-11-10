@@ -1,0 +1,2379 @@
+{
+  "IP": {
+    "CURRENCY": "Moneda",
+    "CURRENCY_TYPES": "Tipos de cambio utilizados:",
+    "CURRENCY_CONVERTIONS": "Generar conversiones",
+    "ENTERPRISE": "Empresa:",
+    "REGISTER_PURCHASE": "Dar de alta orden de compra",
+    "YES": "Sí",
+    "NO": "No",
+    "ALL": "Todos",
+    "FROM": "Desde",
+    "TO": "Hasta",
+    "GO_OUT": "Cerrar",
+    "PAY-INVOICES": {
+      "STEP-1": "Selección de facturas",
+      "STEP-2": "Consolidado",
+      "STEP-3": "Detalle",
+      "DETAILS": {
+        "TOTAL_PROVIDERS": "Total de proveedores",
+        "TOTAL_INVOICES": "Total facturas a pagar",
+        "TOTAL_AMOUNT": "Total monto a pagar",
+        "ID_CONSOLIDATED": "ID consolidado",
+        "CONSOLIDATED_NAME": "Nombre de consolidado",
+        "DATETIME_CONSOLIDATED": "Fecha y hora de generación",
+        "DOWNLOAD_FOR_PAYMENTS": "Descargar"
+      }
+    },
+    "ACCOUNTABILITY-DETAILS": {
+      "ACCEPT": "Aceptar",
+      "ADD-OBSERVATION": "Añadir observación",
+      "AMOUNT": "Monto",
+      "ATTACH-PROOF": "Adjuntar comprobante",
+      "BASIC-INFORMATION": "Información básica",
+      "CANCEL": "Cancelar",
+      "COST-CENTER": "Centro de costo",
+      "COST-CENTER-A": "Centro de costo A",
+      "DATE-OF-PAYMENT": "Fecha de pago",
+      "DETAILS-OBSERVATION": "Detalle de la observación",
+      "DOWNLOAD": "Descargar",
+      "PAYMENT-INFORMATION": "Información de pago",
+      "PAYMENT-METHOD": "Medio de pago",
+      "PAYMENT-REGISTER": "Registrar pago",
+      "PROOF-OF-PAYMENT": "Comprobante de pago",
+      "REFERENCE": "Referencia",
+      "REFERENCES": "Referencias",
+      "RENDICION-CONCEPT": "Concepto rendición",
+      "RENDICION-TIPE": "Tipo rendición",
+      "RENDITION-TYPE": "Tipo de rendición",
+      "TOTAL": "Total"
+    },
+    "ACTIONS_TOOLTIP": {
+      "BLOCK": "Bloquear",
+      "DETAIL": "Ver detalle",
+      "COMMENT": "Observaciones y comentarios",
+      "DELETE": "Eliminar",
+      "EDIT": "Editar",
+      "FILE": "Ver detalle",
+      "IMPORT": "Descargar",
+      "STATUS": "Estado",
+      "INFO": "Asignar proyectos",
+      "PAY": "Pagar",
+      "REPORT": "Reportar",
+      "REPORTED": "Reportada",
+      "BLOCKCARD": "Bloquear tarjeta",
+      "NEWCARD": "Solicitar nueva",
+      "SEARCH": "Revisar",
+      "ASSIGN": "Asignar roles",
+      "CONCILIATE": "Conciliar con venta",
+      "SEND_MAIL": "Enviar email",
+      "DOWNLOAD": "Descargar"
+    },
+    "ADMIN_SUPPLIER": {
+      "ACTIONS": "Acciones",
+      "BANKDATA": "Datos bancarios",
+      "EMAIL": "Correo electrónico",
+      "USERNAME": "Nombre de usuario"
+    },
+    "ADMIN_SUPPLIER_BANK_DATA": {
+      "ACCOUNT-ALIAS": "Alias de cuenta",
+      "ACCOUNT-NUMBER": "Número de cuenta",
+      "ACCOUNT-TYPE": "Tipo de cuenta",
+      "USERNAME": "Nombre del banco"
+    },
+    "ADMIN_SUPPLIER_MODAL": {
+      "BANKDATA": "Datos Bancarios",
+      "ENABLEUSER": "Habilitar usuario"
+    },
+    "ADMIN_TABLE": {
+      "ACTIONS": "ACCIONES",
+      "ADD": "Añadir administrador",
+      "ADD-EMPLOYEE": "Añadir empleado",
+      "ALL_ADMINS": "TODOS LOS GERENTES",
+      "ALL_EMPLOYEES": "TODOS LOS EMPLEADOS",
+      "ALL_USERS": "TODOS LOS ADMINISTRADORES",
+      "EDIT": "Editar administrador",
+      "EMAIL": "CORREO ELECTRÓNICO",
+      "ENTERPRISE": "EMPRESA",
+      "ID": "# ID",
+      "NUMBERID": "LEGAJO",
+      "POSITION": "CARGO",
+      "ROLE": "ROL",
+      "USERCREATIONDATE": "FECHA DE CARGA",
+      "USERNAME": "NOMBRE COMPLETO",
+      "USERSTATUS": "ESTADO"
+    },
+    "ADMIN_TABLE_ENTERPRISE": {
+      "ACTIONS": "ACCIONES",
+      "ADD": "Alta empresa subsidiaria",
+      "ADD-ENTERPRISE": "Añadir empresa subsidiaria",
+      "ADDRESSES": "DIRECCIÓN",
+      "ALL_ENTERPRISES": "TODAS LAS EMPRESAS SUBSIDIARIAS",
+      "BUSINESSNAME": "NOMBRE EMPRESA",
+      "BUSSINESID": "ID FISCAL",
+      "CONTACTNUMBER": "TELÉFONO",
+      "COUNTRY": "PAÍS",
+      "EDIT": "Editar empresa subsidiaria"
+    },
+    "ADMIN_TABLE_ENTERPRISE_FORM_MODAL": {
+      "ADDRESS": "Dirección completa",
+      "BUSINESSID": "ID fiscal",
+      "BUSSINESNAME": "Nombre de la empresa",
+      "CONTACTNUMBER": "Teléfono",
+      "COUNTRY": "País",
+      "VALIDATION_CUIT": "* Ingrese un ID fiscal válido (Solo números y letras)"
+    },
+    "ADMIN_TABLE_SUPPLIER": {
+      "EMAIL": "CORREO ELECTRÓNICO",
+      "USERNAME": "NOMBRE DEL USUARIO"
+    },
+    "ADMIN_TABLE_SUPPLIER_MODAL_EDIT": {
+      "BUSINESSNAME": "Nombre empresa",
+      "LASTLOGINDATE": "Fecha login",
+      "TITLE": "Editar proveedor",
+      "USERCREATIONDATE": "Fecha de creación",
+      "USEREMAIL": "Correo electronico",
+      "USERNAME": "Nombre del usuario"
+    },
+    "ADMIN_TABLE_USER_MODAL": {
+      "EMAIL": "Correo electrónico",
+      "ENTERPRISE": "Empresa",
+      "ROL": "Rol",
+      "STATE-USER": "Estado de usuario",
+      "USERNAME": "Nombre completo"
+    },
+    "ASSIGN-PROJECTS": {
+      "ASSIGN_TO": "Asignar proyectos a",
+      "AVAILABLE": "Disponibles",
+      "ORDER_NAME": "Nombre de ord de compra / Contrato",
+      "STATUS": "Estado",
+      "EXPIRATION": "Vencimiento",
+      "UNAVAILABLE_PROJECTS": "Sin proyectos disponibles.",
+      "UNASSIGNED_PROJECTS": "Sin proyectos asignados.",
+      "ASSIGNED": "Asignados",
+      "VALIDITY": "Vigencia",
+      "EXPIRED": "Vencido",
+      "OK": "Ok",
+      "CLOSE": "Cerrar",
+      "CONTRACT": "Contrato",
+      "PURCHASE_ORDER": "Orden de compra",
+      "ACTIVE": "Activo",
+      "INACTIVE": "Inactivo"
+    },
+    "BILL": {
+      "APPROVED": "Invoice aprobadas",
+      "CARD_TITLE": "Crear invoice",
+      "FIELDS": {
+        "ACTIONS": "ACCIONES",
+        "AMOUNT": "MONTO",
+        "DATEEMIT": "FECHA DE EMISIÓN",
+        "DATEEXPIRY": "FECHA VENCIMIENTO",
+        "DATELOAD": "FECHA DE CARGA",
+        "DETAILS": "DETALLES",
+        "INVOICE": "# INVOICE",
+        "PROVIDERNAME": "NOMBRE DE PROVEEDOR"
+      },
+      "PAID": "Invoice pagadas",
+      "PENDING": "Invoice pendientes",
+      "CREATE_NEW": "Crear nueva factura"
+    },
+    "BILL-MODAL": {
+      "PAYMENT-MANUAL": "Registro de pago",
+      "PAYMENT-ONLINE": "Pago Online",
+      "PAYMENT-QUESTION": "¿Qué deseas realizar?"
+    },
+    "FILTERS_MODAL": {
+      "FILTER": "Filtrar",
+      "START": "Inicio",
+      "END": "Fin"
+    },
+    "BILL_DETAILS": {
+      "ADD_OBSERVATION_BUTTON": "Añadir observación",
+      "DATE": "Fecha de alta",
+      "DOWNLOAD_BUTTON": "Descargar",
+      "EXPIRY_DATE": "Fecha de vencimiento",
+      "INVOICE": "Factura",
+      "NEW_INVOICE": "Crear nueva factura",
+      "OBSERVACION": "Observación",
+      "REFERENCE": "Referencia",
+      "SUBTOTAL": "Subtotal",
+      "SURRENDER": "Rendición",
+      "TAX": "Impuestos",
+      "TITLE": "Detalles de la observación",
+      "BILL": "Detalles de la factura",
+      "RENDITION_DETAILS": "Detalles de la rendición",
+      "COMMENTS": "Observaciones",
+      "TOTAL": "Total",
+      "ADD_OBSERVATION_TITLE": "Nueva observación"
+    },
+    "COST_CENTER": {
+      "TITLE": "Centro de costos",
+      "EDIT": "Editar",
+      "ADD": "Añadir",
+      "NAME": "Nombre",
+      "DESCRIPTION": "Descripción",
+      "WITHOUT_COST_CENTER": "Sin centros de costos por el momento"
+    },
+    "DOCUMENT": {
+      "TAX": "Impuesto",
+      "TOTAL": "Total",
+      "CLOSE": "Cerrar"
+    },
+    "DOMAIN": {
+      "APPLY_TO": "Aplican para",
+      "INVOICES": "Facturas",
+      "RENDITIONS": "Rendiciones"
+    },
+    "FILTERS": {
+      "AMOUNT_RANGE": "Rango del monto",
+      "CLEAN": "Limpiar filtro",
+      "ADD": "Añadir filtro",
+      "DATE": {
+        "FROM": "Desde",
+        "TO": "Hasta"
+      },
+      "ADD_FILTER": "Aplicar filtro"
+    },
+    "FINANCES": {
+      "BLOCK_CARD": {
+        "MODAL_TITLE": "Bloquear tarjeta",
+        "MODAL_QUESTION": "¿Desea bloquear la tarjeta seleccionada?",
+        "MODAL_REASON": "Motivo del bloqueo",
+        "MODAL_LABELS": {
+          "ENTERPRISE": "EMPRESA",
+          "USERNAME": "USUARIO",
+          "CARD_NUMBER": "NRO. TARJETA"
+        },
+        "MODAL_CANCEL": "Cancelar"
+      },
+      "MOVEMENT_TYPES": {
+        "CREDIT": "Crédito",
+        "DEBIT": "Débito"
+      }
+    },
+    "FLOW_STATUS": {
+      "TITLE": "Flujo de aprobación",
+      "STATUS": "Estados de",
+      "INVOICES": "Facturas",
+      "RENDITIONS": "Rendiciones",
+      "CLOSE": "Cerrar",
+      "MODAL": {
+        "EDIT": "Editar",
+        "ADD": "Añadir",
+        "STATUS": "Estado",
+        "GLOBAL": "global",
+        "APPLY_TO": "Aplica para",
+        "DESCRIPTION": "Descripción"
+      },
+      "MANAGEMENT": {
+        "STATUSES": "Estados",
+        "STATUS": "Estado",
+        "TYPE": "Tipo",
+        "DESCRIPTION": "Descripción",
+        "SCOPE": "Alcance",
+        "ROLES": "Roles",
+        "GLOBAL": "Global (todas las empresas)",
+        "LOCAL": "Local (solo esta empresa)",
+        "INITIAL_STATUS": "Estado inicial",
+        "PAYABLE_STATUS": "Estado pagable",
+        "PAID_STATUS": "Estado pagado",
+        "REJECTED_STATUS": "Estado rechazado",
+        "CUSTOM_STATUS": "Estado personalizado",
+        "WITHOUT_STATUS": "Sin estados por el momento"
+      }
+    },
+    "CARD_DASHBOARD": {
+      "EXPIRED": "Invoice vencidas",
+      "OUTSTANDING": "Invoice pendientes ",
+      "PAY": "Pago total invoice",
+      "REMAINING": "Restante",
+      "TIME": "Desde mes pasado"
+    },
+    "CARD_TABLE": {
+      "SUPPLIER": {
+        "BUSINESSNAME": "Nombre de la empresa",
+        "ID": "id",
+        "USEREMAIL": "Email",
+        "USERCREATIONDATE": "Fecha de creación",
+        "USERNAME": "Nombre de usuario",
+        "LASTLOGINDATE": "Fecha de último ingreso",
+        "STATE": "Estado"
+      },
+      "INVOICE": {
+        "FISCALID": "Id fiscal",
+        "LOADINGDATE": "Carga",
+        "CREATIONDATE": "Emisión",
+        "TYPESTATUS": "Estado",
+        "TOTALAMOUNT": "Monto",
+        "SUPPLIERNAME": "Proveedor",
+        "DUEDATE": "Vencimiento",
+        "AMOUNT": "Monto",
+        "BROKERFULLNAME": "Agente de venta",
+        "RESOLUTIONDATE": "Fecha de resolución",
+        "RESOLUTIONTIME": "Tiempo de resolución",
+        "STATUS": "Estado"
+      },
+      "SURRENDERS": {
+        "ID": "Rendición",
+        "USERNAME": "Empleado",
+        "TYPESTATUS": "Estado",
+        "CONCEPT": "Concepto de gastos",
+        "CREATIONDATE": "Fecha de emisión",
+        "AMOUNT": "Monto"
+      },
+      "ACTIVE-CONTRACTS": {
+        "CONTRACTID": "ID",
+        "NAME": "Nombre del contrato",
+        "STARTDATE": "Fecha inicio",
+        "FINISHDATE": "Fecha finalización",
+        "ISACTIVE": "Estado",
+        "COSTCENTERNAME": "Centro de costo",
+        "SUPPLIERNAME": "Proveedor"
+      },
+      "PURCHASE-ORDER": {
+        "PURCHASEID": "ID",
+        "NAME": "Nombre de la orden",
+        "STARTDATE": "Fecha inicio",
+        "FINISHDATE": "Fecha finalización",
+        "ISACTIVE": "Estado",
+        "COSTCENTERNAME": "Centro de costo",
+        "SUPPLIERNAME": "Proveedor"
+      },
+      "SETTLEMENTS": {
+        "SETTLEMENTID": "ID",
+        "CREATIONTIME": "Creación",
+        "STARTDATESETTLEMENT": "Inicio",
+        "ENDDATESETTLEMENT": "Cierre",
+        "PROVIDERNAME": "Agente de venta",
+        "STATUS": "Estado",
+        "SETTLEMENTSUMMARY": "Monto",
+        "CREATIONDATE": "Creación",
+        "AMOUNT": "Monto",
+        "DUEDATE": "Vencimiento",
+        "RESOLUTIONDATE": "Fecha de resolución",
+        "RESOLUTIONTIME": "Tiempo de resolución",
+        "BROKERFULLNAME": "Agente de venta"
+      },
+      "SALES": {
+        "BILLID": "ID factura",
+        "BROKERNAMEBUSSINESS": "Agente de venta",
+        "COMMISSIONAMOUNT": "Monto comisión",
+        "EXPENSES": "Gasto venta",
+        "IDSETTLEMENT": "En liquidación",
+        "CUSTOMERID": "Id cliente",
+        "COMMISSIONPERCENTAGE": "Comisión",
+        "PRODUCTNAME": "Producto",
+        "SALEAMOUNT": "Monto venta",
+        "SALEDATE": "Fecha venta",
+        "SALEID": "ID venta",
+        "ISPAID": "Estado",
+        "YES": "Sí",
+        "NO": "No"
+      },
+      "FLOWSTATUS": {
+        "DESCRIPTION": "Descripción",
+        "GLOBAL": "Alcance",
+        "ISINITIAL": "Estado inicial",
+        "ISPAID": "Estado pagado",
+        "ISPAYABLE": "Estado pagable",
+        "ISREJECTED": "Estado rechazado",
+        "ROLES": "Roles",
+        "STATUS": "Estado",
+        "TYPE": "Tipo"
+      },
+      "ROLES": {
+        "DESCRIPTION": "Descripción",
+        "GLOBAL": "Alcance",
+        "NAME": "Rol"
+      },
+      "TRANSITIONS": {
+        "DESCRIPTION": "Transición",
+        "CURRENTSTATUS": "Estado de orígen",
+        "NEXTSTATUS": "Estado de destino"
+      },
+      "COSTCENTER": {
+        "NAME": "Nombre",
+        "DESCRIPTION": "Descripción"
+      },
+      "EMPLOYEE": {
+        "USERNAME": "Nombre completo",
+        "EMAIL": "Email",
+        "USERSTATUS": "Estado",
+        "USERCREATIONDATE": "Fecha de carga",
+        "POSITION": "Cargo",
+        "NUMBERID": "Legajo",
+        "ROLE": "Rol",
+        "ENTERPRISE": "Empresa"
+      },
+      "SUBSIDIARIES": {
+        "COUNTRY": "País",
+        "ADDRESSES": "Dirección",
+        "BUSINESSNAME": "Nombre empresa",
+        "BUSSINESID": "Id fiscal",
+        "CONTACTNUMBER": "Teléfono"
+      },
+      "PAY-IN": {
+        "DATE": "Fecha de pago",
+        "PAYMENTTYPE": "Tipo de pago",
+        "AMOUNT": "Monto pagado",
+        "CONCILIATE": "Conciliado",
+        "TRANSACTIONID": "Id de transacción",
+        "IDDB": "idDB"
+      },
+      "CONSOLIDATED": {
+        "DATETIME_GENERATED": "Fecha de generación",
+        "DATETIME_MODIFIED": "Última modificación",
+        "ID_CONSOLIDATED": "id",
+        "CONSOLIDATED_NAME": "Nombre de consolidado",
+        "TOTAL_PROVIDERS": "Nro. de proveedores",
+        "TOTAL_INVOICES": "Nro. de facturas",
+        "TOTAL_AMOUNT": "Monto total",
+        "STATUS": "Estado",
+        "OBSERVATION": "COMENTARIO",
+        "ACTIONS": "ACCIONES",
+        "PAID": "Pagado",
+        "GENERATED": "Generado"
+      }
+    },
+    "COMMON": {
+      "BUTTON-CREATE": "Crear",
+      "BUTTON-UPDATE": "Actualizar",
+      "CONFIRM-BUTTON": "Aceptar",
+      "INVALID-EMAIL": "* Ingrese un email válido",
+      "INVALID_DATE-TOO_FAR": "* Fecha demasiado lejana.",
+      "INVALID_DATE-TOO_OLD": "* Fecha demasiado antigua.",
+      "INVALID_DATE-END_LESS-THAN_START": "* Fecha de finalización no puede ser menor que la de inicio.",
+      "REQUIRED-FIELD": "* Campo obligatorio",
+      "BUTTON-SAVE": "Guardar",
+      "MIN": "* Mínimo 0",
+      "MAX": "* Máximo 100"
+    },
+    "CONFIGURATION_TABLE_ICON": {
+      "ASSIGN": "Asignar roles",
+      "DELETE": "Eliminar",
+      "EDIT": "Editar",
+      "COMMENT": "Observaciones y comentarios",
+      "CONCILIATE": "Conciliar con pago"
+    },
+    "CONFIRM-ACTION-DIALOG": {
+      "CANCEL": "Cancelar",
+      "CONFIRM": "Confirmar",
+      "DELETE": "¿Desea eliminar el elemento #",
+      "DELETE-TEXT": "¿Desea eliminar el elemento ",
+      "DELETE-SALE-TEXT1": "¿Desea eliminar la venta del producto \"",
+      "DELETE-SALE-TEXT2": "\" de la fila ",
+      "REPORT": "¿Desea reportar el elemento #",
+      "REPORT-TEXT": "¿Desea reportar el elemento "
+    },
+    "DASHBOARD-COMPANY-CARD": {
+      "APPROVED": "Pago total facturas",
+      "EXPIRED": "Total facturas vencidas",
+      "PENDING": "Total facturas pendientes de pago",
+      "REJECTED": "Total pendiente de pago"
+    },
+    "EMPLOYEE-INVOICE-CARDS": {
+      "EMPLOYEE": {
+        "APPROVED": "Total rendiciones pagadas:",
+        "PENDING": "Total rendiciones en proceso:",
+        "REJECTED": "Total rendiciones rechazadas:",
+        "REPORTED": "Total rendiciones reportadas:"
+      },
+      "SUPPLIER": {
+        "APPROVED": "Total facturas pagadas:",
+        "EXPIRED": "Total facturas vencidas:",
+        "PENDING": "Total facturas en proceso:",
+        "REJECTED": "Total facturas rechazadas:"
+      }
+    },
+    "ENTERPRISE_ADMINS": {
+      "ADD": "Añadir gerente"
+    },
+    "RENDITION_DETAILS": {
+      "EDIT": "Editar",
+      "ACCEPT": "Aceptar",
+      "RENDITION_TYPE": "tipo de rendición",
+      "NAME": "Nombre completo",
+      "DESCRIPTION": "Descripción"
+    },
+    "FORM-MODAL": {
+      "ACTIVE-CONTRACT": {
+        "ID": "ID contrato",
+        "NAME": "Nombre del contrato",
+        "NEW": "Dar de alta contrato",
+        "STATUS": {
+          "ACTIVE": "Activo (puede ser utilizado por el proveedor)",
+          "INACTIVE": "Inactivo (no puede ser utilizado)",
+          "PLACEHOLDER": "Estado de contrato"
+        },
+        "TITLE-CREATE": "Alta contrato",
+        "TITLE-EDIT": "Edición de contrato"
+      },
+      "DOWNLOAD": "Descargar",
+      "AMOUNT": "Monto",
+      "APPROVER": "Nombre del aprobador del contrato",
+      "CANCEL": "Cancelar",
+      "CONFIRM": "Aceptar",
+      "CREATE": "Crear",
+      "DATE_OUT_RANGE_SETTLEMENT": "Fecha de venta fuera del rango de liquidación",
+      "DATE-DIFFERENCE-ERROR": "* La fecha ha de ser posterior a la de inicio",
+      "DESCRIPTION": "Descripción",
+      "ENDING-DATE": "Fecha de finalización",
+      "ENTERPRISE": "Empresa",
+      "PROVIDER": "Proveedor",
+      "MONTHLY-RENEWAL": "El monto es",
+      "PAYMENT-DESCRIPTION": "Datos de pago",
+      "PURCHASE-ORDER": {
+        "ID": "ID compra",
+        "NAME": "Nombre de referencia",
+        "NEW": "Dar de alta orden de compra",
+        "STATUS": {
+          "ACTIVE": "Activa (puede ser utilizada por el proveedor)",
+          "INACTIVE": "Inactiva (no puede ser utilizada)",
+          "PLACEHOLDER": "Estado de orden"
+        },
+        "TITLE-CREATE": "Orden de compra",
+        "TITLE-EDIT": "Editar orden de compra"
+      },
+      "RENEWAL": {
+        "AUTO": "Se renueva anualmente:",
+        "MONTHLY": "Mensual",
+        "RADIO-LABEL": "El monto es:",
+        "TOTAL": "Total"
+      },
+      "REQUIRED": "* El campo es obligatorio ",
+      "AMOUNTTO": "Monto 'hasta' debe ser mayor a monto 'desde'",
+      "SELECT-CURRENCY": "Selecciona la moneda",
+      "CURRENCY": "Moneda",
+      "COST-CENTER": "Centro de costos",
+      "STARTING-DATE": "Fecha de inicio",
+      "UPDATE": "Actualizar",
+      "TRANSITION": "transición",
+      "EDIT": "Editar",
+      "ADD": "Añadir",
+      "APPLY_TO": "Aplica para",
+      "INVOICES": "Facturas",
+      "RENDITIONS": "Rendiciones",
+      "OBSERVATIONS": "Observaciones",
+      "ORIGIN_STATUS": "Estado de origen",
+      "SELECT_STATUS": "Selecciona un estado",
+      "DESTINY_STATUS": "Estado destino",
+      "SAME_STATUS": "* No puedes transidir un estado a sí mismo",
+      "NOT_PAYABLE_ORIGIN_STATUS": "* El estado de origen no es pagable",
+      "TRANSITION_EXIST": "* La transición ya existe",
+      "TRANSITION_NAME": "Nombre de la transición",
+      "CLOSE": "Cerrar",
+      "GO-TO-SETTLEMENT": "Ir a liquidación",
+      "SEND_EMAIL": "Enviar email"
+    },
+    "TRANSITIONS": {
+      "TITLE": "Transiciones de estado",
+      "DIAGRAM_VIEW": "Ver diagrama",
+      "TRANSITION": "Transición",
+      "ORIGIN_STATUS": "Estado de origen",
+      "DESTINY_STATUS": "Estado de destino",
+      "WITHOUT_TRANSITIONS": "Sin transiciones por el momento"
+    },
+    "HEADER": {
+      "LANGUAGES": {
+        "ES": "Español (ES)",
+        "PT": "Portugués (PS)"
+      },
+      "LICENSE": {
+        "BRONZE": "Bronce (personalizada)",
+        "BRONZE_LICENSE": "Licencia bronce",
+        "SILVER": "Plata (personalizada)",
+        "SILVER_LICENSE": "Licencia plata",
+        "GOLD": "Oro (personalizada)",
+        "GOLD_LICENSE": "Licencia oro"
+      }
+    },
+    "INCOME-CARD": {
+      "FROM": "del",
+      "PAID": "Recaudado",
+      "PENDING": "Pendiente de pago",
+      "TO": "al",
+      "TOTAL": "Total facturado",
+      "TOTAL-INVOICES": "Total de facturas cargadas a la fecha actual",
+      "TOTAL-RENDITIONS": "Total de rendiciones cargadas a la fecha actual",
+      "TOTAL-SPENT": "Total de gastos"
+    },
+    "SIGNUP": {
+      "NEW_COMPANY": "Nueva empresa",
+      "COMPANY_COUNTRY": "País de la empresa matriz",
+      "SELECT_COUNTRY": "Selecciona un país",
+      "SOCIAL_REASON": "Razón social",
+      "SELECT_ONE": "Selecciona una",
+      "LEGACY_NAME": "Nombre legal de la empresa",
+      "FANTASY_NAME": "Nombre de fantasía de la empresa",
+      "COMPANY_ADDRESS": "Dirección de la empresa",
+      "COMPANY_PHONE": "Teléfono de la empresa",
+      "COMPANY_ID_FISCAL": "ID fiscal de la empresa",
+      "COMPANY_LOGO": "Logo de la empresa",
+      "WEB_SITE": "Sitio web",
+      "LINKEDIN": "Linkedin",
+      "MANAGER_NAME": "Nombre completo del gerente",
+      "MANAGER_EMAIL": "Email del gerente",
+      "REGISTRY": "Registrar",
+      "ERROR": {
+        "INVALID_ID_FISCAL": "* ID fiscal: Solo números y letras"
+      }
+    },
+    "LOGIN": {
+      "BAD-CREDENTIALS": "Nombre de usuario y/o contraseña incorrectos. Por favor, verifique la información e inténtelo de nuevo.",
+      "CAPTCHA": "Protegido por reCAPTCHA y sujeto a la ",
+      "EMAIL-INVALID-FORMAT": "Formato de correo electrónico inválido",
+      "EMAIL-REQUIRED": "El correo electrónico es obligatorio",
+      "FORGOTTEN-PASSWORD": "¿Olvidaste tu contraseña?",
+      "ITEM-1ST-TITLE": "Rápido y fácil",
+      "ITEM-1ST-CONTENT": "Acceda al instante, sin descargas",
+      "ITEM-2ND-CONTENT": "Podes acceder a este espacio desde cualquier dispositivo",
+      "ITEM-2ND-TITLE": "Múltiples funciones",
+      "ITEM-3RD-CONTENT": "Mayor control de la operación",
+      "ITEM-3RD-TITLE": "Auditoría y alertas",
+      "ITEM-4TH-CONTENT": "Aumento de la productividad",
+      "ITEM-4TH-TITLE": "Eficiencia y agilidad",
+      "PASSWORD-PLACEHOLDER": "Contraseña",
+      "PASSWORD-REQUIRED": "La contraseña es obligatoria",
+      "PORTAL": "Bienvenidos a",
+      "PRIVACY": "Política de Privacidad y Condiciones.",
+      "PROVIDER": "",
+      "PORTAL_LOGIN": " Portal de ",
+      "ADMINISTRATION": "Administración",
+      "EMPLOYEE": "Empleados",
+      "SUPPLIER": "Proveedores",
+      "BROKER": "Agentes de Venta",
+      "EMPLOYEE_PORTAL": "Ir al portal de empleados",
+      "EMAIL": "Email",
+      "EMPLOYEE_SUGGEST": "Si estas intentando ingresar con un usuario de empleado, ve al portal de empleados, si crees que se trata de un error, comunicate con nosotros",
+      "RESTORE": {
+        "EMAIL-LABEL": "Email",
+        "GO-BACK": "Volver al inicio",
+        "MAIN-TEXT": "Ingresa el correo electrónico con el que te registraste y te enviaremos un mail para recuperar tu contraseña.",
+        "MAIN-TITLE": "Recuperar contraseña",
+        "SERVER-ERROR": "Error: no se pudo enviar el mail de recuperación.",
+        "SUBMIT-BUTTON": "Enviar",
+        "SUCCESS-TEXT": "Hemos enviado un correo electrónico a la dirección de email que ingresaste para que puedas recuperar el acceso a tu cuenta. ¡Gracias!",
+        "SUCCESS-TITLE": "Verifica tu casilla de correo"
+      },
+      "SIGNUP-BUTTON": "Registrar una empresa",
+      "SIGNUP-SUCCESS-1": "¡La empresa",
+      "SIGNUP-SUCCESS-2": "ha sido registrada!",
+      "SIGNUP-SUCCESS-3": "Verifica tu casilla de correo electrónico para acceder con tus nuevas credenciales.",
+      "SIGNUP-SUCCESS-TITLE": "Registro exitoso",
+      "SUBMIT-BUTTON": "Iniciar sesión",
+      "WELCOME-TEXT-1": "Nos alegra tenerte de vuelta y estamos listos para",
+      "WELCOME-TEXT-2": "atender tus necesidades. Inicia sesión y continúa",
+      "WELCOME-TEXT-3": "aprovechando al máximo nuestra plataforma.",
+      "WELCOME-TEXT-4": "Bienvenidos",
+      "WELCOME-TITLE": "Iniciar sesión",
+      "WELCOME-TITLESM": "Nos alegra tenerte de vuelta y estamos listos para atender tus necesidades. Inicia sesión y continúa aprovechando al máximo nuestra plataforma.",
+      "CLIENT_NAME": "AVLA"
+    },
+    "LOGIN-MODAL": {
+      "CAPTCHA": "Protegido por reCAPTCHA y sujeto a la ",
+      "PRIVACY": "Política de Privacidad",
+      "CONDITIONS": "Condiciones.",
+      "AND": "y",
+      "EQUAL-PASSWORDS": "Las contraseñas coinciden",
+      "GO-BACK-BUTTON": "Volver al inicio",
+      "INVALID-TOKEN-TEXT": "El token de acceso no es válido para cambiar la contraseña.",
+      "INVALID-TOKEN-TITLE": "Lo sentimos",
+      "MAYUSATLEAST": "Una letra mayúscula",
+      "NANORSPECIAL": "Un número o caracter especial",
+      "NEW-PASSWORD": "Nueva contraseña",
+      "REPEAT-PASSWORD": "Repetir contraseña",
+      "SERVER-ERROR": "Error: no se pudo modificar la contraseña.",
+      "SIX-CHARACTERS": "6 caracteres como mínimo",
+      "SUBMITBUTTON": "Cambiar contraseña",
+      "SUCCESS-BUTTON": "Acceder",
+      "SUCCESS-MESSAGE": "Contraseña modificada con éxito",
+      "TITLE": "Cambio de contraseña"
+    },
+    "MANAGEMENT": {
+      "COST-CENTERS": "Centros de costos",
+      "FLOW-STATUSES": "Estados",
+      "MENU": "Menú",
+      "RENDITION-TYPES": "Tipos de rendición",
+      "ROLES": "Roles",
+      "STATUS-TRANSITIONS": "Transiciones"
+    },
+    "MAKE_PAYMENT": {
+      "COMING_SOON": "Próximamente"
+    },
+    "METRICS": {
+      "CHART_TOOLTIP": {
+        "TITLE": "Este mes"
+      },
+      "MONTHLY": {
+        "1": "Enero",
+        "2": "Febrero",
+        "3": "Marzo",
+        "4": "Abril",
+        "5": "Mayo",
+        "6": "Junio",
+        "7": "Julio",
+        "8": "Agosto",
+        "9": "Septiembre",
+        "10": "Octubre",
+        "11": "Noviembre",
+        "12": "Diciembre"
+      },
+      "SUBTITLE": "Periodo",
+      "TITLE-BUSINESS": "Facturas pagadas",
+      "TITLE-PROVIDER": "Mis ingresos",
+      "TOOLTIP": "Una métrica de rendimiento es una medida cuantitativa que evalúa el desempeño y eficiencia de un sistema o proceso específico. Proporciona datos objetivos para mejorar y optimizar el funcionamiento.",
+      "DASHBOARD": {
+        "SETTLEMENTS": {
+          "TITLE": "Liquidaciones",
+          "OPEN": "Liquidaciones en proceso",
+          "DELAY": "Liquidaciones atrasadas",
+          "APPROVED": "Liquidaciones aprobadas",
+          "CLOSED": "Liquidaciones facturadas sin pagar",
+          "CARD_LABEL": {
+            "PERIOD": "Período de ventas",
+            "RESOLUTION_DATE": "Fecha de cierre:",
+            "BROKER": "Agente:"
+          }
+        },
+        "INVOICES": {
+          "TITLE": "Facturas",
+          "OVERDUE": "Facturas vencidas",
+          "IN_PROGRESS": "Facturas en proceso",
+          "PENDING_PAYMENT": "Facturas pendientes de pago",
+          "CARD_LABEL": {
+            "DUE_DATE": "Vencimiento:",
+            "STATUS": "Estado:",
+            "BROKER": "Proveedor:"
+          }
+        },
+        "PAY_OUT_ORDERS": {
+          "TITLE": "Órdenes de pago",
+          "OPEN": "Órdenes de pago abiertas",
+          "OVERDUE": "Órdenes de pago vencidas"
+        },
+        "GENERAL_OPERATIONS": {
+          "TITLE": "Operaciones generales",
+          "GRAPH": {
+            "PENDING_APPROVED": "Liquidaciones en proceso corredor",
+            "OPEN": "Liquidaciones en proceso empresa",
+            "INVOICES": "Facturas en proceso",
+            "PAY_ORDERS": "Órdenes de pago en proceso"
+          }
+        }
+      }
+    },
+    "MODAL": {
+      "PAYMENT_PROCESSED": "Su pago ha sido procesado."
+    },
+    "MODAL-BILL-EDIT-INVOICE": {
+      "CANCEL": "Cancelar",
+      "COMMENTS": "Observación (opcional)",
+      "DATECREATION": "Fecha de alta",
+      "DATEEXP": "Fecha de vencimiento",
+      "FISCAL_ID": "ID fiscal:",
+      "IDINVOICE": "Nombre de contrato",
+      "IDPURCHASE": "Orden de compra / Ref",
+      "PLACEHOLDER": "Escribe aquí tu observación",
+      "SELECT-APPROVE": "Aprobada",
+      "SELECT-EXPIRED": "Vencida",
+      "SELECT-PAID": "Pagada",
+      "SELECT-PENDING": "Pendiente",
+      "SELECT-REJECTED": "Rechazada",
+      "SELECT-REPORTED": "Reportada",
+      "SERVER-ERROR": "Error: no se pudo completar la operación.",
+      "STATUS": "Estado factura",
+      "SUBMIT": "Aceptar",
+      "SUPPLIER_NAME": "Proveedor",
+      "TITLE": "Editar estado factura",
+      "TOTAL": "Total factura",
+      "USERNAME": "Nombre de usuario",
+      "SETTLEMENT_DATA": "Datos liquidación"
+    },
+    "MODAL_NEW_PROVIDER_ENTERPRISE": {
+      "SUBTITLE-CREATION": "Nuevo proveedor",
+      "SUBTITLE-EDITION": "Editar proveedor",
+      "TITLE-ACTIVE-CONTRACT": "Contrato/Órdenes de compra"
+    },
+    "MODAL_NEW_BROKER_ENTERPRISE": {
+      "SUBTITLE-CREATION": "Nuevo agente de ventas",
+      "SUBTITLE-EDITION": "Editar agente de ventas",
+      "TITLE-ACTIVE-CONTRACT": "Contrato/Órdenes de compra"
+    },
+    "NEW-INVOICE": {
+      "FORM": {
+        "AMOUNT_TOO_BIG": "* Monto máximo superado",
+        "AT_LEAST_ONE": "* Monto mínimo: 1.00",
+        "BASIC_INFO": "Información básica",
+        "CONTRACT_ID": "ID de contrato",
+        "COST_CENTER": "Centro de costo",
+        "CREATE": "Crear",
+        "EDIT": "Editar",
+        "SAVE": "Guardar",
+        "UPDATE": "Actualizar",
+        "CURRENCY": "Moneda",
+        "DATE": "Fecha de la factura",
+        "EMAIL": "Enviar una copia a",
+        "EXPIRE_DATE": "Fecha vto de la factura",
+        "INVALID_FORMAT_AMOUNT": "* Debe contener 2 decimales",
+        "INVALID_AMOUNT": "* Monto inválido. Debe ser mayor a 0.",
+        "SALE_INVALID_AMOUNT": "* Monto inválido. Debe ser mayor a 1.00",
+        "INVALID_DATE_DIFFERENCE": "* La fecha de vencimiento ha de ser posterior a la de alta",
+        "INVALID_FUTURE_CREATION": "* La fecha de alta no puede ser futura",
+        "INVOICE_ADJ": "Adjuntar factura",
+        "INVOICE_TOTAL": "Total factura",
+        "INVOICE_TYPE": "Tipo de factura",
+        "ONLY_BROKERS": "Solo agente de ventas",
+        "PROVIDER_NAME": "Proveedor / Agente de ventas",
+        "PURCHASE_ORDER": "ID orden de compra / Ref.",
+        "REFERENCE_INVOICE": "ID ord de compra / Ref",
+        "MUST_SELECT_SUPPLIER": "Debe seleccionar un proveedor",
+        "SELECT_SETTLEMENT": "Seleccione una liquidación",
+        "EMPTY_SETTLEMENT": "No hay liquidaciones",
+        "SELECT_CONTRACT_ID": "Selecciona el contrato",
+        "SELECT_COST_CENTER": "Centro de costo",
+        "SELECT_CURRENCY": "Selecciona la moneda de la factura",
+        "SELECT_INVOICE_TYPE": "Selecciona el tipo de factura",
+        "SELECT_PROVIDER": "Seleccionar",
+        "SELECT_PURCHASE_ORDER": "Selecciona la orden de compra",
+        "SELECT_TAX": "Selección impuesto",
+        "TAX": "Tipo de impuesto",
+        "TAX_INVOICE_ID": "ID fiscal de la factura",
+        "SETTLEMENT": "Liquidación",
+        "COMMISSION_INVOICE": "Factura de comisión",
+        "UPLOAD_INVOICE": "Adjuntar factura",
+        "PROVIDER": "Proveedor",
+        "BROKER": "Agente de ventas"
+      },
+      "PREVIEW": {
+        "REFERENCE": "Referencia:",
+        "FROM": "De",
+        "TO": "Para",
+        "NO_INVOICE": "No existe factura"
+      }
+    },
+    "NEW-PROVIDER": {
+      "ADD-NEW": "Agregar proveedor",
+      "ADD-NEW-SUPPLIER": "Añadir administrador",
+      "ADD-NEW-USER": "Añadir usuario",
+      "ADDRESS": "Dirección",
+      "ADD_NEW_BROKER": "Agregar agente de ventas",
+      "BUSINESS": "Razón social",
+      "BUTTON-CREATE": "Crear",
+      "BUTTON-EDIT": "Guardar cambios",
+      "CANCEL": "Cancelar",
+      "CODIGO_POSTAL": "Ingrese código postal válido",
+      "COUNTRY": "País",
+      "CATEGORY": "Rubro de la empresa",
+      "COMPANY_NAME": "Nombre de la empresa",
+      "DIRECTION": "Dirección",
+      "DATA": "Datos",
+      "EMAIL": "Email del gerente",
+      "ID_FISCAL": "Id fiscal",
+      "IS_BROKER": "Es agente de venta",
+      "NUMBERING": "Numeración",
+      "LOGO": "Logo",
+      "EXTERNAL_ID": "ID externo",
+      "NAME_PROVIDER": "Nombre completo del gerente",
+      "NUMBER_CONTACT": "Teléfono del gerente",
+      "PAYMENT-FORM-1": "A 2O Días",
+      "PAYMENT-FORM-2": "A 45 Días",
+      "PAYMENT-FORM-3": "A 60 Días",
+      "PROVINCE": "Provincia",
+      "PURCHASE-ORDER": "Asignar ord de compra / Contratos",
+      "STREET": "Calle",
+      "TITLE_BODY": "Agregar proveedor",
+      "TITLE_HEADER": "Información de la empresa",
+      "VALIDATION_CUIT": "* Ingrese un ID fiscal válido (Solo números y letras)",
+      "VALIDATION_EMAIL": "* Ingrese un email válido",
+      "VALIDATION_NUMBER": "Ingrese un número de teléfono válido",
+      "VALIDATION_NUMERACION": "* Ingrese una numeración válida (Solo números, letras y espacios)",
+      "VALIDATION_EXTERNALID": "* No se permiten espacios",
+      "ZIP_CODE": "Código postal",
+      "STATUS": "Activo",
+      "ACCOUNT": {
+        "NUMBER": "Número de cuenta",
+        "BANK": "Banco",
+        "BRANCH": "Sucursal",
+        "OWNER": "Nombre de titular",
+        "TYPE": "Tipo de cuenta",
+        "EXTRAS": "Información extra de la cuenta"
+      }
+    },
+    "SUGGEST": {
+      "LOGO_FORMATS": "Formatos permitidos: JPG-PNG",
+      "MAX": " (máximo 4MB)"
+    },
+    "NEW-RENDITION": {
+      "AMOUNT_TOO_BIG": "* Monto máximo superado",
+      "AT_LEAST_ONE": "* Monto mínimo: 0.01",
+      "BUTTON-CREATE": "Crear rendición",
+      "DATE": "Fecha",
+      "INVALID_AMOUNT": "* Formatos aceptados: 1 o 1.00",
+      "INVALID_FUTURE_CREATION": "* La fecha de alta no puede ser futura",
+      "PROOF-AMOUNT": "Monto",
+      "PROOF-CONCEPT": "Concepto",
+      "PROOF-UPLOAD": "Adjuntar comprobante*",
+      "REFERENCE": "Referencia (opcional)",
+      "RENDITION_CONCEPT": "Concepto rendición",
+      "RENDITION_TYPE": "Tipo de rendición",
+      "RENDITION_TYPE_PLACEHOLDER": "Selecciona el tipo de rendición",
+      "SUBTOTAL": "Subtotal",
+      "TITLE": "Nueva rendición",
+      "TOTAL": "Total",
+      "SELECT_CURRENCY": "Selecciona moneda",
+      "CURRENCY": "Moneda"
+    },
+    "RENDITION-DETAILS": {
+      "RENDITION": "Rendición",
+      "ADDITIONAL_DATA": "Datos adicionales",
+      "STATUS": "Estado",
+      "LEGAJO": "Legajo",
+      "START_DATE": "Fecha de alta",
+      "INFO": "Información de la rendición",
+      "TYPE": "Tipo",
+      "CONCEPT": "Concepto",
+      "COST_CENTER": "Centro de costo",
+      "N/A": "N/A",
+      "RECEIPT": "Comprobante",
+      "AMOUNT": "Monto",
+      "SUBTOTAL": "Subtotal",
+      "TOTAL": "Total",
+      "REFERENCE": "Referencia",
+      "RENDITION_TYPE": "Tipo de rendición",
+      "EDIT": "Editar",
+      "ADD": "Añadir",
+      "NAME": "Nombre",
+      "DESCRIPTION": "Descripción",
+      "WITHOUT-TYPES": "Sin tipos de rendición por el momento"
+    },
+    "RENDITION-STATUS": {
+      "STATUS": "Estado",
+      "OBSERVATION": "Observación",
+      "CANCEL": "Cancelar",
+      "ACCEPT": "Aceptar"
+    },
+    "NEW-USER-ACCOUNT-MODAL": {
+      "BANK-ACCOUNT-ALIAS-LABEL": "Alias de cuenta",
+      "BANK-ACCOUNT-CANCEL-BUTTON": "Cancelar",
+      "BANK-ACCOUNT-NAME-LABEL": "Nombre de banco",
+      "BANK-ACCOUNT-NUMBER-LABEL": "Número de cuenta",
+      "BANK-ACCOUNT-SUBMIT-BUTTON": "Crear",
+      "BANK-ACCOUNT-TYPE-LABEL": "Tipo de cuenta",
+      "BANK-ACCOUNT-TYPE-LABEL-OPTION-1": "Cuenta corriente",
+      "BANK-ACCOUNT-TYPE-LABEL-OPTION-2": "Caja de ahorro",
+      "BANK-ACCOUNT-TYPE-LABEL-OPTION-3": "Cuenta nómina",
+      "BANK-TAB-TITLE": "Datos bancarios",
+      "USER-ACCOUNT-ADD": "Añadir usuario",
+      "USER-ACCOUNT-CANCEL-BUTTON": "Cancelar",
+      "USER-ACCOUNT-EMAIL-LABEL": "Email",
+      "USER-ACCOUNT-SUBMIT-BUTTON": "Crear",
+      "USER-ACCOUNT-USERNAME-LABEL": "Nombre de usuario",
+      "USER-TAB-TITLE": "Habilitar usuario"
+    },
+    "PAY_BILL": {
+      "CONTINUE_BUTTON": "Continuar",
+      "CREDILINK": "Pagar con",
+      "CREDIT_CARD": "Pagar con tarjeta",
+      "MAKE_PAYMENT": "Realizar pago",
+      "TRANSFER": "Pagar con transferencia bancaria"
+    },
+    "PAY_BILL_DETAILS": {
+      "CONCEPT": "Concepto:",
+      "CREATION_DATE": "Fecha de alta:",
+      "DUE_DATE": "Fecha de vencimiento:",
+      "INVOICE-TITLE": "Factura: ",
+      "IS_COMMISSION": "De comisión:",
+      "MONTHLY": {
+        "10": "Oct",
+        "11": "Nov",
+        "12": "Dic",
+        "01": "Ene",
+        "02": "Feb",
+        "03": "Mar",
+        "04": "Abr",
+        "05": "May",
+        "06": "Jun",
+        "07": "Jul",
+        "08": "Ago",
+        "09": "Sep"
+      },
+      "YES": "Sí",
+      "NO": "No",
+      "NAME_PROVIDER": "Proveedor:",
+      "RENDITION-TITLE": "Rendición: #",
+      "SUB_TOTAL": "Subtotal:",
+      "TAX": "Tax",
+      "TEL_PROVIDER": "Télefono:",
+      "TOTAL": "Total:",
+      "USER_EMAIL": "Dirección email:",
+      "USERNAME": "Usuario:"
+    },
+    "PAYMENT_METHOD": {
+      "ACCOUNT_ALIAS": "Alias de cuenta",
+      "ACCOUNT_ALIAS-VALIDATOR": "El alias es requerido.",
+      "ACCOUNT_NUMBER": "Número de cuenta",
+      "ACCOUNT_NUMBER-LENGTH-VALIDATOR": "El número de cuenta debe tener al menos 6 caracteres.",
+      "ACCOUNT_NUMBER-PATTERN-VALIDATOR": "El número de cuenta solo puede contener dígitos numéricos.",
+      "ACCOUNT_NUMBER-VALIDATOR": "El número de cuenta es requerido.",
+      "ACCOUNT_TYPE": "Tipo de cuenta",
+      "ACCOUNT_TYPE-VALIDATOR": "El tipo de cuenta es requerido.",
+      "BANK": "Banco",
+      "BANK-VALIDATOR": "El banco es requerido.",
+      "EMAIL": "Dirección de email",
+      "EMAIL-EMAIL-VALIDATOR": "El email es requerido y debe tener un formato válido.",
+      "EMAIL-LENGTH-VALIDATOR": "El número de cuenta debe tener al menos 6 caracteres.",
+      "EMAIL-VALIDATOR": "El email es requerido.",
+      "CARD_INFO": "Información de la tarjeta",
+      "CARD_OWNER": "Nombre del titular de la tarjeta",
+      "SELECTS": {
+        "ACCOUNT_ALIAS": "Selecciona un alias",
+        "ACCOUNT_TYPE": "Selecciona un tipo de cuenta",
+        "BANK": "Selecciona un banco"
+      }
+    },
+    "OBSERVATIONS": {
+      "TITLE": "Observaciones",
+      "STATUS": "Estado",
+      "EMPTY": "Sin observaciones por el momento.",
+      "CANCEL": "Cancelar",
+      "AGREE": "Aceptar",
+      "SETTLEMENT_SUCCESS_MSG": "La observación ha sido registrada con éxito."
+    },
+    "PAYMENTS": {
+      "DATE": "Fecha del pago",
+      "DOWNLOAD_BUTTON": "Descargar comprobante",
+      "PAYMENT_INFO": "Información del pago",
+      "PAYMENT_METHOD": "Medio de pago",
+      "PAYMENT_PROOF": "Comprobante de pago",
+      "COMMENTARY": "Comentario",
+      "OPCIONAL_COMMENTARY": "Comentario (opcional)",
+      "TIME": "Hora",
+      "TO": "Para",
+      "REGISTER": "Registrar",
+      "ERROR": {
+        "REQUIRED_METHOD": "* Medio requerido",
+        "REQUIRED_DATE": "* Fecha requerida",
+        "INVALID_DATE": "* Fecha inválida",
+        "REQUIRED_TIME": "* Hora requerida",
+        "INVALID_TIME": "* Hora inválida"
+      },
+      "MODAL": {
+        "FISCAL_ID": "ID fiscal:",
+        "FINISH": "Terminar"
+      },
+      "DETAILS": {
+        "PROVIDER_NAME": "Proveedor",
+        "CUIT": "Cuit",
+        "IDCONSOLIDATE": "ID consolidado",
+        "DATE": "Fecha de pago",
+        "AMOUNT": "Monto pagado",
+        "ACCNUMBER": "Nro. cuenta",
+        "INVOICESCOUNT": "Total de facturas",
+        "CLOSE": "Cerrar",
+        "DOWNLOAD": "Descargar",
+        "INVOICES": "Facturas",
+        "INVOICES_TOTAL": "Facturas",
+        "BANK": "Banco",
+        "BRANCH_NUMBER": "Sucursal",
+        "OWNER_NAME": "Nombre de titular",
+        "IS_PAID": "Pagado",
+        "INVOICES_TABLE": {
+          "INVOICENUMBER": "Factura",
+          "PERIOD": "Período",
+          "DUEDATE": "Vencimiento",
+          "DESCRIPTION": "Concepto",
+          "AMOUNT": "Monto"
+        }
+      }
+    },
+    "ROLES": {
+      "TITLE": "Asignar roles al estado: ",
+      "ROLES": "Roles",
+      "AVAILABLE": "Roles disponibles",
+      "ROL": "Rol",
+      "RENDITIONS": "rendiciones",
+      "INVOICES": "facturas",
+      "ACTIONS": "Acciones",
+      "UNAVAILABLE": "Sin roles disponibles.",
+      "ASSIGNED_ROLES": "Roles asignados",
+      "CLOSE": "Cerrar",
+      "EDIT": "Editar",
+      "ADD": "Añadir",
+      "DESCRIPTION": "Descripción",
+      "SCOPE": "Alcance",
+      "GLOBAL": "Global (todas las empresas)",
+      "LOCAL": "Local (solo esta empresa)",
+      "WITHOUT-ROLES": "Sin roles por el momento",
+      "PERMISSION": "Permisos",
+      "SETTLEMENT_ADMIN": "Administra liquidaciones",
+      "SETTLEMENT_PAYMENT": "Administra pagos de ventas en liquidaciones"
+    },
+    "SEARCH": {
+      "SEARCH_DEFAULT": "Buscar",
+      "BUSINESS_INVOICES": "Buscar por proveedor o ID fiscal",
+      "BUSINESS_RENDITIONS": "Buscar por número de rendición o empleado",
+      "CONTRACTS": "Buscar",
+      "EMPLOYEE_RENDITIONS": "Buscar por número de rendición o concepto",
+      "PROVIDER_INVOICES": "Buscar por nombre de usuario o ID fiscal",
+      "PURCHASE_ORDERS": "Buscar",
+      "SUPPLIERS": "Buscar por nombre de empresa"
+    },
+    "SETTINGS": {
+      "MANAGE": "Configuración",
+      "MANAGE-ADMINS": "Gerentes de subsidiarias",
+      "MANAGE-EMPLOYEES": "Empleados",
+      "MANAGE-ENTERPRISES": "Empresas subsidiarias",
+      "MANAGE-USERS": "Administradores"
+    },
+    "SALES": {
+      "IMPORT": {
+        "CSV": {
+          "MODEL-TITLE": "Modelo de archivo .csv:",
+          "MODEL-DOWNLOAD": "Descargar modelo de csv",
+          "MODEL-SEE": "Ver modelo de csv",
+          "BTN_LABEL": "Ver datos y validaciones",
+          "LIST-TITLE": "Datos y validaciones del archivo .csv",
+          "LIST-1": "customer_id: Identificación o DNI del cliente. Requerido",
+          "LIST-2": "sale_date: Fecha de venta. No puede ser posterior a la fecha actual. Formato: aaaa-mm-dd",
+          "LIST-3": "sale_id: Código de identificación de la venta. Debe ser único dentro del archivo. Si el ID ya se encuentra en la base de datos, se actualizará",
+          "LIST-4": "bill_id: Número de factura. Requerido",
+          "LIST-5": "broker_id: ID externo del agente de venta. Debe pertenecer a la empresa",
+          "LIST-6": "product_id: Código de identificación del producto",
+          "LIST-7": "product_name: Nombre del producto",
+          "LIST-8": "sale_amount: Valor de la venta. Debe ser positivo",
+          "LIST-9": "sale_currency: Tipo de moneda. Las monedas aceptadas son: ARS, USD, EUR, BRL y CLP",
+          "LIST-10": "commission_percentage: Porcentaje de comisión. Deben encontrarse entre 0 y 100",
+          "LIST-11": "expenses: Gastos de venta. Debe ser positivo o 0",
+          "LIST-12": "customer_name: Nombre del cliente. Requerido",
+          "LIST-13": "pay_date: Fecha de pago de venta. Si la venta está pagada, debe indicarse, de lo contrario, no. Formato: aaaa-mm-dd"
+        },
+        "ERRORS": {
+          "ID": "ID de venta",
+          "DESCRIPTION": "Descripción",
+          "LINE": "Linea"
+        },
+        "RESULT": {
+          "TITLE": "Resultados:",
+          "CREATED": " ventas creadas",
+          "EDITED": " ventas editadas",
+          "ERRORS": " errores"
+        }
+      },
+      "ERROR": "Errores",
+      "CREATED": "Ventas creadas",
+      "EDITED": "Ventas editadas",
+      "PROCESS": "Procesar",
+      "FILTERS": {
+        "PERIOD": "Ingrese periodo de ventas",
+        "FOR": "Filtrado por",
+        "brokerNameBussiness": "Agente de ventas",
+        "saleId": "ID de venta",
+        "isPaid": "Pagado",
+        "billId": "Id de factura",
+        "commissionAmount": "Comisión",
+        "commissionPercentage": "Porcentaje de comisión",
+        "customerId": "Id del cliente",
+        "customerName": "Nombre del cliente",
+        "expenses": "Gastos",
+        "productId": "Id de producto",
+        "productName": "Nombre de producto",
+        "saleAmount": "Monto",
+        "saleCurrency": "Moneda",
+        "isInSettlement": "En liquidación"
+      },
+      "PAY_IN": {
+        "brokerName": "Agente de ventas",
+        "saleDate": "Fecha de venta"
+      },
+      "ERRORS": {
+        "DATE": "Fecha",
+        "HOUR": "Hora",
+        "DESCRIPTION": "Descripción",
+        "LINE": "Linea",
+        "USER": "Cargado por",
+        "DOWNLOAD": "Descargar",
+        "TITLE": "Detalle de errores de carga",
+        "DETAILS": "Detalles",
+        "SEE_DETAILS": "Ver detalles",
+        "FILTER": "Filtrar errores de carga"
+      },
+      "HISTORY": {
+        "FILTER": "Filtrar historial de carga"
+      }
+    },
+    "PAY_IN": {
+      "REGISTER": "Registrar pago",
+      "EDIT": "Editar pago",
+      "PROOF": "Comprobante de pago",
+      "ERROR": "Errores",
+      "CREATED": "Pagos creados",
+      "EDITED": "Pagos editados",
+      "RESULT": {
+        "TITLE": "Resultados:",
+        "CREATED": " pagos creados",
+        "EDITED": " pagos editados",
+        "ERRORS": " errores"
+      },
+      "METHOD": {
+        "TRANSFER": "Transferencia",
+        "CHECK": "Cheque",
+        "CASH": "Efectivo",
+        "TICKET": "Boleto de pago"
+      }
+    },
+    "SETTLEMENTS": {
+      "IN-PROGRESS": "En curso",
+      "BILLEDS": "Facturadas",
+      "CREATION": {
+        "TITLE": "Datos de la liquidación",
+        "TITLE-SALES": "Crear liquidación desde ventas",
+        "CREATE": "Crear liquidación",
+        "BROKER": "Agente de venta",
+        "SEARCH": "Buscar venta",
+        "SELECT-BROKER": "Selecciona el agente de venta",
+        "DESCRIPTION": "Descripción",
+        "ENDDATE": "Fecha de cierre liquidación",
+        "FILE": "Archivo de ventas (Formatos aceptados: CSV)",
+        "STARTDATE": "Fecha de inicio liquidación"
+      },
+      "CSV": {
+        "MODEL-TITLE": "Modelo de archivo .csv:",
+        "LIST-TITLE": "Datos y validaciones del archivo .csv:",
+        "LIST-1": "customer_id: Identificación o DNI del cliente",
+        "LIST-2": "product_id: Código de identificación del producto",
+        "LIST-3": "sale_id: Código de identificación de la venta. Debe ser único",
+        "LIST-4": "invoice_id: Número de factura",
+        "LIST-5": "sale_date: Fecha de venta. Debe encontrarse dentro de las fechas establecidas",
+        "LIST-6": "sale_amount: Valor de la venta. Debe ser positivo",
+        "LIST-7": "sale_currency: Tipo de moneda. Las monedas aceptadas son: ARS, USD, EUR, BRL y CLP",
+        "LIST-8": "commission_percentage: Porcentaje de comisión. Deben encontrarse entre 0 y 100",
+        "LIST-9": "sale_expense: Gastos de venta. Debe ser positivo o 0"
+      },
+      "DETAILS": {
+        "ACTIONS": "Acciones",
+        "TITLE": "Datos de la liquidación",
+        "DETAILS": "Detalles de la liquidación",
+        "TITLE_SALES": "Comisiones",
+        "STATE": "Estado: ",
+        "TITLE_SUB": "Agente de ventas:",
+        "LAST_MOD": "Última mod: ",
+        "CREATE_DATE": "Fecha de creación",
+        "TOTAL_AMOUNT": "Monto total",
+        "FOR": "por",
+        "TOTAL_CALCULATE": "Calcular totales",
+        "CHANGE_STATUS": "Cambiar estado",
+        "SALES_REGISTRY": "Ventas realizadas",
+        "CUSTOMER_DOI": "ID cliente",
+        "CUSTOMER_NAME": "Nombre cliente",
+        "BROKER_NAME": "Agente de venta",
+        "BROKER_ID": "ID agente de venta",
+        "BILL_ISPAID": "Factura pagada",
+        "EDIT": "Editar",
+        "ID_SALE": "ID venta",
+        "ID_INVOICE": "ID factura",
+        "ID_PRODUCT": "ID producto",
+        "NAME_PRODUCT": "Producto",
+        "PRODUCT_NAME": "Producto",
+        "DATE_SALE": "Fecha venta",
+        "SALE_EXPENSE": "Gasto venta",
+        "SELECT": "Seleccionar",
+        "AMOUNT_SALE": "Monto venta",
+        "COMMISSION": "Comisión",
+        "AMOUNT_COMMISION": "Monto comisión",
+        "VIEW_INVOICE": "Ver factura",
+        "INFO_TAB": "Información",
+        "OBSERVATION_TAB": "Observaciones",
+        "INVOICE_TAB": "Factura",
+        "IS-PAID": "Pagada",
+        "IN-SETTLEMENT": "En liquidación",
+        "OBSERVATIONS": "Observaciones",
+        "INFORMATION": "Información",
+        "UPDATE_PAY": "Actualizar pagos",
+        "UPDATE_PAY_FILE": "Archivo de pago de ventas (Formatos aceptados: CSV)",
+        "UPDATE_PAY_FILE_CSV": "Archivo de pago de ventas (formato: CSV)",
+        "UPDATE_SALES_FILE_CSV": "Archivo de ventas (formato: CSV)",
+        "PAY_FILE": "Archivo de pago de ventas",
+        "SALES_FILE": "Archivo de ventas",
+        "UPDATE_PAY_FILE_ACCEPTED": "* Formatos aceptados: CSV",
+        "UPDATE_SALEID": "ID venta",
+        "UPDATE_PRODUCTID": "ID producto",
+        "UPDATE_SALEDATE": "Fecha de pago",
+        "UPDATE_PROVIDERID": "ID agente de venta",
+        "TAB_TITLE": "Liquidaciones",
+        "TAB_BILLED": "Facturas",
+        "NO_RESULTS": "Sin resultados",
+        "ROW": "Fila",
+        "TOTAL": "Total ventas seleccionadas: ",
+        "TOTAL_SALES": "Ventas totales: "
+      },
+      "HISTORY": {
+        "MODIF_DATE": "Fecha de modificación",
+        "USER": "Usuario",
+        "OBSERVATION": "Observación",
+        "WITHOUT-OBSERVATIONS": "No existen observaciones"
+      },
+      "EDIT_MODAL": {
+        "EDIT": "Editar liquidación",
+        "BROKER": "Agente de venta",
+        "SELECT_BROKER": "Seleccionar agente de venta"
+      },
+      "NEW_SETTLEMENT": "Nueva liquidación",
+      "VALIDATORS": {
+        "AFTER_ENDING_DATE": "* La fecha debe ser anterior a la del cierre.",
+        "AFTER_ACTUAL_DATE": "* La fecha debe ser igual o anterior a la fecha actual",
+        "BEFORE_STARTING_DATE": "* La fecha debe ser posterior a la de inicio.",
+        "INVALID_DATE_DIFFERENCE": "* La fecha de inicio debe ser anterior a la de cierre."
+      },
+      "NEW-SALE": {
+        "SELECT_CURRENCY": "Selecciona la moneda",
+        "CURRENCY": "Moneda"
+      },
+      "STATUS-MODAL": {
+        "TITLE": "Cambiar estado de liquidación",
+        "SELECT_STATUS": "Selecciona el estado"
+      },
+      "SALE-FORM": {
+        "EDIT_SALE": "Editar venta",
+        "DETAIL_SALE": "Detalle de venta",
+        "DOI_CUSTOMER": "Id cliente",
+        "CUSTOMER_NAME": "Nombre cliente",
+        "ID_SALE": "ID venta",
+        "DATE_SALE": "Fecha venta",
+        "AMOUNT_SALE": "Monto venta",
+        "AMOUNT_EXPENSES": "Monto gastos",
+        "PERCENTAGE_COMMISSION": "Porcentaje comisión",
+        "ADD_SALE": "Agregar ventas a la liquidación",
+        "SALE_ADD": "Agregar ventas",
+        "ADD": "Agregar",
+        "SALE_DETAILS": "Detalles de venta",
+        "PAYMENT_DETAILS": "Detalles del pago",
+        "EDIT_PAYMENT": "Pago de venta",
+        "SALE_PAID": "Venta pagada",
+        "SETTLEMENT_DETAILS": "Detalles de liquidación",
+        "NOT_PAIDED": "Pago de venta no registrado",
+        "NOT_IN_SETTLEMENT": "La venta no se encuentra en una liquidación"
+      },
+      "SALE-PAYMENT": {
+        "EDIT_PAYMENT": "Editar pago",
+        "ADD_PAYMENT": "Agregar pago",
+        "ID_SALE": "ID venta",
+        "DATE_PAYMENT": "Fecha de pago",
+        "PAYMENT_METHOD": "Seleccione el método de pago",
+        "PAYMENT_METHOD_ENTITY": "Seleccione una entidad",
+        "PAYMENT_DESCRIPTION": "Descripción del pago",
+        "IS_PAID": "Pagado",
+        "CSV": {
+          "TITLE": "Cargar ventas"
+        },
+        "FILTERS": {
+          "BROKER": "Agente de ventas",
+          "STATE": "Estado",
+          "FROM": "Desde",
+          "TO": "Hasta",
+          "SALE_ID_NAME": "ID de venta",
+          "APPLY": "Aplicar",
+          "CLEAN_FILTER": "Limpiar filtros",
+          "SELECT_BROKER": "Seleccione un agente",
+          "SELECT_STATE": "Seleccione un estado",
+          "FILTER": "Filtros",
+          "SEARCH": "Buscar",
+          "FILTER_TITLE": "Filtrar ventas",
+          "CLEAR": "Limpiar filtros",
+          "MORE": "Más filtros",
+          "LESS": "Ocultar filtros",
+          "CLOSE": "Cerrar",
+          "OPTION_SELECT_STATE": {
+            "PAID": "Pagada",
+            "NO_PAID": "No pagada",
+            "ALL_STATES": "Todos los estados"
+          },
+          "MESSAGE_ERROR_INPUT_BROKER": "*Debe seleccionar un agente"
+        }
+      },
+      "SETTLEMENT_DETAILS": {
+        "NAME_BROKER": "Agente de ventas",
+        "PERIOD": "Período",
+        "STATUS": "Estado",
+        "DESCRIPTION": "Descripción",
+        "PREVIEW_EMAIL": {
+          "TITLE": "Vista previa del email",
+          "SUCCESS_MSG": "El email se ha enviado correctamente.",
+          "FILE_NAME_DOWNLOAD": "liquidación"
+        }
+      },
+      "DATA": {
+        "CREATION_DATE": "Fecha de creación",
+        "START_DATE": "Fecha de inicio",
+        "END_DATE": "Fecha de cierre",
+        "DESCRIPTION": "Descripción",
+        "SUPPLIER": "Proveedor",
+        "STATUS": "Estado",
+        "BASIC_AMOUNT": "Monto base",
+        "IVA": "IVA",
+        "TOTAL_AMOUNT": "Monto total",
+        "TOTAL_WITH_RETENTION": "Total liquidación",
+        "RETENTION": "Retenciones",
+        "CALCULATE": "(calcule el total)"
+      },
+      "DELETE_MODAL": {
+        "TITLE": "Eliminar liquidación",
+        "MESSAGE": "Desea eliminar la liquidación del agente {{broker}} con el monto total de {{total}}",
+        "CONFIRM": "Confirmar",
+        "CANCEL": "Cancelar",
+        "SUCCESS_MESSAGE": "Liquidación eliminada correctamente."
+      },
+      "FILTER": "Filtrar liquidaciones"
+    },
+    "SIDENAV": {
+      "HOME": "Inicio",
+      "OPTIONS": {
+        "ACCOUNTABILITY": {
+          "DETAILS": "Detalle de la rendicion",
+          "DETAILS-INVOICE": "Detalle de la factura",
+          "EDIT": "Editar estado de rendición",
+          "NEW": "Crear rendición",
+          "OBSERVATIONS": "Observaciones - comentarios"
+        },
+        "FINANCE": "Finanzas",
+        "FINANCES_OPTIONS": {
+          "MANAGE": "Gestionar ordenes de pago",
+          "PROVIDER_ACCS": "Cuentas de proveedores",
+          "PAYMENTS_DONE": "Pagos realizados",
+          "PAYMENTS_ONGOING": "Pagos enviados"
+        },
+        "SALES": "Ventas",
+        "SETTLEMENT_SALES": "Liquidaciones (de comisiones)",
+        "SALES_OPTIONS": {
+          "MANAGE": "Gestionar comisiones",
+          "IMPORT": "Cargar comisiones a pagar",
+          "ERRORS": "Errores de carga",
+          "HISTORY": "Historial de carga"
+        },
+        "INVOICE_OPTIONS": {
+          "MANAGE": "Gestionar facturas"
+        },
+        "PAYMENTS": "Pagos (Pay out)",
+        "CONSOLIDATED": "En curso",
+        "PAID_ORDERS": "Finalizados (pagados)",
+        "PAY_INVOICES": "Generar ordenes de pago",
+        "MY_FINANCE": "Mis finanzas",
+        "BILL": "Facturación",
+        "BILL_DETAILS": "Observaciones - comentarios",
+        "BROKER": "Agentes de ventas",
+        "INVOICES": "Facturas en curso",
+        "DASHBOARD": "Dashboard",
+        "EMPLOYEE": "Empleados",
+        "ENTERPRISE": "Empresas subsidiarias",
+        "ENTERPRISE_ADMINS": "Gerentes de subsidiarias",
+        "HISTORY": "Pagadas",
+        "HOME": "Inicio",
+        "MANAGEMENT_SIDENAV": "Administración",
+        "LOGOUT": "Cerrar sesión",
+        "MANAGEMENT": "Configuración",
+        "EMPLOYEES": "Empleados",
+        "NEW_ACTIVE-CONTRACT": "Contratos",
+        "NEW_INVOICE": "Crear factura",
+        "NEW_RENDITION": "Crear rendición",
+        "NEW_SETTLEMENT": "Crear liquidación",
+        "PAY-BILL": "Registrar un pago",
+        "PAYMENTS_DETAILS": "Detalle de la factura",
+        "PURCHASE": "Órdenes de compra",
+        "RENDITION_PAYMENT_DETAILS": "Detalle de la rendición",
+        "RENDITIONS": "Rendiciones",
+        "RENDITIONS_OPTIONS": {
+          "RENDITIONS": "En curso",
+          "REPORTED": "Reportadas",
+          "REPORTED_RENDITIONS": "Rendiciones reportadas",
+          "PAID": "Pagadas",
+          "PAID_RENDITIONS": "Rendiciones pagadas",
+          "STATUS": "Estado de rendición"
+        },
+        "REPORTED": "Reportadas",
+        "REPORTED_INVOICES": "Facturas reportadas",
+        "PAYED_INVOICES": "Facturas pagadas",
+        "SETTLEMENT": "Liquidación",
+        "SETTLEMENTS": "Liquidaciones",
+        "SETTLEMENTS_OPTIONS": {
+          "MANAGE": "Gestionar liquidaciones",
+          "IN_PROGRESS": "Liquidaciones en curso",
+          "IN_PROGRESS_TITLE": "Liquidaciones en curso",
+          "INVOICED": "Liquidaciones facturadas",
+          "INVOICED_TITLE": "Liquidaciones facturadas",
+          "CREATE": "Crear liquidaciones"
+        },
+        "SIGN_OFF": "Cerrar sesión",
+        "SUPPLIER": "Proveedores",
+        "SUPPLIER_DETAILS": "Detalles del proveedor",
+        "BROKER_DETAILS": "Detalles del agente de ventas",
+        "USER": "Administradores",
+        "USER_PROFILE": "Perfil",
+        "CONSOLIDATED_TITLE": "Conciliaciones",
+        "PAY_IN": "Recaudaciones (Pay in)",
+        "PAY_IN_OPTIONS": {
+          "MANAGE": "Gestionar pagos",
+          "CONCILIATED": "Conciliados",
+          "NO_CONCILIATED": "No conciliados",
+          "CONCILIATED_PAYMENTS": "Pagos conciliados",
+          "NO_CONCILIATED_PAYMENTS": "Pagos no conciliados",
+          "CONCILIATED_TO_PAY": "Conciliar ventas",
+          "IMPORT": "Cargar pagos"
+        },
+        "CONSOLIDATED_OPTIONS": {
+          "CONFIG": "Configuraciones",
+          "CONFIG_TITLE": "Configuraciones",
+          "SALES_PAYMENT": "Conciliar venta/pago",
+          "INVOICE_PAYMENT": "Conciliar pago a proveedores",
+          "RENDITION_PAYMENT": "Conciliar pago rendición/rendición",
+          "SALES_CREATION": "Ventas creadas desde proceso de conciliación"
+        },
+        "PRODUCTION": "Comisiones",
+        "COLLECTION_OPTIONS": {
+          "TITLE": "Cobranza",
+          "PENDING_PAYMENTS": "Pagos pendientes"
+        },
+        "ALL_INVOICES": "Facturas"
+      }
+    },
+    "CONSOLIDATED": {
+      "CONSOLIDATE": "Consolidado",
+      "CONCILIATE": "Conciliado",
+      "CONCILIATE_PAY": "Buscar ventas",
+      "CONCILIATE_SALE": "Buscar pagos",
+      "NOT_CONSOLIDATE": "Lineas no emparejadas",
+      "ERRORS1": "Errores en ventas",
+      "ERRORS2": "Errores en pagos",
+      "LINE": "Fila CSV",
+      "ERROR": "Error",
+      "RECONSOLIDATE": "Volver a procesar",
+      "CREATE_SALES": "Confirmar ventas conciliadas",
+      "DOWNLOAD": "Descargar archivos",
+      "ACTIONS": "Editar",
+      "GENERATED_TITLE": "Ordenes de pago en curso",
+      "PAID_TITLE": "Ordenes de pago finalizadas",
+      "TYPES": "Tipo de conciliación",
+      "PAYMENT_NUMBER": "Pago Nº ",
+      "SALE_NUMBER": "Venta Nº ",
+      "SEARCHING": "Buscando pagos para conciliar",
+      "SEARCH": "Refinar búsqueda",
+      "CONSOLIDATED_CONFIGURATION": {
+        "FILE_SALE_NAME": "Datos de venta",
+        "FILE_INVOICE_NAME": "Datos de factura",
+        "FILE_RENDITION_NAME": "Datos de rendici{on",
+        "FILE_PAY_NAME": "Datos de pago",
+        "FILE_FIELD": "Campo",
+        "POSITION_FILE": "Posición en csv",
+        "IS_KEY": "Clave",
+        "NAME": "Nombre en consolidado",
+        "OUT": "Salida",
+        "TABLE_NAME": "Nombre en tabla",
+        "EDIT_SALE": "Editar configuración de conciliación de ventas",
+        "EDIT_RENDITION": "Editar configuración de conciliación de rendiciones",
+        "EDIT_BILL": "Editar configuración de conciliación de facturas",
+        "NEW_SALE": "Crear configuración de conciliación de ventas",
+        "NEW_RENDITION": "Crear configuración de conciliación de rendiciones",
+        "NEW_BILL": "Crear configuración de conciliación de facturas"
+      },
+      "RESULT": {
+        "CREATED": "Línea/s emparejada/s",
+        "NOT_MATCH_SALE": "Línea/s de venta no emparejada/s",
+        "NOT_MATCH_PAY": "Línea/s de pago no emparejada/s",
+        "ERROR_SALES": "Línea/s de venta erronea/s",
+        "ERROR_PAY": "Línea/s de pago erronea/s",
+        "MSG": "(Las líneas no emparejadas se pueden editar para volver a procesar)"
+      },
+      "DETAILS": {
+        "NAME": "Nombre: ",
+        "CREATED_BY": "Creado por: ",
+        "MODIFIED_BY": "Modificado por: ",
+        "LAST_MODIFIED": "Última modificación: ",
+        "DOWNLOAD": "Descargar"
+      }
+    },
+    "SUPPLIER": {
+      "TOTAL_COLLECTED": "Total recaudado",
+      "TOTAL_INVOICES": "Total de facturas cargadas a la fecha actual",
+      "CARD": {
+        "BUSINESSNAME": "Nombre de la empresa",
+        "ID": "id",
+        "USEREMAIL": "Email",
+        "USERCREATIONDATE": "Fecha de creación",
+        "USERNAME": "Nombre de usuario",
+        "LASTLOGINDATE": "Fecha de último ingreso"
+      },
+      "CREATION": {
+        "GENERAL": "Datos generales",
+        "ACCOUNT": "Datos bancarios"
+      }
+    },
+    "SUPPLIERS": {
+      "TOTAL_COLLECTED": "Total recaudado",
+      "TOTAL_INVOICES": "Total de facturas cargadas a la fecha actual"
+    },
+    "INVOICES": {
+      "ACTIONS": "ACCIONES",
+      "CREATIONDATE": "FECHA DE ALTA",
+      "LOADINGDATE": "CARGA",
+      "TYPESTATUS": "TIPO ESTADO",
+      "DUEDATE": "FECHA VENCIMIENTO",
+      "FISCALID": "ID FISCAL",
+      "FORMATTEDAMOUNT": "MONTO",
+      "ISCOMMISSIONINVOICE": "COMISIÓN",
+      "PAYMENTDATE": "FECHA DE PAGO",
+      "REPORTDATE": "FECHA REPORTADA",
+      "STATUS": "ESTADO",
+      "SUPPLIERNAME": "PROVEEDOR",
+      "USERNAME": "NOMBRE DE USUARIO",
+      "CARD": {
+        "FISCALID": "Id fiscal",
+        "LOADINGDATE": "Carga",
+        "CREATIONDATE": "Emisión",
+        "TYPESTATUS": "Estado",
+        "TOTALAMOUNT": "Monto",
+        "SUPPLIERNAME": "Proveedor",
+        "DUEDATE": "Vencimiento"
+      },
+      "INFO": {
+        "TITLE": "Datos adicionales",
+        "STATUS": "Estado",
+        "COMMISION_INVOICE": "¿Es factura de comisión?",
+        "YES": "Sí",
+        "NO": "No",
+        "CONTRACT": "Contrato"
+      }
+    },
+    "INVOICE-PAIDS": {
+      "CARD": {
+        "FISCALID": "Id fiscal",
+        "LOADINGDATE": "Carga",
+        "CREATIONDATE": "Emisión",
+        "TYPESTATUS": "Estado",
+        "TOTALAMOUNT": "Monto",
+        "SUPPLIERNAME": "Proveedor",
+        "DUEDATE": "Vencimiento"
+      }
+    },
+    "TABLE": {
+      "ACTIVE-CONTRACT": {
+        "ACTIONS": "ACCIONES",
+        "CONTRACTID": "# ID",
+        "COSTCENTERNAME": "Centro de costo",
+        "CREATIONDATE": "CREACIÓN",
+        "DESCRIPTION": "DESCRIPCIÓN",
+        "FINISHDATE": "FINALIZACIÓN",
+        "ISACTIVE": "ESTADO",
+        "NAME": "NOMBRE DEL CONTRATO",
+        "STARTDATE": "INICIO",
+        "SUPPLIER": "PROVEEDOR",
+        "SUPPLIERNAME": "PROVEEDOR"
+      },
+      "INVOICE-TO-PAY": {
+        "CARD": {
+          "ID": "id",
+          "SELECT_ALL": "Número de factura",
+          "PROVIDER_NAME": "Nombre de proveedor",
+          "CHARGE_DATE": "Fecha de carga",
+          "EMIT_DATE": "Fecha de emisión",
+          "AMOUNT": "Monto"
+        }
+      },
+      "YES": "Sí",
+      "NO": "No",
+      "ACTIVE": "Activo",
+      "INACTIVE": "Inactivo",
+      "ACTIVE2": "Activa",
+      "INACTIVE2": "Inactiva",
+      "DASHBOARD": {
+        "ACTIONS": "ACCIONES",
+        "AMOUNT": "MONTO",
+        "DATEEXPIRY": "FECHA VENCIMIENTO",
+        "DATEISSUED": "FECHA DE EMISIÓN",
+        "DATELOAD": "FECHA DE CARGA",
+        "EXPIRED": "Vencido",
+        "FILTER": {
+          "DATE-EXPIRY": "Fecha de vencimiento",
+          "DATE-ISSUED": "Fecha de emisión"
+        },
+        "INVOICE": "# INVOICE",
+        "NAMEPROVIDER": "NOMBRE DE PROVEEDOR",
+        "PAID": "Pagada",
+        "PENDING": "Pendiente",
+        "REJECTED": "Rechazada",
+        "STATE": "ESTADO",
+        "TITLE": "Últimos 30 días"
+      },
+      "DASHBOARD-PROVIDER": {
+        "ACTIONS": "ACCIONES",
+        "AMOUNT": "MONTO",
+        "DATEEXPIRY": "FECHA VENCIMIENTO",
+        "DATEISSUED": "FECHA DE EMISIÓN",
+        "EXPIRED": "Vencido",
+        "INVOICE": "# INVOICE",
+        "PAID": "Pagada",
+        "PENDING": "Pendiente",
+        "REJECTED": "Rechazada",
+        "REPORTED": "Reportada",
+        "STATE": "ESTADO",
+        "TITLE": "Últimos 30 días",
+        "USERNAME": "Nombre del usuario"
+      },
+      "HISTORY": {
+        "ACTIONS": "ACCIONES",
+        "CREATIONDATE": "FECHA CREACIÓN",
+        "DUEDATE": "FECHA VENCIMIENTO",
+        "FISCALID": "# FACTURA",
+        "PAYMENTDATE": "FECHA DE PAGO",
+        "SUPPLIERNAME": "NOMBRE DE PROVEEDOR",
+        "TOTALAMOUNT": "MONTO"
+      },
+      "HISTORY-PROVIDER": {
+        "ACTIONS": "ACCIONES",
+        "CREATIONDATE": "FECHA DE EMISIÓN",
+        "DUEDATE": "FECHA VENCIMIENTO",
+        "FISCALID": "# FACTURA",
+        "PAYMENTDATE": "FECHA DE PAGO",
+        "TOTALAMOUNT": "MONTO",
+        "USERNAME": "NOMBRE DE USUARIO"
+      },
+      "HISTORY-SUBMISSIONS": {
+        "ACTIONS": "ACCIONES",
+        "ALL": "PAGAS",
+        "APPROVED": "Aprobada",
+        "CREATIONDATE": "FECHA DE CARGA",
+        "EXPIRED": "Vencida",
+        "PAID": "Pagada",
+        "PAYMENTDATE": "FECHA DE PAGO",
+        "PENDING": "Pendiente aprobación",
+        "REJECTED": "Rechazada",
+        "RENDITIONCONCEPT": "CONCEPTO DE GASTOS",
+        "RENDITIONNUMBER": "# RENDICION",
+        "TOTALAMOUNT": "MONTO",
+        "USERNAME": "NOMBRE DE EMPLEADO"
+      },
+      "HISTORY-SUBMISSIONS-EMPLOYEE": {
+        "ACTIONS": "ACCIONES",
+        "ALL": "PAGAS",
+        "APPROVED": "Aprobada",
+        "CREATIONDATE": "FECHA DE CARGA",
+        "EXPIRED": "Vencida",
+        "PAID": "Pagada",
+        "PAYMENTDATE": "FECHA DE PAGO",
+        "PENDING": "Pendiente aprobación",
+        "REJECTED": "Rechazada",
+        "RENDITIONCONCEPT": "CONCEPTO RENDICIÓN",
+        "RENDITIONNUMBER": "# RENDICION",
+        "RENDITIONTYPE": "TIPO RENDICIÓN",
+        "TOTALAMOUNT": "MONTO",
+        "USERNAME": "NOMBRE DE EMPLEADO"
+      },
+      "INVOICES": {
+        "ACTIONS": "ACCIONES",
+        "CREATIONDATE": "FECHA DE ALTA",
+        "DUEDATE": "FECHA VENCIMIENTO",
+        "FISCALID": "ID FISCAL",
+        "FORMATTEDAMOUNT": "MONTO",
+        "ISCOMMISSIONINVOICE": "COMISIÓN",
+        "PAYMENTDATE": "FECHA DE PAGO",
+        "REPORTDATE": "FECHA REPORTADA",
+        "STATUS": "ESTADO",
+        "SUPPLIERNAME": "PROVEEDOR",
+        "BROKERNAME": "AGENTE DE VENTAS",
+        "USERNAME": "NOMBRE DE USUARIO",
+        "INFO": {
+          "TITLE": "Datos adicionales",
+          "STATUS": "Estado",
+          "COMMISION_INVOICE": "¿Es factura de comisión?",
+          "YES": "Sí",
+          "NO": "No",
+          "CONTRACT": "Contrato",
+          "DOWNLOAD": "Descargar factura legal",
+          "GO_DETAILS_SETTLEMENT": "Ir a detalle de liquidación"
+        }
+      },
+      "NOT-FOUND": {
+        "ACTIVE-CONTRACT": "No se encontraron contratos",
+        "ADMINS": "No se encontraron gerentes",
+        "EMPLOYEES": "No se encontraron empleados",
+        "INVOICE": "No se encontraron facturas",
+        "PAYMENT-HISTORY": "No se encontraron pagos",
+        "PURCHASE-ORDER": "No se encontraron órdenes de compra",
+        "REPORT-INVOICE": "No se encontraron reportadas",
+        "REPORT-SURRENDER": "No se encontraron rendiciones reportadas",
+        "SETTLEMENTS": "No se encontraron liquidaciones",
+        "SUBSIDIARIES": "No se encontraron empresas",
+        "SUPPLIER": "No se encontraron proveedores",
+        "SURRENDER": "No se encontraron rendiciones",
+        "ACCOUNT-TRANSACTIONS": "No se encontraron movimientos de cuenta",
+        "CARD-TRANSACTIONS": "No se encontraron movimientos de la tarjeta",
+        "SALES": "No se encontraron ventas",
+        "SUPPLIER-ACCOUNTS": "No se encontraron cuentas de proveedores",
+        "USERS": "No se encontraron administradores",
+        "ERRORS": "No se encontraron errores",
+        "HISTORY": "No se encontraron ventas"
+      },
+      "SELECT": {
+        "ALL": "Todas las facturas",
+        "ALL-CONTRACTS": "Todos los contratos",
+        "ALL_REPORTED": "Todas las reportadas",
+        "ALLSURRENDERS": "Todas las rendiciones",
+        "APPROVED": "Aprobadas",
+        "APPROVED-2": "Aprobadas",
+        "EXPIRED": "Vencidas",
+        "EXPIRED-2": "Vencidas",
+        "IN_REVIEW": "En revisión",
+        "PAIDS": "Todos los pagos",
+        "PENDING": "Pendientes",
+        "PENDING-2": "Pendientes",
+        "REJECTED": "Rechazadas",
+        "REPORT": "Reportadas",
+        "USER": "Mis facturas"
+      },
+      "SETTLEMENTS": {
+        "ACTIONS": "Acciones",
+        "BUSINESSNAME": "Empresa",
+        "CREATIONTIME": "Creación",
+        "DESCRIPTION": "Descripción",
+        "ENDDATESETTLEMENT": "Cierre",
+        "FORMATTEDTOTALAMOUNT": "Monto total",
+        "PROVIDERNAME": "Agente de venta",
+        "STARTDATESETTLEMENT": "Inicio",
+        "STATUSTEXT": "Estado",
+        "BILLED": "Facturada",
+        "TITLE": "Todas las liquidaciones",
+        "STATUS": "Estado de liquidaciones"
+      },
+      "PAYMENTS-DONE": {
+        "PROVIDER_NAME": "PROVEEDOR",
+        "IDCONSOLIDATE": "ID CONSOLIDADO",
+        "DATE": "FECHA",
+        "AMOUNT": "MONTO",
+        "ACCNUMBER": "NRO. CUENTA",
+        "ACTIONS": "VER DETALLE",
+        "CARD": {
+          "PROVIDER_NAME": "Proveedor",
+          "ACCNUMBER": "Nro. Cuenta",
+          "IDCONSOLIDATE": "ID Consolidado",
+          "DATE": "Fecha",
+          "AMOUNT": "Monto",
+          "CUIT": "Cuit",
+          "INVOICES": "Facturas"
+        }
+      },
+      "PAYMENTS-ONGOING": {
+        "PROVIDER_NAME": "PROVEEDOR",
+        "IDCONSOLIDATE": "ID CONSOLIDADO",
+        "DATE": "FECHA ENVÍO",
+        "AMOUNT": "MONTO",
+        "ACCNUMBER": "NRO. CUENTA",
+        "INVOICESCOUNT": "TOTAL DE FACTURAS",
+        "ACTIONS": "VER DETALLE",
+        "CARD": {
+          "PROVIDER_NAME": "Proveedor",
+          "ACCNUMBER": "Nro. Cuenta",
+          "IDCONSOLIDATE": "ID Consolidado",
+          "DATE": "Fecha",
+          "AMOUNT": "Monto",
+          "CUIT": "Cuit",
+          "INVOICES": "Facturas",
+          "INVOICESCOUNT": "Total de facturas"
+        }
+      },
+      "PAY-INVOICES": {
+        "TITLE": "Selección de facturas",
+        "SELECT_ALL": "SELECCIONAR TODAS",
+        "PROVIDER_NAME": "NOMBRE DE PROVEEDOR",
+        "BROKER_NAME": "AGENTE DE VENTAS",
+        "CHARGE_DATE": "FECHA DE CARGA",
+        "EMIT_DATE": "FECHA DE EMISIÓN",
+        "EXPIRED_DATE": "FECHA DE VENCIMIENTO",
+        "AMOUNT": "MONTO",
+        "CUIT": "ID FISCAL",
+        "INVOICES_TOTAL": "TOTAL DE FACTURAS",
+        "ACTIONS": "VER DETALLE",
+        "TOTAL_PAY": "Total a pagar",
+        "TOTAL_SUPPLIERS": "Total de proveedores",
+        "TOTAL_INVOICES": "Total de facturas",
+        "BANK": "BANCO",
+        "BRANCH_NUMBER": "SUCURSAL",
+        "OWNER_NAME": "TITULAR"
+      },
+      "CONSOLIDATED": {
+        "TITLE": "Consolidados",
+        "DATETIME_GENERATED": "FECHA Y HORA GENERACIÓN",
+        "DATETIME_MODIFIED": "ÚLTIMA MODIFICACIÓN",
+        "ID_CONSOLIDATED": "ID",
+        "CONSOLIDATED_NAME": "NOMBRE",
+        "TOTAL_PROVIDERS": "TOTAL PROVEEDORES",
+        "TOTAL_INVOICES": "TOTAL FACTURAS",
+        "TOTAL_AMOUNT": "MONTO TOTAL",
+        "STATUS": "ESTADO",
+        "OBSERVATION": "COMENTARIO",
+        "ACTIONS": "ACCIONES",
+        "PAID": "Pagado",
+        "GENERATED": "Generado",
+        "PAY_IN": {
+          "DATAID": "ID",
+          "ORIGINACCOUNT": "Cuenta de origen",
+          "DESTINYACCOUNT": "Cuenta destino",
+          "ORIGINBANK": "Banco de origen",
+          "DESTINYBANK": "Banco de destino",
+          "ORIGINOWNER": "Titular cuenta origen",
+          "DESTINYOWNER": "Titular cuenta destino",
+          "DATACONCEPT": "Concepto",
+          "COMMENT": "Comentario",
+          "TRANSACTIONID": "Id de transacción",
+          "TRANSFERTYPE": "Tipo de transferencia",
+          "DATEPAYIN": "Fecha de pago",
+          "CURRENCY": "Moneda",
+          "AMOUNT": "Monto",
+          "SELECTED_AMOUNT": "Total selección",
+          "NO_MATCH_AMOUNT": "Guardar montos no coincidentes",
+          "PAYORIGIN": "Origen del pago",
+          "CONCILIATE": "Conciliado",
+          "ACTIONS": "Acciones",
+          "MANUAL": "Manual",
+          "CONCILIATION": "Conciliación",
+          "ONLINE": "Online",
+          "CHECKNUMBER": "Número de cheque",
+          "EXPIRATIONDATE": "Fecha de vencimiento",
+          "PAYMENTDATE": "Fecha de pago",
+          "DEPOSITDATE": "Fecha de depósito",
+          "CHECKISSUER": "Librador de cheque",
+          "ORIGINCHECKBANK": "Banco de origen del cheque",
+          "CASHNUMBER": "Número de caja",
+          "CASHIERNUMBER": "Número de cajero",
+          "BRANCHNAME": "Nombre de sucursal",
+          "BRANCHNUMBER": "Número de sucursal",
+          "BRANCHADDRESS": "Domicilio de sucursal",
+          "TICKETNUMBER": "Número de ticket",
+          "TICKETPAYMENTCODE": "Código de ticket",
+          "ORIGINTICKET": "Origen de boleto",
+          "DESTINYTICKET": "Destino de boleto",
+          "DESTINYTICKETBANK": "Banco de boleto",
+          "PAYMENTTYPE": "Tipo de pago",
+          "BILLID": "Factura",
+          "ERRORS": {
+            "IDDATA": "Id de transacción/fila",
+            "FIELD": "Campo",
+            "MESSAGE": "Descripción",
+            "LINE": "Linea"
+          }
+        },
+        "SALES": {
+          "ID": "Póliza",
+          "BROKER": "Corredor",
+          "DATE": "Fecha de venta",
+          "AMOUNT": "Monto",
+          "PRODUCT": "Producto"
+        }
+      },
+      "CONSOLIDATED-DETAIL": {
+        "TITLE": "Detalle de consolidados",
+        "PROVIDER_NAME": "NOMBRE DE PROVEEDOR",
+        "BROKER_NAME": "AGENTE DE VENTAS",
+        "CUIT": "ID FISCAL",
+        "ID_CONSOLIDATED": "ID CONSOLIDADO",
+        "INVOICES_TOTAL": "TOTAL FACTURAS",
+        "AMOUNT": "MONTO TOTAL",
+        "ACTIONS": "ACCIONES",
+        "BANK": "BANCO",
+        "BRANCH_NUMBER": "SUCURSAL",
+        "OWNER_NAME": "TITULAR",
+        "IS_PAID": "PAGADO"
+      },
+      "ACCOUNT-TRANSACTIONS": {
+        "TITLE": "Movimientos de cuenta",
+        "DATETIME": "FECHA Y HORA",
+        "MOVEMENTTYPE": "TIPO DE MOVIMIENTO",
+        "DESCRIPTION": "CONCEPTO",
+        "AMOUNT": "MONTO",
+        "CARD": {
+          "DATETIME": "Fecha y Hora",
+          "MOVEMENTTYPE": "Tipo de movimiento",
+          "DESCRIPTION": "Concepto",
+          "AMOUNT": "Monto"
+        }
+      },
+      "CARD-TRANSACTIONS": {
+        "TITLE": "Movimientos",
+        "DATETIME": "FECHA Y HORA",
+        "MOVEMENTTYPE": "TIPO DE MOVIMIENTO",
+        "DESCRIPTION": "CONCEPTO",
+        "AMOUNT": "MONTO",
+        "CARD": {
+          "DATETIME": "Fecha y Hora",
+          "MOVEMENTTYPE": "Tipo de movimiento",
+          "DESCRIPTION": "Concepto",
+          "AMOUNT": "Monto"
+        }
+      },
+      "SUPPLIER-ACCOUNTS": {
+        "ACTIONS": "ACCIONES",
+        "TITLE": "Cuentas de proveedores",
+        "BUSINESSNAME": "PROVEEDOR",
+        "USERNAME": "USUARIO",
+        "CARDNUMBER": "NRO. TARJETA",
+        "FORMATTEDCARDBALANCE": "SALDO TARJETA",
+        "ACCOUNTNUMBER": "NRO. CUENTA",
+        "FORMATTEDACCOUNTBALANCE": "SALDO CUENTA",
+        "CARD": {
+          "BUSINESSNAME": "Proveedor",
+          "USERNAME": "Usuario",
+          "CARDNUMBER": "Nro. tarjeta",
+          "FORMATTEDCARDBALANCE": "Saldo tarjeta",
+          "ACCOUNTNUMBER": "Nro. cuenta",
+          "FORMATTEDACCOUNTBALANCE": "Saldo cuenta",
+          "CARDNETWORK": "A",
+          "CARDSTATUS": ""
+        }
+      }
+    },
+    "TABLE_BILL_SUPPLIER": {
+      "ACTIONS": "ACCIONES",
+      "AMOUNT": "MONTO",
+      "APPROVED": "Aprobada",
+      "DATE": "FECHA",
+      "EXPIRED": "Vencido",
+      "EXPIRYDATE": "FECHA VENCIMIENTO",
+      "INVOICE": "# INVOICE",
+      "PAID": "Pagada",
+      "PENDING": "Pendiente",
+      "PROVIDERNAME": "NOMBRE DE PROVEEDOR",
+      "STATE": "ESTADO",
+      "TITLE": "Últimos 30 días",
+      "USERNAME": "NOMBRE USUARIO"
+    },
+    "TABLE_COMPANY": {
+      "FIELDS": {
+        "ACTIONS": "ACCIONES",
+        "AMOUNT": "MONTO",
+        "BILL": "# FACTURA",
+        "DATEEMIT": "FECHA DE EMISIÓN",
+        "DATEEXPIRY": "FECHA VENCIMIENTO",
+        "DATELOAD": "FECHA DE CARGA",
+        "NAME": "NOMBRE DE PROVEEDOR",
+        "STATE": "ESTADO"
+      },
+      "FILTER": {
+        "ALL": "TODAS LAS FACTURAS",
+        "APPROVED": "APROBADAS",
+        "DUE": "PENDIENTES",
+        "OVERDUE": "VENCIDAS",
+        "REJECTED": "RECHAZADAS"
+      },
+      "TITLE": "Últimos 30 días"
+    },
+    "TABLE_DASHBOARD": {
+      "ACTIONS": "ACCIONES",
+      "AMOUNT": "MONTO",
+      "APPROVED": "Aprobada",
+      "DATE": "FECHA",
+      "DATEEXPIRY": "FECHA VENCIMIENTO",
+      "DATEISSUED": "FECHA DE EMISIÓN",
+      "DATELOAD": "FECHA DE CARGA",
+      "EXPIRED": "Vencido",
+      "INVOICE": "# INVOICE",
+      "NAMEPROVIDER": "NOMBRE DE PROVEEDOR",
+      "PAID": "Pagada",
+      "PENDING": "Pendiente",
+      "REJECTED": "Rechazada",
+      "STATE": "ESTADO",
+      "TITLE": "Últimos 30 días",
+      "USERNAME": "NOMBRE USUARIO"
+    },
+    "TABLE_DASHBOARD_PROVIDER": {
+      "ACTIONS": "ACCIONES",
+      "AMOUNT": "MONTO",
+      "APPROVED": "Aprobada",
+      "DATEEXPIRY": "FECHA VENCIMIENTO",
+      "DATEISSUED": "FECHA EMISIÓN",
+      "EXPIRED": "Vencido",
+      "INVOICE": "# INVOICE",
+      "PAID": "Pagada",
+      "PENDING": "Pendiente",
+      "REJECTED": "Rechazada",
+      "STATE": "ESTADO",
+      "TITLE": "Últimos 30 días",
+      "USERNAME": "NOMBRE DEL USUARIO"
+    },
+    "TABLE_EMPLOYEE": {
+      "FIELDS": {
+        "ACTIONS": "ACCIONES",
+        "AMOUNT": "MONTO",
+        "CONCEPT": "CONCEPTO DE GASTOS",
+        "DATELOAD": "FECHA DE CARGA",
+        "INVOICE": "# INVOICE",
+        "STATE": "ESTADO"
+      },
+      "FILTER": {
+        "ALL": "TODAS LAS RENDCIONES",
+        "APPROVED": "APROBADAS",
+        "DUE": "PENDIENTES",
+        "OVERDUE": "VENCIDAS",
+        "REJECTED": "RECHAZADAS"
+      },
+      "TITLE": "Últimos 30 días"
+    },
+    "TABLE_FILTER": {
+      "ALL_INVOICE": "TODOS LOS INVOICES",
+      "INVOICE": {
+        "ALL": "Todas las facturas",
+        "APPROVED": "aprobadas",
+        "MY": "Mis facturas",
+        "OVERDUE": "vencidas",
+        "PENDING": "pendientes",
+        "REJECTED": "rechazadas"
+      },
+      "INVOICES_APPROVED": "INVOICE APROBADOS",
+      "INVOICES_DUE": "INVOICE PENDIENTES",
+      "INVOICES_OVERDUE": "INVOICE VENCIDO",
+      "INVOICES_PAID": "PAGOS",
+      "INVOICES_REPORT": "INVOICE REPORTADOS",
+      "MY_INVOICES": "MIS INVOICES"
+    },
+    "TABLE_FILTER_BILL_SUPLLIER": {
+      "ALL": "TODAS LAS FACTURAS",
+      "APPROVED": "APROBADAS",
+      "DUE": "PENDIENTES",
+      "MY": "MIS FACTURAS",
+      "OVERDUE": "VENCIDAS",
+      "REJECTED": "RECHAZADAS"
+    },
+    "TABLE_INVOICE_PENDING": {
+      "FIELDS": {
+        "ACTIONS": "ACCIONES",
+        "AMOUNT": "MONTO",
+        "DATEEMIT": "FECHA DE EMISIÓN",
+        "DATEUPLOAD": "FECHA DE CARGA",
+        "DETAILS": "DETALLES",
+        "EXPIRYDATE": "FECHA VENCIMIENTO",
+        "INVOICE": "# INVOICE",
+        "NAME": "NOMBRE DE PROVEEDOR"
+      },
+      "TITLE": "INVOICE PENDIENTES"
+    },
+    "TABLE_INVOICE_REPORT": {
+      "FIELDS": {
+        "ACTIONS": "ACCIONES",
+        "APPROVE": "Aprobada",
+        "CREATIONDATE": "FECHA DE EMISIÓN",
+        "DUEDATE": "FECHA VENCIMIENTO",
+        "INVOICENUMBER": "FACTURA",
+        "OVERDUE": "Vencida",
+        "PAID": "Pagada",
+        "PENDING_APROVAL": "Pendiente",
+        "REJECTED": "Rechazada",
+        "REPORTDATE": "FECHA REPORTADA",
+        "REPORTED": "Reportada",
+        "STATUS": "ESTADO",
+        "SUPPLIERNAME": "NOMBRE DE PROVEEDOR",
+        "TOTALAMOUNT": "MONTO"
+      },
+      "TITLE": "REPORTADAS POR FALTA DE PAGO"
+    },
+    "TABLE_KEYS_BILL_SUPLLIER": {
+      "ACTIONS": "ACCIONES",
+      "AMOUNT": "MONTO",
+      "DATEEXPIRY": "FECHA VENCIMIENTO",
+      "DATEISSUED": "FECHA EMISIÓN",
+      "INVOICE": "# INVOICE",
+      "NAME": "NOMBRE DEL USUARIO",
+      "STATE": "ESTADO"
+    },
+    "TABLE_PAYMENT_HISTORY": {
+      "INVOICES": {
+        "ACTIONS": "ACCIONES",
+        "AMOUNT": "MONTO",
+        "APPROVED": "Aprobada",
+        "DATECREATE": "FECHA CREACIÓN",
+        "DATEEXPIRY": "FECHA VENCIMIENTO",
+        "DATEPAY": "FECHA DE PAGO",
+        "EXPIRED": "Vencido",
+        "INVOICE": "# FACTURA",
+        "PAID": "Pagada",
+        "PENDING": "Pendiente",
+        "PROVIDERNAME": "NOMBRE DE PROVEEDOR",
+        "TITLE": "Facturas"
+      },
+      "SUBMISSIONS": {
+        "ACTIONS": "ACCIONES",
+        "AMOUNT": "MONTO",
+        "APPROVED": "Aprobada",
+        "DATEPAY": "FECHA DE PAGO",
+        "EXPENSESCONCEPT": "CONCEPTO DE GASTOS",
+        "EXPIRED": "Vencido",
+        "PAID": "Pagada",
+        "PENDING": "Pendiente",
+        "SUBMISSION": "# RENDICION",
+        "TITLE": "Rendiciones",
+        "UPLOADDATE": "FECHA DE CARGA",
+        "USERNAME": "NOMBRE DE EMPLEADO"
+      }
+    },
+    "TABLE_PROVIDER_PAYMENT_HISTORY": {
+      "ACTIONS": "ACCIONES",
+      "AMOUNT": "MONTO",
+      "EXPIRYDATE": "FECHA VENCIMIENTO",
+      "INVOICE": "# INVOICE",
+      "ISSUEDATE": "FECHA DE EMISIÓN",
+      "PAYMENT": "Pagos",
+      "PAYMENTDATE": "FECHA DE PAGO",
+      "SEARCH-PLACEHOLDER": "Buscar por usuario, fecha...",
+      "USERNAME": "NOMBRE DE USUARIO"
+    },
+    "TABLE_PURCHASE": {
+      "FIELDS": {
+        "ACTIONS": "ACCIONES",
+        "COSTCENTERNAME": "Centro de costo",
+        "CREATIONDATE": "CREACIÓN",
+        "DESCRIPTION": "DESCRIPCIÓN",
+        "FINISHDATE": "FINALIZACIÓN",
+        "ISACTIVE": "ESTADO",
+        "NAME": "NOMBRE DE LA ORDEN",
+        "PURCHASEID": "# ID",
+        "STARTDATE": "INICIO",
+        "SUPPLIERNAME": "PROVEEDOR"
+      },
+      "TITLE": "TODAS LAS ÓRDENES DE COMPRA"
+    },
+    "TABLE_SUPPLIERS": {
+      "FIELDS": {
+        "ACTIONS": "ACCIONES",
+        "BUSINESSNAME": "NOMBRE EMPRESA",
+        "COUNTRYNAME": "PAÍS",
+        "ID": "# ID",
+        "LASTLOGINDATE": "ÚLTIMO INGRESO",
+        "USERCREATIONDATE": "CREACIÓN",
+        "USEREMAIL": "EMAIL",
+        "USERNAME": "NOMBRE COMPLETO",
+        "STATE": "ESTADO"
+      },
+      "TITLE": "TODOS LOS PROVEEDORES",
+      "TITLE_BROKER": "TODOS LOS AGENTES DE VENTAS"
+    },
+    "TABLE_SURRENDER": {
+      "CREATE_BUTTON": "Crear rendición",
+      "FIELDS": {
+        "ACTIONS": "ACCIONES",
+        "CONCEPT": "CONCEPTO DE GASTOS",
+        "CREATIONDATE": "FECHA DE EMISIÓN",
+        "FORMATTEDAMOUNT": "MONTO",
+        "ID": "# RENDICIÓN",
+        "LOADINGDATE": "FECHA DE CARGA",
+        "PAYMENTDATE": "FECHA DE PAGO",
+        "RENDITIONTYPE": "TIPO RENDICIÓN",
+        "REPORTDATE": "FECHA REPORTADA",
+        "STATUS": "ESTADO",
+        "USERNAME": "NOMBRE EMPLEADO"
+      },
+      "FILTERS": {
+        "ALL": "TODAS LAS RENDICIONES",
+        "APPROVED": "APROBADAS",
+        "DUE": "PENDIENTES",
+        "OVERDUE": "VENCIDAS",
+        "REJECTED": "RECHAZADAS",
+        "REPORTED": "REPORTADAS"
+      },
+      "TITLE": "RENDICIONES"
+    },
+    "TOGGLE_BILL_TYPE": {
+      "INVOICES_TAB": "Facturas",
+      "RENDITIONS_TAB": "Rendiciones"
+    },
+    "USER_FORM_MODAL": {
+      "EMAIL": "Correo electrónico",
+      "ENTERPRISE": "Empresa",
+      "INVALID_EMAIL": "* Correo inválido",
+      "NUMBER-ID": "Número / ID de legajo",
+      "NUMBER-ID-PATTERN": "* Solo números y letras",
+      "POSITION": "Cargo del empleado",
+      "ROLE": "Rol",
+      "TITLE-CREATE": "Alta usuario",
+      "TITLE-EDIT": "Editar usuario",
+      "MODAL": {
+        "CREATE": "Alta ",
+        "EDIT": "Editar ",
+        "EMPLOYEE": "empleado",
+        "ENTERPRISE_USER": "administrador",
+        "ENTERPRISE_ADMIN": "gerente de subsidiaria",
+        "SUPPLIER_BROKER": "Agente de ventas"
+      },
+      "USER_STATE": {
+        "ACTIVATED": "Activo",
+        "DISABLED": "Deshabilitado",
+        "PLACEHOLDER": "Estado de usuario"
+      },
+      "USERNAME": "Nombre del usuario",
+      "FULL_NAME": "Nombre completo",
+      "FULL_ADDRESS": "Dirección completa",
+      "FISCAL_ID": "ID fiscal",
+      "IS_BROKER_PROMOTER": "¿Es agente de ventas promotor?",
+      "PHONE_NUMBER": "Número de teléfono"
+    },
+    "VALIDATORS": {
+      "REQUIRED": "* El campo es obligatorio ",
+      "AMOUNT_TOO_BIG": "* Valor máximo superado",
+      "INVALID_NUMBER": "* Valor inválido. Debe ser mayor a 0.",
+      "NUMBER_TOO_LARGE-15": "* Máximo 15 dígitos",
+      "ONLY_NUMBERS": "* Solo números",
+      "ONLY_NUMBERS_AND_LETTERS": "* Solo números y letras",
+      "ONLY_NUMBERS_LETTERS_AND_SPACES": "* Solo números, letras y/o espacios",
+      "NO_SPACES": "* No se permiten espacios",
+      "PERCENTAGE_TOO_HIGH": "* Máximo 100%",
+      "PERCENTAGE_TOO_LOW": "* Mínimo 0.01%",
+      "VALUE_TOO_LOW": "* Mínimo 1",
+      "STRING_TOO_LARGE": "* Máximo {{characters}} caracteres",
+      "STRING_TOO_LARGE-12": "* Máximo 12 caracteres",
+      "STRING_TOO_LARGE-15": "* Máximo 15 caracteres",
+      "STRING_TOO_LARGE-16": "* Máximo 16 caracteres",
+      "STRING_TOO_LARGE-20": "* Máximo 20 caracteres",
+      "STRING_TOO_LARGE-255": "* Máximo 255 caracteres",
+      "STRING_TOO_LARGE-30": "* Máximo 30 caracteres",
+      "STRING_TOO_LARGE-50": "* Máximo 50 caracteres",
+      "EMAIL": "* Ingrese un email válido",
+      "INVALID_FORMAT": "* Formato inválido",
+      "DATE_TOO_FAR": "* Fecha demasiado lejana",
+      "DATE_TOO_OLD": "* Fecha demasiado antigua",
+      "DATE-DIFFERENCE-ERROR": "* La fecha debe ser posterior a la de inicio",
+      "AFTER_ACTUAL_DATE": "* La fecha debe ser igual o anterior a la fecha actual",
+      "TOO_BIG": "* Tamaño máximo 4MB"
+    },
+    "USER_PROFILE": {
+      "EDIT": "Editar",
+      "CANCEL": "Cancelar",
+      "SAVE": "Guardar cambios",
+      "NAME": "Nombre completo",
+      "COUNTRY": "País",
+      "SELECTED_COUNTRY": "Selecciona un país",
+      "EMAIL": "Correo electrónico",
+      "LAST_DAY": "Hace 1 día"
+    },
+    "HOME": {
+      "TITLE": "Bienvenido a Invopay",
+      "SUBTITLE": "Invopay es un backoffice financiero que mejora sus procesos organizacionales financieros, ayudando a su empresa en la transformación digital.",
+      "TEXT_BULLET": {
+        "TITLE1": "Pay in",
+        "TEXT1": "Gestione todos los pagos de sus ventas de forma centralizada y fácil.",
+        "TITLE2": "Pay out",
+        "TEXT2": "Administre de forma integral las facturas a pagar y el pago de las mismas.",
+        "TITLE3": "Comisiones",
+        "TEXT3": "Realice el cálculo de comisiones a pagar de sus agentes de ventas, para luego ser facturadas en los procesos de \"pay out\"",
+        "TITLE4": "Seguimiento en tiempo real",
+        "TEXT4": "Tenga visibilidad de todos los procesos del backoffice financiero en tiempo real para todos los participantes.",
+        "TITLE5": "Métricas de negocio",
+        "TEXT5": "Vea y monitoree todos los indicadores de la perfomance de su negocio."
+      }
+    }
+  },
+  "REVENUES": {
+    "TITLE": "Recaudaciones",
+    "TABLE": {
+      "REVENUEDATE": "Fecha",
+      "REVENUEAMOUNT": "Monto",
+      "PAYMENTCHANNEL": "Canal de pago",
+      "POLICYNUMBER": "Número de póliza",
+      "PRODUCTNAME": "Producto",
+      "PREMIUMAMOUNT": "Monto prima",
+      "BROKERNAME": "Agente de ventas"
+    }
+  }
+}

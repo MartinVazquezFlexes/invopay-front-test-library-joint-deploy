@@ -1,0 +1,16 @@
+<div class="form-floating">
+  <input
+    type="text"
+    class="form-control shadow-none"
+    [value]="formattedAmount"
+    (blur)="onBlur($event)"
+    (input)="onAmountChange($event)"
+    placeholder=""
+    (keydown)="validateFormat($event)"
+    [disabled]="form?.get(controlName!)?.disabled"
+    id="input-values-form-edit-sales"
+  />
+  <label for="saleAmount">
+    {{ label }}
+  </label>
+</div>

@@ -1,0 +1,101 @@
+<div class="modal" (click)="close.emit()"></div>
+
+<div class="modal__content">
+  <div class="modal__header">
+    <h4 *ngIf="context == 'detail'">{{ "IP.SCHEMES.MODAL_TITLE" | translate }}</h4>
+    <h4 *ngIf="context == 'status'">{{ "IP.SETTLEMENTS.DETAILS.CHANGE_STATUS" | translate }}</h4>
+    <button (click)="close.emit()">
+      <img src="assets/new-styles/icons/buttons/close-icon.svg" />
+    </button>
+  </div>
+
+  <form [formGroup]="detailedInfoForm">
+    <div class="modal__body" [ngClass]="{'modal__body--status': context === 'status'}">
+      <div class="modal__section">
+        <div class="modal__inputs" [ngClass]="{'modal__inputs--status': context === 'status'}">
+          <div class="modal__input-wrapper">
+            <label class="modal__label" for="schemeName">{{
+              "IP.ADMIN_TABLE.SCHEMENAME" | translate
+            }}</label>
+            <app-ip-input
+              inputId="schemeName"
+              [control]="getControl('schemeName')"
+              label=""
+              type="text"
+            ></app-ip-input>
+          </div>
+
+          <div class="modal__input-wrapper">
+            <label class="modal__label" for="schemaStatus">{{
+              "IP.SCHEMES.ACTUALSTATUS" | translate
+            }}</label>
+            <app-ip-input
+              inputId="schemaStatus"
+              [control]="getControl('schemaStatus')"
+              type="text"
+            ></app-ip-input>
+          </div>
+
+          <!--<div class="modal__input-wrapper" *ngIf="context == 'detail'">
+            <label class="modal__label" for="shortDescription">{{
+              "IP.SCHEMES.SHORTDESCRIPTION" | translate
+            }}</label>
+            <app-ip-input
+              inputId="shortDescription"
+              [control]="getControl('shortDescription')"
+              type="text"
+            ></app-ip-input>
+          </div>-->
+
+          <div
+            class="modal__input-wrapper modal__input-wrapper--full"
+            *ngIf="context == 'detail'"
+          >
+            <label class="modal__label" for="fullDescription">{{
+              "IP.ADMIN_TABLE.DESCRIPTION" | translate
+            }}</label>
+            <app-ip-text-area-input
+              inputId="fullDescription"
+              [control]="getControl('fullDescription')"
+            ></app-ip-text-area-input>
+          </div>
+        </div>
+        <p *ngIf="context == 'status'">
+          {{ "IP.SCHEMES.MESSAGE" | translate }}
+        </p>
+      </div>
+    </div>
+
+    <div class="modal__buttons">
+      <app-ip-button-modal
+        *ngIf="context == 'detail'"
+        class="btn--close"
+        typeBtn="submit"
+        size="normal"
+        (clicked)="close.emit()"
+      >
+        {{ "IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.CLOSE" | translate }}
+      </app-ip-button-modal>
+
+      <app-ip-button-modal
+        *ngIf="context == 'status'"
+        class="btn--close"
+        typeBtn="submit"
+        size="normal"
+        (clicked)="close.emit()"
+      >
+        {{ "IP.CONFIRM-ACTION-DIALOG.CANCEL" | translate }}
+      </app-ip-button-modal>
+
+      <app-ip-button-modal
+        *ngIf="context == 'status'"
+        class="btn--confirm"
+        typeBtn="submit"
+        size="normal"
+        (clicked)="updateStatus()"
+      >
+        {{ "IP.CONFIRM-ACTION-DIALOG.CONFIRM" | translate }}
+      </app-ip-button-modal>
+    </div>
+  </form>
+</div>

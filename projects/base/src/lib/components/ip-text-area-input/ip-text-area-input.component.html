@@ -1,0 +1,18 @@
+<div class="form-floating">
+  <textarea
+    type="text"
+    class="form-control shadow-none"
+    placeholder=""
+    [formControl]="control" 
+    [id]="inputId"
+  ></textarea>
+  <label [for]="inputId">{{ label }}</label>
+  <div
+    class="error-message"
+    *ngIf="
+      control.invalid &&
+      control.touched &&
+      control.errors">
+    {{ getErrorMessage() | translate }}
+  </div>
+</div>

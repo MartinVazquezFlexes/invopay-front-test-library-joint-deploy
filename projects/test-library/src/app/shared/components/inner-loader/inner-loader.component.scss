@@ -1,0 +1,25 @@
+@import "./../../mixins/variables/color.scss";
+
+.spinner-container {
+  z-index: 2000;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background: conic-gradient(#0000 10%, $secondary-color);
+  -webkit-mask: radial-gradient(farthest-side, #0000 80%, #000 0);
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}

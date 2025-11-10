@@ -1,0 +1,205 @@
+<app-ip-modal-mobile (close)="onClose()" [title]="title">
+<div class="ip-form-modal">
+  <div class="ip-form-modal__body">
+    <form class="ip-form-modal__body-container" [formGroup]="form">
+        <div class="ip-form-modal__body-input">
+          <app-ip-input 
+          [control]="id" 
+          [label]="(this.isPurchaseOrder
+            ? 'IP.FORM-MODAL.PURCHASE-ORDER.ID'
+            : 'IP.FORM-MODAL.ACTIVE-CONTRACT.ID'
+            ) | translate" 
+          type="number" 
+          inputId="id"
+          (keypressed)="validateFormat($event)"
+          (changed)="changeIsNumeric($event, 'id')"></app-ip-input>
+        </div>
+        <div class="ip-form-modal__body-input">
+          <app-ip-input 
+          [control]="description" 
+          [label]="(this.isPurchaseOrder
+            ? 'IP.FORM-MODAL.DESCRIPTION'
+            : 'IP.FORM-MODAL.DESCRIPTION'
+            ) | translate" 
+          type="text" 
+          inputId="description"></app-ip-input>
+        </div>
+        <div class="ip-form-modal__body-input">
+          <app-ip-input 
+          [control]="name" 
+          [label]="(this.isPurchaseOrder
+            ? 'IP.FORM-MODAL.PURCHASE-ORDER.NAME'
+            : 'IP.FORM-MODAL.ACTIVE-CONTRACT.NAME'
+            ) | translate" 
+          type="text" 
+          inputId="name"></app-ip-input>
+        </div>       
+        <div class="ip-form-modal__body-input">
+          <app-ip-select-input 
+            [control]="status" 
+            [label]="(this.isPurchaseOrder
+              ? 'IP.FORM-MODAL.PURCHASE-ORDER.STATUS.PLACEHOLDER'
+              : 'IP.FORM-MODAL.ACTIVE-CONTRACT.STATUS.PLACEHOLDER'
+              ) | translate">
+            <option value="ACTIVE">
+              {{
+                (this.isPurchaseOrder
+                  ? "IP.FORM-MODAL.PURCHASE-ORDER.STATUS.ACTIVE"
+                  : "IP.FORM-MODAL.ACTIVE-CONTRACT.STATUS.ACTIVE"
+                ) | translate
+              }}
+            </option>
+            <option value="INACTIVE">
+              {{
+                (this.isPurchaseOrder
+                  ? "IP.FORM-MODAL.PURCHASE-ORDER.STATUS.INACTIVE"
+                  : "IP.FORM-MODAL.ACTIVE-CONTRACT.STATUS.INACTIVE"
+                ) | translate
+              }}
+            </option>
+          </app-ip-select-input>
+        </div>        
+        <div class="ip-form-modal__body-input">
+          <app-ip-date-input 
+            [control]="startingDate" 
+            [label]="'IP.FORM-MODAL.STARTING-DATE' | translate"
+            inputId="startingDate"
+            min="1900-01-01"
+            max="2100-12-31"
+            (changed)="onStartDateChange()"></app-ip-date-input>
+        </div>    
+        <div class="ip-form-modal__body-input">
+          <app-ip-date-input 
+            [control]="endingDate" 
+            [label]="'IP.FORM-MODAL.ENDING-DATE' | translate"
+            inputId="endingDate"
+            [min]="minEndDate"
+            max="2100-12-31"></app-ip-date-input>
+        </div>        
+        <div class="ip-form-modal__body-input" *ngIf="suppliers.length > 0">
+          <app-ip-select-input 
+            [control]="supplierId" 
+            [label]="'IP.FORM-MODAL.PROVIDER' | translate">
+            <option
+              *ngFor="let supplier of this.suppliers"
+              [value]="supplier.id"
+            >
+              {{ supplier.businessName }}
+            </option>
+          </app-ip-select-input>
+        </div>
+        <div class="ip-form-modal__body-input" *ngIf="suppliers.length === 0">
+          <app-ip-select-input 
+            [control]="supplierId" 
+            [label]="'IP.FORM-MODAL.PROVIDER' | translate">
+          </app-ip-select-input>
+        </div>
+        <div class="ip-form-modal__body-input" *ngIf="costCenters.length > 0">
+          <app-ip-select-input 
+            [control]="costCenterId" 
+            [label]="'IP.FORM-MODAL.COST-CENTER' | translate">
+            <option
+              *ngFor="let costCenter of this.costCenters"
+              [value]="costCenter.id"
+            >
+              {{ costCenter.name }}
+            </option>
+          </app-ip-select-input>
+        </div>        
+        <div class="ip-form-modal__body-input" *ngIf="costCenters.length === 0">
+          <app-ip-select-input 
+            [control]="costCenterId" 
+            [label]="'IP.FORM-MODAL.COST-CENTER' | translate">
+          </app-ip-select-input>
+        </div>        
+        <ng-container *ngIf="!this.isPurchaseOrder">
+          <div class="ip-form-modal__body-input">
+            <app-ip-select-input 
+              [control]="currencyId" 
+              [label]="'IP.FORM-MODAL.CURRENCY' | translate">
+              <option
+                *ngFor="let currency of this.currencies"
+                [value]="currency.id"
+              >
+                {{ currency.code }} - {{ currency.name }}
+              </option>
+            </app-ip-select-input>
+          </div>
+          <div class="ip-form-modal__body-input">
+            <app-ip-input 
+            [control]="amount" 
+            [label]="'IP.FORM-MODAL.AMOUNT' | translate"
+            type="number" 
+            inputId="amount"
+            (keypressed)="validateFormat($event)"
+            (changed)="changeIsNumeric($event, 'amount')"></app-ip-input>
+          </div>
+          <div class="ip-form-modal__body-container-content-radio">
+            <label for="monthlyRenewal">
+              {{ "IP.FORM-MODAL.RENEWAL.RADIO-LABEL" | translate }}
+            </label>
+            <mat-radio-group
+              aria-label="Select an option"
+              formControlName="monthlyRenewal"
+              class="ip-form-modal__body-container-content-radio-group"
+            >
+              <mat-radio-button [value]="true">
+                {{ "IP.FORM-MODAL.RENEWAL.MONTHLY" | translate }}
+              </mat-radio-button>
+              <mat-radio-button [value]="false">{{
+                "IP.FORM-MODAL.RENEWAL.TOTAL" | translate
+              }}</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="ip-form-modal__body-container-content-checkbox">
+            <mat-checkbox
+              formControlName="autoRenewal"
+              class=""
+              labelPosition="before"
+            >
+              {{ "IP.FORM-MODAL.RENEWAL.AUTO" | translate }}
+            </mat-checkbox>
+          </div>
+          <div class="ip-form-modal__body-input">
+            <app-ip-input 
+            [control]="approver" 
+            [label]="'IP.FORM-MODAL.APPROVER' | translate" 
+            type="text" 
+            inputId="approver"></app-ip-input>
+          </div>         
+        </ng-container>
+      <div
+        class="ip-form-modal__body-container-content ip-form-modal__body-container-content-full-width"
+      >
+        <ng-container *ngIf="!this.isPurchaseOrder">
+          <div class="ip-form-modal__body-input">
+            <app-ip-text-area-input 
+            [control]="paymentDescription" 
+            [label]="'IP.FORM-MODAL.PAYMENT-DESCRIPTION' | translate"
+            inputId="paymentDescription"></app-ip-text-area-input>
+          </div>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+
+  <div class="ip-form-modal__footer">
+    <app-ip-button-modal
+      typeBtn="cancel"
+      (clicked)="onClose()"
+    >
+      {{ "IP.FORM-MODAL.CANCEL" | translate }}
+    </app-ip-button-modal>
+    <app-ip-button-modal
+      typeBtn="action"
+      (clicked)="onSubmit()"
+      [disabled]="this.form.invalid"
+    >
+      {{
+        (this.isEdition ? "IP.FORM-MODAL.CONFIRM" : "IP.FORM-MODAL.CREATE")
+          | translate
+      }}
+    </app-ip-button-modal>
+  </div>
+</div>
+</app-ip-modal-mobile>

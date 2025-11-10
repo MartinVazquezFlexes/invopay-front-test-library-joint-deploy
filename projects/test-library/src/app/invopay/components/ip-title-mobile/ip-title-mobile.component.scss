@@ -1,0 +1,97 @@
+@import "../../../shared/mixins/generalText.scss";
+@import "../../../shared/mixins/sizes.scss";
+@import "../../../shared/mixins/variables/color.scss";
+
+.ip-title-mobile{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: $background-tables;
+  box-shadow: 0px 5px 15px 0px hsla(0, 0%, 0%, 0.07);
+  border-radius: 0.7rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  height: 5rem;
+  padding: 1rem 2.5rem;
+  @include sm() {
+    height: 2rem;
+    padding: 1rem;
+    box-shadow: none;
+    background-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+  @include md() {
+    height: 3rem;
+    padding: 1rem 2.5rem;
+    margin-bottom: 0.7rem;
+  }
+  @include lg() {
+    height: 3rem;
+    padding: 1rem 2.5rem;
+    margin-bottom: 0.7rem;
+  }
+  &__title{
+    @include mainTitleText();
+    display: flex;
+    align-items: center;
+    &-back-icon{
+      margin-right: 0.7rem;
+      scale: 1.2;      
+      @include sm(){
+        margin-right: 0.4rem;
+        scale: 0.8;
+      }
+      @include lg(){
+        scale: 1;
+      }
+      @include md(){
+        scale: 1;
+      }
+      cursor: pointer;
+      &:hover{
+        color: $primary-color-hover;
+      }
+    }
+  }
+  &__btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    border-radius: 0.6rem;
+    border: none;
+    background: $app-btn-main-bg-color;
+    box-shadow: 0px 0px 20px 0px rgba(215, 222, 227, 0.39);
+    @include btnGeneralText();
+    color: $text-white;
+    gap: 0.4rem;
+      padding: 0 1rem;
+    @include md() {
+      height: 1.7rem;
+    }
+    @include lg() {
+      height: 1.7rem;
+    }
+    @include sm(){
+      height: 1.875rem;
+      width: 6rem;
+      gap: 0.2rem;
+    }
+    span{
+      margin-right: 0.5rem;
+    }
+    &-icon {
+      color: $tab-btn-icon-color;
+      scale: 0.9;
+      @include sm(){
+        scale: 0.6;
+      }
+      @include md(){
+        scale: 0.7;
+      }
+      @include lg(){
+        scale: 0.7;
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <button class="menu-toggle" (click)="toggleSidebar()" aria-label="Toggle menu">
+      <img src="../../../assets/new-styles/icons/navbar/ham-icon.svg" alt="" class="menu-icon">
+    </button>
+    <div class="logo">
+      <img src="../../../assets/new-styles/logoPNG.png" alt="AVLA" class="logo-img">
+    </div>
+  </div>
+
+  <div class="navbar-right">
+    <img 
+      src="../../../assets/icons/settings-icon.svg" 
+      alt="Configuración" 
+      class="settings-img"
+      title="Configuración">
+    
+    <div class="user-info">
+      <span class="company">{{ userProfile?.bussinessName }}</span>
+      <span class="user-name">{{ userProfile?.username }}</span>
+    </div>
+    
+    <img 
+      src="../../../assets/new-styles/icons/sidebar/logout-icon.svg" 
+      alt="Cerrar sesión" 
+      class="logout-img"
+      title="Cerrar sesión"
+      (click)="logout()">
+  </div>
+</nav>

@@ -1,0 +1,174 @@
+// extends
+@import 'app-base.scss';
+
+// @Override
+$font-family-primary: Loos, Arial, sans-serif;
+$font-family-sec: "Inter", sans-serif;
+
+// app component background
+$app-component-bg: #fff;
+
+$app-lines: #dcdbdd; // line dividers
+$app-white: #ffffff;
+$propisory-white: $app-white;
+$background-color: #fafafa;
+
+$primary-color-text: #3e3e3e;
+$secondary-color-text: #84818A;
+$text-white: #ffffff;
+
+$primary-color: #0071ce;
+$secondary-color: #0071ce;
+$secondary-color-opacity: 0.2;
+
+:root {
+  --global-primary-color: #{$primary-color};
+}
+
+$background-menu-active: #f9fafc;
+$background-btn-cancel: #eeebeb;
+
+$error-color: #f00;  // warning-text
+$primary-color-hover: darken($secondary-color, 10%);
+
+$grey-text: #667085;
+$hover-button: #0000000f;
+
+$primary-color-login: #fff6;
+$secondary-color-login: #107076b3;
+
+$filter-primary-color: brightness(0) saturate(100%) invert(26%) sepia(83%) saturate(2037%) hue-rotate(190deg) brightness(96%) contrast(102%);
+
+$green-light: #31e2ad;
+$green-gradient: #82e1ab;
+
+$gradient-dashboard-text: linear-gradient(90deg, $green-light 0%, $primary-color 100%);
+
+// Forms
+$header-form-border: 1px solid $app-lines;
+
+// Shadow
+$box-shadow: 0px 0px 15px 0px #0000001a;
+
+// Login
+$login-bg-image: linear-gradient(248.66deg, $primary-color-login 0%, $secondary-color 100%);
+$login-bg-image-effect: hsla(0, 0%, 0%, 0.1);
+$login-bg-form: $app-white; // login && forgot password
+
+// Header
+$header-enterprise-logo-display: none; // none/block
+$header-padding: 0 1.625rem;
+
+$header-margin-x: 0;
+$header-margin-y: 0;
+
+$header-bg-color: $app-component-bg;
+$header-text-color: #222222;
+$header-box-shadow: $box-shadow;
+
+$header-border-radius: .5rem;
+
+$header-vertical-divider-bg-color: $header-text-color;
+$header-vertical-divider-1-visibility: hidden; // hidden/visible
+$header-vertical-divider-2-visibility: hidden; // hidden/visible
+
+// Sidenav
+$sidenav-bg-color: $header-bg-color;
+$sidenav-item-selected-text-color: $secondary-color;
+$sidenav-item-not-selected-text-color: $secondary-color-text;
+$sidenav-item-border-color: $secondary-color; // wip line active
+$sidenav-menu-active-bg-color: rgba($secondary-color, 0.16);
+$sidenav-menu-active-border-bg-color: $secondary-color;
+$sidenav-menu-hover-bg-color: #f5f5f5;
+
+$sidenav-icon-selected-filter: brightness(0) saturate(100%) invert(22%) sepia(50%) saturate(300%) hue-rotate(250deg) brightness(90%) contrast(95%);
+
+$sidenav-height: max-content;
+$sidenav-mobile-height: auto;
+$sidenav-margins: 2.5rem $header-margin-x;
+$sidenav-border-radius: $header-border-radius;
+$sidenav-box-shadow: $header-box-shadow;
+
+//
+
+// min-width: 12rem;
+//        /* height: 100%; */
+//        margin: 2.5rem 2.5rem;
+//        border-radius: .5rem;
+//        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1215686275);
+
+// Label (top)
+$label-input-text-color: $secondary-color-text;
+
+// Input
+$input-text-hint: $secondary-color-text;
+$input-text-color-active: $secondary-color-text;
+$input-bg-color: $app-white;
+$input-border: 0.93px solid $app-lines;
+
+// button main bg
+$app-btn-main-bg-color: linear-gradient(89.38deg, $secondary-color 0%, $primary-color 100%);
+
+// Button action style 2
+$btn-action-style-two-bg-color: $primary-color;
+
+// Button with icon
+$btn-with-icon-bg-color: $app-btn-main-bg-color;
+
+// Button filters
+$btn-filters-selected-bg-color: $primary-color;
+$btn-filters-selected-text-color: $text-white;
+$btn-filters-not-selected-bg-color: #DCDBDD;
+$btn-filters-not-selected-text-color: $primary-color-text;
+
+// Modal
+$modal-bg-color: $app-component-bg;
+$modal-header-line-divider-color: $app-lines;
+$modal-btn-action-text-color: $text-white;
+$modal-btn-action-bg-color: $app-btn-main-bg-color;
+$modal-btn-cancel-bg-color: $background-btn-cancel;
+
+// Table
+$table-header-text-color: #000;
+$table-header-text-transform: uppercase;
+$table-header-bg-color: #F9FAFC;
+$table-text-color: $secondary-color-text; // main tables
+$table-text: $secondary-color-text; // table in containers
+$table-bg-color: $app-component-bg;
+$table-border-x: $app-lines; // gris
+
+$not-found-text: #afafaf;
+
+// Paginator
+$paginator-btn-selected-bg-color: $primary-color;
+$paginator-btn-bg-color: $app-component-bg;
+$paginator-btn-next-bg-color: $app-component-bg;
+$paginator-btn-prev-bg-color: $app-component-bg;
+
+$paginator-btn-selected-text-color: $text-white;
+$paginator-btn-text-color: $primary-color-text;
+$paginator-border-color: $app-lines;
+
+$background-tables: $app-component-bg;
+$table-lines: $app-lines;
+$table-rows: 0.5px solid $secondary-color;
+$box-shadow-table: 0px 0px 20px 0px rgba(215, 222, 227, 0.5);
+
+// Tab
+$tab-title-bg-color: $app-component-bg;
+$tab-btn-icon-color: $app-white;
+
+// card icons
+$card-icon-border-radius: 50%;
+$card-icon-box-shadow: 0 0 2px rgb(94, 94, 94);
+
+// Card subcards
+$card-sub-card-bg-color: #f8f9fc;
+$card-border-radius: .5rem;
+
+// Home welcome
+$home-welcome-bg-color: $app-component-bg;
+
+// progreso bar
+$progress-bar-completed-bg-color: $secondary-color;
+$progress-bar-pending-bg-color: rgba($secondary-color, $secondary-color-opacity);

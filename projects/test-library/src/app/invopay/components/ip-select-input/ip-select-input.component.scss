@@ -1,0 +1,118 @@
+@import "../../../shared/mixins/sizes.scss";
+@import "../../../shared/mixins/generalText.scss";
+
+.form-floating {
+  width: 100%;
+  @include generalInputText();
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  margin-bottom: 1rem;
+  @include sm(){
+    height: 2rem;
+  }
+  @include md(){
+    height: 2rem;
+  }
+  @include lg(){
+    height: 2rem;
+  }
+  .error-message {
+    width: 100%;
+    @include errorText;
+  }
+  &-select {
+    width: 100%;
+    cursor: pointer;
+    appearance: none;
+    background-image: url(../../../../assets/img/pay-bill/ic_down.svg);
+    background-repeat: no-repeat;
+    background-position-x: 99%;
+    background-position-y: center;
+    margin-right: 0.3rem;
+    &-without-icon {
+      background-image: none;
+      padding: 0 !important;
+    }
+  }
+  select {
+    position: relative;
+  }
+}
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-control-plaintext ~ label {
+  transform: scale(0.8) translateY(-20px) translateX(10px) !important;
+  height: 1.7rem;
+  @include md() {
+    transform: scale(0.75) translateY(-24px) translateX(15px) !important;
+    padding: 1rem;
+    height: 1.9rem;
+  }
+  @include lg() {
+    transform: scale(0.75) translateY(-24px) translateX(15px) !important;
+    padding: 1rem;
+    height: 1.9rem;
+  }
+  @include xl() {
+    transform: scale(0.85) translateY(-30px) translateX(15px) !important;
+    padding: 1.1rem;
+    height: 1.9rem;
+  }
+}
+
+.form-floating > .form-control,
+.form-floating > .form-control-plaintext {
+  padding: 0rem 0.75rem;
+  @include generalInputText();
+  height: 2.5rem;
+  min-height: 2.5rem;
+  @include sm(){
+    padding: 0rem 0.6rem;
+    @include textMobile();
+    height: 2rem;
+    min-height: 2rem;
+  }
+  @include md(){
+    padding: 0rem 0.6rem;
+    height: 2rem;
+    min-height: 2rem;
+  }
+  @include lg(){
+    padding: 0rem 0.6rem;
+    height: 2rem;
+    min-height: 2rem;
+  }
+}
+.form-floating > label {
+  padding: 0.6rem;
+  font-size: 0.7rem;
+  line-height: 0.8rem;
+  @include xl(){
+    padding: 0.65rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1rem;
+  }
+}
+
+.ip-select-label-floating {
+  @include generalInputText();
+
+  padding: 0.1rem 0.4rem !important;
+  transform: scale(0.8) translateY(-20px) translateX(10px) !important;
+
+  @include medias(md, lg, xl) {
+    transform: scale(0.75) translateY(-14px) translateX(24px) !important;
+  }
+  background-color: $input-bg-color;
+  height: fit-content;
+  width: fit-content;
+}
+
+.ip-select-input {
+  border: $input-border;
+  border-radius: 0.5rem;
+}
+.mat-mdc-select {
+  @include generalInputText();
+}

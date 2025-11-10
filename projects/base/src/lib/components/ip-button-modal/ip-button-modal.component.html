@@ -1,0 +1,20 @@
+<button
+  class="ip-button"
+  [ngClass]="{
+    'ip-button__action2': typeBtn === 'action2',
+    'ip-button__action': (typeBtn === 'action' || typeBtn === 'submit' ),
+    'ip-button__cancel': typeBtn === 'cancel',
+    'ip-button__small': size === 'small',
+    'ip-button__large': size === 'large',
+    'ip-button__clean': typeBtn === 'clean'
+    }"
+  (click)="onClickButton($event)"
+  [disabled]="disabled"
+  [type]="typeBtn === 'submit' ? 'submit' : 'button'"
+  [style]="styleButton"
+  >
+  <div *ngIf="textCodeBtn" class="ip-button__text-btn">
+    {{ textCodeBtn | translate }}
+  </div>
+  <ng-content></ng-content>
+</button>

@@ -1,0 +1,91 @@
+    <div *ngIf="open" class="notification-modal-overlay" (click)="onCloseModal()">
+  <div class="notification-modal" (click)="$event.stopPropagation()">
+    <div class="notification-modal__header">
+      <h3>{{ title | translate }}</h3>
+      <button class="filters-modal__close" (click)="onCloseModal()">×</button>
+    </div>
+
+    <div class="notification-modal__content">
+      <div class="modal-tabs" *ngIf="!isReplyMode">
+        <button class="tab-button" [class.active]="activeTab === 'info'" (click)="activeTab = 'info'">Información</button>
+        <button class="tab-button" [class.active]="activeTab === 'responses'" (click)="activeTab = 'responses'">Respuestas</button>
+      </div>
+
+      <div class="notification-detail" *ngIf="details && activeTab === 'info' && !isReplyMode">
+        <div class="notification-details__inputs">
+          <div class="notification-details__input-wrapper">
+            <label class="notification-details__label" for="date-modal">{{ 'IP.NOTIFICATIONS.TABLE.DATE' | translate }}</label>
+            <input
+              id="date-modal"
+              type="text"
+              class="notification-details__input"
+              [value]="details?.notificationDate"
+              disabled>
+          </div>
+          <div class="notification-details__input-wrapper">
+            <label class="notification-details__label" for="broker-modal">{{ 'IP.NOTIFICATIONS.TABLE.BROKER' | translate }}</label>
+            <input
+              id="broker-modal"
+              type="text"
+              class="notification-details__input"
+              [value]="details?.brokerName"
+              disabled>
+          </div>
+          <div class="notification-details__input-wrapper">
+            <label class="notification-details__label" for="entity-modal">{{ 'IP.NOTIFICATIONS.TABLE.ENTITY' | translate }}</label>
+            <input
+              id="entity-modal"
+              type="text"
+              class="notification-details__input"
+              [value]="details?.entity"
+              disabled>
+          </div>
+          <div class="notification-details__input-wrapper">
+            <label class="notification-details__label" for="answered-modal">{{ 'IP.NOTIFICATIONS.TABLE.ANSWERED' | translate }}</label>
+            <input
+              id="answered-modal"
+              type="text"
+              class="notification-details__input"
+              [value]="details?.answered"
+              disabled>
+          </div>
+          <div class="notification-details__input-wrapper notification-details__input-wrapper--full">
+            <label class="notification-details__label" for="query-modal">{{ 'IP.NOTIFICATIONS.TABLE.QUERY' | translate }}</label>
+            <textarea
+              id="query-modal"
+              class="notification-details__textarea"
+              [value]="details?.query"
+              disabled
+              rows="3">
+            </textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="notification-responses" *ngIf="responses?.length && activeTab === 'responses' && !isReplyMode">
+        <h4>{{ 'IP.NOTIFICATIONS.MODAL.PREVIOUS_RESPONSES' | translate }}</h4>
+        <div class="response-item" *ngFor="let response of responses">
+          <div class="response-date">{{ response.date }}</div>
+          <div class="response-responded-by" *ngIf="response.respondedBy">{{ 'IP.NOTIFICATIONS.MODAL.RESPONDED_BY' | translate }}: {{ response.respondedBy }}</div>
+          <div class="response-text">{{ response.text }}</div>
+        </div>
+      </div>
+
+      <div class="notification-reply" *ngIf="isReplyMode">
+        <h4>{{ 'IP.NOTIFICATIONS.MODAL.REPLY' | translate }}</h4>
+        <textarea class="reply-textarea" [(ngModel)]="replyText" placeholder="{{ 'IP.NOTIFICATIONS.MODAL.REPLY_PLACEHOLDER' | translate }}"></textarea>
+        <div class="notification-modal__actions">
+          <button class="btn btn--secondary" (click)="onCloseModal()">{{ cancelLabel | translate }}</button>
+          <button
+            class="btn btn--primary"
+            (click)="applyModal()"
+            [disabled]="applyDisabled">
+            {{ applyLabel | translate }}
+          </button>
+        </div>
+      </div>
+
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

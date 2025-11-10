@@ -1,0 +1,69 @@
+<app-notification-tray
+  [config]="notificationTrayConfig"
+  [data]="notificationData"
+  (viewNotification)="onViewNotification($event)"
+  (replyNotification)="onReplyNotification($event)"
+  (searchPerformed)="onSearchPerformed($event)"
+  (filtersCleared)="onFiltersCleared()"
+  (mobileFiltersOpened)="onMobileFiltersOpened()">
+</app-notification-tray>
+
+<!-- Modal para ver/responder notificación -->
+<app-notification-modal
+  [open]="showNotificationModal"
+  [title]="'IP.NOTIFICATIONS.MODAL.TITLE'"
+  [details]="selectedNotification"
+  [responses]="selectedNotification?.responses"
+  [isReplyMode]="isReplyMode"
+  (openChange)="showNotificationModal = $event"
+  (sendReply)="onSendReply($event)"
+  (closeModal)="closeNotificationModal()">
+</app-notification-modal>
+
+  <app-ip-modal-mobile
+    *ngIf="showMobileFiltersModal"
+    [title]="'IP.NOTIFICATIONS.FILTERS.TITLE' | translate"
+    (close)="showMobileFiltersModal = false">
+
+  <div class="mobile-filters-content">
+    <div class="notification-tray__filter-group">
+      <app-ip-select-input
+        [options]="answeredOptions"
+        [labelCode]="'IP.NOTIFICATIONS.FILTERS.ANSWERED'"
+        [control]="answeredControl"
+        (selectEmitter)="selectedAnswered = $event">
+      </app-ip-select-input>
+    </div>
+
+    <div class="notification-tray__filter-group">
+      <app-ip-select-input
+        [options]="entityOptions"
+        [labelCode]="'IP.NOTIFICATIONS.FILTERS.ENTITY'"
+        [control]="entityControl"
+        (selectEmitter)="selectedEntity = $event">
+      </app-ip-select-input>
+    </div>
+
+    <div class="notification-tray__filter-group">
+      <app-ip-input
+        [label]="'IP.NOTIFICATIONS.FILTERS.USER' | translate"
+        [control]="userControl"
+        [placeholder]="'IP.NOTIFICATIONS.FILTERS.USER_PLACEHOLDER' | translate"
+        (changed)="onUserChanged($event)">
+      </app-ip-input>
+    </div>
+
+    <div class="mobile-filters-content__actions">
+      <button class="btn btn--search" (click)="onMobileSearch()" [disabled]="isMobileSearchDisabled">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path [attr.stroke]="isMobileSearchDisabled ? '#CBD5E0' : 'white'" d="M7 13A6 6 0 1 0 7 1a6 6 0 0 0 0 12zM15 15l-4-4" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="btn btn--clear" (click)="onMobileClearFilters()" [disabled]="!isMobileClearEnabled">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 -960 960 960" fill="#DCDBDD">
+          <path d="M120-40v-280q0-83 58.5-141.5T320-520h40v-320q0-33 23.5-56.5T440-920h80q33 0 56.5 23.5T600-840v320h40q83 0 141.5 58.5T840-320v280H120Zm80-80h80v-120q0-17 11.5-28.5T320-280q17 0 28.5 11.5T360-240v120h80v-120q0-17 11.5-28.5T480-280q17 0 28.5 11.5T520-240v120h80v-120q0-17 11.5-28.5T640-280q17 0 28.5 11.5T680-240v120h80v-200q0-50-35-85t-85-35H320q-50 0-85 35t-35 85v200Zm320-400v-320h-80v320h80Zm0 0h-80 80Z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</app-ip-modal-mobile>

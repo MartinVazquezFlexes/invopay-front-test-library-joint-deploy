@@ -1,0 +1,19 @@
+<div *ngIf="modalVisible" class="ip-dialog" [@slideUp]="mobile ? 'in' : ''">
+  <div class="ip-block-card-modal">
+    <div *ngIf="showTitle" class="ip-block-card-modal__header">
+      <div class="ip-block-card-modal__header-title">
+        {{ title }}
+      </div>
+      <img
+      *ngIf="showCloseModal"
+      class="ip-block-card-modal__header-close"
+      (click)="closeModal()"
+      src="assets/icons/close.svg"
+      >
+    </div>
+    
+    <div class="ip-block-card-modal__content" [style]="contentStyle">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

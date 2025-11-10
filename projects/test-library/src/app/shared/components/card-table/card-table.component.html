@@ -1,0 +1,326 @@
+<div class="card-table-container">
+<div class="card-table" *ngFor="let fields of labelsArrayTest; let i = index">
+  <div class="card-table-group" *ngIf="!['invoice', 'surrenders', 'supplier', 'project', 'settlements', 'sales', 'configuration', 'costCenter', 'employee', 'subsidiaries','pay-in', 'consolidated', 'consolidated-template'].includes(typeService)">
+    <div class="card-table-group__data">
+      <div class="card-table__info" *ngFor="let val of fields.data; let j = index">
+        <ng-container *ngIf="service === 'invoice-to-pay'">
+          <div class="card-table__info-values">
+            <div
+              class=""
+              *ngIf="
+                val.key === 'Número de factura' ||
+                val.key === 'Nombre de proveedor'
+              "
+              style="display: flex; justify-content: flex-start; gap: 1.5rem"
+            >
+              <div class="">
+                <input
+                  class="table__head-row-item--text__check"
+                  type="checkbox"
+                  [checked]="isItemSelected(fields)"
+                  (change)="toggleItemSelection(fields)"
+                  *ngIf="isForSelectItem && j === 0"
+                />
+              </div>
+
+              <div class="">
+                <div class="" *ngIf="val.key === 'Número de factura'">
+                  {{ val.value || "00000" }}
+                </div>
+                <div class="" *ngIf="val.key === 'Nombre de proveedor'">
+                  {{ val.value }}
+                </div>
+              </div>
+            </div>
+            <div
+              *ngIf="
+                val.key !== 'Número de factura' &&
+                val.key !== 'Nombre de proveedor'
+              "
+              class="card-table__info-values__key{{
+                isAmountKey(val.key) ? '-amount' : ''
+              }}"
+            >
+              {{ val.key }}
+            </div>
+            <div
+              *ngIf="
+                val.key !== 'Número de factura' &&
+                val.key !== 'Nombre de proveedor'
+              "
+              class="card-table__info-values__value{{
+                isAmountKey(val.key) ? '-amount' : ''
+              }}"
+            >
+              {{ isAmountKey(val.key) ? "$" : ""
+              }}{{
+                isAmountKey(val.key)
+                  ? [val.value | amount]
+                  : isDateTimeKey(val.key)
+                  ? [val.value | customDate : true]
+                  : isMovementTypeKey(val.key)
+                  ? [this.getMovementType(val.value)]
+                  : val.value
+              }}
+            </div>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="
+            service === 'account-transactions' ||
+            service === 'card-transactions'
+          "
+        >
+          <div class="card-table__info-values">
+            <div
+              class="card-table__info-values__key{{
+                isAmountKey(val.key) ? '-amount' : ''
+              }}"
+            >
+              {{ val.key }}
+            </div>
+            <div
+              class="card-table__info-values__value{{
+                isAmountKey(val.key) ? '-amount' : ''
+              }}"
+            >
+              {{ isAmountKey(val.key) ? "$" : ""
+              }}{{
+                isAmountKey(val.key)
+                  ? [val.value | amount]
+                  : isDateTimeKey(val.key)
+                  ? [val.value | customDate : true]
+                  : isMovementTypeKey(val.key)
+                  ? [this.getMovementType(val.value)]
+                  : val.value
+              }}
+            </div>
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="
+            (service === 'payments-done' || service === 'payments-ongoing') &&
+            val.key !== 'Cuit' &&
+            val.key !== 'Facturas'
+          "
+        >
+          <div class="card-table__info-values">
+            <div
+              class="card-table__info-values__key{{
+                isAmountKey(val.key) ? '-amount' : ''
+              }}"
+              *ngIf="j !== 0"
+            >
+              {{ val.key }}
+            </div>
+            <div
+              class="card-table__info-values__value{{
+                j === 0 ? '-title' : ''
+              }}{{ isAmountKey(val.key) ? '-amount' : '' }}"
+            >
+              {{ isAmountKey(val.key) ? "$" : ""
+              }}{{ isAmountKey(val.key) ? [val.value | amount] : val.value }}
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="service === 'supplier-accounts'">
+          <div
+            class="card-table__info-values"
+            [ngStyle]="{
+              'border-bottom': j === 1 ? '1px solid #DCDBDD' : '',
+              'margin-top': j === 1 ? '-0.4rem' : '',
+              'margin-bottom': j === 1 ? '0.1rem' : '',
+            }"
+          >
+            <ng-container *ngIf="val.key !== 'supplierId'">
+              <ng-container *ngIf="!this.isCardRelatedKey(val.key)">
+                <div
+                  class="card-table__info-values__key{{
+                    isAmountKey(val.key) ? '-amount' : ''
+                  }}"
+                  *ngIf="j !== 0 && j !== 1"
+                >
+                  {{ val.key }}
+                </div>
+                <div
+                  class="card-table__info-values__value{{
+                    j === 0 ? '-title' : ''
+                  }}{{ j === 1 ? '-subtitle' : '' }}{{
+                    isAmountKey(val.key) ? '-amount' : ''
+                  }}"
+                >
+                  {{ val.value }}
+                </div>
+              </ng-container>
+              <ng-container *ngIf="this.isCardRelatedKey(val.key)">
+                <div
+                  *ngIf="this.isCardNumberKey(val.key)"
+                  class="card-table__info-values__key{{
+                    isAmountKey(val.key) ? '-amount' : ''
+                  }}"
+                >
+                  {{ val.key }}
+                </div>
+                <div
+                  *ngIf="this.isCardNumberKey(val.key)"
+                  class="card-table__info-values__value"
+                >
+                  <img
+                    *ngIf="this.getCardBrand(fields.data) === 'VISA'"
+                    src="../../../../assets/new-styles/img/card-visa-blue.png"
+                  />
+                  <img
+                    *ngIf="this.getCardBrand(fields.data) === 'MASTER_CARD'"
+                    src="../../../../assets/new-styles/img/card-master.png"
+                  />
+                  <span>
+                    {{ this.formatCardNumber(val.value) }}
+                  </span>
+                  <img
+                    *ngIf="this.getCardStatus(fields.data) === 'ACTIVE'"
+                    src="../../../../assets/new-styles/img/card-active.png"
+                  />
+                  <img
+                    *ngIf="this.getCardStatus(fields.data) === 'BLOCKED'"
+                    src="../../../../assets/new-styles/img/card-blocked.png"
+                  />
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div
+      class="card-table-group__btn"
+      *ngIf="
+        service !== 'account-transactions' &&
+        service !== 'card-transactions' &&
+        service !== 'supplier-accounts'
+      "
+    >
+      <button mat-icon-button (click)="onAction('search', fields)">
+        <img
+          src="../../../../assets/new-styles/icons/buttons/view-details-card-icon.svg"
+          alt=""
+        />
+      </button>
+    </div>
+    <div class="card-table__menu" *ngIf="service === 'supplier-accounts'">
+      <button (click)="toggleMenu(i)">
+        <img
+          src="assets/icons/more-icon.svg"
+          alt=""
+        />
+      </button>
+      <div *ngIf="isMenuOpen(i)" class="card-table__menu-template">
+        <div class="card-table__menu-arrow"></div>
+        <ul class="menu-list" *ngFor="let action of actions">
+          <li (click)="onAction(action, fields)">
+            {{ "IP.ACTIONS_TOOLTIP." + action.toUpperCase() | translate }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div
+  *ngIf="['invoice', 'surrenders', 'supplier', 'project', 'settlements', 'sales', 'configuration', 'costCenter', 'employee', 'subsidiaries','pay-in', 'consolidated', 'consolidated-template'].includes(typeService)"
+  >
+    <div class="card-table__info-check" *ngIf="this.service === 'settlements-from-sale' || service === 'invoice-to-pay' || isForSelectItem">
+      <mat-checkbox 
+                  [checked]="isItemSelected(fields)"
+                  (change)="toggleItemSelection(fields)">
+        </mat-checkbox>
+    </div>
+    <div class="card-table__info" *ngFor="let val of fields.data; let k = index">
+      <div class="card-table__info-id" *ngIf="isIdKey(val.key) || (actions && actions.length > 0 && k ===0)">
+        <span *ngIf="isIdKey(val.key)"> #{{ val.value }}</span>
+
+        <div class="card-table__menu" *ngIf="actions && actions.length > 0 && this.service !== 'settlements-from-sale'">
+          <button (click)="toggleMenu(i)">
+            <img
+              src="assets/icons/more-icon.svg"
+              alt=""
+            />
+          </button>
+          <div *ngIf="isMenuOpen(i)" class="card-table__menu-template">
+            <div class="card-table__menu-arrow"></div>
+            <ul class="menu-list" *ngFor="let action of actions">
+              <li (click)="onAction(action, fields)" [ngClass]="{'disabled': checkActionDisable(fields, action)}">
+                {{ "IP.ACTIONS_TOOLTIP." + action.toUpperCase() | translate }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-table__info-status" *ngIf="isStatusKey(val.key)">
+        <span class="card-table__info-status-key">{{ val.key }}</span>
+        <span class="card-table__info-status-value">{{ setStatusValue(val.value) }}</span>
+      </div>
+      <div
+        class="card-table__info-usernames"
+        *ngIf="isUsernameKey(val.key)"
+      >
+        {{ val.value }}
+      </div> 
+<!--      WIP read flag userType -->
+<!--      <div-->
+<!--          class="card-table__info-usernames"-->
+<!--          *ngIf="isUsernameKey(val.key)"-->
+<!--        >-->
+<!--          {{ val.value }}-->
+<!--        </div>-->
+        <div class="card-table__info-separator" *ngIf="!separatorKey(fields.data) && isUsernameKey(val.key)"></div>
+      <div
+        class="card-table__info-values"
+        *ngIf="!isStatusKey(val.key) && !isIdKey(val.key)"
+      >
+      <div class="card-table__info-values__dates" *ngIf="isValueKeyFlowStatus(val.key, val.value)">
+        <span>{{ "IP.CARD_TABLE.FLOWSTATUS.TYPE" | translate }}</span>
+        <span>{{ val.key }}</span>
+      </div>
+
+      <div class="card-table__info-values__dates" *ngIf="isValueKey(val.key)">
+        <span>{{ val.key }}</span>
+        <span>{{ setValueKey(val.value, val.key) }}</span>
+      </div>
+      <div class="card-table__info-values__roles" *ngIf="isValueKeyRoles(val.key)">
+        <span>{{ val.key }}</span>
+        <div>
+          <span>{{ getFormattedRoles(val) }}</span>
+        </div>
+      </div>
+        <div class="card-table__info-values__dates" *ngIf="isDateKey(val.key)">
+          <span>{{ val.key }}</span>
+          <span>{{ val.value != null ?( val.value | customDate) : '-'}}</span>
+        </div>
+        <div class="card-table__info-values__dates" *ngIf="isBooleanKey(val.key)">
+          <span>{{ val.key }}</span>
+          <span>{{ val.value ? ('IP.YES' | translate) : ('IP.NO' | translate) }}</span>
+        </div> 
+        <div class="card-table__info-values__payment-type" *ngIf="isPaymentTypeKey(val.key)">
+          <span>{{ val.key }}</span>
+          <span>{{ setPaymentType(val.value) }}</span>
+        </div> 
+
+        <div
+          class="card-table__info-values__expired-date"
+          *ngIf="isExpirationDateKey(val.key)"
+        >
+          <span>{{ val.key }}</span>
+          <span>{{ val.value != null ?( val.value | customDate) : '-'}}</span>
+        </div>
+        <div
+          class="card-table__info-values__amount"
+          *ngIf="isAmountKey(val.key)"
+        >
+          <span>{{ val.key }}</span>
+          <span>${{ setValueAmountKey(isType(val.value)) | amount }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

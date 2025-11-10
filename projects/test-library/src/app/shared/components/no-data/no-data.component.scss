@@ -1,0 +1,28 @@
+@import "../../../shared/mixins/sizes.scss";
+
+.ip-no-data {
+  &__not-found {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    &-image {
+      width: 5rem;
+      height: 5rem;
+      @include medias(sm) {
+        width: 3em;
+        height: 3rem;
+      }
+    }
+    &-text {
+      font-size: 1rem;
+      color: #000000;
+      @media (width <= 1366px) {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}

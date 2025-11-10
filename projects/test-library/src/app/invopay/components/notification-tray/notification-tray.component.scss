@@ -1,0 +1,833 @@
+@import "../../../../../../base/src/shared/mixins/generalText.scss";
+@import "../../../../../../base/src/shared/mixins/utils.scss";
+@import "../../../../../../base/src/shared/mixins/sizes.scss";
+
+$backgrounds-color: #D9D9D9;
+
+.notification-tray {
+  background: transparent;
+  width: 100%;
+  min-height: calc(100vh - 45px);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  &__card {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  &__title-section {
+    text-align: left;
+    width:100%;
+    background: $app-white;
+    border-radius: $card-border-radius;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 30px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+
+    @include mmd {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+  }
+
+  &__title {
+    @include mainTitleText();
+    color: $primary-color;
+    margin: 0;
+  }
+
+  &__mobile-filter-btn {
+    display: none;
+    padding: 8px 14px;
+    background: $primary-color;
+    color: $app-white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    @include sm {
+      display: flex;
+      width: auto;
+      min-width: auto;
+      max-width: 100px;
+      border-radius: 9px;
+      padding: 6px 12px;
+
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
+  &__filters {
+    background: $app-white;
+    border-radius: $card-border-radius;
+    width:100%;
+    padding: 20px 30px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow: hidden;
+
+    @include sm {
+      display: none;
+    }
+  }
+
+  &__filters-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  &__filter-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  &__filters-icon {
+    width: 18px;
+    height: 16px;
+    background: $primary-color;
+  }
+
+  &__filters-subtitle {
+    @include subTitleText();
+    margin: 0;
+  }
+
+  &__filters-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  &__filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 200px;
+    position: relative;
+    
+    // Align input field with select elements
+    ::ng-deep .ip-input-container {
+
+      
+      .mat-form-field-wrapper {
+        padding-bottom: 0 !important;
+        
+        .mat-form-field-flex {
+          padding-top: 0 !important;
+        }
+      }
+    }
+  }
+
+  &__filter-label {
+    @include labelGeneralText();
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    background: $app-white;
+    padding: 0 6px;
+    font-size: 12px;
+    color: #a9adba;
+    z-index: 1;
+  }
+
+  &__filter-input {
+    @include generalInputText();
+    padding: 6px 10px;
+    border: $input-border;
+    border-radius: 6px;
+    color: $primary-color-text;
+    background: $input-bg-color;
+    cursor: pointer;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    font-size: 13px;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+
+  &__filter-actions {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+  }
+
+  &__table-container {
+    background: $app-white;
+    border-radius: $card-border-radius;
+    width: 100%;
+    padding: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+    &--desktop {
+      display: block;
+    }
+  }
+
+  &__cards-container {
+    display: none;
+
+    &--mobile {
+      @include sm {
+        display: block;
+      }
+    }
+  }
+
+  &__body {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  &__paginator-container {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
+
+  &__paginator-container--desktop {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__paginator-container--mobile {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__rows-per-page {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    span {
+      @include labelGeneralText();
+      color: $primary-color-text;
+    }
+  }
+
+  &__paginator {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    ::ng-deep .ip-paginator {
+      padding: 0 !important;
+      height: auto !important;
+      align-items: center !important;
+    }
+  }
+
+  &__rows-select {
+    @include generalInputText();
+    padding: 8px 12px;
+    border: $input-border;
+    border-radius: 6px;
+    color: $primary-color-text;
+    background: $input-bg-color;
+    cursor: pointer;
+    min-width: 70px;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+
+  @include mmd {
+    &__card {
+      padding: 15px;
+    }
+
+    &__filters-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &__filter-group {
+      width: 100%;
+      min-width: unset;
+    }
+
+    &__filter-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+
+  @include sm {
+    &__card {
+      padding: 10px;
+      gap: 10px;
+    }
+
+    &__title-section {
+      padding: 15px 20px;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    &__title {
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    &__filters {
+      padding: 15px 20px;
+    }
+
+    &__filter-actions {
+      justify-content: center;
+    }
+
+    &__table-container--desktop {
+      display: none;
+    }
+
+    &__rows-per-page {
+      position: static;
+      width: 100%;
+      justify-content: center;
+    }
+
+    &__filters-container {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    &__filter-group {
+      width: 100%;
+      min-width: unset;
+    }
+
+    &__filter-input {
+      font-size: 16px;
+      padding: 12px;
+      display: block;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+    }
+
+    &__filter-input[type="date"] {
+      -webkit-appearance: none;
+      appearance: none;
+      line-height: 1.2;
+      padding-right: 36px;
+    }
+
+    &__filter-input[type="date"]::-webkit-calendar-picker-indicator {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.btn {
+  @include btnGeneralText();
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  min-width: 40px;
+  font-size: 13px;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &--search {
+    background: $primary-color;
+
+    &:disabled, &--disabled {
+      background: #7FB6FF;
+      cursor: not-allowed;
+
+      svg path {
+        stroke: #EBF5FF;
+      }
+
+      &:hover {
+        transform: none;
+        background: #7FB6FF;
+      }
+    }
+  }
+
+  &--filter {
+    background: $primary-color;
+
+    &:disabled, &--disabled {
+      background: #7FB6FF;
+      cursor: not-allowed;
+
+      img {
+        background: #7FB6FF;
+      }
+
+      &:hover {
+        transform: none;
+        background: #7FB6FF;
+      }
+    }
+  }
+
+  &--clear {
+    background: $primary-color;
+
+    &:disabled, &--disabled {
+      background: #7FB6FF;
+      cursor: not-allowed;
+
+      svg path {
+        stroke: #EBF5FF;
+      }
+
+      &:hover {
+        transform: none;
+        background: #7FB6FF;
+      }
+    }
+  }
+}
+
+.notification-tray__filters-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  &-content {
+    background: $app-white;
+    padding: 25px;
+    border-radius: $card-border-radius;
+    width: 400px;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+
+    h3 {
+      margin: 0;
+      @include subTitleText();
+      text-align: center;
+    }
+  }
+}
+
+.filters-row-modal {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  .filter-group-modal {
+    flex: 1 1 48%;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+      @include labelGeneralText();
+    }
+
+    select {
+      @include generalInputText();
+      padding: 10px;
+      border: $input-border;
+      border-radius: 6px;
+      background: $input-bg-color;
+      color: $primary-color-text;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+      }
+    }
+
+    &--floating {
+      position: relative;
+      gap: 0;
+    }
+  }
+
+  .filter-label-modal--floating {
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    background: $app-white;
+    padding: 0 6px;
+    font-size: 12px;
+    color: #a9adba;
+    z-index: 1;
+  }
+
+  .filter-select-modal--floating {
+    padding: 10px 12px !important;
+  }
+}
+
+.filter-actions-modal {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+
+  .btn--clear {
+    background: $backgrounds-color;
+    color: $primary-color-text;
+  }
+
+  .btn--cancel {
+    background: $backgrounds-color;
+    color: $primary-color-text;
+  }
+
+  .btn--apply {
+    background: $primary-color;
+    color: $app-white;
+  }
+}
+
+@include sm {
+  .filters-row-modal {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+// Mobile filters content
+.mobile-filters-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: flex-end;
+
+    .btn {
+      padding: 0;
+      border: none;
+      border-radius: 8px;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &--search {
+        background: $primary-color;
+
+        &:disabled {
+          background: #7FB6FF;
+          cursor: not-allowed;
+
+          &:hover {
+            transform: none;
+            background: #7FB6FF;
+          }
+        }
+      }
+
+      &--clear {
+        background: $primary-color;
+
+        &:disabled {
+          background: #7FB6FF;
+          cursor: not-allowed;
+
+          &:hover {
+            transform: none;
+            background: #7FB6FF;
+          }
+        }
+      }
+
+      &--filter {
+        background: $primary-color;
+
+        img {
+          width: 18px;
+          height: 16px;
+        }
+
+        &:disabled {
+          background: #7FB6FF;
+          cursor: not-allowed;
+
+          img {
+            background: #7FB6FF;
+          }
+
+          &:hover {
+            transform: none;
+            background: #7FB6FF;
+          }
+        }
+      }
+
+      &:hover:not(:disabled) {
+        opacity: 0.9;
+      }
+
+      &:active:not(:disabled) {
+        transform: scale(0.95);
+      }
+    }
+  }
+}
+
+::ng-deep .table__body-row-item button.btn-eye {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform 0.2s ease !important;
+}
+
+::ng-deep .table__body-row-item button.btn-eye svg {
+  width: 13px !important;
+  height: 13px !important;
+  fill: black !important;
+}
+
+::ng-deep .table__body-row-item button.btn-eye:hover {
+  transform: scale(1.1) !important;
+}
+
+::ng-deep .table__body-row-item button.btn-eye:hover svg {
+  fill: black  !important;
+}
+
+::ng-deep .table__body-row-item:last-child {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+
+::ng-deep {
+  body .cdk-overlay-container {
+    z-index: 10000 !important;
+  }
+
+  .cdk-overlay-backdrop {
+    z-index: 898 !important;
+  }
+  app-ip-select-input {
+    display: block;
+    width: 100%;
+    position: relative;
+    
+    .form-floating {
+      position: relative;
+      margin-bottom: 0 !important;
+      padding-top: 0.5rem;
+      
+      .ip-select-label-floating {
+        position: absolute;
+        top: 1rem;
+        left: 0.75rem;
+        transform: none;
+        background: white;
+        padding: 0 0.25rem;
+        color: #94A3B8;
+        font-size: 0.75rem;
+        line-height: 1;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 1 !important;
+        display: block !important;
+      }
+    }
+
+    .form-control {
+      width: 100%;
+      height: 2.5rem;
+      padding: 0 0.75rem;
+      border: 1px solid #dee2e6;
+      border-radius: 0.5rem;
+      background: #FFFFFF;
+      color: $primary-color-text;
+      font-size: 0.875rem;
+      outline: none;
+      box-sizing: border-box;
+      
+      &:focus {
+        border-color: $primary-color;
+        box-shadow: 0 0 0 1px $primary-color;
+      }
+      
+      @media (max-width: 767px) {
+        height: 2rem;
+      }
+    }
+  }
+
+  mat-select {
+    @include generalInputText();
+    color: #1F2933 !important;
+
+    .mat-mdc-select-arrow-wrapper {
+      position: absolute !important;
+      top: 5px;
+      right: 12px;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      pointer-events: none;
+
+      svg {
+        fill: #6B7280 !important;
+      }
+    }
+
+    .mdc-select__anchor {
+      background: #FFFFFF !important;
+      border: 1px solid #E0E6ED !important;
+      border-radius: 8px !important;
+      transition: border-color 0.2s ease;
+
+      &:focus-within {
+        border-color: $primary-color !important;
+      }
+    }
+  }
+
+  app-ip-input {
+  display: block;
+  width: 100%;
+  position: relative;
+  
+  .form-floating {
+    position: relative;
+    margin-bottom: 0 !important;
+    width: 100%;
+    
+    input.form-control {
+      width: 100%;
+      height: 2.5rem;
+      padding: 0 0.75rem;
+      border: 1px solid #dee2e6;
+      border-radius: 0.5rem;
+      background: #FFFFFF;
+      color: $primary-color-text;
+      font-size: 0.1111175rem;
+      box-sizing: border-box;
+      
+      &:focus {
+        border-color: $primary-color;
+        box-shadow: 0 0 0 1px $primary-color;
+      }
+      
+      @media (max-width: 767px) {
+        height: 2rem;
+      }
+    }
+    
+    label {
+      position: absolute;
+      top: 0;
+      left: 1rem;
+      padding: 0 0.25rem;
+      font-size: 0.7rem;
+      color: #6B7280;
+      z-index: 2;
+      pointer-events: none;
+      transform: scale(0.85) translateY(-50%);
+      transform-origin: left center;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    
+    .form-control {
+      position: relative;
+      z-index: 1;
+      background: transparent !important;
+    }
+  }
+}
+}

@@ -1,0 +1,69 @@
+@import "../mixins/variables/size.scss";
+
+// we could add a smaller mixin
+@mixin smallSm {
+  @media only screen and (max-width: $screen-sm) {
+    @content;
+  }
+}
+
+// Small devices (phones)
+@mixin sm {
+  @media only screen and (width < $screen-sm) {
+    @content;
+  }
+}
+
+// Medium devices (tablets)
+@mixin md {
+  @media only screen and (width >= $screen-sm) and (width < $screen-md) {
+    @content;
+  }
+}
+
+// Large devices (desktops)
+@mixin lg {
+  @media only screen and (width >= $screen-md) and (width < $screen-lg) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media screen and (width >= $screen-lg) {
+    @content;
+  }
+}
+
+@mixin mmd {
+  @media only screen and (min-width: $screen-md) and (max-width: $screen-mmd) {
+    @content;
+  }
+}
+
+@mixin smallPhone {
+  @media only screen and (max-height: $screen-v-sm) and (max-width: $screen-h-sm) {
+    @content;
+  }
+}
+
+@mixin hover {
+  @media (hover: hover) {
+    @content;
+  }
+}
+
+@mixin medias($breakpoints...) {
+  @each $breakpoint in $breakpoints {
+    @if $breakpoint == sm {
+      @include sm { @content; }
+    } @else if $breakpoint == md {
+      @include md { @content; }
+    } @else if $breakpoint == lg {
+      @include lg { @content; }
+    } @else if $breakpoint == xl {
+      @include xl { @content; }
+    } @else {
+      @warn "Unknown breakpoint: #{$breakpoint}";
+    }
+  }
+}

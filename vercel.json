@@ -1,0 +1,4 @@
+{
+  "buildCommand": "ng build base && ng build test-library --configuration production",
+  "outputDirectory": "dist/test-library"
+}

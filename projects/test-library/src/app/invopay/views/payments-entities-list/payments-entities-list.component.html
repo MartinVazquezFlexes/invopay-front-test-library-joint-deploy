@@ -1,0 +1,85 @@
+<div class="payment-entities">
+  <div class="payment-entities__card">
+    <!-- Title Section -->
+    <div class="payment-entities__title-section">
+      <h1 class="payment-entities__title">{{ 'IP.PAYMENTS_ENTITIES.TITTLE' | translate }}</h1>
+    </div>
+
+    <!-- Table Container - Desktop -->
+    <div class="payment-entities__table-container payment-entities__table-container--desktop">
+      <div class="payment-entities__body">
+        <div>
+          <app-table
+            *ngIf="titlesFile && titlesFile.size > 0 && paginatedData && paginatedData.length > 0"
+            [data]="paginatedData"
+            [initTable]="false"
+            [propertyOrder]="columns"
+            [titlesFile]="titlesFile"
+            [actions]="actions"
+            keyTranslate="IP.ADMIN_TABLE"
+            [scroll]="true"
+            [tableStyle]="tableStyle"
+            (action)="onTableAction($event)">
+          </app-table>
+          
+          <app-no-data 
+            *ngIf="titlesFile && titlesFile.size > 0 && (!paginatedData || paginatedData.length === 0)">
+          </app-no-data>
+        </div>
+      </div>
+
+      <!-- Paginator Section - Desktop -->
+      <div class="payment-entities__paginator-container payment-entities__paginator-container--desktop" *ngIf="paginatedData && paginatedData.length > 0">
+        <div class="payment-entities__rows-per-page">
+          <select class="payment-entities__rows-select" [(ngModel)]="itemsPerPage" (ngModelChange)="onItemsPerPageChange($event)">
+            <option [value]="10">10</option>
+            <option [value]="25">25</option>
+            <option [value]="50">50</option>
+            <option [value]="100">100</option>
+          </select>
+        </div>
+        
+        <app-paginator 
+          *ngIf="showPaginator"
+          class="payment-entities__paginator"
+          [totalItems]="totalItems"
+          [itemsPerPage]="itemsPerPage"
+          [currentPages]="currentPages"
+          (pageChange)="onPageChange($event)">
+        </app-paginator>
+      </div>
+    </div>
+
+    <!-- Cards Container - Mobile -->
+    <div class="payment-entities__cards-container payment-entities__cards-container--mobile">
+      <app-mobile-card-list
+        [data]="paginatedData"
+        [config]="mobileCardConfig"
+        [showNoData]="!paginatedData || paginatedData.length === 0"
+        (cardAction)="onMobileCardAction($event)">
+        <app-no-data no-data></app-no-data>
+      </app-mobile-card-list>
+
+      <!-- Paginator Section - Mobile -->
+      <div class="payment-entities__paginator-container payment-entities__paginator-container--mobile" *ngIf="paginatedData && paginatedData.length > 0">
+        <div class="payment-entities__rows-per-page">
+          <select class="payment-entities__rows-select" [(ngModel)]="itemsPerPage" (ngModelChange)="onItemsPerPageChange($event)">
+            <option [value]="10">10</option>
+            <option [value]="25">25</option>
+            <option [value]="50">50</option>
+            <option [value]="100">100</option>
+          </select>
+        </div>
+        
+        <app-paginator 
+          *ngIf="showPaginator"
+          class="payment-entities__paginator"
+          [totalItems]="totalItems"
+          [itemsPerPage]="itemsPerPage"
+          [currentPages]="currentPages"
+          (pageChange)="onPageChange($event)">
+        </app-paginator>
+      </div>
+    </div>
+  </div>
+</div>

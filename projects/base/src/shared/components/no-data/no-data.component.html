@@ -1,0 +1,6 @@
+<div class="ip-no-data__not-found">
+  <img class="ip-no-data__not-found-image" src="assets/img/ip-table/no-data.svg" />
+  <span class="ip-no-data__not-found-text" *ngIf="service">
+    {{ setText(service) | translate }}
+  </span>
+</div>

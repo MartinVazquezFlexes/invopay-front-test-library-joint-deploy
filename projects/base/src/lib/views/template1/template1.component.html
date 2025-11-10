@@ -1,0 +1,28 @@
+<section>
+    <header>
+        <app-ip-title-mobile 
+            [title]="'IP.REVENUES.TITLE' | translate" 
+            btn="filter"
+            (clicked)="onFilterClicked()" 
+        />
+    </header>
+    <main *ngIf="!!revenues">
+        <app-table 
+            [data]="revenues" 
+            [propertyOrder]="propertyOrder" 
+            [keyTranslate]="keyTranslate"
+            tableStyle="invopay" 
+            [actions]="actions" 
+            [actionKey]="'IP.TABLE'"
+            (action)="onAction($event)" 
+            />
+        </main>
+            <footer *ngIf="!!revenues">
+                <app-paginator 
+                    [currentPages]="currentPage + 1"
+                    [itemsPerPage]="pageItems" 
+                    [totalItems]="totalItems" 
+                    (pageChange)="onPageChange($event)" 
+                    />
+            </footer>
+</section>

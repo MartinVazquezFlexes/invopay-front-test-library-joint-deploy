@@ -1,0 +1,28 @@
+<div class="langSelector">
+  <button mat-button extended [matMenuTriggerFor]="menu" color="primary">
+    <div class="langSelector__text-color">
+      <img src="assets/img/header/language.svg" alt="Lang" />
+      <span class="ms-1">
+        <i>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="17"
+            height="17"
+            viewBox="0 0 216 384"
+          >
+            <path fill="currentColor" d="M0 139h213L107 245z" />
+          </svg>
+        </i>
+      </span>
+    </div>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button
+      mat-menu-item
+      *ngFor="let lang of langs"
+      (click)="selectLang(lang.code)"
+    >
+      {{ lang.label | translate }}
+    </button>
+  </mat-menu>
+</div>

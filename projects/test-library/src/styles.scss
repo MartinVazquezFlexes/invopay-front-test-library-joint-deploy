@@ -1,0 +1,375 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
+
+@import "/src/app/shared/mixins/variables/color.scss";
+@import "/src/app/shared/mixins/sizes.scss";
+@import "/src/app/shared/mixins/generalText.scss";
+
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$finsuite-primary: mat.define-palette(mat.$indigo-palette);
+$finsuite-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$finsuite-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$finsuite-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $finsuite-primary,
+      accent: $finsuite-accent,
+      warn: $finsuite-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($finsuite-theme);
+
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Roboto, "Helvetica Neue", sans-serif;
+  font-variant-numeric: tabular-nums;
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 2rem !important;
+    @media (max-width: 1600px) {
+      border-radius: 1.5rem !important;
+    }
+    @media (max-width: 1366px) {
+      border-radius: 1.4rem !important;
+    }
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+
+/* FADE ANIMATION */
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+:root {
+  --secondary-color: #{$secondary-color};
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #c3c3c3;
+  border-radius: 20px;
+}
+
+@media (width < 1024px) {
+  *::-webkit-scrollbar {
+    width: 0;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 20px;
+  }
+}
+
+.mat-calendar-period-button {
+  pointer-events: none;
+}
+.mat-calendar-arrow {
+  display: none !important;
+}
+
+.mat-calendar-body-cell {
+  &-content {
+    &:hover {
+      background: var(--loginButtonBackgroundColor);
+      opacity: 0.8;
+      color: #fff;
+    }
+    &.mat-focus-indicator {
+      background: #fff !important;
+      &:hover {
+        background-color: var(--loginButtonBackgroundColor) !important;
+      }
+    }
+
+    &.mat-calendar-body {
+      &-selected {
+        background-color: var(--loginButtonBackgroundColor) !important;
+
+        &:hover {
+          background-color: var(--loginButtonBackgroundColor) !important;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}
+.mat-datepicker-content {
+  .mat-calendar {
+    width: 15rem !important;
+    height: 100% !important;
+  }
+}
+
+.my-snackbar {
+  margin-top: 2rem !important;
+}
+
+.error-snackbar {
+  --mat-snack-bar-button-color: #e6e6e6;
+  --mdc-snackbar-container-color: #b80c09;
+}
+
+.success-snackbar {
+  --mdc-snackbar-container-color: #33a3aa;
+}
+
+.mat-mdc-radio-button
+  .mdc-radio
+  .mdc-radio__native-control:enabled:checked
+  + .mdc-radio__background
+  .mdc-radio__outer-circle {
+  border-color: $secondary-color !important;
+}
+
+.mat-mdc-radio-button
+  .mdc-radio
+  .mdc-radio__native-control:enabled
+  + .mdc-radio__background
+  .mdc-radio__inner-circle {
+  border-color: $secondary-color !important;
+}
+
+.mat-mdc-radio-button.mat-mdc-radio-checked .mat-ripple-element {
+  background-color: $secondary-color !important;
+}
+
+.mat-mdc-radio-button.mat-mdc-radio-checked .mdc-radio__background::before {
+  background-color: $secondary-color !important;
+}
+
+.mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background{
+  background-color: $secondary-color !important;
+  border-color: $secondary-color !important;
+}
+
+.mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background,
+.mdc-checkbox__ripple {
+  background-color: $secondary-color !important;
+  border-color: $secondary-color !important;
+}
+
+.mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full{
+  background-color: $secondary-color !important;
+  border-color: $secondary-color !important;
+}
+
+.mat-mdc-checkbox .mdc-checkbox__background{
+  @include sm(){
+    transform: scale(0.8);
+  }
+  @include md(){
+    transform: scale(0.8);
+  }
+  @include lg(){
+    transform: scale(0.8);
+  }  
+} 
+
+.mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{
+  background-color: $secondary-color !important;
+  border-color: $secondary-color !important;
+}
+
+.soft-label .mat-mdc-checkbox .mdc-form-field {
+  color: #838b9e !important;
+}
+
+select:focus {
+  outline: 1px solid #dedede;
+}
+
+input:focus {
+  outline: 1px solid #dedede;
+}
+
+button:focus {
+  outline: 1px solid #dedede;
+}
+
+.form-control:focus {
+  border-color: var(--bs-border-color);
+}
+
+.mdc-tab__text-label {
+  @include mainTabText; 
+}
+
+.mat-mdc-tab .mdc-tab-indicator__content--underline {
+  border-color: $secondary-color !important;
+}
+
+    
+.mat-mdc-tab.mdc-tab {
+  @include lg{
+    height: 2rem !important;
+  }
+  @include md{
+    height: 2rem !important;
+  }
+  @include sm{
+    height: 2rem !important;
+  }
+}
+.mdc-tab__text-label {
+  @include lg{
+    font-size: 0.8rem !important;
+  }
+  @include md{
+    font-size: 0.8rem !important;
+  }
+  @include sm{
+    font-size: 0.8rem !important;
+  }
+}
+
+.mat-mdc-select-trigger{
+  height: 2.5rem;
+  padding: 0rem 0.75rem ;
+  @include sm(){
+    height: 2rem;
+  }
+  @include md(){
+    height: 2rem;
+  }
+  @include lg(){
+    height: 2rem;
+  }
+}
+
+.mat-mdc-option{
+  min-height: 2.5rem !important;
+  @include lg(){
+    min-height: 2rem !important;
+  }
+  @include md(){
+    min-height: 2rem !important;
+  }
+  @include sm(){
+    min-height: 2rem !important;
+  }
+}
+
+.mat-mdc-option .mat-pseudo-checkbox-full{
+  @include lg(){
+    transform: scale(0.7) !important;
+  }
+  @include md(){
+    transform: scale(0.7) !important;
+  }
+  @include sm(){
+    transform: scale(0.7) !important;
+  }
+}
+
+.cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel {
+  border-radius: 1rem;
+  font-size: 0.85rem;
+  @include lg(){
+    font-size: 0.75rem;
+  }
+  @include md(){
+    font-size: 0.75rem;
+  }
+  @include sm(){
+    font-size: 0.75rem;
+  }
+}
+
+.mat-select-search-clear{
+  transform: scale(0.7) translateY(-20%);
+  @include lg(){
+    transform: scale(0.5) translateY(-30%);
+  }
+  @include md(){
+    transform: scale(0.5) translateY(-30%);
+  }
+  @include sm(){
+    transform: scale(0.5) translateY(-30%);
+  }
+}
+
+.mat-horizontal-stepper-header .mat-step-icon{
+  @include lg(){
+    transform: scale(0.7);
+  }
+  @include md(){
+    transform: scale(0.7);
+  }
+  @include sm(){
+    transform: scale(0.7);
+  }
+}
+
+.mat-horizontal-stepper-header-container{
+  @include lg(){
+    margin-top: 0rem !important;
+  }
+  @include md(){
+    margin-top: 0rem !important;
+  }
+}
+
+input[type=checkbox]{
+  accent-color: $primary-color;
+}
+
+.ip-icon-svg {
+  filter: $filter-primary-color;
+}
+
+.mat-mdc-tab-labels{
+  margin-left: 0.5rem;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;}

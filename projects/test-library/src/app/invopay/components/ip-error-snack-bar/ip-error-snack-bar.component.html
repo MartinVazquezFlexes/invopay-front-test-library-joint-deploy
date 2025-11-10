@@ -1,0 +1,15 @@
+<div class="ip-error-snack-bar">
+  <div class="ip-error-snack-bar__label" matSnackBarLabel>
+    <h2>{{ this.data.title }}</h2>
+    <p>{{ this.data.description }}</p>
+  </div>
+  <div matSnackBarActions>
+    <button
+      mat-button
+      matSnackBarAction
+      (click)="snackBarRef.dismissWithAction()"
+    >
+      ✖
+    </button>
+  </div>
+</div>

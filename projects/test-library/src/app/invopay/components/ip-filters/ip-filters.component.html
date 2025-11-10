@@ -1,0 +1,96 @@
+<form novalidate [formGroup]="form" class="ip-filters" (submit)="onSubmit()">
+  <h1 class="ip-filters__title">{{ "IP.FILTERS.ADD" | translate }}</h1>
+  <span
+    class="ip-filters__close"
+    (click)="onClose()"
+    [ngStyle]="{
+      'background-image': 'url(assets/img/ip-filters/close.svg)'
+    }"
+  ></span>
+
+  <div
+    class="ip-filters__range"
+    *ngIf="service !== 'active-contracts' && service !== 'purchase-order'"
+  >
+    <div class="ip-filters__range-container">
+      <label for="numberFrom" class="ip-filters__range-container-label">{{
+        "IP.FILTERS.AMOUNT_RANGE" | translate
+      }}</label>
+      <button
+        (click)="resetForm($event)"
+        class="ip-filters__range-container-clean"
+      >
+        {{ "IP.FILTERS.CLEAN" | translate }}
+      </button>
+    </div>
+
+    <input
+      class="ip-filters__range-from"
+      formControlName="amountFrom"
+      type="number"
+      name="numberFrom"
+      (keypress)="validateFormat($event)"
+      (input)="inputChangeAmountFrom($event)"
+      id=""
+      placeholder="Desde"
+      min="0"
+    />
+    <input
+      class="ip-filters__range-to"
+      formControlName="amountTo"
+      (keypress)="validateFormat($event)"
+      (input)="inputChangeAmountTo($event)"
+      type="number"
+      name="numberTo"
+      id=""
+      placeholder="Hasta"
+      [min]="minAmountTo"
+      [ngClass]="{'input-invalid': amountToValidate}"
+    />
+  </div>
+  <mat-error
+  *ngIf="this.amountToValidate"
+  style="font-size: 0.8rem;"
+    class="error-message"
+  >
+    {{ "IP.FORM-MODAL.AMOUNTTO" | translate }}
+  </mat-error>
+  <div class="ip-filters__date" *ngIf="!this.onlyLast30days">
+    <div class="ip-filters__date-input">
+      <label for="" class="ip-filters__date-label">{{
+        "IP.FILTERS.DATE.FROM" | translate
+      }}</label>
+      <input
+        type="date"
+        [max]="maxDate"
+        formControlName="createDateFrom"
+        (change)="onStartDateChange()"
+        id="startDate"
+        name="startDate"
+      />
+    </div>
+    <div class="ip-filters__date-input">
+      <label for="" class="ip-filters__date-label">{{
+        "IP.FILTERS.DATE.TO" | translate
+      }}</label>
+      <input
+        type="date"
+        formControlName="createDateTo"
+        [min]="minEndDate"
+        [max]="maxEndDate"
+        id="endDate"
+        name="endDate"
+      />
+    </div>
+  </div>
+
+  <button
+    class="ip-filters__button ip-filters__button{{
+      form.invalid ? '--disabled' : ''
+    }}"
+    [disabled]="form.invalid || this.amountToValidate"
+    type="submit"
+  >
+    {{ "IP.FILTERS.ADD_FILTER" | translate }}
+  </button>
+</form>

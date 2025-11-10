@@ -1,0 +1,33 @@
+<div class="form-floating" [style]="inputStyle">
+  <input
+    type="date"
+    class="form-control shadow-none"
+    [formControl]="control"
+    [min]="min"
+    [max]="max"
+    [id]="inputId"
+    (change)="onChanged($event)"
+    onkeydown="return false"
+    *ngIf="!withHour"
+  />
+  <input
+    type="datetime-local"
+    class="form-control shadow-none"
+    [formControl]="control"
+    [min]="min"
+    [max]="max"
+    [id]="inputId"
+    (change)="onChanged($event)"
+    onkeydown="return false"
+    *ngIf="withHour"
+  />
+  <label [for]="inputId">{{ label }}</label>
+  <div
+    class="error-message"
+    *ngIf="
+      control.invalid &&
+      control.touched &&
+      control.errors">
+    {{ getErrorMessage() | translate }}
+  </div>
+</div>

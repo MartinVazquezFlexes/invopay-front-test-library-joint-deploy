@@ -1,0 +1,142 @@
+<div class="notification-tray" *ngIf="config">
+  <div class="notification-tray__card">
+    <!-- Title Section -->
+    <div class="notification-tray__title-section">
+      <h1 class="notification-tray__title">{{ config.title | translate }}</h1>
+      <button type="button" class="notification-tray__mobile-filter-btn" (click)="openMobileFilters()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+        {{ 'IP.REVENUE_LIST.FILTERS_TITLE' | translate}}
+      </button>
+    </div>
+
+    <!-- Filters Section -->
+    <div class="notification-tray__filters">
+      <div class="notification-tray__filters-container">
+        <div class="notification-tray__filter-group">
+          <app-ip-select-input
+            [options]="answeredOptions"
+            [labelCode]="'IP.NOTIFICATIONS.FILTERS.ANSWERED'"
+            [control]="answeredControl"
+            (selectEmitter)="selectedAnswered = $event">
+          </app-ip-select-input>
+        </div>
+
+        <div class="notification-tray__filter-group">
+          <app-ip-select-input
+            [options]="entityOptions"
+            [labelCode]="'IP.NOTIFICATIONS.FILTERS.ENTITY'"
+            [control]="entityControl"
+            (selectEmitter)="selectedEntity = $event">
+          </app-ip-select-input>
+        </div>
+
+        <div class="notification-tray__filter-group" *ngIf="brokerOptions.length > 0">
+          <app-ip-select-input
+            [options]="brokerOptions"
+            [labelCode]="'IP.NOTIFICATIONS.FILTERS.USER'"
+            [control]="brokerControl"
+            (selectEmitter)="selectedBroker = $event">
+          </app-ip-select-input>
+        </div>
+        <div class="notification-tray__filter-group" *ngIf="brokerOptions.length === 0">
+          <app-ip-input
+            [label]="'IP.NOTIFICATIONS.FILTERS.USER' | translate"
+            [control]="userInputControl"
+            [placeholder]="'IP.NOTIFICATIONS.FILTERS.USER_PLACEHOLDER' | translate">
+          </app-ip-input>
+        </div>
+
+        <div class="notification-tray__filter-actions">
+          <button class="btn btn--search" (click)="onSearch()" [disabled]="isSearchDisabled" [class.btn--disabled]="isSearchDisabled">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path [attr.stroke]="isSearchDisabled ? '#CBD5E0' : 'white'" d="M7 13A6 6 0 1 0 7 1a6 6 0 0 0 0 12zM15 15l-4-4" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="btn btn--clear" (click)="onClearFilters()" [disabled]="!isClearEnabled">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 -960 960 960" fill="#DCDBDD">
+              <path d="M120-40v-280q0-83 58.5-141.5T320-520h40v-320q0-33 23.5-56.5T440-920h80q33 0 56.5 23.5T600-840v320h40q83 0 141.5 58.5T840-320v280H120Zm80-80h80v-120q0-17 11.5-28.5T320-280q17 0 28.5 11.5T360-240v120h80v-120q0-17 11.5-28.5T480-280q17 0 28.5 11.5T520-240v120h80v-120q0-17 11.5-28.5T640-280q17 0 28.5 11.5T680-240v120h80v-200q0-50-35-85t-85-35H320q-50 0-85 35t-35 85v200Zm320-400v-320h-80v320h80Zm0 0h-80 80Z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Container - Desktop -->
+    <div class="notification-tray__table-container notification-tray__table-container--desktop">
+      <div class="notification-tray__body">
+        <app-table
+            *ngIf="titlesFile && titlesFile.size > 0 && paginatedData && paginatedData.length > 0"
+          [data]="paginatedData"
+            [initTable]="false"
+          [propertyOrder]="config.columns"
+            [titlesFile]="titlesFile"
+          [actions]="config.actions"
+            keyTranslate="IP.ADMIN_TABLE"
+            [scroll]="true"
+          [tableStyle]="config.tableStyle"
+          (action)="onTableAction($event)"
+          (sort)="onTableSort($event)">
+        </app-table>
+
+         <app-no-data 
+            *ngIf="titlesFile && titlesFile.size > 0 && (!paginatedData || paginatedData.length === 0)">
+          </app-no-data>
+      </div>
+
+      <!-- Paginator Section - Desktop -->
+      <div class="notification-tray__paginator-container notification-tray__paginator-container--desktop" *ngIf="paginatedData && paginatedData.length > 0">
+        <div class="notification-tray__rows-per-page">
+          <select class="notification-tray__rows-select" [(ngModel)]="itemsPerPage" (ngModelChange)="onItemsPerPageChange($event)">
+            <option [value]="10">10</option>
+            <option [value]="25">25</option>
+            <option [value]="50">50</option>
+            <option [value]="100">100</option>
+          </select>
+        </div>
+
+        <app-paginator
+          *ngIf="showPaginator"
+          class="notification-tray__paginator"
+          [totalItems]="totalItems"
+          [itemsPerPage]="itemsPerPage"
+          [currentPages]="currentPages"
+          (pageChange)="onPageChange($event)">
+        </app-paginator>
+      </div>
+    </div>
+
+    <!-- Cards Container - Mobile -->
+    <div class="notification-tray__cards-container notification-tray__cards-container--mobile">
+      <app-mobile-card-list
+        [data]="paginatedData"
+        [config]="mobileCardConfig"
+        [showNoData]="!paginatedData || paginatedData.length === 0"
+        (cardAction)="onMobileCardAction($event)">
+        <app-no-data no-data></app-no-data>
+      </app-mobile-card-list>
+
+      <!-- Paginator Section - Mobile -->
+      <div class="notification-tray__paginator-container notification-tray__paginator-container--mobile" *ngIf="paginatedData && paginatedData.length > 0">
+        <div class="notification-tray__rows-per-page">
+          <select class="notification-tray__rows-select" [(ngModel)]="itemsPerPage" (ngModelChange)="onItemsPerPageChange($event)">
+            <option [value]="10">10</option>
+            <option [value]="25">25</option>
+            <option [value]="50">50</option>
+            <option [value]="100">100</option>
+          </select>
+        </div>
+
+        <app-paginator
+          *ngIf="showPaginator"
+          class="notification-tray__paginator"
+          [totalItems]="totalItems"
+          [itemsPerPage]="itemsPerPage"
+          [currentPages]="currentPages"
+          (pageChange)="onPageChange($event)">
+        </app-paginator>
+      </div>
+    </div>
+  </div>
+</div>

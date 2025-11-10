@@ -1,0 +1,45 @@
+<div class="mobile-card-list" *ngIf="config">
+  <div class="mobile-card-list__item" *ngFor="let item of data">
+    <div class="mobile-card-list__header">
+      <div class="mobile-card-list__header-content">
+        <span class="mobile-card-list__header-label" *ngIf="config.headerLabel">{{ config.headerLabel }}</span>
+        <span class="mobile-card-list__header-value">{{ item[config.headerKey] }}</span>
+      </div>
+      <div class="mobile-card-list__action-container" *ngIf="config.showActionButton">
+        <button 
+          class="mobile-card-list__action-btn" 
+          (click)="toggleMenu(item)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <circle cx="8" cy="3" r="1.5"/>
+            <circle cx="8" cy="8" r="1.5"/>
+            <circle cx="8" cy="13" r="1.5"/>
+          </svg>
+        </button>
+        <div class="mobile-card-list__dropdown" *ngIf="showMenuForItem === item">
+          <button 
+            class="mobile-card-list__dropdown-item"
+            *ngFor="let action of config?.actions || ['search']"
+            (click)="onCardAction(item, action)">
+            {{ 'IP.ACTIONS_TOOLTIP.' + action.toUpperCase() | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="mobile-card-list__content">
+      <div 
+        class="mobile-card-list__row" 
+        *ngFor="let field of config.fields"
+        [class.mobile-card-list__row--highlight]="field.highlight">
+        <span class="mobile-card-list__label">{{ field.label }}</span>
+        <span 
+          class="mobile-card-list__value"
+          [class.mobile-card-list__value--amount]="field.isAmount">
+          {{ item[field.key] }}
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <ng-content *ngIf="showNoData" select="[no-data]"></ng-content>
+</div>

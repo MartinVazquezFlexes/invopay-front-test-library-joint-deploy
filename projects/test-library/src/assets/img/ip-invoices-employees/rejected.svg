@@ -1,0 +1,13 @@
+<!-- <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="32" cy="32" r="32" fill="#FADABC" fill-opacity="0.79"/>
+<path d="M39.7726 25.0918L22.0166 42.8478" stroke="#FF8A48" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M22.0165 25.0918L39.7725 42.8478" stroke="#FF8A48" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg> -->
+
+<svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="22.5" cy="22.5" r="22.5" fill="#FFF2E7"/>
+  <!-- Primera línea de la cruz (diagonal) -->
+  <path d="M26.7726 18.0918L18.0166 26.8478" stroke="#FF8A48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Segunda línea de la cruz (diagonal) -->
+  <path d="M18.0165 18.0918L26.7725 26.8478" stroke="#FF8A48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,134 @@
+<div class="chart" [@fideIn]="animationFideIn">
+  <ul class="chart__axis-amounts">
+    <li
+      *ngFor="let label of dataLabels"
+      [ngStyle]="{
+        'font-family': data.fontFamily ? data.fontFamily : '',
+        'font-size': data.fontSizeY ? data.fontSizeY + 'rem' : ''
+      }"
+    >
+      {{ label }}
+    </li>
+  </ul>
+
+  <ul
+    class="chart__axis-dates"
+    *ngIf="dateLabels"
+    [ngStyle]="{
+    'padding': padding ? '0 '+padding+'%' : '0 1%',
+  }"
+  >
+    <li
+      *ngFor="let label of dateLabels; let i = index"
+      [ngStyle]="{
+        color: nearestPoint && nearestPoint.index === i ? '#000' : '',
+        'font-family': data.fontFamily ? data.fontFamily : '',
+        'font-size': data.fontSizeX ? data.fontSizeX + 'rem' : '',
+        left: positionsX[i] + 'px',
+        display: this.showLabel(label)
+      }"
+    >
+      {{ label }}
+    </li>
+  </ul>
+
+  <div
+    class="chart__drawing"
+    [ngStyle]="{
+      height: data.fontSizeY ? 'calc( 100% - ' + data.fontSizeY + 'rem )' : ''
+    }"
+  >
+    <svg #chartContainer width="100%" xmlns="http://www.w3.org/2000/svg">
+      <line
+        *ngFor="let percent of rowsLine"
+        x1="0"
+        x2="100%"
+        [attr.y1]="percent + '%'"
+        [attr.y2]="percent + '%'"
+        [attr.stroke]="data.row.rowColor ? data.row.rowColor : '#EAEAEA'"
+        [attr.stroke-dasharray]="data.row.rowDash ? '5 5' : '0'"
+        [attr.stroke-width]="percent == 0 || percent == 100 ? 2 : 1"
+      ></line>
+
+      <line
+        class="chart__drawing-line-tooltip"
+        *ngIf="lineTooltip && nearestPoint"
+        [attr.x1]="nearestPoint.posX"
+        [attr.x2]="nearestPoint.posX"
+        [attr.y1]="nearestPoint.posY"
+        [attr.y2]="'100%'"
+        stroke-dasharray="5 5"
+        stroke="#33A3AA"
+      ></line>
+
+      <ng-container *ngFor="let data of datasets">
+        <linearGradient [id]="'G' + data.id" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="20%" [attr.stop-color]="data.gradient?.firstColor" />
+          <stop offset="100%" [attr.stop-color]="data.gradient?.secondColor" />
+        </linearGradient>
+
+        <filter
+          [id]="'S' + data.id"
+          x="-20%"
+          y="-20%"
+          width="140%"
+          height="300%"
+        >
+          <feDropShadow
+            dx="0"
+            dy="4"
+            stdDeviation="5"
+            [attr.flood-color]="data.shadow?.color"
+            [attr.flood-opacity]="data.shadow?.opacity"
+          />
+        </filter>
+        ;
+
+        <path
+          *ngIf="animationFideIn != 'active' && points.length"
+          [attr.d]="points[0].posX != undefined ? data.direction : 'M10,10'"
+          [attr.stroke]="data.gradient ? setGradient(data.id) : data.color"
+          [attr.stroke-width]="data.strokeLine"
+          stroke-linejoin="round"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="bevel"
+        />
+
+        <path
+          *ngIf="animationFideIn != 'active' && points.length"
+          [attr.d]="points[0].posX != undefined ? data.direction : 'M10,10'"
+          [attr.stroke]="data.gradient ? setGradient(data.id) : data.color"
+          [attr.filter]="data.shadow ? setShadow(data.id) : ''"
+          fill="none"
+        />
+      </ng-container>
+    </svg>
+
+    <div
+      #focusPoint
+      class="chart__drawing-circle"
+      *ngIf="data"
+      [ngStyle]="{
+        top: nearestPoint
+          ? nearestPoint.posY - nearestPoint.dataPoint.diameter / 2 + 'px'
+          : 0,
+        left: nearestPoint
+          ? nearestPoint.posX - nearestPoint.dataPoint.diameter / 2 + 'px'
+          : 0,
+        width: nearestPoint ? nearestPoint.dataPoint.diameter + 'px' : '',
+        height: nearestPoint ? nearestPoint.dataPoint.diameter + 'px' : '',
+        'background-color': nearestPoint ? nearestPoint.dataPoint.fill : '',
+        border: nearestPoint
+          ? nearestPoint.dataPoint.strokeWidth +
+            ' solid ' +
+            nearestPoint.dataPoint.strokeColor
+          : ''
+      }"
+    >
+      <div #svgInfoAmount class="chart__drawing-circle-label">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

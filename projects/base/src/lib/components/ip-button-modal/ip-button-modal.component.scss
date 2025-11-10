@@ -1,0 +1,111 @@
+@import "../../../shared/mixins/sizes.scss";
+@import "../../../shared/mixins/generalText.scss";
+@import "../../../shared/mixins/variables/color.scss";
+
+.ip-button {
+  width: 11.375rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  @include buttonText;
+  @include sm() {
+    width: 7.917rem;
+    height: 2rem;
+    border-radius: 0.696rem;
+  }
+  @include md() {
+    width: 6rem;
+    height: 2rem;
+    border-radius: 0.696rem;
+  }
+  @include lg() {
+    width: 7.917rem;
+    height: 2rem;
+    border-radius: 0.696rem;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default !important;
+  }
+
+  &:hover:enabled {
+    cursor: pointer;
+    background: $primary-color-hover
+  }
+
+  &__action {
+    color: $modal-btn-action-text-color;
+    background: $modal-btn-action-bg-color;
+  }
+
+  &__action2 {
+    color: $modal-btn-action-text-color;
+    background: $btn-action-style-two-bg-color;
+  }
+
+  &__cancel {
+    background: $modal-btn-cancel-bg-color;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: default !important;
+    }
+
+    &:hover:enabled {
+      cursor: pointer;
+      background: darken($modal-btn-cancel-bg-color, 10%);
+    }
+  }
+
+  &__clean {
+    background: $modal-btn-action-bg-color;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: default !important;
+    }
+  }
+
+  &__small {
+    width: 3.5rem;
+    height: 2.5rem;
+    @include sm() {
+      width: 2.5rem;
+      height: 2rem;
+    }
+    @include md() {
+      width: 2.3rem;
+      height: 2rem;
+    }
+    @include lg() {
+      width: 2.5rem;
+      height: 2rem;
+    }
+  }
+  
+  &__large {
+    width: 15rem;
+    height: 2.5rem;
+    @include sm() {
+      width: 12rem;
+      height: 2rem;
+    }
+    @include md() {
+      width: 11rem;
+      height: 2rem;
+    }
+    @include lg() {
+      width: 12rem;
+      height: 2rem;
+    }
+  }
+
+  &__text-btn {
+    @include buttonText();
+    color: $primary-color-text;
+  }
+}

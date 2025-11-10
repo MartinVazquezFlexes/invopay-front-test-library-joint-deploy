@@ -1,0 +1,21 @@
+<div class="form-floating">
+  <input 
+    [disabled]="disabled()"
+    [type]="type" 
+    [formControl]="control" 
+    [id]="inputId" 
+    class="form-control shadow-none" 
+    [placeholder]="placeholder"
+    autocomplete="off"
+    (keypress)="onKeypressed($event)"
+    (change)="onChanged($event)">
+  <label [for]="inputId">{{ label }}</label>
+  <div
+    class="error-message"
+    *ngIf="
+      control.invalid &&
+      control.touched &&
+      control.errors">
+    {{ getErrorMessage() | translate }}
+  </div>
+</div>

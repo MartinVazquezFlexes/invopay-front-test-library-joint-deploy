@@ -1,0 +1,5 @@
+<svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="22.5" cy="22.5" r="22.5" fill="#E6FFE6"/> <!-- Fondo más verdoso -->
+  <ellipse cx="22.2261" cy="22.2182" rx="8.38043" ry="8.24948" fill="#228B22" fill-opacity="0.25"/> <!-- Verde suave -->
+  <path d="M22.2246 17.0625V21.9606C22.2246 22.103 22.34 22.2184 22.4824 22.2184H25.3673" stroke="#228B22" stroke-width="1.03119" stroke-linecap="round"/> <!-- Verde más oscuro -->
+</svg>

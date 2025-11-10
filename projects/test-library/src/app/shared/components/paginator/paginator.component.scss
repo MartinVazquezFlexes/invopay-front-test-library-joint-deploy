@@ -1,0 +1,99 @@
+@import "../../mixins/variables/color.scss";
+@import "../../mixins/generalText.scss";
+@import "../../mixins/sizes.scss";
+.ip-paginator {
+  width: 100%;
+  height: 4.75rem;
+  display: inline-flex;
+  padding: 1.06rem;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 0.3125rem;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  @include sm() {
+    justify-content: center;
+  }
+  &__text {
+    @include paginatorText();
+
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    padding-right: 1.69rem;
+  }
+  &__botton {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.5rem;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    font-size: 0.7rem;   
+    padding: 0; 
+    @include lg() {
+      font-size: 0.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      img{
+        transform: scale(0.8);
+      }
+    }
+    @include md() {
+      font-size: 0.5rem;
+      width: 1.3rem;
+      height: 1.3rem;
+      img{
+        transform: scale(0.8);
+      }
+    }
+  }
+  &__elipsis {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.5rem;
+    background: #fff;
+    color: #333;
+    font-family: var(--fontName);
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .disabled {
+    img{
+      filter: invert(79%) sepia(0%) saturate(2871%) hue-rotate(34deg) brightness(81%) contrast(84%);
+    }
+  }
+  .selected {
+    color: $background-tables;
+    background: $primary-color;
+  }
+
+  @media (width < 768px) {
+    align-items: center;
+    &__text {
+      font-size: 0.58rem;
+      align-items: flex-end;
+      height: auto;
+      padding-right: 0.3rem;
+    }
+    &__botton {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 0.25rem;
+      font-size: 0.4rem;
+      padding: 0;
+    }
+  }
+}

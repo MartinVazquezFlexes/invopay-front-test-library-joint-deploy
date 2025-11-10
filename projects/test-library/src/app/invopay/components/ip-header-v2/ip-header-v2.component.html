@@ -1,0 +1,144 @@
+<div class="ip-header-v2">
+  <mat-toolbar class="ip-header-v2__toolbar">
+    <div class="ip-header-v2__left">
+      <button
+        mat-icon-button
+        class="ip-header-v2__menu-button-desktop-only"
+        *ngIf="!isMobile"
+        (click)="toggleSidenav()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img src="assets/new-styles/logo.svg" alt="Logo" class="ip-header-v2__img" />
+    </div>
+
+    <div class="ip-header-v2__right">
+      <div class="ip-header-v2__settings">
+        <app-ip-settings></app-ip-settings>
+      </div>
+      <div class="ip-header-v2__title-company" *ngIf="businessName">
+        <span class="ip-header-v2__title-company-name">
+          {{ businessName }}
+        </span>
+        <div class="ip-header-v2__title-company-licence">
+          <span>{{ userName }}</span>
+        </div>
+      </div>
+
+      <button (click)="onLogout()" mat-icon-button class="ip-header-v2__icon-button" *ngIf="!isMobile">
+        <mat-icon>logout</mat-icon>
+      </button>
+
+      <button *ngIf="isMobile" mat-icon-button (click)="toggleSidenav()" class="ip-header-v2__menu-button">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container autosize #matSidenavContainer class="ip-header-v2__sidenav-container">
+    <mat-sidenav
+      #sidenav
+      class="ip-header-v2__sidenav"
+      [ngClass]="{ 'collapsed': !isExpanded }"
+      [mode]="isMobile ? 'over' : 'side'"
+      [opened]="!isMobile || sidenavOpened"
+      (mouseenter)="expandSidenav()"
+      (mouseleave)="collapseSidenav()"
+    >
+      <mat-nav-list class="ip-header-v2__nav-list">
+        <ng-container *ngFor="let item of listItems">
+          <div *ngIf="item.show !== false" class="ip-header-v2__nav-list-section">
+            <hr *ngIf="item.line === true" class="ip-header-v2__nav-list-divider" />
+
+            <div
+              class="ip-header-v2__nav-item"
+              [ngClass]="{
+                'ip-header-v2__nav-item--selected': isSubItemActive(item),
+                'ip-header-v2__nav-item--has-submenu': item.subItems?.length
+              }"
+              [routerLinkActive]="['ip-header-v2__nav-item--selected']"
+              [routerLinkActiveOptions]="{ exact: true }"
+              [routerLink]="item.link"
+              (click)="onCloseSidenav(item)"
+              *ngIf="item.line !== true"
+            >
+              <div class="ip-header-v2__nav-item-content">
+                <img *ngIf="item.img" [src]="item.img" alt="" class="ip-header-v2__nav-item-img" />
+                <span class="ip-header-v2__nav-item-text" *ngIf="isExpanded || isMobile">{{ item.text }}</span>
+              </div>
+
+              <div class="ip-header-v2__nav-item-arrow" *ngIf="item.subItems?.length && (isExpanded || isMobile)">
+                <img
+                  [src]="item.showSubItems
+                    ? 'assets/new-styles/icons/sidebar/row-up.svg'
+                    : 'assets/new-styles/icons/sidebar/row-down.svg'"
+                  alt="toggle submenu"
+                />
+              </div>
+            </div>
+
+            <!-- Subitems -->
+            <div
+              class="ip-header-v2__nav-sublist"
+              *ngIf="item.showSubItems && item.subItems?.length && (isExpanded || isMobile)"
+            >
+              <ng-container *ngFor="let subItem of item.subItems">
+                <div *ngIf="subItem.line === true" class="ip-header-v2__nav-sublist-divider">
+                  <hr />
+                  <span class="ip-header-v2__nav-sublist-title" *ngIf="subItem.titleLine !== null">
+                    {{ subItem.titleLine }}
+                  </span>
+                </div>
+                <a
+                  *ngIf="subItem.show !== false"
+                  routerLink="{{ subItem.link }}"
+                  routerLinkActive="ip-header-v2__nav-sublist-item--selected"
+                  class="ip-header-v2__nav-sublist-item"
+                  (click)="onCloseSidenav2(item)"
+                >
+                  <div class="ip-header-v2__nav-sublist-item-content">
+                    <!-- <img
+                      src="assets/icons/row-right.svg"
+                      alt="arrow"
+                      class="ip-header-v2__nav-sublist-arrow{{
+                        subItem.link === selectedItem!.link ? '-selected' : ''
+                      }}"
+                    /> -->
+                    {{ subItem.text }}
+                  </div>
+                </a>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="ip-header-v2__nav-mobile" *ngIf="typeManager !== 'ENTERPRISE_USER'">      
+          <hr class="ip-header-v2__nav-list-divider" />
+          <div
+            *ngFor="let item of managementItems; let i = index"
+          >
+            <div class="ip-header-v2__nav-manage ip-header-v2__nav-item"
+              (click)="onCloseSidenav(item)"
+              [routerLink]="item.link">
+              <img src="{{ item.img }}" alt="" class="ip-header-v2__nav-item-img" /> {{ item.text }}
+            </div>
+          </div>    
+        </div>
+
+        <div class="ip-header-v2__nav-mobile">    
+          <hr class="ip-header-v2__nav-list-divider" />
+          <div class="ip-header-v2__nav-manage ip-header-v2__nav-item" (click)="onLogout()">
+            <img src="assets/new-styles/icons/sidebar/logout-icon.svg" alt="logout" class="ip-header-v2__nav-item-img" />
+            <span class="ip-header-v2__nav-item-text" *ngIf="isExpanded || isMobile"> {{ 'IP.SIDENAV.OPTIONS.LOGOUT' | translate }} </span>
+          </div>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="ip-header-v2__content">
+      <div class="ip-header-v2__main-content">
+        <ng-content></ng-content>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

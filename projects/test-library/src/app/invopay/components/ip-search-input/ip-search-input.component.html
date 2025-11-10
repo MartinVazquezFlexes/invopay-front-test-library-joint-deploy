@@ -1,0 +1,23 @@
+<div class="ip-search-input">
+  <img
+    *ngIf="!hidePrefix"
+    class="ip-search-input__icon"
+    src="assets/new-styles/icons/buttons/search-icon.svg"
+  />
+  <input
+    *ngIf="!isKeyUp"
+    class="ip-search-input__field{{ hidePrefix ? '-hidePrefix' : '' }}"
+    type="text"
+    [placeholder]="placeholder"
+    [(ngModel)]="this.searchValue"
+    (keydown.enter)="this.onSearch.emit(this.searchValue)"
+  />
+  <input
+    *ngIf="isKeyUp"
+    class="ip-search-input__field{{ hidePrefix ? '-hidePrefix' : '' }}"
+    type="text"
+    [placeholder]="placeholder"
+    [(ngModel)]="this.searchValue"
+    (keyup)="this.onSearch.emit(this.searchValue)"
+  />
+</div>

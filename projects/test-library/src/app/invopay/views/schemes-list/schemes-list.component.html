@@ -1,0 +1,113 @@
+<div class="schemes">
+  <div class="schemes__header">
+    <h2 class="schemes__title">{{ "IP.SCHEMES.TITLE" | translate }}</h2>
+  </div>
+
+  <app-modal-schema
+    *ngIf="showModal"
+    [schemaId]="schemaId"
+    [context]="context"
+    (close)="closeModal()"
+    (updateTable)="updateTable()"
+  >
+  </app-modal-schema>
+
+  <div class="schemes__card">
+    <div class="schemes__table-view">
+      <!--[actions]="actions"-->
+      <app-table
+        *ngIf="pagedData.length > 0"
+        [propertyOrder]="propertyOrder"
+        [data]="pagedData"
+        [keyTranslate]="keyTranslate"
+        [tableStyle]="'invopay'"
+        [actionsIf]="actionsIf"
+        [actions]="actions"
+        [initTable]="initTable"
+        [scroll]="scroll"
+        (action)="onAction($event)"
+        (selectedItemsChange)="onSelectedItemsChange($event)"
+      >
+      </app-table>
+    </div>
+
+    <!--Mostrar si es mobile-->
+    <!--Hacer card la info para mobile-->
+    <div class="schemes__card-view" *ngFor="let item of pagedData">
+      <div class="schemes__card-header">
+        <span class="schemes__card-id">#{{ item.id }}</span>
+        <div class="schemes__menu">
+          <button class="schemes__menu-button" (click)="toggleMenu(item.id)">
+            ⋮
+          </button>
+          <div class="schemes__menu-dropdown" *ngIf="openMenuId === item.id">
+            <button
+              class="schemes__menu-item"
+              (click)="openModal(item.id, 'detail')"
+            >
+              {{ "IP.SCHEMES.SEE" | translate }}
+            </button>
+            <button
+              class="schemes__menu-item"
+              (click)="openModal(item.id, 'status')"
+            >
+              <span *ngIf="item.isSchemaActive == 'No'">{{
+                "IP.SCHEMES.ACTIVE" | translate
+              }}</span>
+              <span *ngIf="item.isSchemaActive == 'Si'">{{
+                "IP.SCHEMES.DEACTIVED" | translate
+              }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="schemes__card-row">
+        <label class="schemes__card-label">{{
+          "IP.ADMIN_TABLE.SCHEMENAME" | translate
+        }}</label>
+        <span class="schemes__card-value schemes__card-value--amount">{{
+          item.schemeName
+        }}</span>
+      </div>
+
+      <div class="schemes__card-row">
+        <label class="schemes__card-label">{{
+          "IP.ADMIN_TABLE.DESCRIPTION" | translate
+        }}</label>
+        <span class="schemes__card-value">{{ item.description }}</span>
+      </div>
+
+      <div class="schemes__card-row">
+        <label class="schemes__card-label">{{
+          "IP.ADMIN_TABLE.ISSCHEMAACTIVE" | translate
+        }}</label>
+        <span class="schemes__card-value" *ngIf="item.isSchemaActive == 'Si'">{{
+          "IP.YES" | translate
+        }}</span> <!--*ngIf="item.isActive" cuando ande el endpoint-->
+        <span class="schemes__card-value" *ngIf="item.isSchemaActive == 'No'">{{
+          "IP.NO" | translate
+        }}</span><!--*ngIf="item.isActive" cuando ande el endpoint-->
+      </div>
+    </div>
+
+    <div class="schemes__pagination">
+      <div class="schemes__pagination-center" *ngIf="optPages">
+        <app-ip-select-input
+          [control]="itemsPerPageControl"
+          [options]="pageOptions"
+          (selectEmitter)="onItemsPerPageChange($event)"
+        ></app-ip-select-input>
+      </div>
+      <div>
+        <app-paginator
+          [totalItems]="tableData.length"
+          [itemsPerPage]="itemsPerPage"
+          [currentPages]="currentPage"
+          (pageChange)="onPageChange($event)"
+        >
+        </app-paginator>
+      </div>
+    </div>
+  </div>
+</div>

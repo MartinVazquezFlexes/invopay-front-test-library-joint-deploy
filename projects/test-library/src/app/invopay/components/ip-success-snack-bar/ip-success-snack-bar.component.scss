@@ -1,0 +1,13 @@
+.ip-success-snack-bar {
+  // background-color: green;
+  &__label {
+    h2 {
+      font-size: .9rem;
+    }
+    p {
+      font-size: .8rem;
+      opacity: .9;
+      margin-bottom: 0;
+    }
+  }
+}

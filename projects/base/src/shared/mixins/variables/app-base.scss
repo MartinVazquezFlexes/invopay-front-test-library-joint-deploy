@@ -1,0 +1,188 @@
+$font-family-primary: "Poppins", sans-serif;
+$font-family-sec: "Inter", sans-serif;
+
+// app component background
+$app-component-bg: #fff;
+
+$app-lines: #dcdbdd; // line dividers
+$app-white: #ffffff;
+$propisory-white: $app-white;
+$background-color: #f7fdff;
+
+$primary-color-text: #000000;
+$secondary-color-text: #84818a;
+$text-white: #ffffff;
+
+$primary-color: #33a3aa;
+$secondary-color: #5914a9;
+$green-light: #31e2ad;
+$green-gradient: #82e1ab;
+$secondary-color-opacity: 0.2;
+
+$card-shadow: 0px 10px 15px 0px #00000023;
+$success-color: #76c47a;
+$accent-color: #f0a941;
+$warn-color: #cc3300;
+
+:root {
+  --global-primary-color: #{$primary-color};
+  --global-success-color: #{$success-color};
+  --global-accent-color: #{$accent-color};
+  --global-warn-color: #{$warn-color};
+}
+
+$background-menu-active: #f9fafc;
+$background-btn-cancel: #eeebeb;
+
+$error-color: #f00; // warning-text
+$primary-color-hover: darken($secondary-color, 10%);
+
+$grey-text: #667085;
+$hover-button: #0000000f;
+
+$primary-color-login: #fff6;
+$secondary-color-login: #107076b3;
+
+$filter-primary-color: brightness(0) saturate(100%) invert(45%) sepia(15%)
+  saturate(426%) hue-rotate(157deg) brightness(95%) contrast(96%);
+
+$green-light: #31e2ad;
+$green-gradient: #82e1ab;
+
+$gradient-dashboard-text: linear-gradient(
+  90deg,
+  $green-light 0%,
+  $primary-color 100%
+);
+
+// Forms
+$header-form-border: 1px solid $app-lines;
+
+// Shadow
+$box-shadow: 0px 0px 15px 0px #0000001a;
+$card-shadow: 0px 10px 15px 0px #00000023;
+
+// Login
+$login-bg-image: linear-gradient(
+  248.66deg,
+  $primary-color-login 0%,
+  $secondary-color-login 100%
+);
+$login-bg-image-effect: hsla(0, 0%, 0%, 0.4);
+$login-bg-form: $app-white; // login && forgot password
+
+// Header
+$header-enterprise-logo-display: none; // none/block
+$header-padding: 0 3rem;
+
+$header-margin-x: 0rem;
+$header-margin-y: 0rem;
+
+$header-bg-color: linear-gradient(
+  89.38deg,
+  $secondary-color 0%,
+  $green-gradient 100%
+);
+$header-text-color: $text-white;
+$header-box-shadow: 0;
+
+$header-border-radius: none;
+
+$header-vertical-divider-bg-color: $text-white;
+$header-vertical-divider-1-visibility: hidden; // hidden/visible
+$header-vertical-divider-2-visibility: visible; // hidden/visible
+
+// Sidenav
+$sidenav-bg-color: white;
+$sidenav-item-selected-text-color: $secondary-color;
+$sidenav-item-not-selected-text-color: $secondary-color-text;
+$sidenav-item-border-color: $secondary-color; // wip line active
+$sidenav-menu-active-bg-color: #f6f3fb;
+$sidenav-menu-active-border-bg-color: $secondary-color;
+
+$sidenav-icon-selected-filter: brightness(0) saturate(100%) invert(22%)
+  sepia(50%) saturate(300%) hue-rotate(250deg) brightness(90%) contrast(95%);
+
+$sidenav-height: 100vh;
+$sidenav-mobile-height: 100vh;
+$sidenav-margins: 0;
+$sidenav-border-radius: none;
+$sidenav-box-shadow: 0;
+
+// Label (top)
+$label-input-text-color: $secondary-color-text;
+
+// Input
+$input-text-hint: $secondary-color-text;
+$input-text-color-active: $secondary-color-text;
+$input-bg-color: $app-white;
+$input-border: 0.93px solid $app-lines;
+
+// button main bg
+$app-btn-main-bg-color: $header-bg-color;
+
+// Button action style 2
+$btn-action-style-two-bg-color: $primary-color;
+
+// Button with icon
+$btn-with-icon-bg-color: $header-bg-color;
+
+// Button filters
+$btn-filters-selected-bg-color: $primary-color;
+$btn-filters-selected-text-color: $text-white;
+$btn-filters-not-selected-bg-color: #dcdbdd;
+$btn-filters-not-selected-text-color: $primary-color-text;
+
+// Modal
+$modal-bg-color: $app-component-bg;
+$modal-header-line-divider-color: $app-lines;
+$modal-btn-action-text-color: $text-white;
+$modal-btn-action-bg-color: $app-btn-main-bg-color;
+$modal-btn-cancel-bg-color: $background-btn-cancel;
+
+// Table
+$table-header-text-color: $secondary-color-text;
+$table-header-text-transform: uppercase;
+$table-header-bg-color: #f9fafc;
+$table-text-color: $secondary-color-text;
+$table-text: $secondary-color-text;
+$table-bg-color: $app-component-bg;
+$table-border-x: $app-lines; // gris
+
+$not-found-text: #afafaf;
+
+// Paginator
+$paginator-btn-selected-bg-color: $primary-color;
+$paginator-btn-bg-color: $app-component-bg;
+$paginator-btn-next-bg-color: $app-component-bg;
+$paginator-btn-prev-bg-color: $app-component-bg;
+
+$paginator-btn-selected-text-color: $text-white;
+$paginator-btn-text-color: $primary-color-text;
+$paginator-border-color: $app-lines;
+
+$background-tables: $app-component-bg;
+$table-lines: $app-lines;
+$table-rows: 0.5px solid $secondary-color;
+$box-shadow-table: 0px 0px 20px 0px rgba(215, 222, 227, 0.5);
+
+// Tab
+$tab-title-bg-color: $app-component-bg;
+$tab-btn-icon-color: $app-white;
+
+// card icons
+$card-icon-border-radius: 0;
+$card-icon-box-shadow: none;
+
+// Card subcards
+$card-sub-card-bg-color: #f8f9fc;
+
+// Home welcome
+$home-welcome-bg-color: $app-component-bg;
+
+// progreso bar
+$progress-bar-completed-bg-color: $secondary-color;
+$progress-bar-pending-bg-color: rgba(
+  $secondary-color,
+  $secondary-color-opacity
+);

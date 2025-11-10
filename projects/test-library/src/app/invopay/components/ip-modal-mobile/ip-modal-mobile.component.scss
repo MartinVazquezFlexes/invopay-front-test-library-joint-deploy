@@ -1,0 +1,79 @@
+@import "../../../shared/mixins/sizes.scss";
+@import "../../../shared/mixins/generalText.scss";
+@import "../../../shared/mixins/variables/color.scss";
+
+.ip-dialog {
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  background-color: $background-tables;
+  position: relative;
+  bottom: unset;
+  width: auto;
+  margin: 0 auto;
+  border-radius: 1rem;
+  box-shadow: none;
+  min-width: unset;
+  min-height: unset;
+  max-height: 90vh;
+  @include sm(){
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 10vh;
+    max-height: 75dvh;
+    border-radius: 2rem 2rem 0 0;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.ip-block-card-modal {
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.875rem 1.5rem;
+  max-height: 85vh;
+  @include sm(){
+    max-height: 75dvh;
+    padding: 0 1rem;
+  }
+  
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 2px solid $table-lines;
+    @include sm(){
+      border-bottom: none;
+    }    
+    @include md(){
+      padding: 0.5rem 0;
+    }
+    @include lg(){
+      padding: 0.5rem 0;
+    }
+    &-title {
+      display: flex;
+      align-items: center;
+      @include modalTitleText;
+      @include sm(){
+        @include titleTextMobile();
+      }
+    }
+    &-close {
+      cursor: pointer;
+      width: 1.5rem;
+      height: 1.5rem;
+    }    
+  }
+  &__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+}
+

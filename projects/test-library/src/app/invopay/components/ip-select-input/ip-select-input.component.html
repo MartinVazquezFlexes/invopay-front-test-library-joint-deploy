@@ -1,0 +1,50 @@
+<main>
+  <section class="form-floating" *ngIf="options.length === 0" [style]="onStyle">
+    <select
+      [formControl]="control"
+      class="form-floating-select form-control shadow-none"
+      (change)="onSelect($event)"
+    >
+      <option value="" disabled selected>
+        {{ label }}
+      </option>
+      <ng-content></ng-content>
+    </select>
+    <label *ngIf="control?.value !== ''">{{ label }}</label>
+    <div
+      class="error-message"
+      *ngIf="control.invalid && control.touched && control.errors"
+    >
+      {{ getErrorMessage() | translate }}
+    </div>
+  </section>
+
+  <section *ngIf="options.length > 0" class=" form-floating">
+    <ng-container *ngTemplateOutlet="selectWithOptions" />
+  </section>
+</main>
+
+<ng-template #selectWithOptions>
+  <label class="ip-select-label-floating">
+    {{ labelCode ? (labelCode | translate) : label }}
+  </label>
+  <mat-select
+    [formControl]="control"
+    class="form-floating-select-without-icon form-control shadow-none"
+    [multiple]="isMultiple"
+    (selectionChange)="onSelectMaterial($event)"
+    [placeholder]="placeholder"
+  >
+    <mat-option *ngIf="withSearch">
+      <!-- <ngx-mat-select-search 
+        [placeholderLabel]="'IP.FILTERS.SEARCH' | translate" [formControl]="searchCtrl"
+        [noEntriesFoundLabel]="'IP.FILTERS.SEARCH_NO_RESULTS' | translate"
+      /> -->
+    </mat-option>
+    <mat-option *ngIf="noneOption">{{ 'IP.SELECT-INPUT.NONE-OPTION' | translate }}</mat-option>
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.value">
+      {{ option.labelCode ? (option.labelCode | translate) : option.label }}
+    </mat-option>
+  </mat-select>
+</ng-template>
+

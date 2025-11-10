@@ -1,0 +1,302 @@
+@import "../../mixins/variables/color.scss";
+@import "../../mixins/generalText.scss";
+@import "../../mixins/utils.scss";
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@mixin hoverButton($width, $height) {
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    transition: all 0.3s;
+    width: $width;
+    height: $height;
+    border-radius: 9999px;
+  }
+  &:hover::before {
+    background-color: #0000000f;
+    transform: scaleY(2) scaleX(2);
+    cursor: pointer;
+  }
+  &:active::before {
+    background-color: #0000001f;
+  }
+}
+
+.card-table {
+  margin: 0.5rem 0;
+  border-radius: 0.5rem;
+  padding: 0 0.5rem;
+  background: $app-component-bg;
+  box-shadow: $card-shadow;
+  &-container{
+    min-height: 30vh;
+    @include sm{
+      display: flex;
+      flex-direction: column;
+    }
+    @include md{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+  }
+  &-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-right: 1rem;
+    &__data {
+      flex-grow: 1;
+    }
+
+    &__btn {
+      flex-shrink: 0;
+      width: max-content;
+      height: max-content;
+      margin-top: 1rem;
+      button {
+        border: none;
+        width: fit-content;
+        height: fit-content;
+        scale: 0.8;
+        padding: 0;
+      }
+    }
+  }
+  // &:after {
+  //   content: "";
+  //   position: absolute;
+  //   bottom: 0;
+  //   left: 50%;
+  //   transform: translateX(-50%);
+  //   border-bottom: 1px solid $primary-color;
+  //   display: block;
+  //   width: 100%;
+  // }
+  position: relative;
+
+  // &:last-child {
+  //   &:after {
+  //     content: "";
+  //     position: absolute;
+  //     bottom: 0;
+
+  //     border-bottom: none;
+  //   }
+  //   border-bottom: none;
+  //   margin-bottom: 0;
+  // }
+
+  &__info {
+    padding: 0.3rem 0;
+    &:first-child{
+      border-bottom: 1px solid $primary-color;
+    }
+    &-id {
+      display: flex;
+      justify-content: space-between;
+      @include idCardTxt();
+      height: 1.5rem;
+      align-items: center;
+    }
+    &-separator{
+      margin-bottom: 0.4rem;
+    }
+    &-status {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      &-key{
+        @include keyStatusCardTxt();
+      }
+      &-value{
+        @include statusCardTxt();
+      }
+    }
+
+    &-usernames {
+      @include idCardTxt();
+    }
+
+    &-values {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      &__key {
+        @include keyCardTxt();
+
+        &-amount {
+          @include amountCardTxt();
+        }
+      }
+
+      &__value {
+        &-title {
+          @include usernameCardTxt();
+          margin-top: 0.2rem;
+        }
+
+        &-subtitle {
+          @include supplierUserCardTxt();
+          margin-bottom: 0.2rem;
+        }
+
+        @include keyCardTxt();
+
+        &-amount {
+          @include amountCardTxt();
+        }
+      }
+
+      &__dates {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        span{
+          @include cardText();
+        }
+      }
+
+      &__expired-date {
+
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        span{
+          @include cardText();
+        }
+      }
+      &__amount {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        span{
+          @include amountCardTxt();
+        }
+      }
+      &__roles{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span{
+          @include cardText();
+        }
+      }
+      &__payment-type{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span{
+          @include statusCardTxt();
+        }
+      }
+    }
+    &-check{
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: 0;
+    right: 0.3rem;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    button {
+      background-position: center;
+      border: none;
+      background-color: transparent;
+      height: 2.5rem;
+      &::before {
+        right: -0.085rem;
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+      }
+    }
+    &-template {
+      position: absolute;
+      top: 15%;
+      right: -11px;
+      background-color: $app-component-bg;
+      border-radius: 8px;
+      padding: 0.5rem 0;
+      margin-top: 1rem;
+      box-shadow: $box-shadow;
+
+      z-index: 1000;
+      white-space: nowrap;
+
+      .card-table__menu-arrow {
+        width: 1rem;
+        height: 1rem;
+        z-index: -1;
+        transform: rotate(45deg);
+        position: absolute;
+        top: -9px;
+        background-color: $app-component-bg;
+        right: 18px;
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: none;
+        border-right: none;
+      }
+
+      .menu-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          transition: background-color 0.2s ease;
+          @include menuActionsTxt();
+          &:hover {
+            @include menuActionsTxtHover();
+          }
+        }
+      }
+    }
+  }
+  &__state {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.62rem;
+
+    // ?
+    line-height: 0.9;
+    font-size: 0.75rem;
+    font-weight: 500;
+    &--pending {
+      color: #8a8a8a;
+    }
+    &--paid {
+      color: #8bc34a;
+    }
+    &--expired {
+      color: #f52d56;
+    }
+  }
+}
+
+.disabled{
+  pointer-events: none;
+  opacity: 0.5;
+}

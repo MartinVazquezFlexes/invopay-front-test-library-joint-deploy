@@ -1,0 +1,73 @@
+@import "../../../shared/mixins/sizes.scss";
+@import "../../../shared/mixins/generalText.scss";
+
+.ip-search-input {
+  display: flex;
+  align-items: center;
+  @include sm() {
+    width: 100%;
+    height: 3rem;
+    justify-content: flex-end;
+    padding-right: 1rem;
+  }
+  &__field {
+    transition: all 0.5s;
+    padding: 0 40px;
+    width: 23.5rem;
+    height: 2rem;
+    outline: none;
+    border-radius: 1.25rem;
+    background: rgba($table-lines, 20%);
+    @include generalText();
+    font-size: 0.9rem;
+    border: none;
+
+    @include sm() {
+      transition: 0;
+      @include inputValueLoginText();
+      font-size: 0.8rem;
+      width: 100%;
+      height: 80%;
+      padding: 0;
+      padding-left: 1rem;
+      border-radius: 1.2rem;
+    }
+    &::placeholder {
+      @include inputLabelLoginText();
+      font-size: 0.8rem;
+    }
+  }
+
+  &__field {
+    height: 100%;
+    &-hidePrefix {
+      padding: 0 1rem;
+      @include generalInputText();
+      font-size: 0.9rem;
+      border: none;
+      height: 2.6rem;
+      outline: none;
+      border-radius: 1.25rem;
+      background: rgba($table-lines, 20%);
+      @include lg{
+        height: 2rem;
+      }
+      @include md{
+        height: 2rem;
+      }
+    }
+  }
+
+  &__icon {
+    transform: translateX(150%);
+    padding-left: 0.2rem;
+    pointer-events: none;
+    user-select: none;
+    @include sm() {
+      position: absolute;
+      transform: translateX(-100%);
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+}

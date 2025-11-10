@@ -1,0 +1,210 @@
+<div>
+  <ng-container *ngTemplateOutlet="table"></ng-container>
+</div>
+
+<ng-template #table>
+<table class="table" *ngIf="data" >
+  <!-- headers -->
+  <thead class="table__head">
+    <tr class="table__head-row">
+      <th
+        class="table__head-row-item"
+        [ngStyle]="tableStyles[tableStyle]['dataHead']"
+        *ngIf="isForSelectItem"
+      >
+        <div class="table__head-row-item--text table__head-row-item--text__check">
+          <input
+            class="table__body-row-item__check"
+            type="checkbox"
+            [indeterminate]="selectSomeChecked && !selectAllChecked"
+            [checked]="selectAllChecked"
+            (change)="toggleSelectAllInvoices()"
+          >
+        </div>
+      </th>
+      <th
+        class="table__head-row-item"
+        *ngFor="let key of keyColumns; let i = index"
+        [ngStyle]="tableStyles[tableStyle]['dataHead']"
+        [ngClass]="{ 'table__head-row-itemSortable': this.isSortable(key) }"
+        (click)="onSort($event, key)"
+      >
+        <div class="table__head-row-item--text">
+          {{ tableHeads[key] }}
+          <ng-container *ngIf="this.isSortable(key)">
+            <ng-container *ngTemplateOutlet="sort"></ng-container>
+          </ng-container>
+        </div>
+      </th>
+      <th
+        class="table__head-row-item"
+        *ngIf="actions.length"
+        [ngStyle]="tableStyles[tableStyle]['dataHead']"
+        [ngClass]="{'table-sticky-right': scroll}"
+      >
+      <div class="table__head-row-item--text" *ngIf="!actionKey">
+        {{ keyTranslate + ".ACTIONS" | translate }}
+      </div>
+      <div class="table__head-row-item--text" *ngIf="actionKey">
+        {{ actionKey + ".ACTIONS" | translate }}
+      </div>
+      </th>
+    </tr>
+  </thead>
+  <!-- body fields -->
+  <tbody class="table__body">
+    <ng-container *ngFor="let dataField of data">
+      <tr class="table__body-row">
+        <td
+          class="table__body-row-item"
+          [ngStyle]="tableStyles[tableStyle]['dataRow']"
+          *ngIf="isForSelectItem"
+        >
+          <input
+            class="table__body-row-item__check"
+            type="checkbox"
+            [checked]="isItemSelected(dataField)"
+            (change)="toggleItemSelection(dataField)"
+          /></td>
+        <td
+          class="table__body-row-item"
+          *ngFor="let key of keyColumns; let i = index"
+          [ngStyle]="tableStyles[tableStyle]['dataRow']"
+        >
+          <!-- <span *ngIf="key.includes('id') || key.includes('Id')">#</span> -->
+          <img
+            *ngIf="key === 'logoUrl' && dataField[key] && dataField[key].trim()"
+            [src]="dataField[key]"
+            alt="Logo"
+            class="provider-logo"
+            width="30px"
+            style="max-height: 50px; object-fit: contain;"
+          />
+          <img
+            *ngIf="key === 'cardNumber' && dataField.cardNetwork === 'VISA'"
+            src="../../../../assets/new-styles/img/card-visa-blue.png"
+            class="table__body-row-item-visa"
+          />
+          <img
+            *ngIf="
+              key === 'cardNumber' && dataField.cardNetwork === 'MASTER_CARD'
+            "
+            src="../../../../assets/new-styles/img/card-master.png"
+            class="table__body-row-item-mastercard"
+          />
+          <span
+            
+            [style.word-break]="
+              key.includes('amount') || key.includes('Amount')
+                ? 'normal'
+                : key.includes('id') ||
+                  key.includes('Id') ||
+                  key.includes('date') ||
+                  key.includes('Date')
+                ? 'keep-all'
+                : 'inherit'
+            "
+            *ngIf="dataField[key] !== true && dataField[key] !== false && key !== 'logoUrl'"
+          >
+            {{ dataField[key]  }}
+          </span>
+          <span *ngIf="dataField[key] === true || dataField[key] === false">
+            <ng-container *ngIf="key === 'isActive' && dataField.contractId">
+              {{
+                dataField[key] === true
+                  ? ("IP.TABLE.ACTIVE" | translate)
+                  : ("IP.TABLE.INACTIVE" | translate)
+              }}
+            </ng-container>
+            <ng-container *ngIf="key === 'state'">
+              {{
+                dataField[key] === true
+                  ? ("IP.TABLE.ACTIVE" | translate)
+                  : ("IP.TABLE.INACTIVE" | translate)
+              }}
+            </ng-container>
+            <ng-container *ngIf="key === 'isActive' && dataField.purchaseId">
+              {{
+                dataField[key] === true
+                  ? ("IP.TABLE.ACTIVE2" | translate)
+                  : ("IP.TABLE.INACTIVE2" | translate)
+              }}
+            </ng-container>
+            <ng-container *ngIf="key === 'isCommissionInvoice' || key ==='billed' || key ==='is_paid' || key === 'conciliate'">
+              {{
+                dataField[key] === true
+                  ? ("IP.YES" | translate)
+                  : ("IP.NO" | translate)
+              }}
+            </ng-container>
+          </span>
+          <img
+            *ngIf="key === 'cardNumber' && dataField.cardStatus === 'ACTIVE'"
+            src="../../../../assets/new-styles/img/card-active.png"
+            class="table__body-row-item-status"
+          />
+          <img
+            *ngIf="key === 'cardNumber' && dataField.cardStatus === 'BLOCKED'"
+            src="../../../../assets/new-styles/img/card-blocked.png"
+            class="table__body-row-item-status"
+          />
+        </td>
+        <td
+          class="table__body-row-actions"
+          *ngIf="actions.length"
+          [ngStyle]="tableStyles[tableStyle]['dataRow']"
+          [ngClass]="{'table-sticky-right': scroll}"
+        >
+          <ul class="table__body-row-actions-list">
+            <ng-container *ngFor="let action of actions">
+              <span
+                class="table__body-row-actions-list-item"
+                (click)="onAction(action, dataField)"
+                [ngStyle]="{
+                  'background-image': this.checkAction(dataField, action).icon,
+                  'pointer-events': this.checkAction(dataField, action)
+                    .pointerEvents
+                }"
+              ></span>
+            </ng-container>
+          </ul>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+<div *ngIf="initTable" class="table__init">...</div>
+</ng-template>
+<!-- sort icon -->
+<ng-template #sort>
+  <span class="table__head-row-item-sort">
+    <svg
+      class="table__head-row-item-sort-up"
+      xmlns="http://www.w3.org/2000/svg"
+      width="6"
+      height="4"
+      viewBox="0 0 6 4"
+      fill="none"
+    >
+      <path
+        class="table__head-row-item-sort-down--fill"
+        d="M5.70867 3.28674H0.289317C0.0328653 3.28674 -0.0977798 2.97707 0.0860911 2.79319L2.79577 0.0835173C2.90706 -0.027773 3.09093 -0.027773 3.20227 0.0835173L5.91195 2.79319C6.09577 2.97707 5.96512 3.28674 5.70867 3.28674Z"
+        fill="#CFD9DF"
+      />
+    </svg>
+    <svg
+      class="table__head-row-item-sort-down"
+      xmlns="http://www.w3.org/2000/svg"
+      width="6"
+      height="4"
+      viewBox="0 0 6 4"
+      fill="none"
+    >
+      <path
+        class="table__head-row-item-sort-down--fill"
+        d="M5.70867 0.713257H0.289317C0.0328653 0.713257 -0.0977798 1.02293 0.0860911 1.20681L2.79577 3.91648C2.90706 4.02777 3.09093 4.02777 3.20227 3.91648L5.91195 1.20681C6.09577 1.02293 5.96512 0.713257 5.70867 0.713257Z"
+        fill="#CFD9DF"
+      />
+    </svg>
+  </span>
+</ng-template>

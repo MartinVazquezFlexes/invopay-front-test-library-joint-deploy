@@ -1,0 +1,9 @@
+<div class="spinner-container">
+  <div class="spinner"></div>
+  <div class="text" *ngIf="loaderText">
+    {{ loaderText }}
+  </div>
+  <div class="chronometer">
+    {{ elapsedSeconds | formatTime }}
+  </div>
+</div>

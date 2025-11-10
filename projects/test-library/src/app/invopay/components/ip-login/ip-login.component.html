@@ -1,0 +1,401 @@
+<div class="ip-login" [ngClass]="{
+  'ip-login__background-admin': routeExtension === 'login-admin', 
+  'ip-login__background-broker': routeExtension === 'login-broker', 
+  }">
+  <div class="ip-login__welcome">
+    <div class="ip-login__welcome-text">
+      <h1 class="ip-login__welcome-text-title">
+        {{ "IP.LOGIN.WELCOME-TITLE" | translate }}
+      </h1>
+      <p class="ip-login__welcome-text-paragraph">
+        {{ "IP.LOGIN.WELCOME-TEXT-1" | translate }}
+        {{ "IP.LOGIN.WELCOME-TEXT-2" | translate }} 
+        {{ "IP.LOGIN.WELCOME-TEXT-3" | translate }}
+      </p>
+      <div class="ip-login__welcome-text-item">
+        <div>
+          <span class="ip-login__welcome-text-item-ico"
+            ><img
+              src="../../../../assets/new-styles/icons/login/fast-access-icon.svg"
+              alt="Centralization"
+          /></span>
+        </div>
+        <div class="ip-login__welcome-text-item__texts">
+          <span class="ip-login__welcome-text-item__texts-title">{{
+            "IP.LOGIN.ITEM-1ST-TITLE" | translate
+          }}</span>
+          <span class="ip-login__welcome-text-item__texts-subtitle">{{
+            "IP.LOGIN.ITEM-1ST-CONTENT" | translate
+          }}</span>
+        </div>
+      </div>
+      <div class="ip-login__welcome-text-item">
+        <div>
+          <span class="ip-login__welcome-text-item-ico"
+            ><img
+              src="../../../../assets/new-styles/icons/login/multi-func-icon.svg"
+              alt="Visibility"
+          /></span>
+        </div>
+        <div class="ip-login__welcome-text-item__texts">
+          <span class="ip-login__welcome-text-item__texts-title">{{
+            "IP.LOGIN.ITEM-2ND-TITLE" | translate
+          }}</span>
+          <span class="ip-login__welcome-text-item__texts-subtitle">{{
+            "IP.LOGIN.ITEM-2ND-CONTENT" | translate
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ip-login__content" *ngIf="this.step === 'login'">
+    <div class="ip-login__content-wrapper">
+      <div>
+        <div *ngIf="!provider" class="ip-login__welcome-title">
+          <!-- NON PROVIDER TITLE -->
+           <img src="assets/new-styles/logo.svg" alt="Logo" class="ip-login__img" />
+          <h1 class="ip-login__content-wrapper-title">
+            {{ "IP.LOGIN.WELCOME-TEXT-4" | translate }}
+          </h1>
+        </div>
+        <div *ngIf="provider">
+          <!-- PROVIDER TITLE -->
+          <h1 class="ip-login__content-wrapper-title">
+            {{ "IP.LOGIN.PORTAL" | translate }}
+            <b
+              class="ip-login__content-wrapper-title ip-login__content-wrapper-title--bolder"
+            >
+              {{ nameCompany$ | async }}
+            </b>
+          </h1>
+        </div>
+        <div class="d-flex align-items-center">
+          <h2
+            class="ip-login__content-wrapper-subtitle"
+            *ngIf="this.routeExtension === 'login-admin'"
+          >
+            <span class="ip-login__content-wrapper-subtitle-bold">{{ "IP.LOGIN.PORTAL_LOGIN" | translate }}</span> {{ "IP.LOGIN.ADMINISTRATION" | translate }}
+          </h2>
+          <h2
+            class="ip-login__content-wrapper-subtitle"
+            *ngIf="this.routeExtension === 'login-broker'"
+          >
+          <span class="ip-login__content-wrapper-subtitle-bold">{{ "IP.LOGIN.PORTAL_LOGIN" | translate }}</span> {{ "IP.LOGIN.BROKER" | translate }}
+          </h2>
+        </div>
+        <h2 class="ip-login__content-wrapper-msgsm" *ngIf="this.isAdminLogin">
+          {{ "IP.LOGIN.WELCOME-TITLESM" | translate }}&nbsp;
+        </h2>
+      </div>
+      <!-- FORM START -->
+
+      <form
+        class="ip-login__content-wrapper-form"
+        [formGroup]="loginForm"
+        novalidate
+        (ngSubmit)="submitLogin()"
+      >
+        <div class="phone">
+          <mat-form-field class="email" appearance="outline">
+            <mat-label for="floatingEmail">{{
+              "IP.LOGIN.EMAIL" | translate
+            }}</mat-label>
+            <input
+              matInput
+              type="email"
+              id="floatingEmail"
+              formControlName="email"
+              [spellcheck]="false"
+            />
+            <mat-error class="error" *ngIf="loginForm.get('email')?.hasError('required')">
+              {{ "IP.LOGIN.EMAIL-REQUIRED" | translate }}
+            </mat-error>
+            <mat-error class="error" *ngIf="loginForm.get('email')?.hasError('email')">
+              {{ "IP.LOGIN.EMAIL-INVALID-FORMAT" | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "IP.LOGIN.PASSWORD-PLACEHOLDER" | translate
+            }}</mat-label>
+            <input
+              matInput
+              [type]="showPassword ? 'text' : 'password'"
+              id="floatingPassword"
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="switchPasswordVisibility()"
+              [attr.aria-label]="'Hide password'"
+            >
+              <mat-icon style="color: #ffffff">{{
+                showPassword ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            <mat-error class="error" *ngIf="loginForm.get('password')?.hasError('required')">
+              {{ "IP.LOGIN.PASSWORD-REQUIRED" | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-error class="error" *ngIf="errorMessage">
+            {{ this.errorMessage }}
+          </mat-error>
+        </div>
+
+        <div class="desktop">
+          <div
+            class="ip-login__content-wrapper-form-floating form-floating mb-1"
+          >
+            <input
+              type="email"
+              class="ip-login__content-wrapper-form-floating-input form-control shadow-none"
+              id="floatingEmail"
+              placeholder="name@example.com"
+              formControlName="email"
+              [ngClass]="{
+                'ip-login__content-wrapper-form-floating-input--is-not-valid':
+                  loginForm.get('email')?.invalid &&
+                  (loginForm.get('email')?.touched || isSubmitted)
+              }"
+            />
+            <label
+              class="ip-login__content-wrapper-form-floating-label"
+              for="floatingEmail"
+            >
+              {{ "IP.LOGIN.EMAIL" | translate }}</label
+            >
+
+            <span
+              class="ip-login__content-wrapper-form-floating-validator text-danger"
+              *ngIf="
+                loginForm.get('email')?.errors?.['required'] &&
+                (loginForm.get('email')?.touched || isSubmitted)
+              "
+            >
+              {{ "IP.LOGIN.EMAIL-REQUIRED" | translate }}
+            </span>
+            <span
+              class="ip-login__content-wrapper-form-floating-validator text-danger"
+              *ngIf="
+              loginForm.get('email')?.errors?.['email'] &&
+              (loginForm.get('email')?.touched || isSubmitted)
+            "
+            >
+              {{ "IP.LOGIN.EMAIL-INVALID-FORMAT" | translate }}
+            </span>
+          </div>
+
+          <div
+            class="ip-login__content-wrapper-form-floating form-floating mb-1"
+          >
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              class="ip-login__content-wrapper-form-floating-input form-control ip-login__content-wrapper-form-floating-input--password shadow-none"
+              id="floatingPassword"
+              placeholder="Password"
+              formControlName="password"
+              [ngClass]="{
+                'ip-login__content-wrapper-form-floating-input--is-not-valid':
+                  loginForm.get('password')?.invalid &&
+                  (loginForm.get('password')?.touched || isSubmitted)
+              }"
+            />
+            <div
+              class="ip-login__content-wrapper-form-floating-visible"
+              (click)="switchPasswordVisibility()"
+            >
+              <span class="ip-login__content-wrapper-form-floating-visible-ico">
+                <ng-container *ngIf="showPassword">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    viewBox="0 -960 960 960"
+                    width="24"
+                  >
+                    <path
+                      d="M792-56 624-222q-35 11-70.5 16.5T480-200q-151 0-269-83.5T40-500q21-53 53-98.5t73-81.5L56-792l56-56 736 736-56 56ZM480-320q11 0 20.5-1t20.5-4L305-541q-3 11-4 20.5t-1 20.5q0 75 52.5 127.5T480-320Zm292 18L645-428q7-17 11-34.5t4-37.5q0-75-52.5-127.5T480-680q-20 0-37.5 4T408-664L306-766q41-17 84-25.5t90-8.5q151 0 269 83.5T920-500q-23 59-60.5 109.5T772-302ZM587-486 467-606q28-5 51.5 4.5T559-574q17 18 24.5 41.5T587-486Z"
+                      fill="#84818A"
+                    />
+                  </svg>
+                </ng-container>
+                <ng-container *ngIf="!showPassword">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24"
+                    viewBox="0 -960 960 960"
+                    width="24"
+                  >
+                    <path
+                      d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Z"
+                      fill="#84818A"
+                    />
+                  </svg>
+                </ng-container>
+              </span>
+            </div>
+            <label
+              class="ip-login__content-wrapper-form-floating-label"
+              for="floatingPassword"
+              >{{ "IP.LOGIN.PASSWORD-PLACEHOLDER" | translate }}</label
+            >
+            <span
+              class="ip-login__content-wrapper-form-floating-validator text-danger"
+              *ngIf="
+                loginForm.get('password')?.errors?.['required'] &&
+                (loginForm.get('password')?.touched || isSubmitted)
+              "
+            >
+              {{ "IP.LOGIN.PASSWORD-REQUIRED" | translate }}
+            </span>
+          </div>
+          <div class="ip-login__content-wrapper-form-floating__incorrect-user">
+            <span
+              style="transform: translateY(-1rem)"
+              *ngIf="errorMessage"
+              class="ip-login__content-wrapper-form-floating-validator text-danger"
+            >
+              {{ this.errorMessage }}
+            </span>
+            <!-- <span
+              *ngIf="errorMessage"
+              class="ip-login__content-wrapper-form-floating-validator-suggest"
+            >
+              {{ "IP.LOGIN.EMPLOYEE_SUGGEST" | translate }}
+            </span> -->
+          </div>
+        </div>
+
+        <div class="ip-login__content-wrapper-form-submit">
+          <a
+            class="ip-login__content-wrapper-form-submit-forgotten"
+            (click)="onRestorePasswordClick()"
+            >{{ "IP.LOGIN.FORGOTTEN-PASSWORD" | translate }}</a
+          >
+          <button
+            type="submit"
+            class="ip-login__content-wrapper-form-submit-button"
+          >
+            {{ "IP.LOGIN.SUBMIT-BUTTON" | translate }}
+          </button>
+        </div>
+      </form>
+
+      <div class="ip-login__content-signupsm" *ngIf="this.routeExtension === 'login-admin' && registerButton">
+        <a
+          class="ip-login__content-wrapper-linksm"
+          [routerLink]="['']"
+          *ngIf="this.isAdminLogin"
+        >
+          {{ "IP.LOGIN.EMPLOYEE_PORTAL" | translate }}
+          <img
+            src="../../../../assets/new-styles/icons/login/right-arrow.svg"
+            alt=""
+          />
+        </a>
+        <a
+          class="ip-login__content-signup-text"
+          [routerLink]="['/invopay/signup']"
+        >
+          {{ "IP.LOGIN.SIGNUP-BUTTON" | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="ip-login__content" *ngIf="this.step === 'restorePassword'">
+    <div class="ip-login__content-wrapper">
+      <div class="ip-login__content-wrapper-back" (click)="onGoBackClick()">
+        <img
+          class="ip-login__content-wrapper-back-icon"
+          src="assets/img/header/ep_back.svg"
+        />
+        <span class="ip-login__content-wrapper-back-text">
+          {{ "IP.LOGIN.RESTORE.GO-BACK" | translate }}
+        </span>
+      </div>
+      <h1 class="ip-login__content-wrapper-title">
+        {{ "IP.LOGIN.RESTORE.MAIN-TITLE" | translate }}
+      </h1>
+      <p>
+        {{ "IP.LOGIN.RESTORE.MAIN-TEXT" | translate }}
+      </p>
+      <form
+        class="ip-login__content-wrapper-form"
+        [formGroup]="restorePasswordForm"
+        novalidate
+        (ngSubmit)="submitRestorePassword()"
+      >
+        <div class="ip-login__content-wrapper-form-floating form-floating mb-1">
+          <input
+            type="email"
+            class="ip-login__content-wrapper-form-floating-input form-control shadow-none"
+            id="floatingEmail"
+            formControlName="email"
+            placeholder="name@example.com"
+            [ngClass]="{
+              'ip-login__content-wrapper-form-floating-input--is-not-valid':
+                restorePasswordForm.get('email')?.invalid &&
+                (restorePasswordForm.get('email')?.touched || isSubmitted)
+            }"
+          />
+          <label
+            class="ip-login__content-wrapper-form-floating-label"
+            for="floatingEmail"
+          >
+            {{ "IP.LOGIN.RESTORE.EMAIL-LABEL" | translate }}
+          </label>
+          <span
+            class="ip-login__content-wrapper-form-floating-validator text-danger"
+            *ngIf="
+                restorePasswordForm.get('email')?.errors?.['required'] &&
+                (restorePasswordForm.get('email')?.touched || isSubmitted)
+              "
+          >
+            {{ "IP.LOGIN.EMAIL-REQUIRED" | translate }}
+          </span>
+          <span
+            class="ip-login__content-wrapper-form-floating-validator text-danger"
+            *ngIf="
+                restorePasswordForm.get('email')?.errors?.['email'] &&
+                (restorePasswordForm.get('email')?.touched || isSubmitted)
+              "
+          >
+            {{ "IP.LOGIN.EMAIL-INVALID-FORMAT" | translate }}
+          </span>
+        </div>
+        <span
+          *ngIf="errorMessage"
+          class="ip-login__content-wrapper-form-floating-validator text-danger"
+        >
+          {{ this.errorMessage }}
+        </span>
+        <button
+          type="submit"
+          class="ip-login__content-wrapper-form-submit-button m-0"
+        >
+          {{ "IP.LOGIN.RESTORE.SUBMIT-BUTTON" | translate }}
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="ip-login__content" *ngIf="this.step === 'restoreSuccess'">
+    <div class="ip-login__content-wrapper">
+      <div class="ip-login__content-wrapper-back" (click)="onGoBackClick()">
+        <img
+          class="ip-login__content-wrapper-back-icon"
+          src="assets/img/header/ep_back.svg"
+        />
+        <span class="ip-login__content-wrapper-back-text">
+          {{ "IP.LOGIN.RESTORE.GO-BACK" | translate }}
+        </span>
+      </div>
+      <h1 class="ip-login__content-wrapper-title">
+        {{ "IP.LOGIN.RESTORE.SUCCESS-TITLE" | translate }}
+      </h1>
+      <p>
+        {{ "IP.LOGIN.RESTORE.SUCCESS-TEXT" | translate }}
+      </p>
+    </div>
+  </div>
+</div>

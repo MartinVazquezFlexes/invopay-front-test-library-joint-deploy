@@ -1,0 +1,37 @@
+@import "../../../../../base/src/shared/mixins/generalText.scss";
+@import "../../../../../base/src/shared/mixins/sizes.scss";
+@import "../../../../../base/src/shared/mixins/utils.scss";
+
+.main-content {
+  margin-left: 190px;
+  padding: 60px 10px 10px 60px;
+  min-height: 100vh;
+  height: 100%;
+  background: #F5F5F5;
+  transition: margin-left 0.3s ease, padding-left 0.3s ease;
+  box-sizing: border-box;
+  overflow-x: hidden;
+
+  &.sidebar-collapsed {
+    margin-left: 50px;
+    padding-left: 10px;
+  }
+
+  @include mmd {
+    margin-left: 240px;
+    padding: 60px 20px 20px 20px;
+
+    &.sidebar-collapsed {
+      margin-left: 50px;
+    }
+  }
+
+  @include sm {
+    margin-left: 0;
+    padding: 60px 15px 15px 15px;
+
+    &.sidebar-collapsed {
+      margin-left: 0;
+    }
+  }
+}

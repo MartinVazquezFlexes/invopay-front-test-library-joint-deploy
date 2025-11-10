@@ -1,0 +1,29 @@
+<main>
+  <h1>Test View</h1>
+  <form>
+    <app-ip-modal-mobile title="Titulo" />
+
+    <!-- uso del input-->
+    <app-ip-input inputId="ipInputTest" />
+
+    <!-- uso del date-input -->
+    <app-ip-date-input inputId="ipDateInputTest" label="Date" />
+
+    <!-- uso del select-input -->
+    <app-ip-select-input [label]="'Select'" [options]="options">
+    </app-ip-select-input>
+
+    <app-ip-text-area-input inputId="ipTextAreaInputTest" label="Text Area" />
+
+    <app-ip-title-mobile [title]="'Test Title Mobile'" [btn]="'create'">
+      Titulo
+    </app-ip-title-mobile>
+
+    <app-ip-button-modal type="submit">
+      Submit
+    </app-ip-button-modal>
+
+    {{ 'IP.CURRENCY' | translate }}
+
+  </form>
+</main>
