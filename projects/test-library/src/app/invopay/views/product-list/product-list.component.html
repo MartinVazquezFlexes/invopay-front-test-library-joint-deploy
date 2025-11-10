@@ -177,7 +177,12 @@
           
           <div class="product-details__section">
             <label for="create-code">{{ 'IP.PRODUCTS.FORM.CODE.LABEL' | translate }}</label>
-            <input type="text" id="create-code" class="form-control" formControlName="code">
+            <app-ip-input
+              [formGroup]="createForm"
+              controlName="code"
+              inputId="create-code"
+              labelCode="IP.PRODUCTS.FORM.CODE.LABEL">
+            </app-ip-input>
           </div>
 
           <div class="product-details__section">
@@ -197,7 +202,12 @@
 
           <div class="product-details__section">
             <label for="create-name">{{ 'IP.PRODUCTS.FORM.NAME.LABEL' | translate }}</label>
-            <input type="text" id="create-name" class="form-control" formControlName="name">
+            <app-ip-input
+              [formGroup]="createForm"
+              controlName="name"
+              inputId="create-name"
+              labelCode="IP.PRODUCTS.FORM.NAME.LABEL">
+            </app-ip-input>
           </div>
 
           <div class="product-details__section">
@@ -220,12 +230,22 @@
 
           <div class="product-details__section">
             <label for="create-externalId">{{ 'IP.PRODUCTS.FORM.EXTERNAL_ID.LABEL' | translate }}</label>
-            <input type="text" id="create-externalId" class="form-control" formControlName="externalId">
+            <app-ip-input
+              [formGroup]="createForm"
+              controlName="externalId"
+              inputId="create-externalId"
+              labelCode="IP.PRODUCTS.FORM.EXTERNAL_ID.LABEL">
+            </app-ip-input>
           </div>
 
           <div class="product-details__section">
             <label for="create-enterprise">{{ 'IP.PRODUCTS.FORM.ENTERPRISE.LABEL' | translate }}</label>
-            <input type="text" id="create-enterprise" class="form-control" formControlName="insuranceEnterprise">
+            <app-ip-input
+              [formGroup]="createForm"
+              controlName="insuranceEnterprise"
+              inputId="create-enterprise"
+              labelCode="IP.PRODUCTS.FORM.ENTERPRISE.LABEL">
+            </app-ip-input>
           </div>
           
           <div class="product-details__section is-toggle">
@@ -258,10 +278,14 @@
         [showCloseModal]="true" (close)="onEditModalClose()">
         
         <form class="product-details" [formGroup]="editForm">
-          
           <div class="product-details__section">
             <label>{{ 'IP.PRODUCTS.FORM.CODE.LABEL_READONLY' | translate }}</label>
-            <input type="text" class="form-control-disabled" formControlName="code" readonly>
+            <app-ip-input
+              [formGroup]="editForm"
+              controlName="code"
+              inputId="edit-code"
+              labelCode="IP.PRODUCTS.FORM.CODE.LABEL_READONLY">
+            </app-ip-input>
           </div>
 
           <div class="product-details__section">
@@ -281,7 +305,12 @@
 
           <div class="product-details__section">
             <label for="edit-name">{{ 'IP.PRODUCTS.FORM.NAME.LABEL' | translate }}</label>
-            <input type="text" id="edit-name" class="form-control" formControlName="name">
+            <app-ip-input
+              [formGroup]="editForm"
+              controlName="name"
+              inputId="edit-name"
+              labelCode="IP.PRODUCTS.FORM.NAME.LABEL">
+            </app-ip-input>
           </div>
           
           <div class="product-details__section">
@@ -304,12 +333,22 @@
 
           <div class="product-details__section">
             <label for="edit-externalId">{{ 'IP.PRODUCTS.FORM.EXTERNAL_ID.LABEL' | translate }}</label>
-            <input type="text" id="edit-externalId" class="form-control" formControlName="externalId">
+            <app-ip-input
+              [formGroup]="editForm"
+              controlName="externalId"
+              inputId="edit-externalId"
+              labelCode="IP.PRODUCTS.FORM.EXTERNAL_ID.LABEL">
+            </app-ip-input>
           </div>
 
           <div class="product-details__section">
             <label for="edit-enterprise">{{ 'IP.PRODUCTS.FORM.ENTERPRISE.LABEL' | translate }}</label>
-            <input type="text" id="edit-enterprise" class="form-control" formControlName="insuranceEnterprise">
+            <app-ip-input
+              [formGroup]="editForm"
+              controlName="insuranceEnterprise"
+              inputId="edit-enterprise"
+              labelCode="IP.PRODUCTS.FORM.ENTERPRISE.LABEL">
+            </app-ip-input>
           </div>
 
           <div class="product-details__section is-toggle">
