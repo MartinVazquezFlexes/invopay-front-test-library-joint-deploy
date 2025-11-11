@@ -267,8 +267,8 @@ body {
   &::before {
     content: "";
     position: absolute;
-    top: -6px;
-    right: 5px;
+    top: -6px; // posición vertical (ajustá según necesites)
+    right: 5px; // alineación horizontal (ajustá según tu botón)
     width: 10px;
     height: 10px;
     background: white;

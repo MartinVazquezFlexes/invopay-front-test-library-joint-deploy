@@ -8,6 +8,7 @@
         [options]="answeredOptions"
         [labelCode]="'IP.NOTIFICATIONS.FILTERS.ANSWERED'"
         [control]="answeredControl"
+        [placeholder]="'IP.NOTIFICATIONS.FILTERS.ANSWERED_PLACEHOLDER' | translate"
         (selectEmitter)="selectedAnswered = $event">
       </app-ip-select-input>
     </div>
@@ -17,6 +18,7 @@
         [options]="entityOptions"
         [labelCode]="'IP.NOTIFICATIONS.FILTERS.ENTITY'"
         [control]="entityControl"
+        [placeholder]="'IP.NOTIFICATIONS.FILTERS.ENTITY_PLACEHOLDER' | translate"
         (selectEmitter)="selectedEntity = $event">
       </app-ip-select-input>
     </div>
@@ -36,6 +38,7 @@
         [options]="userOptions"
         [labelCode]="'IP.NOTIFICATIONS.FILTERS.USER'"
         [control]="userControl"
+        [placeholder]="'IP.NOTIFICATIONS.FILTERS.USER_PLACEHOLDER' | translate"
         (selectEmitter)="selectedUser = $event">
       </app-ip-select-input>
     </div>

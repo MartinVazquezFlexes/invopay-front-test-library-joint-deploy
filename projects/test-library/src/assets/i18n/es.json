@@ -2581,7 +2581,7 @@
         "ENTITY": "Entidad",
         "ENTITY_PLACEHOLDER": "Seleccionar entidad",
         "USER": "Usuario",
-        "USER_PLACEHOLDER": "Usuario"
+        "USER_PLACEHOLDER": "Seleccionar Usuario"
       },
       "ENTITIES": {
         "SETTLEMENT": "Liquidación",

@@ -39,10 +39,11 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
   
   // Options for selects
   answeredOptions: IpSelectInputOption[] = [
-    { label: '', labelCode: 'IP.NOTIFICATIONS.FILTERS.ANSWERED_PLACEHOLDER', value: '' },
     { label: '', labelCode: 'IP.NOTIFICATIONS.FILTERS.YES', value: 'si' },
     { label: '', labelCode: 'IP.NOTIFICATIONS.FILTERS.NO', value: 'no' }
   ];
+  answeredPlaceholder = 'IP.NOTIFICATIONS.FILTERS.ANSWERED_PLACEHOLDER';
+  showAnsweredPlaceholder = true;
   
   entityOptions: IpSelectInputOption[] = [];
 
@@ -59,7 +60,7 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
   showPaginator: boolean = true;
 
   showMobileFiltersModal = false;
-  selectedAnswered: string = '';
+  selectedAnswered: string | null = null;
   selectedEntity: string = '';
   selectedUser: string = '';
 
@@ -101,7 +102,7 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
     
     // Subscribe to form control changes
     this.answeredControl.valueChanges.subscribe(value => {
-      this.selectedAnswered = value || '';
+      this.selectedAnswered = value || null;
     });
     
     this.entityControl.valueChanges.subscribe(value => {
@@ -316,14 +317,15 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
 
   onClearFilters(): void {
     this.answeredControl.reset();
-  this.entityControl.reset();
-  this.brokerControl.reset();
-    this.selectedAnswered = '';
+    this.entityControl.reset();
+    this.brokerControl.reset();
+    this.selectedAnswered = null;
     this.selectedEntity = '';
     this.selectedUser = '';
     this.selectedBroker = '';
     this.hasSearched = false;
     this.isClearEnabled = false;
+    this.showAnsweredPlaceholder = true;
     this.filtersCleared.emit();
     this.applyCurrentFilters();
   }

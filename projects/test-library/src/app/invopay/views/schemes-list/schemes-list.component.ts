@@ -4,7 +4,6 @@ import { FormControl } from '@angular/forms';
 import { SchemeService } from '../../services/scheme.service';
 import { Scheme } from '../../interface/scheme';
 import { SchemaContext } from '../../components/modal-schema/modal-schema.component';
-import { CardConfig } from '../../../shared/models/movile-table';
 
 
 @Component({
@@ -27,7 +26,7 @@ export class SchemesListComponent implements OnInit {
   //Por si queres traducir el encabezado
   keyTranslate = 'IP.ADMIN_TABLE';
   //Acciones de la tabla
-  actions: string[] = ['detail', 'status'];
+  actions: string[] = ['detail', 'edit'];
   //Acciones de condicion
   actionsIf: any[] = [];
   //Inicializar la tabla
@@ -77,8 +76,8 @@ export class SchemesListComponent implements OnInit {
     this.schemaId = id;
     if (type == 'detail') {
       this.context = type;
-    } else if (type == 'status') {
-      this.context = type;
+    } else if (type == 'edit') {
+      this.context = 'status';
     } else {
       console.log('type not exists');
     }
@@ -139,48 +138,4 @@ export class SchemesListComponent implements OnInit {
     this.currentPage = 1;
     this.updatePage();
   }
-
-  /*cardConfig: CardConfig = {
-  headerLabel: '#',
-  headerKey: 'id',
-  showActionButton: true,
-  actions: ['detail', 'status'],
-  fields: [
-    {
-      key: 'schemeName',
-      label: 'IP.ADMIN_TABLE.SCHEMENAME',
-      highlight: false,
-      isAmount: true
-    },
-    {
-      key: 'description',
-      label: 'IP.ADMIN_TABLE.DESCRIPTION',
-      highlight: false
-    },
-    {
-      key: 'isSchemaActiveDisplay',
-      label: 'IP.ADMIN_TABLE.ISSCHEMAACTIVE',
-      highlight: false
-    }
-  ]
-};
-
-// Modifica tu getter preparedData o crea uno nuevo
-get preparedData() {
-  return this.pagedData.map(item => ({
-    ...item,
-    isSchemaActiveDisplay: item.isSchemaActive === 'Si' ? 'IP.YES' : 'IP.NO'
-  }));
-}
-
-// Tu handleCardAction ya lo tienes, solo ajústalo
-handleCardAction(event: any): void {
-  const { item, action } = event;
-  
-  if (action === 'detail') {
-    this.openModal(item.id, 'detail');
-  } else if (action === 'status') {
-    this.openModal(item.id, 'status');
-  }
-}*/
 }
