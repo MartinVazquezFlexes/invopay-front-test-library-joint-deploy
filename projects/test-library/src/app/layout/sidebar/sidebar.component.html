@@ -29,7 +29,7 @@
 
       <div class="menu-item-group">
         <div class="menu-item has-submenu" [class.open]="notificationsSubmenuOpen" (click)="toggleNotificationsSubmenu()" title="Notificaciones">
-          <img src="../../../assets/new-styles/icons/bell.svg" alt="Notificaciones">
+          <img src="../../../assets/new-styles/icons/bell.svg" alt="Notificaciones" class="bell-icon">
           <span class="label" *ngIf="!isCollapsed" style="color:#0071CE;">{{ 'IP.SIDENAV.OPTIONS.NOTIFICATIONS' | translate }}</span>
           <span class="arrow" *ngIf="!isCollapsed">▼</span> 
         </div>

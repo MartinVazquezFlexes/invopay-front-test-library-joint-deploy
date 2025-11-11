@@ -9,22 +9,23 @@ import { RevenuesListStateService } from '../../services/revenues-list-state.ser
 import { RevenuesResponse } from '../../interface/revenueResponse';
 import { Revenue } from '../../interface/revenue';
 import { RevenueListState } from '../../services/revenueListState';
+import { LoadingService } from '../../../shared/services/loading.service';
 @Component({
   selector: 'app-revenues-list',
   templateUrl: './revenues-list.component.html',
   styleUrls: ['./revenues-list.component.scss']
 })
 export class RevenuesListComponent {
-
   constructor(
       private readonly revenueService: RevenueService,
       private readonly router: Router ,
       private readonly stateService: RevenuesListStateService,
       private readonly translate: TranslateService,
-      private readonly route : ActivatedRoute
+      private readonly route : ActivatedRoute,
+      private loadingService: LoadingService
       
      ) { }
-
+    showLoader:boolean = false
     nRowsParameter:number = 20;
     isMobile: boolean=false;
     showMobileMenuIndex: number|null=null;
@@ -35,8 +36,8 @@ export class RevenuesListComponent {
 
   controlsForm = new FormGroup({
     rowPaginator: new FormControl<number>(20),
-    dateEnd: new FormControl<string>('', { nonNullable: true }),      // ← Agrega nonNullable
-    dateStart: new FormControl<string>('', { nonNullable: true }),    // ← Agrega nonNullable
+    dateEnd: new FormControl<string>('', { nonNullable: true }),      
+    dateStart: new FormControl<string>('', { nonNullable: true }),    
     chanelPayment: new FormControl<string>('')
     });
 
@@ -72,12 +73,12 @@ export class RevenuesListComponent {
   ngOnInit(): void {
 
    console.log('isMobile:', this.isMobile);
-  console.log('RevenueListComponent init');
-  console.log('controlsForm:', this.controlsForm);
+   console.log('RevenueListComponent init');
+   console.log('controlsForm:', this.controlsForm);
 
       console.log('RevenueListComponent init ');
       console.log(this.formatDate(new Date()))
-  
+      this.loadingService.setLoadingState(true)
       this.nRowsParameter= this.route.snapshot.data['rowsTable'] || 20
       this.checkScreenSize()
       this.loadTitleMap();
@@ -211,6 +212,27 @@ export class RevenuesListComponent {
           this.isModalOpen=false
         });
   }
+  
+onClearFilters(): void {
+  this.controlsForm.reset({
+    rowPaginator: this.itemsPerpage, // mantiene el tamaño actual de página
+    dateStart: '',
+    dateEnd: '',
+    chanelPayment: ''
+  });
+
+  // Resetear variables internas
+  this.currentStart = '';
+  this.currentEnd = '';
+  this.currentPayChannel = '';
+  this.currentPages = 1;
+
+    this.onApplyFilter(1)
+    this.isModalOpen = false;
+
+}
+
+
 
   onClickFiltredSearch() {
     this.onApplyFilter(1)
@@ -267,6 +289,10 @@ export class RevenuesListComponent {
       ,
       error: (error) => {
         console.error('Error al cargar las recaudaciones:', error);
+      },
+      complete:()=>{
+        console.log("asssssssssssssssssssssss")
+        this.loadingService.setLoadingState(false)
       }
     });
     this.subscriptions.add(getRevenuesSub)
@@ -346,7 +372,6 @@ export class RevenuesListComponent {
 
   formatDate2(date: string | Date): string {
     const d = new Date(date);
-
     const day = String(d.getDate()).padStart(2, '0');
     const month = String(d.getMonth() + 1).padStart(2, '0');
     const year = d.getFullYear();
@@ -355,7 +380,7 @@ export class RevenuesListComponent {
     const minutes = String(d.getMinutes()).padStart(2, '0');
     const seconds = String(d.getSeconds()).padStart(2, '0');
 
-    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+    return `${year}-${month}-${day}`;
   }
   getTodayDate(): string {
     return new Date().toISOString().split('T')[0];

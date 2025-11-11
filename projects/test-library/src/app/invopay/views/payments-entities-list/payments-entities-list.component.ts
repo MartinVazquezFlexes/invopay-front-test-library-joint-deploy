@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { CardConfig } from '../../../shared/models/movile-table';
 import { PaymentProvider } from '../../interface/paymentEntities';
 import { ProvidersService } from '../../services/providers.service';
+import { LoadingService } from '../../../shared/services/loading.service';
 @Component({
   selector: 'app-payments-entities-list',
   templateUrl: './payments-entities-list.component.html',
@@ -25,7 +26,7 @@ export class PaymentsEntitiesListComponent implements OnInit,OnDestroy,AfterView
     });
     this.loadProviders();
   }
-  
+  public readonly loadingService = inject(LoadingService);
   private initializeMobileCardConfig(): void {
     this.mobileCardConfig = {
       headerKey: 'providerName',
@@ -73,7 +74,9 @@ export class PaymentsEntitiesListComponent implements OnInit,OnDestroy,AfterView
   defaultLogo = './assets/img/mercado-pago.jpeg';
 
   loadProviders(){
-    const sub=this.providersService.getPaymentsEntities().subscribe({
+    const sub=this.loadingService.setLoadingState(true);
+    this.subscription.add(sub);
+    const sub2=this.providersService.getPaymentsEntities().subscribe({
       next:(res)=>{
         console.log(res)
         const providerData= Array.isArray(res) ? res[0] : res;
@@ -92,12 +95,16 @@ export class PaymentsEntitiesListComponent implements OnInit,OnDestroy,AfterView
           });  
           this.data = [...this.originalData]; 
           this.loadData();    
+          const sub3=this.loadingService.setLoadingState(false);
+          this.subscription.add(sub3);
       },
       error:(err)=>{
         console.error('Error fetching providers:', err);
+        const sub3=this.loadingService.setLoadingState(false);
+        this.subscription.add(sub3);
       }
     })
-    this.subscription.add(sub);
+    this.subscription.add(sub2);
   }
 
  

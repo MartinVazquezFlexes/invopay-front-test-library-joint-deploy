@@ -123,7 +123,7 @@ export class ProductService {
     formData.append('description', productData.description);
     formData.append('code', productData.code);
     formData.append('type', productData.type);
-    formData.append('isActive', productData.isActive ? '1' : '0'); // Envía 1 o 0
+    formData.append('isActive', productData.isActive.toString()); 
     
     if (productData.longDescription) {
       formData.append('longDescription', productData.longDescription);

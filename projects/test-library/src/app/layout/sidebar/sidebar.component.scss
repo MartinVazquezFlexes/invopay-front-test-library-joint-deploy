@@ -80,6 +80,10 @@
     gap: 2px;
   }
 
+  .bell-icon {
+    filter: invert(60%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%) contrast(90%);
+  }
+
   .menu-item {
     display: flex;
     align-items: center;

@@ -341,7 +341,6 @@ $status-inactive-color: $error-color;
   }
 
   &__status {
-    font-size: 0.8rem;
     font-weight: 600;
 
     &.status--active {
@@ -351,6 +350,13 @@ $status-inactive-color: $error-color;
     &.status--inactive {
       color: $status-inactive-color;
     }
+  }
+
+  &__status-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   &__section {
@@ -442,7 +448,7 @@ $status-inactive-color: $error-color;
   max-width: 450px;
   text-align: center;
 
-  p {
+  &__message {
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.5;
@@ -451,13 +457,15 @@ $status-inactive-color: $error-color;
       color: $primary-color;
       font-weight: 600;
     }
+
+    &__warning {
+      font-size: 0.75rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
   }
 
-  &__note {
-    font-size: 0.8rem;
-    color: #666;
-    margin-top: 0.5rem;
-  }
+
 }
 
 /* --- Estilos para Inputs de Formulario (dentro de Modales) --- */

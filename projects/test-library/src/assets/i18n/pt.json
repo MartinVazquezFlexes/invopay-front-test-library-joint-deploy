@@ -254,6 +254,7 @@
     },
     "COMMON": {
       "CONFIRM-BUTTON": "Confirmar",
+      "CLOSE": "Fechar",
       "REQUIRED-FIELD": "*Campo obrigatório"
     },
     "PAY_BILL_DETAILS": {
@@ -1366,7 +1367,7 @@
     "PAYMENTS_ENTITIES": {
       "TITTLE": "Provedores e Canais de arrecadação",
       "TABLE": {
-        "LOGO": "Logo",
+        "LOGO": " ",
         "PROVIDEER": "Provedor",
         "PAYMENT_CHANNEL": "Canais",
         "ACTIVE": "Ativo",
@@ -1426,14 +1427,14 @@
         "ANSWERED_PLACEHOLDER": "Selecionar estado",
         "YES": "Sim",
         "NO": "Não",
-        "ENTITY": "Entidade",
-        "ENTITY_PLACEHOLDER": "Selecionar entidade",
+        "ENTITY": "Conceito",
+        "ENTITY_PLACEHOLDER": "Selecionar conceito",
         "USER": "Usuário",
         "USER_PLACEHOLDER": "Selecionar usuário"
       },
       "TABLE": {
         "DATE": "Data",
-        "ENTITY": "Entidade",
+        "ENTITY": "Conceito",
         "BROKER": "Corretor",
         "USER": "Usuário",
         "QUERY": "Consulta",

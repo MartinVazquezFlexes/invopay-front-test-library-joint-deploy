@@ -1,4 +1,4 @@
-<div class="payment-entities">
+<div class="payment-entities" *ngIf="!(loadingService.isLoading$ | async)">
   <div class="payment-entities__card">
     <!-- Title Section -->
     <div class="payment-entities__title-section">

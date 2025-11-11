@@ -1,3 +1,4 @@
+
 <form [formGroup]="controlsForm">
   <app-title-page *ngIf="!isMobile" [isMobile]="isMobile" [title]="'IP.SIDENAV.OPTIONS.PAY_IN' | translate"></app-title-page>
 
@@ -22,7 +23,7 @@
             <label class="placeholder">{{'NEW_VAR.PAYMEN_CHANNEL'|translate}}</label>
             <div class="custom-select-container">
               <select formControlName="chanelPayment" class="custom-select">
-                <option  [value]="">{{'IP.SETTLEMENTS.SALE-PAYMENT.PAYMENT_METHOD'|translate}}</option>
+                <option  disabled [value]="">{{'IP.SETTLEMENTS.SALE-PAYMENT.PAYMENT_METHOD'|translate}}</option>
                 <option *ngFor="let item of paymentChannels" value="{{item.value}}">{{item.label}}</option>
               </select>
             </div>
@@ -47,6 +48,11 @@
             </app-ip-date-input>
           </div>
 
+           <div class="date-wrapper">
+              <button class="search" (click)="onClearFilters()">
+                  <img src="../../../../assets/new-styles/icons/cleaning.svg">
+              </button>
+          </div>
           <div class="date-wrapper">
             <button class="search" (click)="onClickFiltredSearch()">
               <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
@@ -129,14 +135,14 @@
  
   
     <div class="card-paginator"  *ngIf="revenues.length>5">
+
       <div class="paginator-controls">
-        <select class="page-size-select" formControlName="rowPaginator" title="Filas por pagina">
+        <select class="page-size-select" formControlName="rowPaginator" title="Filas por pagina" >
           <option [value]="5">5</option>
           <option [value]="10">10</option>
           <option [value]="20">20</option>
           <option [value]="50">50</option>
         </select>
-
         <app-paginator
           (pageChange)="onPageChange($event)"
           [totalItems]="revenues.length"
@@ -196,7 +202,9 @@
     </div>
     <!-- Botones de acción -->
     <div class="modal-actions">
-
+      <button  style="margin-right: 6px;" class="search" (click)="onClearFilters()">
+          <img src="../../../../assets/new-styles/icons/cleaning.svg">
+      </button>
       <button class="search" (click)="onClickFiltredSearch()">
                 <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
       </button>

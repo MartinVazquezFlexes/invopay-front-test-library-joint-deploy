@@ -494,6 +494,7 @@
     },
     "COMMON": {
       "BUTTON-CREATE": "Crear",
+      "CLOSE": "Cerrar",
       "BUTTON-UPDATE": "Actualizar",
       "CONFIRM-BUTTON": "Aceptar",
       "INVALID-EMAIL": "* Ingrese un email válido",
@@ -2579,8 +2580,8 @@
         "ANSWERED_PLACEHOLDER": "Seleccionar estado",
         "YES": "Sí",
         "NO": "No",
-        "ENTITY": "Entidad",
-        "ENTITY_PLACEHOLDER": "Seleccionar entidad",
+        "ENTITY": "Concepto",
+        "ENTITY_PLACEHOLDER": "Seleccionar concepto",
         "USER": "Usuario",
         "USER_PLACEHOLDER": "Seleccionar Usuario"
       },
@@ -2597,7 +2598,7 @@
       },
       "TABLE": {
         "DATE": "Fecha/Hora",
-        "ENTITY": "Entidad",
+        "ENTITY": "Concepto",
         "BROKER": "Corredor/Proveedor",
         "USER": "Nombre de usuario",
         "QUERY": "Consulta",
@@ -2620,7 +2621,7 @@
     "PAYMENTS_ENTITIES":{
     "TITTLE":"Proveedores y Canales de recaudación",
     "TABLE":{
-      "LOGO":"Logo",
+      "LOGO":" ",
       "PROVIDEER":"Proveedor",
       "PAYMENT_CHANNEL":"Canales",
       "ACTIVE":"Activo",
@@ -2667,6 +2668,7 @@
       "ROWS_PER_PAGE": "Filas por página: "
     },
     "BUTTONS": {
+      "ADD": "Agregar",
       "CANCEL": "Cancelar",
       "CONFIRM": "Confirmar",
       "DELETING": "Eliminando...",

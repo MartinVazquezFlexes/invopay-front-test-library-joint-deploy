@@ -439,65 +439,6 @@
   }
 }
 
-.card-paginator {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center; // 👈 CAMBIO: de end a center
-  background-color: #fff;
-  border-top: 1px solid #e5e7eb;
-  border-bottom-left-radius: 0.75rem;
-  border-bottom-right-radius: 0.75rem;
-  padding: 0.75rem 1.5rem; // 👈 AGREGADO: padding para dar espacio
-  @include sm() {
-     background-color: transparent;
-     justify-content: center;
-     border: none;
-     padding: 0%;
-     margin-bottom: 0%;
-    }
-
-  .paginator-controls {
-    display: flex;
-    align-items: flex-end; 
-    margin-bottom: 1rem;
-
-    select {
-      width: 3rem;
-      height: 1.75rem;
-      text-align: center;
-      border: 1px solid #d1d5db;
-      border-radius: 0.375rem;
-      background-color: #f9fafb;
-      font-size: 0.8rem;
-      color: #374151;
-      outline: none;
-      appearance: none;
-      cursor: pointer;
-      padding: 0;
-      line-height: 1.75rem;
-      margin-bottom: 1rem;
-    
-
-      &:hover {
-        border-color: #3b82f6;
-        background-color: #f3f4f6;
-      }
-
-      &:focus {
-        border-color: #2563eb;
-        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
-      }
-      @include sm() {
-        display: none; // ocupa todo el ancho en móvil
-        }
-
-
-    }
-
-  }
-}
-
-
 
 
 //para la card movile 
@@ -825,7 +766,67 @@ app-ip-date-input {
 }
 
 
+.card-paginator {
+  display: flex;
+  flex-direction: column; // Cambio a columna para alineación vertical
+  align-items: center;
+  background-color: #fff;
+  border-top: 1px solid #e5e7eb;
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  gap: 1rem; // 👈 Espacio entre select y paginador
+  
+  @include sm() {
+     background-color: transparent;
+     justify-content: center;
+     border: none;
+     padding: 0%;
+     margin-bottom: 0%;
+    }
+
+  .paginator-controls {
+    display: flex;
+    align-items: center;
+    width: 100%; // 👈 Ancho completo
+    justify-content: flex-start; // 👈 Alinea al inicio
+
+    select {
+      width: 3rem;
+      height: 1.75rem;
+      text-align: center;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+      background-color: #f9fafb;
+      font-size: 0.8rem;
+      color: #374151;
+      outline: none;
+      appearance: none;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1.75rem;
+       margin-top: 1srem; //Margen superior para bajar el select
 
 
+      &:hover {
+        border-color: #3b82f6;
+        background-color: #f3f4f6;
+      }
 
-
+      &:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+      }
+      
+      @include sm() {
+        display: none;
+      }
+    }
+  }
+  
+  app-paginator {
+    width: 100%; // 👈 Ancho completo para el paginador
+    display: flex;
+    justify-content: flex-end; // 👈 Alinea al final
+  }
+}

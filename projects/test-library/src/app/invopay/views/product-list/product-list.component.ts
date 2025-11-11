@@ -143,8 +143,7 @@ export class ProductListComponent implements OnInit {
       },
       error: (err) => {
         console.error("Error al cargar productos:", err);
-        // (Aquí iría un Toast de error)
-        this.loadingService.setLoadingState(false); // <-- DESACTIVAR LOADER (Error)
+        this.loadingService.setLoadingState(false);
       }
     });
   }

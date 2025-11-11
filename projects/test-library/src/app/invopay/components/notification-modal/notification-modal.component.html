@@ -6,12 +6,7 @@
     </div>
 
     <div class="notification-modal__content">
-      <div class="modal-tabs" *ngIf="!isReplyMode">
-        <button class="tab-button" [class.active]="activeTab === 'info'" (click)="activeTab = 'info'">Información</button>
-        <button class="tab-button" [class.active]="activeTab === 'responses'" (click)="activeTab = 'responses'">Respuestas</button>
-      </div>
-
-      <div class="notification-detail" *ngIf="details && activeTab === 'info' && !isReplyMode">
+      <div class="notification-detail" *ngIf="details && !isReplyMode">
         <div class="notification-details__inputs">
           <div class="notification-details__input-wrapper">
             <label class="notification-details__label" for="date-modal">{{ 'IP.NOTIFICATIONS.TABLE.DATE' | translate }}</label>
@@ -62,14 +57,6 @@
         </div>
       </div>
 
-      <div class="notification-responses" *ngIf="responses?.length && activeTab === 'responses' && !isReplyMode">
-        <h4>{{ 'IP.NOTIFICATIONS.MODAL.PREVIOUS_RESPONSES' | translate }}</h4>
-        <div class="response-item" *ngFor="let response of responses">
-          <div class="response-date">{{ response.date }}</div>
-          <div class="response-responded-by" *ngIf="response.respondedBy">{{ 'IP.NOTIFICATIONS.MODAL.RESPONDED_BY' | translate }}: {{ response.respondedBy }}</div>
-          <div class="response-text">{{ response.text }}</div>
-        </div>
-      </div>
 
       <div class="notification-reply" *ngIf="isReplyMode">
         <h4>{{ 'IP.NOTIFICATIONS.MODAL.REPLY' | translate }}</h4>
@@ -86,6 +73,14 @@
       </div>
 
       <ng-content></ng-content>
+      
+      <div class="notification-modal__footer" *ngIf="!isReplyMode">
+        <app-ip-button-modal
+          typeBtn="cancel"
+          [textCodeBtn]="'IP.COMMON.CLOSE' | translate"
+          (clicked)="onCloseModal($event)">
+        </app-ip-button-modal>
+      </div>
     </div>
   </div>
 </div>

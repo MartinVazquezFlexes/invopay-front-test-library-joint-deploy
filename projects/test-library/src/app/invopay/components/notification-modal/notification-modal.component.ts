@@ -24,7 +24,10 @@ export class NotificationModalComponent {
   replyText: string = '';
   activeTab: string = 'info';
 
-  onCloseModal(): void {
+  onCloseModal(event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
     this.openChange.emit(false);
     this.closeModal.emit();
   }

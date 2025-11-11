@@ -77,6 +77,8 @@ $backgrounds-color: #D9D9D9;
     justify-content: space-between;
     align-items: center;
     padding: 0;
+    padding-right: 20px;
+    padding-left: 30px;
   }
 
   &__paginator-container--desktop {
@@ -116,13 +118,14 @@ $backgrounds-color: #D9D9D9;
 
   &__rows-select {
     @include generalInputText();
-    padding: 8px 12px;
+    padding: 8px 6px;
     border: $input-border;
     border-radius: 6px;
     color: $primary-color-text;
     background: $input-bg-color;
     cursor: pointer;
-    min-width: 70px;
+    width: 60px;
+    text-align: left;
 
     &:focus {
       outline: none;

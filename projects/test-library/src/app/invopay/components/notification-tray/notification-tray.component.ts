@@ -72,7 +72,23 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
   isClearEnabled: boolean = false;
 
   get isSearchDisabled(): boolean {
-    return !this.selectedAnswered && !this.selectedEntity && !this.selectedUser;
+   
+    if (this.selectedAnswered && !this.selectedEntity && !this.selectedUser && !this.selectedBroker) {
+      if (!this.originalData || this.originalData.length === 0) {
+        return true;
+      }
+      
+      const answerValue = this.selectedAnswered === 'si' ? 'si' : 'no';
+      const hasMatchingAnswers = this.originalData.some(item => item.answered === answerValue);
+      
+      if (!hasMatchingAnswers) {
+        return true;
+      }
+      return false;
+    }
+    
+   
+    return !(this.selectedEntity || this.selectedUser || this.selectedBroker || this.selectedAnswered);
   }
 
   ngOnDestroy(): void {

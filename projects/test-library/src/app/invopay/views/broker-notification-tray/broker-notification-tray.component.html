@@ -1,4 +1,5 @@
 <app-notification-tray
+  *ngIf="!(loadingService.isLoading$ | async)"
   [config]="notificationTrayConfig"
   [data]="notificationData"
   (viewNotification)="onViewNotification($event)"

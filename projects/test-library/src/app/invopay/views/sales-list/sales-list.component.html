@@ -45,7 +45,7 @@
                         <label class="placeholder">{{'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate}}</label>
                         <div class="custom-select-container">
                             <select formControlName="productFilter" class="custom-select">
-                                <option value="">{{'NEW_VAR.SELECT_PRODUCT' | translate}}</option>
+                                <option disabled value="">{{'NEW_VAR.SELECT_PRODUCT' | translate}}</option>
                                 <option *ngFor="let item of this.products" value={{item}}>{{item}}</option>
                             </select>
                         </div>
@@ -54,7 +54,7 @@
                         <label class="placeholder">{{'IP.SETTLEMENTS.DETAILS.BROKER_NAME' | translate}}</label>
                         <div class="custom-select-container">
                             <select formControlName="brokerFilter" class="custom-select">
-                                <option value="">{{'IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.SELECT_BROKER' | translate}}</option>
+                                <option disabled value="">{{'IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.SELECT_BROKER' | translate}}</option>
                                 <option *ngFor="let item of this.brokers" value={{item}}>{{item}}</option>
 
                             </select>
@@ -75,12 +75,17 @@
                         </app-ip-date-input>
                     </div>
                  </div>
-
+                    <div class="date-wrapper">
+                            <button class="search" (click)="onClearFilters()">
+                                <img src="../../../../assets/new-styles/icons/cleaning.svg">
+                            </button>
+                    </div>
                     <div class="date-wrapper">
                         <button class="search" (click)="onClickFiltredSearch()">
                             <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
                         </button>
                     </div>
+    
                 </div>
            
             </div>
@@ -233,6 +238,9 @@
     <!-- Botones de acción -->
     <div class="modal-actions">
 
+      <button  style="margin-right: 6px;" class="search" (click)="onClearFilters()">
+          <img src="../../../../assets/new-styles/icons/cleaning.svg">
+      </button>
       <button class="search" (click)="onClickFiltredSearch()">
                 <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
       </button>

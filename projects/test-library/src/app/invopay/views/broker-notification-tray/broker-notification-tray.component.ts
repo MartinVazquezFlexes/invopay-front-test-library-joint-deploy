@@ -9,6 +9,7 @@ import { combineLatest, forkJoin, Subscription } from 'rxjs';
 import { NotificationItem, NotificationTrayConfig } from '../../interface/notification-tray.models';
 import { MatDialog } from '@angular/material/dialog';
 import { IpNotificationModalFilterMobileComponent } from '../../components/ip-notification-modal-filter-mobile/ip-notification-modal-filter-mobile.component';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-broker-notification-tray',
@@ -24,6 +25,7 @@ export class BrokerNotificationTrayComponent implements OnInit,OnDestroy {
   private readonly translate = inject(TranslateService);
   private readonly notificationBrokerService = inject(NotificationBrokerService);
   private readonly router=inject(Router)  
+  public readonly loadingService=inject(LoadingService)
   notificationData: NotificationItem[] = [];
   notificationUpdate:NotificationRead={
     notificationId:0
@@ -74,9 +76,7 @@ private originalNotificationData: any[] = [];
     tableStyle: 'invopay',
     entities: [
       'Liquidación',
-      'Comisión',
       'Factura',
-      'Pago'
     ],
     users: [
       'Juan Pérez',
@@ -127,6 +127,8 @@ private originalNotificationData: any[] = [];
   }
 
   private loadNotifications(): void {
+    const suub=this.loadingService.setLoadingState(true);
+    this.subscription.add(suub);
     const sub = forkJoin({
       read: this.notificationBrokerService.getAllReadNotifications(),
       unread: this.notificationBrokerService.getAllUnreadNotifications()
@@ -137,11 +139,16 @@ private originalNotificationData: any[] = [];
         this.originalNotificationData = this.mapToNotificationItem(allNotifications);
         this.notificationData = [...this.originalNotificationData];
         this.loadEntityTranslations();
+        const sub2=this.loadingService.setLoadingState(false);
+        this.subscription.add(sub2);
+
       },
       error: (error) => {
         console.error('Error loading notifications:', error);
         this.originalNotificationData = [];
         this.notificationData = [];
+        const sub2=this.loadingService.setLoadingState(false);
+        this.subscription.add(sub2);
       }
     });
     this.subscription.add(sub);

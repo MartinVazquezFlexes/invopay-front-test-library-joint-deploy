@@ -15,6 +15,7 @@ import { SaleListState } from '../../interface/saleListState';
   styleUrls: ['./sales-list.component.scss']
 })
 export class SalesListComponent implements OnInit , OnDestroy {
+
 selectedTab: string='all';
    onClickFiltredSearchMobile() {
     if (this.isMobile) {
@@ -223,6 +224,32 @@ selectedTab: string='all';
 
     this.onApplyFilter(1)
   }
+onClearFilters(): void {
+    this.controlsForm.patchValue({
+      brokerFilter: '',
+      productFilter: '',
+      rowPaginator: this.itemsPerpage, // mantiene el valor actual del paginador
+      dateStart: '',
+      dateEnd: ''
+    });
+
+    // Limpiar variables internas de filtros
+    this.currentBroker = '';
+    this.currentProduct = '';
+    this.currentStart = '';
+    this.currentEnd = '';
+
+    // Limpiar min y max para permitir nueva selección libre
+    this.minEnd = '';
+    this.maxEnd = '';
+    this.maxStart = this.formatDate(new Date());
+    
+     this.isModalOpen=false
+     this.onApplyFilter(1)
+
+     console.log('Filtros limpiados correctamente');
+}
+
 
   isValidDate(date: Date|string|null): boolean {
     return date instanceof Date && !isNaN(date.getTime());
@@ -297,7 +324,7 @@ selectedTab: string='all';
         this.tableSalesDto = [...filteredSales.map((item, index) => ({
           id:  item.id,
           fila: startIndex+index + 1, 
-          fecha: this.formatDate2(item.saleDate),
+          fecha: this.formatDate3(item.saleDate),
           producto: item.productName,
           broker: item.brokerName,
           cliente: item.customerName,
@@ -399,6 +426,13 @@ selectedTab: string='all';
     }
     const iso = date.toISOString();
     return iso.replace('T', ' ');
+  }
+  formatDate3(date: string | Date): string {
+  if (!date) return '';
+
+  const d = new Date(date);
+  return d.toISOString().split('T')[0]; 
+
   }
 
   getTodayDate(): string {

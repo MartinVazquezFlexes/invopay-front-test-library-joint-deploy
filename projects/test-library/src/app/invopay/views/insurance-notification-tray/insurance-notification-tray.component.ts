@@ -10,6 +10,7 @@ import { Broker } from '../../interface/broker';
 import { NotificationItem, NotificationTrayConfig } from '../../interface/notification-tray.models';
 import { MatDialog } from '@angular/material/dialog';
 import { IpNotificationModalFilterMobileComponent } from '../../components/ip-notification-modal-filter-mobile/ip-notification-modal-filter-mobile.component';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-insurance-notification-tray',
@@ -22,7 +23,7 @@ export class InsuranceNotificationTrayComponent implements OnInit, OnDestroy {
   private readonly notificationService = inject(NotificationInsuranceService);
   private subscription = new Subscription();
   private readonly dialog = inject(MatDialog);
-
+  public readonly loadingService = inject(LoadingService);
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -101,9 +102,7 @@ export class InsuranceNotificationTrayComponent implements OnInit, OnDestroy {
     tableStyle: 'invopay',
     entities: [
       'Liquidación',
-      'Comisión',
-      'Factura',
-      'Pago'
+      'Factura'
     ],
     users: [
       'Juan Pérez',
@@ -158,6 +157,7 @@ export class InsuranceNotificationTrayComponent implements OnInit, OnDestroy {
   }
 
   private loadNotifications(type: string = '', filters: any = {}): void {
+    
     const hasFilters = Object.keys(filters).length > 0 || this.selectedBrokerId || this.selectedEntity;
     
     if (!hasFilters) {
@@ -172,7 +172,8 @@ export class InsuranceNotificationTrayComponent implements OnInit, OnDestroy {
     
     const userId = this.selectedBrokerId || undefined; 
     console.log('Loading notifications with params - type:', type, 'userId:', userId);
-    
+    const sub=this.loadingService.setLoadingState(true);
+    this.subscription.add(sub);
     this.subscription.add(
       forkJoin({
         read: this.notificationService.getAllReadNotifications(type, userId),
@@ -195,27 +196,37 @@ export class InsuranceNotificationTrayComponent implements OnInit, OnDestroy {
             console.log('Applying initial filters:', filters);
             this.applyFilters(filters);
           }
+          const sub2=this.loadingService.setLoadingState(false);
+          this.subscription.add(sub2);
         },
         error: (error) => {
           console.error('Error loading notifications:', error);
+          const sub2=this.loadingService.setLoadingState(false);
+          this.subscription.add(sub2);
         }
       })
     );
   }
   loadBrokers(){
-    const sub = this.notificationService.getBrokers().subscribe({
+    const sub=this.loadingService.setLoadingState(true);
+    this.subscription.add(sub);
+    const sub2 = this.notificationService.getBrokers().subscribe({
       next: (result) => {
         this.brokers = result;
         this.brokerOptions = this.brokers.map(broker => ({
           label: broker.username,
           value: broker.id.toString()
         }));
+        const sub3=this.loadingService.setLoadingState(false);
+        this.subscription.add(sub3);
       },
       error: (error) => {
         console.error('Error loading brokers:', error);
+        const sub3=this.loadingService.setLoadingState(false);
+        this.subscription.add(sub3);
       }
     });
-    this.subscription.add(sub);
+    this.subscription.add(sub2);
   }
 
 
