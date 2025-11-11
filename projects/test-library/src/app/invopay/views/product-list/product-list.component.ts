@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms'; // FormArray se usa para el tipo, aunque no se implemente
-import { ProductService } from '../../services/product.service'; // (Ajusta la ruta)
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { ProductService } from '../../services/product.service';
 import { LoadingService } from '../../../shared/services/loading.service';
 
 import {
@@ -10,9 +10,8 @@ import {
   ProductDocument,
   CreateProductDTO,
   UpdateProductDTO
-} from '../../interface/product-interfaces'; // (Ajusta la ruta)
+} from '../../interface/product-interfaces';
 
-// Evento genérico de la tabla
 type TableActionEvent = {
   event: string;
   key?: string;
@@ -26,7 +25,7 @@ type TableActionEvent = {
 })
 export class ProductListComponent implements OnInit {
 
-  // --- Propiedades de Datos ---
+
   products: AppProductItem[] = [];
   titlesFile = new Map<string, string>([
     ['logoUrl', ''],
@@ -35,7 +34,6 @@ export class ProductListComponent implements OnInit {
     ['statusText', 'Activo'],
   ]);
 
-  // --- Propiedades de Paginación ---
   pageIndex = 0;
   pageSize = 10;
   total = 0;
@@ -45,7 +43,6 @@ export class ProductListComponent implements OnInit {
   private lastDesktopPageSize = this.pageSize;
   paginatorReload = false;
   
-  // --- Propiedades de Estado y Modales ---
   private originalProducts: AppProductItem[] = [];
   loading = false;
   isHandset = false;
@@ -65,7 +62,6 @@ export class ProductListComponent implements OnInit {
   createBusy = false;
   createForm!: FormGroup;
 
-  // Propiedad para guardar el archivo a subir
   private logoFileToUpload: File | null = null;
 
   @ViewChildren('menuRef') menuRefs!: QueryList<ElementRef<HTMLElement>>;
@@ -75,11 +71,10 @@ export class ProductListComponent implements OnInit {
     private elementRef: ElementRef,
     private formBuilder: FormBuilder,
     private productService: ProductService,
-    public loadingService: LoadingService // Servicio real inyectado
+    public loadingService: LoadingService
   ) { }
 
   ngOnInit() {
-    // 1. Lógica Responsive
     this.breakpoint.observe(['(max-width: 550px)']).subscribe(state => {
       const enteringHandset = !!state.matches;
       if (enteringHandset === this.isHandset) return;
@@ -96,9 +91,8 @@ export class ProductListComponent implements OnInit {
       }
     });
 
-    // 2. Inicializar formulario de CREACIÓN (coincide con la API)
     this.createForm = this.formBuilder.group({
-      logoUrl: [''], // Solo para UI (vista previa)
+      logoUrl: [''],
       code: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -109,10 +103,9 @@ export class ProductListComponent implements OnInit {
       isActive: [true]
     });
 
-    // 3. Inicializar formulario de EDICIÓN (coincide con la API)
     this.editForm = this.formBuilder.group({
       id: [null, Validators.required],
-      logoUrl: [''], // Solo para UI (vista previa)
+      logoUrl: [''],
       code: [{ value: '', disabled: true }, Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -123,11 +116,8 @@ export class ProductListComponent implements OnInit {
       isActive: [true]
     });
 
-    // 4. Carga Inicial de Datos (Real)
     this.loadPage(this.pageIndex, this.pageSize);
   }
-
-  /*----------------------------------- LÓGICA DE DATOS (Real) --------------------------------------*/
 
   private loadPage(index: number, size: number) {
     this.loadingService.setLoadingState(true);
@@ -166,8 +156,6 @@ export class ProductListComponent implements OnInit {
     this.originalProducts = update([...this.originalProducts]);
     this.products = update([...this.products]);
   }
-
-  /*--------------------------------- ACCIONES (Crear, Editar, Eliminar) -------------------------------*/
 
   onConfirmCreate(): void {
     if (this.createForm.invalid) {
@@ -247,8 +235,6 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  /*--------------------------------- Helpers (Modales, Acciones, Archivos) -------------------------------*/
-
   onAddNewProduct(): void {
     this.createForm.reset({
       type: 'INDIVIDUAL',
@@ -274,7 +260,7 @@ export class ProductListComponent implements OnInit {
         longDescription: this.selectedProduct.descriptionDetailed,
         isActive: this.selectedProduct.isActive,
         logoUrl: this.selectedProduct.logoUrl,
-        type: (this.selectedProduct as any).type || 'INDIVIDUAL', // Carga el tipo si existe
+        type: (this.selectedProduct as any).type || 'INDIVIDUAL',
         externalId: (this.selectedProduct as any).externalId || '',
         insuranceEnterprise: (this.selectedProduct as any).insuranceEnterprise || ''
       });
@@ -288,7 +274,6 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  // --- Helpers de Modales ---
   onViewModalClose(): void {
     this.isViewModalOpen = false;
     this.selectedProduct = null;
@@ -310,24 +295,20 @@ export class ProductListComponent implements OnInit {
     this.editForm.reset();
   }
 
-  // --- Helpers de FormArray (Solo para el tipo, ya no se usan) ---
   documentationFormArray(form: FormGroup): FormArray {
     return form.get('documentation') as FormArray;
   }
 
-  // --- Helper de Subida de Archivo ---
   onFileSelected(event: Event, formGroup: FormGroup, controlName: string): void {
     const input = event.target as HTMLInputElement;
     if (!input.files || input.files.length === 0) return;
 
     const file = input.files[0];
     
-    // 1. Guardar el archivo real para el FormData
     if (controlName === 'logoUrl') {
       this.logoFileToUpload = file;
     }
     
-    // 2. Generar Base64 para la vista previa
     const reader = new FileReader();
     reader.onload = () => {
       const dataUrl = reader.result as string;
@@ -337,10 +318,6 @@ export class ProductListComponent implements OnInit {
     reader.readAsDataURL(file);
     input.value = ''; 
   }
-
-  /*------------------------------------ Paginación, Responsive, Clic Fuera --------------------------------------*/
-  // (El resto de funciones de Paginación, Sort, Responsive y HostListener 
-  //  son idénticas a la versión MOCK y se quedan igual)
 
   onSort(event: any): void {
     if (event?.key !== 'name') return; 

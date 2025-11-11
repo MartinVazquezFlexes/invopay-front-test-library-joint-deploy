@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
-import { Observable, of, forkJoin, EMPTY } from 'rxjs';
-import { map, switchMap} from 'rxjs/operators';// 1. Importa el entorno
+import { HttpClient } from '@angular/common/http';
+import { Observable, of, forkJoin, EMPTY, Subject } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { IpAuthService } from './ip-auth.service';
+import { environment } from '../../../environments/environment';
 
-// 2. Importa las interfaces del archivo separado
 import {
   ApiProductPage,
   AppProductPage,
@@ -12,82 +12,79 @@ import {
   ApiProduct,
   CreateProductDTO,
   UpdateProductDTO
-} from '../interface/product-interfaces'; // (Ajusta esta ruta)
+} from '../interface/product-interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private serverBaseUrl = 'https://api.130.211.34.27.nip.io'; 
-  private apiUrl = `${this.serverBaseUrl}/api/v1/invopay/insurance-products`;
+  private serverBaseUrl = environment.api;
+  private apiUrl = `${this.serverBaseUrl}/invopay/insurance-products`;
 
   constructor(private http: HttpClient, private authService: IpAuthService) { }
 
   getProducts(page: number, size: number): Observable<AppProductPage> {
-     
-     // 1. Llama a la API de texto (como antes)
-     return this.http.get<ApiProductPage>(`${this.apiUrl}?page=${page}&size=${size}`).pipe(
-       
-       // 2. Intercepta la respuesta de texto
-       switchMap((apiResponse: ApiProductPage) => {
-         
-         console.log('--- JSON RECIBIDO (GET) ---');
-         console.log(JSON.stringify(apiResponse, null, 2));
 
-         // 3. Mapea la respuesta (API -> App)
-         const mappedContent: ProductItem[] = apiResponse.content.map(
-           (apiProduct: ApiProduct) => this.mapApiToProductItem(apiProduct)
-         );
-         
-         // 4. Prepara la lista de URLs de imágenes para pre-descargar
-         const imageUrls = mappedContent
-           .map(product => product.logoUrl) // Obtiene todas las URLs
-           .filter(url => !!url); // Filtra las que sean undefined/null
+    return this.http.get<ApiProductPage>(`${this.apiUrl}?page=${page}&size=${size}`).pipe(
 
-         if (imageUrls.length === 0) {
-           // No hay imágenes, devuelve los datos inmediatamente
-           return of({
-             ...apiResponse,
-             content: mappedContent
-           });
-         }
+      switchMap((apiResponse: ApiProductPage) => {
+        console.log('--- JSON RECIBIDO (GET) ---');
+        console.log(JSON.stringify(apiResponse, null, 2));
 
-         // 5. Crea un array de Observables (peticiones de descarga)
-         const imageDownloadObs: Observable<any>[] = imageUrls.map(url => {
-           // (Asumimos que el token ya está en la URL gracias a mapApiToProductItem)
-           return this.http.get(url!, { responseType: 'blob' });
-         });
+        const mappedContent: ProductItem[] = apiResponse.content.map(
+          (apiProduct: ApiProduct) => this.mapApiToProductItem(apiProduct)
+        );
 
-         // 6. Ejecuta todas las descargas en paralelo y espera a que terminen
-         return forkJoin(imageDownloadObs).pipe(
-           map(() => {
-             // 7. ¡ÉXITO! Las imágenes están en el caché del navegador.
-             // Ahora devolvemos la respuesta de la API original (mapeada)
-             return {
-               ...apiResponse,
-               content: mappedContent
-             };
-           })
-         );
-       })
-     );
+        if (mappedContent.length === 0) {
+
+          return of({
+            ...apiResponse,
+            content: mappedContent
+          });
+        }
+
+        const productWithImageObs: Observable<ProductItem>[] = mappedContent.map(product => {
+
+          if (!product.logoUrl) {
+            return of(product);
+          }
+
+          return this.http.get(product.logoUrl, { responseType: 'blob' }).pipe(
+            switchMap(blob => this.convertBlobToBase64(blob)),
+            map(base64String => {
+              product.logoUrl = base64String;
+              return product;
+            }),
+            catchError(() => {
+              product.logoUrl = undefined;
+              return of(product);
+            })
+          );
+        });
+
+        return forkJoin(productWithImageObs).pipe(
+          map((finalProducts: ProductItem[]) => {
+            return {
+              ...apiResponse,
+              content: finalProducts
+            };
+          })
+        );
+      })
+    );
   }
-
-  /**
-   * POST: Crea un nuevo producto (Todo en FormData).
-   */
   createProduct(productData: any, logoFile: File): Observable<ProductItem> {
 
     const formData = new FormData();
-    
+
     formData.append('logoFile', logoFile, logoFile.name);
     formData.append('name', productData.name);
     formData.append('description', productData.description);
     formData.append('code', productData.code);
     formData.append('type', productData.type);
 
-    formData.append('isActive', productData.isActive.toString()); 
+    formData.append('isActive', productData.isActive.toString());
 
     if (productData.longDescription) {
       formData.append('longDescription', productData.longDescription);
@@ -108,23 +105,20 @@ export class ProductService {
     );
   }
 
-  /**
-   * PUT: Actualiza un producto existente (Todo en FormData).
-   */
   updateProduct(productData: any, logoFile: File | null): Observable<ProductItem> {
     const formData = new FormData();
-    
+
     if (logoFile) {
       formData.append('logoFile', logoFile, logoFile.name);
-    } 
+    }
 
     formData.append('id', productData.id.toString());
     formData.append('name', productData.name);
     formData.append('description', productData.description);
     formData.append('code', productData.code);
     formData.append('type', productData.type);
-    formData.append('isActive', productData.isActive.toString()); 
-    
+    formData.append('isActive', productData.isActive.toString());
+
     if (productData.longDescription) {
       formData.append('longDescription', productData.longDescription);
     }
@@ -144,51 +138,31 @@ export class ProductService {
     );
   }
 
-  /**
-   * DELETE: Realiza una eliminación.
-   * La API responde con 204 No Content (vacío).
-   */
   deleteProduct(id: number): Observable<Object> {
-    const deleteUrl = `${this.apiUrl}/${id}`; 
-    return this.http.delete(deleteUrl); // Espera una respuesta vacía
+    const deleteUrl = `${this.apiUrl}/${id}`;
+    return this.http.delete(deleteUrl);
   }
 
-
-  /**
-   * Mapeador centralizado (API -> App).
-   */
-  // En product.service.ts
-
   private mapApiToProductItem(apiProduct: ApiProduct): ProductItem {
-    const currentToken = this.authService.getToken(); 
+    const currentToken = this.authService.getToken();
     let finalLogoUrl: string | undefined = undefined;
 
     if (apiProduct.logoUrl) {
-      
-      let filename: string = apiProduct.logoUrl;
 
-      // --- 1. LÓGICA DE LIMPIEZA ---
-      // Si el logoUrl ya es una URL (dato corrupto), extraemos el 'filename' real
+      let filename: string = apiProduct.logoUrl;
       try {
         if (apiProduct.logoUrl.startsWith('http')) {
           const url = new URL(apiProduct.logoUrl);
           filename = url.searchParams.get('filename') || apiProduct.logoUrl;
         }
       } catch (e) {
-        // Falló el parseo, lo más probable es que sea solo el nombre del archivo
         filename = apiProduct.logoUrl;
       }
-      // --- FIN DE LÓGICA DE LIMPIEZA ---
-
-
-      // --- 2. LÓGICA DE AUTENTICACIÓN ---
-      // (Asumo que tu authService tiene un método 'getToken()')
-      
       if (!currentToken) {
         console.error("Error: No se pudo obtener el token de autenticación para la imagen.");
       }
 
-      finalLogoUrl = `${this.serverBaseUrl}/api/v1/files/download-by-token?filename=${filename}&token=${currentToken}`;
+      finalLogoUrl = `${this.serverBaseUrl}/files/download-by-token?filename=${filename}&token=${currentToken}`;
     }
 
     console.log(`[ProductService Mapeo] ID: ${apiProduct.id}, URL Generada: ${finalLogoUrl}`);
@@ -201,10 +175,27 @@ export class ProductService {
       isActive: apiProduct.isActive,
       descriptionShort: apiProduct.description,
       descriptionDetailed: apiProduct.longDescription,
-      documentation: [], 
-      descriptionExpanded: '', 
+      documentation: [],
+      descriptionExpanded: '',
       deletable: apiProduct.deletable,
       editable: apiProduct.editable
     };
+  }
+
+  private convertBlobToBase64(blob: Blob): Observable<string> {
+    const reader = new FileReader();
+    const subject = new Subject<string>();
+
+    reader.onloadend = () => {
+      subject.next(reader.result as string);
+      subject.complete();
+    };
+
+    reader.onerror = (err) => {
+      subject.error(err);
+    };
+
+    reader.readAsDataURL(blob);
+    return subject.asObservable();
   }
 }
