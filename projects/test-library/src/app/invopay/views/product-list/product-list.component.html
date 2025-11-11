@@ -1,4 +1,4 @@
-<section class="product-list page">
+<section class="product-list page" *ngIf="!(loadingService.isLoading$ | async)">
 
   <div class="ip-title-mobile">
     <div class="ip-title-mobile__title">
@@ -33,7 +33,7 @@
     </app-ip-drag-scroll>
   </section>
 
-  <section class="product-list__cards" *ngIf="isHandset" role="list" [attr.aria-label]="'IP.PRODUCTS.CARDS.ARIA_LABEL' | translate">
+  <section class="product-list__cards" *ngIf="isHandset && !loading" role="list" [attr.aria-label]="'IP.PRODUCTS.CARDS.ARIA_LABEL' | translate">
     <ng-container *ngIf="products?.length; else noData">
       <article class="product-card" role="listitem" *ngFor="let p of products">
 
@@ -85,7 +85,16 @@
     </ng-template>
   </section>
 
-  <footer class="product-list__paginator" *ngIf="!isHandset">
+  <footer class="product-list__paginator" *ngIf="!isHandset && !loading">
+    <div class="page-size">
+      <select [value]="pageSize" (change)="onPageSizeChange($any($event.target)?.value)">
+        <option [value]="10">10</option>
+        <option [value]="20">20</option>
+        <option [value]="25">25</option>
+        <option [value]="50">50</option>
+        <option [value]="100">100</option>
+      </select>
+    </div>
     <ng-container *ngIf="!paginatorReload">
       <app-paginator [totalItems]="total" [itemsPerPage]="pageSize" [currentPages]="pageIndex + 1"
         (pageChange)="onPageChange($event)">
@@ -93,7 +102,7 @@
     </ng-container>
   </footer>
 
-  <footer class="product-list__paginator--mobile" *ngIf="isHandset">
+  <footer class="product-list__paginator--mobile" *ngIf="isHandset && !loading">
     <app-paginator [totalItems]="total" [itemsPerPage]="10" [currentPages]="mobilePageIndex + 1"
       (pageChange)="onMobilePageChange($event)">
     </app-paginator>
@@ -110,7 +119,6 @@
             <div class="product-details__header">
               <img [src]="p.logoUrl | safe" [alt]="p.name" class="product-details__logo" *ngIf="p.logoUrl">
               <div class="product-details__header-info">
-                <span class="product-details__code">{{ p.code }}</span>
                 <h3 class="product-details__name">{{ p.name }}</h3>
                 <span class="product-details__status" [class.status--active]="p.isActive"
                   [class.status--inactive]="!p.isActive">

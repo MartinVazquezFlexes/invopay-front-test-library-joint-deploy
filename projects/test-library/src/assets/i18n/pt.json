@@ -119,7 +119,8 @@
       "SHORTDESCRIPTION": "Breve Descrição",
       "ACTIVE": "Ativar",
       "DEACTIVED": "Desativar",
-      "MESSAGE": "Deseja alterar o estado deste esquema de comissões?",
+      "MESSAGEPARTONE":"Deseja alterar o estado para ",
+      "MESSAGEPARTTWO":" para o esquema ",
       "ACTUALSTATUS": "Estado Atual",
       "SEE": "Ver"
     },

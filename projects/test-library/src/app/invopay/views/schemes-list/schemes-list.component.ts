@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { SchemeService } from '../../services/scheme.service';
 import { Scheme } from '../../interface/scheme';
 import { SchemaContext } from '../../components/modal-schema/modal-schema.component';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { SchemaContext } from '../../components/modal-schema/modal-schema.compon
   styleUrls: ['./schemes-list.component.scss'],
 })
 export class SchemesListComponent implements OnInit {
-  constructor() {}
+  constructor(public loadingService: LoadingService) {}
 
   private readonly schemeService = inject(SchemeService);
 
@@ -38,7 +39,7 @@ export class SchemesListComponent implements OnInit {
   // dataField que tiene la informacion del objeto
   onAction(event: any) {
     console.log('Acción recibida:', event);
-    this.openModal(event.dataField.id, event.event);
+    this.openModal(event.dataField, event.event);
   }
 
   //Si seleccionamos items
@@ -49,6 +50,7 @@ export class SchemesListComponent implements OnInit {
   tableData: Scheme[] = [];
   getSchemas() {
 
+    this.loadingService.setLoadingState(true); //mostrar
     //GetAll
     this.schemeService.getSchemes().subscribe({
         next: (response) => {
@@ -62,18 +64,21 @@ export class SchemesListComponent implements OnInit {
             isSchemaActive: scheme.isActive ? 'Si' : 'No',
   
           })) as any;
-  
+          this.loadingService.setLoadingState(false);
           this.currentPage = 1; //cargo la pagina 1
           this.updatePage(); //actualizo los items de la pagina 1
         },
+        error: () => {
+        this.loadingService.setLoadingState(false); //ocultar
+      },
       });
   }
 
   showModal = false;
-  schemaId: number = 0;
+  schemaToDetail: number = 0;
   context: SchemaContext = 'detail';
-  openModal(id: number, type: string) {
-    this.schemaId = id;
+  openModal(schema: any, type: string) {
+    this.schemaToDetail = schema;
     if (type == 'detail') {
       this.context = type;
     } else if (type == 'edit') {

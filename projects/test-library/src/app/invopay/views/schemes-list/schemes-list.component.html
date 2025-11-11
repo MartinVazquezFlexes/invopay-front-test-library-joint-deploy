@@ -1,13 +1,13 @@
-  <app-modal-schema
-    *ngIf="showModal"
-    [schemaId]="schemaId"
-    [context]="context"
-    (close)="closeModal()"
-    (updateTable)="updateTable()"
-  >
-  </app-modal-schema>
+<app-modal-schema
+  *ngIf="showModal"
+  [schemaToDetail]="schemaToDetail"
+  [context]="context"
+  (close)="closeModal()"
+  (updateTable)="updateTable()"
+>
+</app-modal-schema>
 
-<div class="schemes">
+<div class="schemes" *ngIf="!(loadingService.isLoading$ | async)">
   <div class="schemes__header">
     <h2 class="schemes__title">{{ "IP.SCHEMES.TITLE" | translate }}</h2>
   </div>
@@ -16,7 +16,7 @@
     <div class="schemes__table-view">
       <!--[actions]="actions"-->
       <app-table
-        *ngIf="pagedData.length > 0"
+        *ngIf="pagedData.length > 0 && !(loadingService.isLoading$ | async)"
         [propertyOrder]="propertyOrder"
         [data]="pagedData"
         [keyTranslate]="keyTranslate"
@@ -43,13 +43,13 @@
           <div class="schemes__menu-dropdown" *ngIf="openMenuId === item.id">
             <button
               class="schemes__menu-item"
-              (click)="openModal(item.id, 'detail')"
+              (click)="openModal(item, 'detail')"
             >
               {{ "IP.SCHEMES.SEE" | translate }}
             </button>
             <button
               class="schemes__menu-item"
-              (click)="openModal(item.id, 'status')"
+              (click)="openModal(item, 'edit')"
             >
               <span *ngIf="item.isSchemaActive == 'No'">{{
                 "IP.SCHEMES.ACTIVE" | translate
@@ -84,15 +84,17 @@
         }}</label>
         <span class="schemes__card-value" *ngIf="item.isSchemaActive == 'Si'">{{
           "IP.YES" | translate
-        }}</span> <!--*ngIf="item.isActive" cuando ande el endpoint-->
+        }}</span>
+        <!--*ngIf="item.isActive" cuando ande el endpoint-->
         <span class="schemes__card-value" *ngIf="item.isSchemaActive == 'No'">{{
           "IP.NO" | translate
-        }}</span><!--*ngIf="item.isActive" cuando ande el endpoint-->
+        }}</span
+        ><!--*ngIf="item.isActive" cuando ande el endpoint-->
       </div>
     </div>
 
     <div class="schemes__pagination">
-      <div class="schemes__pagination-center" *ngIf="optPages">
+      <div class="schemes__pagination-center">
         <app-ip-select-input
           [control]="itemsPerPageControl"
           [options]="pageOptions"

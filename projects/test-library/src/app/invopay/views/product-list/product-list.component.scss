@@ -45,13 +45,14 @@ $status-inactive-color: $error-color;
   // Elemento: Paginador
   &__paginator {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 1rem;
     background: $header-bg-color;
     border-radius: $header-border-radius;
     box-shadow: $header-box-shadow;
-    padding-right: 16px;
+    padding-right: 1rem;
+    padding-left: 2.06rem;
 
     .page-size {
       display: inline-flex;
@@ -110,7 +111,6 @@ $status-inactive-color: $error-color;
   }
 }
 
-/* --- Bloque de Tarjeta: .product-card --- */
 .product-card {
   width: 100%;
   max-width: 380px;
@@ -433,7 +433,6 @@ $status-inactive-color: $error-color;
   }
 }
 
-/* --- Bloque BEM: .product-delete-confirm (Modal "Eliminar") --- */
 .product-delete-confirm {
   display: flex;
   flex-direction: column;
@@ -655,14 +654,12 @@ $status-inactive-color: $error-color;
 :host ::ng-deep .product-list-table {
   .table thead .table__head-row>th:last-child .table__head-row-item--text {
 
-    /* 1. Oculta el texto ".ACTIONS" */
     color: transparent;
     position: relative;
 
-    /* 2. Añade la palabra "Acciones" */
     &::after {
       content: 'Acciones';
-      color: $table-header-text-color; // (Asegúrate que esta variable esté disponible)
+      color: $table-header-text-color;
       font-weight: 600;
       position: absolute;
       left: 50%;

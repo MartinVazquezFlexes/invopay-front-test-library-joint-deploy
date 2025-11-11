@@ -2,6 +2,8 @@ import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } 
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms'; // FormArray se usa para el tipo, aunque no se implemente
 import { ProductService } from '../../services/product.service'; // (Ajusta la ruta)
+import { LoadingService } from '../../../shared/services/loading.service';
+
 import {
   ProductItem,
   AppProductItem,
@@ -27,7 +29,7 @@ export class ProductListComponent implements OnInit {
   // --- Propiedades de Datos ---
   products: AppProductItem[] = [];
   titlesFile = new Map<string, string>([
-    ['logoUrl', 'Logo'],
+    ['logoUrl', ''],
     ['name', 'Nombre del Producto'],
     ['descriptionShort', 'Descripción'],
     ['statusText', 'Activo'],
@@ -72,7 +74,8 @@ export class ProductListComponent implements OnInit {
     private breakpoint: BreakpointObserver,
     private elementRef: ElementRef,
     private formBuilder: FormBuilder,
-    private productService: ProductService // Servicio real inyectado
+    private productService: ProductService,
+    public loadingService: LoadingService // Servicio real inyectado
   ) { }
 
   ngOnInit() {
@@ -127,14 +130,22 @@ export class ProductListComponent implements OnInit {
   /*----------------------------------- LÓGICA DE DATOS (Real) --------------------------------------*/
 
   private loadPage(index: number, size: number) {
-    this.loading = true;
-    this.productService.getProducts(index, size).subscribe(response => {
-      this.products = this.withDisplayStatus(response.content);
-      this.originalProducts = [...this.products];
-      this.total = response.totalElements;
-      this.pageIndex = response.number;
-      this.pageSize = response.size;
-      this.loading = false;
+    this.loadingService.setLoadingState(true);
+    this.productService.getProducts(index, size).subscribe({
+      next: (response) => {
+        this.products = this.withDisplayStatus(response.content);
+        this.originalProducts = [...this.products];
+        this.total = response.totalElements;
+        this.pageIndex = response.number;
+        this.pageSize = response.size;
+        
+        this.loadingService.setLoadingState(false);
+      },
+      error: (err) => {
+        console.error("Error al cargar productos:", err);
+        // (Aquí iría un Toast de error)
+        this.loadingService.setLoadingState(false); // <-- DESACTIVAR LOADER (Error)
+      }
     });
   }
 
@@ -168,18 +179,22 @@ export class ProductListComponent implements OnInit {
       alert('Por favor, seleccione un archivo de logo.');
       return;
     }
+    this.loadingService.setLoadingState(true);
     this.createBusy = true;
     
     this.productService.createProduct(this.createForm.value, this.logoFileToUpload).subscribe({
       next: (createdItem: ProductItem) => {
         this.loadPage(this.pageIndex, this.pageSize); 
-        this.createBusy = false;
         this.onCreateModalClose();
+
+        this.createBusy = false;
+        this.loadingService.setLoadingState(false);
       },
       error: (err: any) => {
         console.error(err);
         alert('Error al crear el producto: ' + (err.error?.message || err.message));
         this.createBusy = false;
+        this.loadingService.setLoadingState(false);
       }
     });
   }
@@ -189,19 +204,23 @@ export class ProductListComponent implements OnInit {
       this.editForm.markAllAsTouched();
       return;
     }
+    this.loadingService.setLoadingState(true);
     this.editBusy = true;
     const payload: any = this.editForm.getRawValue();
 
     this.productService.updateProduct(payload, this.logoFileToUpload).subscribe({
       next: (updatedItem: ProductItem) => {
         this.updateLocalData(this.withDisplayStatus([updatedItem])[0]);
-        this.editBusy = false;
         this.onEditModalClose();
+
+        this.editBusy = false;
+        this.loadingService.setLoadingState(false);
       },
       error: (err: any) => {
         console.error(err);
         alert('Error al editar el producto: ' + (err.error?.message || err.message));
         this.editBusy = false;
+        this.loadingService.setLoadingState(false);
       }
     });
   }
@@ -209,17 +228,17 @@ export class ProductListComponent implements OnInit {
   onConfirmDelete(): void {
     if (!this.selectedProduct) return;
 
+    this.loadingService.setLoadingState(true);;
     this.deleteBusy = true;
     
     this.productService.deleteProduct(this.selectedProduct.id).subscribe({
       next: () => { 
-        // (Aquí iría el Toast/Snackbar de éxito)
-        this.deleteBusy = false;
-        this.onDeleteModalClose();
-        
-        // --- SOLUCIÓN ---
-        // Vuelve a cargar la página actual desde la API
         this.loadPage(this.pageIndex, this.pageSize); 
+        this.onDeleteModalClose();
+
+        this.deleteBusy = false;
+        this.loadingService.setLoadingState(false);
+      
       },
       error: (err: any) => {
         console.error(err);

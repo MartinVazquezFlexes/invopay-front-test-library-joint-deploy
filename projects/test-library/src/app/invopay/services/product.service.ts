@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';// 1. Importa el entorno
+import { HttpClient} from '@angular/common/http';
+import { Observable, of, forkJoin, EMPTY } from 'rxjs';
+import { map, switchMap} from 'rxjs/operators';// 1. Importa el entorno
 import { IpAuthService } from './ip-auth.service';
 
 // 2. Importa las interfaces del archivo separado
@@ -19,35 +19,57 @@ import {
 })
 export class ProductService {
 
-  // 3. Lee la URL Base del entorno
   private serverBaseUrl = 'https://api.130.211.34.27.nip.io'; 
-  
-  // 4. Construye la URL completa de la API
   private apiUrl = `${this.serverBaseUrl}/api/v1/invopay/insurance-products`;
 
   constructor(private http: HttpClient, private authService: IpAuthService) { }
 
-  /**
-   * GET: Obtiene la lista paginada de productos.
-   */
   getProducts(page: number, size: number): Observable<AppProductPage> {
+     
+     // 1. Llama a la API de texto (como antes)
      return this.http.get<ApiProductPage>(`${this.apiUrl}?page=${page}&size=${size}`).pipe(
-       map((apiResponse: ApiProductPage) => {
-        
-        console.log('--- JSON RECIBIDO (GET) ---');
-        console.log(JSON.stringify(apiResponse, null, 2));
+       
+       // 2. Intercepta la respuesta de texto
+       switchMap((apiResponse: ApiProductPage) => {
+         
+         console.log('--- JSON RECIBIDO (GET) ---');
+         console.log(JSON.stringify(apiResponse, null, 2));
 
-        const mappedContent: ProductItem[] = apiResponse.content.map(
-          (apiProduct: ApiProduct) => this.mapApiToProductItem(apiProduct)
-        );
+         // 3. Mapea la respuesta (API -> App)
+         const mappedContent: ProductItem[] = apiResponse.content.map(
+           (apiProduct: ApiProduct) => this.mapApiToProductItem(apiProduct)
+         );
+         
+         // 4. Prepara la lista de URLs de imágenes para pre-descargar
+         const imageUrls = mappedContent
+           .map(product => product.logoUrl) // Obtiene todas las URLs
+           .filter(url => !!url); // Filtra las que sean undefined/null
 
-        return {
-          totalPages: apiResponse.totalPages,
-          totalElements: apiResponse.totalElements,
-          number: apiResponse.number,
-          size: apiResponse.size,
-          content: mappedContent
-        };
+         if (imageUrls.length === 0) {
+           // No hay imágenes, devuelve los datos inmediatamente
+           return of({
+             ...apiResponse,
+             content: mappedContent
+           });
+         }
+
+         // 5. Crea un array de Observables (peticiones de descarga)
+         const imageDownloadObs: Observable<any>[] = imageUrls.map(url => {
+           // (Asumimos que el token ya está en la URL gracias a mapApiToProductItem)
+           return this.http.get(url!, { responseType: 'blob' });
+         });
+
+         // 6. Ejecuta todas las descargas en paralelo y espera a que terminen
+         return forkJoin(imageDownloadObs).pipe(
+           map(() => {
+             // 7. ¡ÉXITO! Las imágenes están en el caché del navegador.
+             // Ahora devolvemos la respuesta de la API original (mapeada)
+             return {
+               ...apiResponse,
+               content: mappedContent
+             };
+           })
+         );
        })
      );
   }
@@ -138,7 +160,7 @@ export class ProductService {
   // En product.service.ts
 
   private mapApiToProductItem(apiProduct: ApiProduct): ProductItem {
-    
+    const currentToken = this.authService.getToken(); 
     let finalLogoUrl: string | undefined = undefined;
 
     if (apiProduct.logoUrl) {
@@ -161,14 +183,11 @@ export class ProductService {
 
       // --- 2. LÓGICA DE AUTENTICACIÓN ---
       // (Asumo que tu authService tiene un método 'getToken()')
-      const currentToken = this.authService.getToken(); 
+      
       if (!currentToken) {
         console.error("Error: No se pudo obtener el token de autenticación para la imagen.");
       }
-      // --- FIN LÓGICA DE AUTENTICACIÓN ---
 
-
-      // 3. CONSTRUCCIÓN DE URL (La forma correcta)
       finalLogoUrl = `${this.serverBaseUrl}/api/v1/files/download-by-token?filename=${filename}&token=${currentToken}`;
     }
 
@@ -178,7 +197,7 @@ export class ProductService {
       id: apiProduct.id,
       name: apiProduct.name,
       code: apiProduct.code,
-      logoUrl: finalLogoUrl, // Asigna la URL generada
+      logoUrl: finalLogoUrl,
       isActive: apiProduct.isActive,
       descriptionShort: apiProduct.description,
       descriptionDetailed: apiProduct.longDescription,

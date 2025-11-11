@@ -23,7 +23,7 @@ export class ModalSchemaComponent implements OnInit {
 
   private readonly schemeService = inject(SchemeService);
 
-  @Input() schemaId: number = 0;
+  @Input() schemaToDetail: any;
   @Input() context: SchemaContext = 'detail';
   @Output() close = new EventEmitter<void>();
   @Output() updateTable = new EventEmitter<void>();
@@ -53,49 +53,7 @@ export class ModalSchemaComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.getSchemaDetail();
-  }
-
-  //schemaDetail = {};
-  schemeParameters: SchemeParameters = {
-    percentage: 0,
-  };
-  schemaDetails: Scheme = {
-    id: 0,
-    name: '',
-    description: '',
-    longDescription: '',
-    enterpriseId: 0,
-    externalId: '',
-    isActive: false,
-    parameters: this.schemeParameters,
-    schemaType: '',
-  };
-
-  //Mockeado
-  /*schemaDetail = {
-    id: 1,
-    schemeName: 'Cuadrado',
-    shortDescription: 'Este esquema explica como funciona',
-    fullDescription:
-      'Este esquema explica como funciona el elemento del esquema que esta planteado con el objetivo',
-    isSchemaActive: 'Si',
-    schemaStatus: 'Activo' //Activo / Inactivo
-  };*/
-
-  getSchemaDetail() {
-    //Obtener el detalle del back
-    //usar el id this.schemaId
-    //GetById
-    console.log('Id: ', this.schemaId);
-    this.schemeService.getSchemeById(this.schemaId).subscribe({
-      next: (response) => {
-        this.schemaDetails = response;
-        console.log('Detalle Esquema: ', this.schemaDetails);
-
-        this.setFormValues();
-      },
-    });
+    this.setFormValues();
   }
 
   setFormValues() {
@@ -103,11 +61,11 @@ export class ModalSchemaComponent implements OnInit {
 
     this.detailedInfoForm.patchValue({
       //transaccion
-      schemeName: this.schemaDetails.name || '',
-      shortDescription: this.schemaDetails.description || '',
-      fullDescription: this.schemaDetails.longDescription || '',
-      isSchemaActive: this.schemaDetails.isActive || '',
-      schemaStatus: this.getStatusText(this.schemaDetails.isActive),
+      schemeName: this.schemaToDetail.name || '',
+      shortDescription: this.schemaToDetail.description || '',
+      fullDescription: this.schemaToDetail.longDescription || '',
+      isSchemaActive: this.schemaToDetail.isActive || '',
+      schemaStatus: this.getStatusText(this.schemaToDetail.isActive),
     });
   }
 
@@ -124,8 +82,8 @@ export class ModalSchemaComponent implements OnInit {
 
   responseUpdate: any;
   updateStatus() {
-    console.log('Id: ', this.schemaId);
-    this.schemeService.patchScheme(this.schemaId).subscribe({
+    console.log('Id: ', this.schemaToDetail.id);
+    this.schemeService.patchScheme(this.schemaToDetail.id).subscribe({
       next: (response) => {
         this.responseUpdate = response;
         console.log('Estado actualizado: ', this.responseUpdate);

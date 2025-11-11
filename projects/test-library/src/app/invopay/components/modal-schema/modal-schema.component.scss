@@ -38,6 +38,12 @@ body {
   display: flex !important;
   flex-direction: column !important;
 }
+
+.modal__content--status{
+  width: min(500px, 95%) !important;
+  padding: 15px 20px !important;
+}
+
 .modal__input-wrapper {
   position: relative;
   margin: 0;
@@ -150,9 +156,9 @@ p {
   padding-bottom: 10px;
 }
 
-.modal__inputs--status {
+/*.modal__inputs--status {
   height: 5vh;
-}
+}*/
 
 /*::ng-deep .modal__input-wrapper app-ip-input input:disabled {
   color: #999 !important;
@@ -340,7 +346,7 @@ p{
     height: auto;
   }
   p{
-    padding-top: 10px;
+    padding-top: 0px;
     margin: 0;
   }
 

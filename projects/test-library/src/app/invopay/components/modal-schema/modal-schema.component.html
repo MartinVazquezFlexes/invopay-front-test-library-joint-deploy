@@ -1,29 +1,39 @@
 <div class="modal" (click)="close.emit()"></div>
 
-<div class="modal__content">
+<div class="modal__content" 
+[ngClass]="{ 'modal__content--status': context === 'status' }">
   <div class="modal__header">
-    <h4 *ngIf="context == 'detail'">{{ "IP.SCHEMES.MODAL_TITLE" | translate }}</h4>
-    <h4 *ngIf="context == 'status'">{{ "IP.SETTLEMENTS.DETAILS.CHANGE_STATUS" | translate }}</h4>
+    <h4 *ngIf="context == 'detail'">
+      {{ "IP.SCHEMES.MODAL_TITLE" | translate }}
+    </h4>
+    <h4 *ngIf="context == 'status'">
+      {{ "IP.SETTLEMENTS.DETAILS.CHANGE_STATUS" | translate }}
+    </h4>
     <button (click)="close.emit()">
       <img src="assets/new-styles/icons/buttons/close-icon.svg" />
     </button>
   </div>
 
   <form [formGroup]="detailedInfoForm">
-    <div class="modal__body" [ngClass]="{'modal__body--status': context === 'status'}">
+    <div
+      class="modal__body"
+      [ngClass]="{ 'modal__body--status': context === 'status' }"
+    >
       <div class="modal__section">
-        <div class="modal__inputs" [ngClass]="{'modal__inputs--status': context === 'status'}">
-          <div class="modal__input-wrapper">
-
+        <div
+          class="modal__inputs" *ngIf="context == 'detail'"
+        >
+          <div class="modal__input-wrapper" *ngIf="context == 'detail'">
             <app-ip-input
               inputId="schemeName"
+              
               [control]="getControl('schemeName')"
               [label]="'IP.ADMIN_TABLE.SCHEMENAME' | translate"
               type="text"
             ></app-ip-input>
           </div>
 
-          <div class="modal__input-wrapper">
+          <div class="modal__input-wrapper" *ngIf="context == 'detail'">
             <app-ip-input
               inputId="schemaStatus"
               [control]="getControl('schemaStatus')"
@@ -31,17 +41,6 @@
               type="text"
             ></app-ip-input>
           </div>
-
-          <!--<div class="modal__input-wrapper" *ngIf="context == 'detail'">
-            <label class="modal__label" for="shortDescription">{{
-              "IP.SCHEMES.SHORTDESCRIPTION" | translate
-            }}</label>
-            <app-ip-input
-              inputId="shortDescription"
-              [control]="getControl('shortDescription')"
-              type="text"
-            ></app-ip-input>
-          </div>-->
 
           <div
             class="modal__input-wrapper modal__input-wrapper--full"
@@ -55,7 +54,15 @@
           </div>
         </div>
         <p *ngIf="context == 'status'">
-          {{ "IP.SCHEMES.MESSAGE" | translate }}
+          {{ "IP.SCHEMES.MESSAGEPARTONE" | translate }}
+          <span *ngIf="!schemaToDetail.isActive">{{
+            "IP.ADMIN_TABLE.ISSCHEMAACTIVE" | translate
+          }}</span>
+          <span *ngIf="schemaToDetail.isActive">{{
+            "IP.ASSIGN-PROJECTS.INACTIVE" | translate
+          }}</span>
+          {{ "IP.SCHEMES.MESSAGEPARTTWO" | translate }}
+          <span>{{schemaToDetail.schemeName}}?</span>
         </p>
       </div>
     </div>

@@ -52,7 +52,7 @@ body {
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
   gap: 20px;
   box-sizing: border-box;
   min-height: 50px;
@@ -86,16 +86,13 @@ body {
     ::ng-deep {
     app-ip-select-input {
       .form-floating {
-        padding-right: 6px;
-        border: 1px solid #d1d1d1;
-        
-        &:focus-within {
-          border-color: #0071ce;
-        }
+        margin: 8px;
       }
     }
 }
 }
+
+
 
 
 .schemes__table-view {
