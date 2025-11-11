@@ -22,7 +22,7 @@
             <label class="placeholder">{{'NEW_VAR.PAYMEN_CHANNEL'|translate}}</label>
             <div class="custom-select-container">
               <select formControlName="chanelPayment" class="custom-select">
-                <option  value="">{{'IP.SETTLEMENTS.SALE-PAYMENT.PAYMENT_METHOD'|translate}}</option>
+                <option  [value]="">{{'IP.SETTLEMENTS.SALE-PAYMENT.PAYMENT_METHOD'|translate}}</option>
                 <option *ngFor="let item of paymentChannels" value="{{item.value}}">{{item.label}}</option>
               </select>
             </div>

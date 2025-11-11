@@ -50,25 +50,26 @@ form {
   text-overflow: ellipsis;
   max-width: calc(100% - 4rem);
   border-radius: 0.5rem;
-}
-.card-header span {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 600;   /* igual que el header */
-  font-size: 1rem;    /* mismo tamaño */
-  color: #333;        /* o el color del header */
+  border-bottom: none !important;
+  box-shadow: none !important; /* por si hay sombra simulando borde */
 }
 
 .card-title {
   display: block;
-  color: rgb(51, 47, 47)
+  color: rgb(51, 47, 47);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;   /* igual que el header */
+  font-size: 1rem;    /* mismo tamaño */
+  
 }
 
 .card-body {
   display: flex; /* cambio a flexbox */
   flex-wrap: wrap; /* permite que las cards se envuelvan */
-  gap: 1rem;
-  margin-top: 2.5rem;
+  gap: 2rem;
+  margin-top: 2rem;
   width: 100%;
+  padding-left: 8rem;
 }
 
 .inner-card {
@@ -80,11 +81,12 @@ form {
   display: inline-flex; /* se ajusta al contenido */
   flex-direction: column;
   box-sizing: border-box;
-  min-width: calc(33% - 0.75rem); /* ancho mínimo del 25% para forzar máximo 4 columnas */
+  min-width: calc(33% - 2rem); /* ancho mínimo del 25% para forzar máximo 4 columnas */
   max-width: 250px; /* ancho máximo antes de romper línea */
-  flex: 0 1 calc(25% - 0.75rem); /* no crece, puede encogerse hasta el min-width */
+  flex: 0 1 calc(33% - 2rem); /* no crece, puede encogerse hasta el min-width */
   position: relative; /* necesario para posicionar el label */
   margin-top: 0.2rem; /* espacio para que el label no se corte */
+  gap: 2rem;
 }
 
 .inner-card label {
@@ -120,17 +122,21 @@ form {
     min-width: calc(33.333% - 0.75rem);
     flex: 0 1 calc(33.333% - 0.75rem);
   }
+
 }
 
 /* Tablets - máximo 2 columnas */
 @media (max-width: 768px) {
   .inner-card {
-    min-width: calc(50% - 0.5rem);
-    flex: 0 1 calc(50% - 0.5rem);
+    min-width: calc(50% - 1rem);
+    flex: 0 1 calc(50% - 1rem);
   }
   
   .card {
     padding: 1.5rem;
+  }
+  .card-body{
+    padding-left: 0;
   }
   
   .card-2 {

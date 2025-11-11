@@ -11,7 +11,6 @@ form {
   margin: 0; /* elimina cualquier margen */
   padding: 0; /* sin padding propio para respetar el del padre */
   margin-bottom: 1vh;
-
 }
 
 .card {
@@ -64,36 +63,39 @@ position: absolute;
   left: 2rem;
   background-color: #ffffff;
   padding: 0.5rem 1rem;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 500;
+  font-size: 0.9rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: calc(100% - 4rem);
   border-radius: 0.5rem;
+  border-bottom: none !important;
+  box-shadow: none !important; /* por si hay sombra simulando borde */
 }
-.card-header span {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 600;   /* igual que el header */
-  font-size: 1rem;    /* mismo tamaño */
-  color: #333;        /* o el color del header */
-}
+
+
 
 .card-title {
   display: block;
-  color: rgb(51, 47, 47)
+  color: rgb(51, 47, 47);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;   /* igual que el header */
+  font-size: 1rem;    /* mismo tamaño */
 
 }
 
 .card-body {
   display: flex; /* cambio a flexbox */
   flex-wrap: wrap; /* permite que las cards se envuelvan */
-  gap: 1rem;
-  margin-top: 2.5rem;
+  gap: 2rem;
+  margin-top: 1rem;
   width: 100%;
+  padding-left: 8rem;
 }
 
 .inner-card {
+
   background-color: #e9ecef;
   border-radius: 0.3rem;
   padding: 1rem;
@@ -102,9 +104,9 @@ position: absolute;
   display: inline-flex; /* se ajusta al contenido */
   flex-direction: column;
   box-sizing: border-box;
-  min-width: calc(33% - 0.75rem); /* ancho mínimo del 25% para forzar máximo 4 columnas */
-  max-width: 250px; /* ancho máximo antes de romper línea */
-  flex: 0 1 calc(25% - 0.75rem); /* no crece, puede encogerse hasta el min-width */
+  min-width: calc(33% - 2rem); /* ancho mínimo del 25% para forzar máximo 4 columnas */
+  max-width: 200px; /* ancho máximo antes de romper línea */
+  flex: 0 1 calc(33% - 2rem); /* no crece, puede encogerse hasta el min-width */
   position: relative; /* necesario para posicionar el label */
   margin-top: 0.2rem; /* espacio para que el label no se corte */
 
@@ -144,35 +146,27 @@ position: absolute;
 /* Tablets grandes - máximo 3 columnas */
 @media (max-width: 1200px) {
   .inner-card {
-    min-width: calc(33.333% - 0.75rem);
-    flex: 0 1 calc(33.333% - 0.75rem);
+    min-width: calc(33.333% - 2rem);
+    flex: 0 1 calc(33.333% - 2rem);
+  }
+  .card-body{
+    padding-left: 0%;
   }
 }
 
-/* Tablets - máximo 2 columnas */
-@media (max-width: 768px) {
-  .inner-card {
-    min-width: calc(50% - 0.5rem);
-    flex: 0 1 calc(50% - 0.5rem);
-  }
-  
-  .card {
-    padding: 1.5rem;
-  }
-  
-  .card-2 {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-}
+
+
 
 /* Móviles - 1 columna */
-@media (max-width: 550px) {
+@media (max-width: 750px) {
   .inner-card {
     min-width: 100%;
     flex: 0 1 100%;
     max-width: 100%;
   }
+  .card-body {
+  padding-left: 2rem;
+}
   
   .card {
     padding: 1rem;

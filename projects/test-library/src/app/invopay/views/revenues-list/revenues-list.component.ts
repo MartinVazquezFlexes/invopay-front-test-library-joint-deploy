@@ -61,7 +61,7 @@ export class RevenuesListComponent {
 
 
   paymentChannels = [
-  { label: 'Transferencia', value: 'transferencia' },
+  { label: 'Transferencia', value: 'TRANSFER' },
   { label: 'Efectivo', value: 'efectivo' },
   { label: 'Tarjeta', value: 'tarjeta' },
   { label: 'Boleto', value: 'boleto'},
@@ -198,7 +198,10 @@ export class RevenuesListComponent {
             return this.revenueData.content.filter(x => {
               const saleDate = new Date(x.revenueDate);
               const matchesDate = saleDate >= from && saleDate <= to;
-              const matchesChannel = !this.currentPayChannel || x.paymentChannel.toLocaleLowerCase() === this.currentPayChannel.toLocaleLowerCase();
+              const matchesChannel = !this.currentPayChannel || x.paymentChannel.toLocaleLowerCase() === this.currentPayChannel.toLocaleLowerCase()||this.currentPayChannel=='';
+              console.log(this.currentPayChannel)
+              console.log(x.paymentChannel)
+              console.log(matchesChannel)
               return matchesDate && matchesChannel;
             });
           })
