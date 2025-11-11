@@ -231,20 +231,6 @@
             <textarea id="create-long-desc" class="form-control" formControlName="longDescription" rows="5"></textarea>
           </div>
 
-          <div class="product-details__section">
-            <label for="create-externalId">{{ 'IP.PRODUCTS.FORM.EXTERNAL_ID.LABEL' | translate }}</label>
-            <app-ip-input [formGroup]="createForm" controlName="externalId" inputId="create-externalId"
-              labelCode="IP.PRODUCTS.FORM.EXTERNAL_ID.LABEL">
-            </app-ip-input>
-          </div>
-
-          <div class="product-details__section">
-            <label for="create-enterprise">{{ 'IP.PRODUCTS.FORM.ENTERPRISE.LABEL' | translate }}</label>
-            <app-ip-input [formGroup]="createForm" controlName="insuranceEnterprise" inputId="create-enterprise"
-              labelCode="IP.PRODUCTS.FORM.ENTERPRISE.LABEL">
-            </app-ip-input>
-          </div>
-
           <div class="product-details__section is-toggle">
             <label for="create-isActive">{{ 'IP.PRODUCTS.FORM.IS_ACTIVE.LABEL' | translate }}</label>
             <input type="checkbox" id="create-isActive" class="form-check" formControlName="isActive">
@@ -319,20 +305,6 @@
           <div class="product-details__section">
             <label for="edit-long-desc">{{ 'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate }}</label>
             <textarea id="edit-long-desc" class="form-control" formControlName="longDescription" rows="5"></textarea>
-          </div>
-
-          <div class="product-details__section">
-            <label for="edit-externalId">{{ 'IP.PRODUCTS.FORM.EXTERNAL_ID.LABEL' | translate }}</label>
-            <app-ip-input [formGroup]="editForm" controlName="externalId" inputId="edit-externalId"
-              labelCode="IP.PRODUCTS.FORM.EXTERNAL_ID.LABEL">
-            </app-ip-input>
-          </div>
-
-          <div class="product-details__section">
-            <label for="edit-enterprise">{{ 'IP.PRODUCTS.FORM.ENTERPRISE.LABEL' | translate }}</label>
-            <app-ip-input [formGroup]="editForm" controlName="insuranceEnterprise" inputId="edit-enterprise"
-              labelCode="IP.PRODUCTS.FORM.ENTERPRISE.LABEL">
-            </app-ip-input>
           </div>
 
           <div class="product-details__section is-toggle">
