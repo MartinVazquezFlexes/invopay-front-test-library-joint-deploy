@@ -54,7 +54,7 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
 
   titlesFile = new Map<string, string>();
   currentPages: number = 1;
-  itemsPerPage: number = 25;
+  itemsPerPage: number = 10;
   paginatedData: NotificationItem[] = [];
   totalItems: number = 0;
   showPaginator: boolean = true;

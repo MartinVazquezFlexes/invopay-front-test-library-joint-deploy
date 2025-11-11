@@ -73,6 +73,7 @@
         flex-wrap: wrap;
       }
 
+
       // Estilos para el select wrapper (igual que date-wrapper)
       .select-wrapper {
         min-width: 200px;
@@ -121,13 +122,6 @@
           transition: all 0.3s ease;
           background-color: white;
 
-          @include sm() {
-            height: 1.625rem;
-          }
-
-          @include md() {
-            height: 1.6875rem;
-          }
 
           &:focus-within {
             box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
@@ -154,12 +148,10 @@
             background-position: right 0.5rem center;
 
             @include sm() {
-              height: 1.625rem;
               font-size: 0.75rem;
             }
 
             @include md() {
-              height: 1.6875rem;
               font-size: 0.78125rem;
             }
 
@@ -203,11 +195,9 @@
             min-width: 150px;
 
             @include sm() {
-              height: 1.625rem;
             }
 
             @include md() {
-              height: 1.6875rem;
             }
 
             &:focus-within {
@@ -230,13 +220,11 @@
 
 
             @include sm() {
-              height: 1.8rem !important;
               min-height: 1.8rem !important;
               font-size: 0.75rem;
             }
 
             @include md() {
-               height: 1.8rem!important;
                min-height: 1.6875rem !important;
                font-size: 0.78125rem;
             }
@@ -392,12 +380,10 @@
   justify-content: center;
 
   @include sm() {
-    height: 1.625rem;
     padding: 0 0.625rem;
   }
 
   @include md() {
-    height: 1.6875rem;
     padding: 0 0.6875rem;
   }
 
@@ -408,7 +394,6 @@
 
     @include sm() {
       width: 0.8125rem;
-      height: 0.8125rem;
     }
   }
 
@@ -828,5 +813,26 @@ app-ip-date-input {
     width: 100%; // 👈 Ancho completo para el paginador
     display: flex;
     justify-content: flex-end; // 👈 Alinea al final
+  }
+}
+
+// 👇 AGREGAR ESTO AL FINAL DEL ARCHIVO
+.card-filtros__actions {
+  .filters-container {
+    display: flex;
+    flex-wrap: wrap; // 👈 permite que los filtros bajen de línea
+    gap: 1rem;
+    align-items: flex-end;
+    flex: 1; // 👈 ocupa todo el espacio disponible
+    min-width: 0;
+
+    @include sm() {
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    @include md() {
+      gap: 0.875rem;
+    }
   }
 }

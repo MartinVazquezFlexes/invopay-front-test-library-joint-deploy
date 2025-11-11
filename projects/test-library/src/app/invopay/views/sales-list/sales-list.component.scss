@@ -957,9 +957,9 @@ app-ip-date-input {
   }
   
   app-paginator {
-    width: 100%; //Ancho completo para el paginador
+    width: 100%; // 👈 Ancho completo para el paginador
     display: flex;
-    justify-content: flex-end; //Alinea al final
+    justify-content: flex-end; // 👈 Alinea al final
   }
 }
 

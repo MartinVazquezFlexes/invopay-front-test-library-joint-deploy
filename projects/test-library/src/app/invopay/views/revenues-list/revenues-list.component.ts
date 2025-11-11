@@ -190,15 +190,17 @@ export class RevenuesListComponent {
 
         const from = new Date(this.currentStart);
         const to = new Date(this.currentEnd);
+        const fromNotHour =new Date(from.getFullYear(), from.getMonth(), from.getDate())
+        const toNotHour =new Date(to.getFullYear(), to.getMonth(), to.getDate())
         const chanelPayment = this.currentPayChannel;
-        to.setHours(23, 59, 59, 999);
 
         this.revenueService.getRevenues().pipe(
           map(response => {
             this.revenueData = response;
             return this.revenueData.content.filter(x => {
-              const saleDate = new Date(x.revenueDate);
-              const matchesDate = saleDate >= from && saleDate <= to;
+              const revDate = new Date(x.revenueDate);
+              const revDateNotHours=new Date(revDate.getFullYear(), revDate.getMonth(), revDate.getDate())
+              const matchesDate = revDateNotHours >= from && revDateNotHours <= toNotHour;
               const matchesChannel = !this.currentPayChannel || x.paymentChannel.toLocaleLowerCase() === this.currentPayChannel.toLocaleLowerCase()||this.currentPayChannel=='';
               console.log(this.currentPayChannel)
               console.log(x.paymentChannel)
@@ -319,10 +321,10 @@ onClearFilters(): void {
           proveedorPago:item.paymentProvider,
           canalPago:item.paymentChannel,
           consolidada: item.isConsolidated ? 'SI':'NO',
-          nroPoliza: item.policyNumber,
-          producto: item.productName,
-          montoPrima: item.premiumAmount? this.formatNumberToArg(item.premiumAmount):'-',
-          broker:item.brokerName,
+          nroPoliza: item.isConsolidated ? item.policyNumber:'-',
+          producto: item.isConsolidated ?  item.productName :'-',
+          montoPrima: item.isConsolidated ? this.formatNumberToArg(item.premiumAmount):'-',
+          broker: item.isConsolidated ? item.brokerName : '-',
           realSale: item
         }))];
 

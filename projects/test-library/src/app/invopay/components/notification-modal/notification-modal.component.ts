@@ -1,11 +1,38 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-notification-modal',
 templateUrl: './notification-modal.component.html',
   styleUrls: ['./notification-modal.component.scss']
 })
-export class NotificationModalComponent {
+export class NotificationModalComponent implements OnInit, OnChanges {
+  dateControl = new FormControl({ value: '', disabled: true });
+  brokerControl = new FormControl({ value: '', disabled: true });
+  entityControl = new FormControl({ value: '', disabled: true });
+  answeredControl = new FormControl({ value: '', disabled: true });
+  queryControl = new FormControl({ value: '', disabled: true });
+  replyControl = new FormControl('');
+
+  ngOnInit() {
+    this.updateControls();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['details']) {
+      this.updateControls();
+    }
+  }
+
+  private updateControls() {
+    if (this.details) {
+      this.dateControl.setValue(this.details.notificationDate || '');
+      this.brokerControl.setValue(this.details.brokerName || '');
+      this.entityControl.setValue(this.details.entity || '');
+      this.answeredControl.setValue(this.details.answered || '');
+      this.queryControl.setValue(this.details.query || '');
+    }
+  }
   @Input() open = false;
   @Input() title: string = '';
   @Input() details: any;

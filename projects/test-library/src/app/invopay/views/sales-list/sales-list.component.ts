@@ -8,6 +8,7 @@ import { SalesListStateService } from '../../services/sales-list-state.service';
 import { SalesResponse } from '../../interface/salesResponse';
 import { Sale } from '../../interface/sale';
 import { SaleListState } from '../../interface/saleListState';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-sales-list',
@@ -29,7 +30,8 @@ selectedTab: string='all';
      private readonly salesService: SalesService,
      private readonly router: Router ,
      private readonly stateService: SalesListStateService,
-     private readonly translate: TranslateService   
+     private readonly translate: TranslateService   ,
+     private readonly loadingService : LoadingService
     ) { }
 
 
@@ -72,6 +74,7 @@ selectedTab: string='all';
 
 
   ngOnInit(): void {
+      this.loadingService.setLoadingState(true)
       this.loadTitleMap();
       this.checkScreenSize()
       this.loadControlsSubscriptions()
@@ -201,6 +204,8 @@ selectedTab: string='all';
 
           const from = new Date(this.currentStart);
           const to = new Date(this.currentEnd);
+        const fromNotHour =new Date(from.getFullYear(), from.getMonth(), from.getDate())
+        const toNotHour =new Date(to.getFullYear(), to.getMonth(), to.getDate())
           to.setHours(23, 59, 59, 999);
 
           this.salesService.getSales().pipe(
@@ -208,9 +213,11 @@ selectedTab: string='all';
               this.salesData = response;
               return this.salesData.content.filter(x => {
               const saleDate = new Date(x.saleDate);
-              const matchesDate = saleDate >= from && saleDate <= to;
+              const saleDateNotHours=new Date(saleDate.getFullYear(), saleDate.getMonth(), saleDate.getDate())
+              const matchesDate = saleDateNotHours >= fromNotHour && saleDateNotHours <= toNotHour;
               const matchesProduct = !this.currentProduct || x.productName.toLocaleLowerCase() === this.currentProduct.toLocaleLowerCase();
               const matchesBroker = !this.currentBroker || x.brokerName.toLocaleLowerCase() === this.currentBroker.toLocaleLowerCase();
+              if(!matchesDate){ console.log("XXXXXX") ;console.log(x)}
                 return matchesDate && matchesBroker && matchesProduct;
               });
             })
@@ -243,7 +250,7 @@ onClearFilters(): void {
     this.minEnd = '';
     this.maxEnd = '';
     this.maxStart = this.formatDate(new Date());
-    
+
      this.isModalOpen=false
      this.onApplyFilter(1)
 
@@ -305,6 +312,9 @@ onClearFilters(): void {
       },
       error: (error) => {
         console.error('Error al cargar ventas:', error);
+      },
+      complete:()=>{
+        this.loadingService.setLoadingState(false)
       }
     });
     this.subscriptions.add(getSalesSub)

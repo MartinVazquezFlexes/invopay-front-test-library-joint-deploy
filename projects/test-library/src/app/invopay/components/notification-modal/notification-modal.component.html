@@ -5,62 +5,60 @@
       <button class="filters-modal__close" (click)="onCloseModal()">×</button>
     </div>
 
-    <div class="notification-modal__content">
-      <div class="notification-detail" *ngIf="details && !isReplyMode">
-        <div class="notification-details__inputs">
-          <div class="notification-details__input-wrapper">
-            <label class="notification-details__label" for="date-modal">{{ 'IP.NOTIFICATIONS.TABLE.DATE' | translate }}</label>
-            <input
-              id="date-modal"
-              type="text"
-              class="notification-details__input"
-              [value]="details?.notificationDate"
-              disabled>
+    <div class="modal__content">
+      <div class="modal__body" *ngIf="details && !isReplyMode">
+        <div class="modal__inputs">
+          <div class="modal__input-wrapper">
+            <app-ip-input
+              inputId="date-modal"
+              [control]="dateControl"
+              [label]="'IP.NOTIFICATIONS.TABLE.DATE' | translate"
+              type="text">
+            </app-ip-input>
           </div>
-          <div class="notification-details__input-wrapper">
-            <label class="notification-details__label" for="broker-modal">{{ 'IP.NOTIFICATIONS.TABLE.BROKER' | translate }}</label>
-            <input
-              id="broker-modal"
-              type="text"
-              class="notification-details__input"
-              [value]="details?.brokerName"
-              disabled>
+          <div class="modal__input-wrapper">
+            <app-ip-input
+              inputId="broker-modal"
+              [control]="brokerControl"
+              [label]="'IP.NOTIFICATIONS.TABLE.BROKER' | translate"
+              type="text">
+            </app-ip-input>
           </div>
-          <div class="notification-details__input-wrapper">
-            <label class="notification-details__label" for="entity-modal">{{ 'IP.NOTIFICATIONS.TABLE.ENTITY' | translate }}</label>
-            <input
-              id="entity-modal"
-              type="text"
-              class="notification-details__input"
-              [value]="details?.entity"
-              disabled>
+          <div class="modal__input-wrapper">
+            <app-ip-input
+              inputId="entity-modal"
+              [control]="entityControl"
+              [label]="'IP.NOTIFICATIONS.TABLE.ENTITY' | translate"
+              type="text">
+            </app-ip-input>
           </div>
-          <div class="notification-details__input-wrapper">
-            <label class="notification-details__label" for="answered-modal">{{ 'IP.NOTIFICATIONS.TABLE.ANSWERED' | translate }}</label>
-            <input
-              id="answered-modal"
-              type="text"
-              class="notification-details__input"
-              [value]="details?.answered"
-              disabled>
+          <div class="modal__input-wrapper">
+            <app-ip-input
+              inputId="answered-modal"
+              [control]="answeredControl"
+              [label]="'IP.NOTIFICATIONS.TABLE.ANSWERED' | translate"
+              type="text">
+            </app-ip-input>
           </div>
-          <div class="notification-details__input-wrapper notification-details__input-wrapper--full">
-            <label class="notification-details__label" for="query-modal">{{ 'IP.NOTIFICATIONS.TABLE.QUERY' | translate }}</label>
-            <textarea
-              id="query-modal"
-              class="notification-details__textarea"
-              [value]="details?.query"
-              disabled
-              rows="3">
-            </textarea>
+          <div class="modal__input-wrapper modal__input-wrapper--full">
+            <app-ip-text-area-input
+              inputId="query-modal"
+              [control]="queryControl"
+              [label]="'IP.NOTIFICATIONS.TABLE.QUERY' | translate">
+            </app-ip-text-area-input>
           </div>
         </div>
       </div>
 
-
-      <div class="notification-reply" *ngIf="isReplyMode">
+      <div class="modal__body" *ngIf="isReplyMode">
         <h4>{{ 'IP.NOTIFICATIONS.MODAL.REPLY' | translate }}</h4>
-        <textarea class="reply-textarea" [(ngModel)]="replyText" placeholder="{{ 'IP.NOTIFICATIONS.MODAL.REPLY_PLACEHOLDER' | translate }}"></textarea>
+        <div class="modal__input-wrapper modal__input-wrapper--full">
+          <app-ip-text-area-input
+            inputId="reply-modal"
+            [control]="replyControl"
+            [label]="''">
+          </app-ip-text-area-input>
+        </div>
         <div class="notification-modal__actions">
           <button class="btn btn--secondary" (click)="onCloseModal()">{{ cancelLabel | translate }}</button>
           <button

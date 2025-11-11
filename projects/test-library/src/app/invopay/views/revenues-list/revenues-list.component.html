@@ -18,12 +18,12 @@
       <div class="card-filtros">
 
         <div *ngIf="!isMobile" class="card-filtros__actions">
-          
+          <div class="filters-container">
           <div class="select-wrapper">
             <label class="placeholder">{{'NEW_VAR.PAYMEN_CHANNEL'|translate}}</label>
             <div class="custom-select-container">
               <select formControlName="chanelPayment" class="custom-select">
-                <option  disabled [value]="">{{'IP.SETTLEMENTS.SALE-PAYMENT.PAYMENT_METHOD'|translate}}</option>
+                <option  disabled value="">{{'IP.SETTLEMENTS.SALE-PAYMENT.PAYMENT_METHOD'|translate}}</option>
                 <option *ngFor="let item of paymentChannels" value="{{item.value}}">{{item.label}}</option>
               </select>
             </div>
@@ -47,7 +47,7 @@
               (changed)="onEndDateChange($event)">
             </app-ip-date-input>
           </div>
-
+          </div>
            <div class="date-wrapper">
               <button class="search" (click)="onClearFilters()">
                   <img src="../../../../assets/new-styles/icons/cleaning.svg">
