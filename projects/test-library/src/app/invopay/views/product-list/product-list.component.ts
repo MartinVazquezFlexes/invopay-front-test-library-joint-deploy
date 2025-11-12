@@ -1,8 +1,9 @@
 import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { LoadingService } from '../../../shared/services/loading.service';
+import IpSelectInputOption from '../../interface/ip-select-input-option';
 
 import {
   ProductItem,
@@ -42,7 +43,14 @@ export class ProductListComponent implements OnInit {
   private lastDesktopPageIndex = 0;
   private lastDesktopPageSize = this.pageSize;
   paginatorReload = false;
-  
+  itemsPerPageControl = new FormControl('10');
+  pageOptions: IpSelectInputOption[] = [
+    { value: '10', label: '10' },
+    { value: '15', label: '15' },
+    { value: '20', label: '20' },
+    { value: '25', label: '25' },
+  ];
+
   private originalProducts: AppProductItem[] = [];
   loading = false;
   isHandset = false;
@@ -50,14 +58,14 @@ export class ProductListComponent implements OnInit {
   selectedProduct: AppProductItem | null = null;
 
   isViewModalOpen = false;
-  
+
   isDeleteModalOpen = false;
   deleteBusy = false;
-  
+
   isEditModalOpen = false;
   editBusy = false;
   editForm!: FormGroup;
-  
+
   isCreateModalOpen = false;
   createBusy = false;
   createForm!: FormGroup;
@@ -128,7 +136,7 @@ export class ProductListComponent implements OnInit {
         this.total = response.totalElements;
         this.pageIndex = response.number;
         this.pageSize = response.size;
-        
+
         this.loadingService.setLoadingState(false);
       },
       error: (err) => {
@@ -168,10 +176,10 @@ export class ProductListComponent implements OnInit {
     }
     this.loadingService.setLoadingState(true);
     this.createBusy = true;
-    
+
     this.productService.createProduct(this.createForm.value, this.logoFileToUpload).subscribe({
       next: (createdItem: ProductItem) => {
-        this.loadPage(this.pageIndex, this.pageSize); 
+        this.loadPage(this.pageIndex, this.pageSize);
         this.onCreateModalClose();
 
         this.createBusy = false;
@@ -217,15 +225,15 @@ export class ProductListComponent implements OnInit {
 
     this.loadingService.setLoadingState(true);;
     this.deleteBusy = true;
-    
+
     this.productService.deleteProduct(this.selectedProduct.id).subscribe({
-      next: () => { 
-        this.loadPage(this.pageIndex, this.pageSize); 
+      next: () => {
+        this.loadPage(this.pageIndex, this.pageSize);
         this.onDeleteModalClose();
 
         this.deleteBusy = false;
         this.loadingService.setLoadingState(false);
-      
+
       },
       error: (err: any) => {
         console.error(err);
@@ -248,15 +256,15 @@ export class ProductListComponent implements OnInit {
     if (evt.event === 'detail' && evt.dataField) {
       this.selectedProduct = evt.dataField as AppProductItem;
       this.isViewModalOpen = true;
-    } 
+    }
     else if (evt.event === 'edit' && evt.dataField) {
       this.selectedProduct = evt.dataField as AppProductItem;
-      
+
       this.editForm.patchValue({
         id: this.selectedProduct.id,
         code: this.selectedProduct.code,
         name: this.selectedProduct.name,
-        description: this.selectedProduct.descriptionShort, 
+        description: this.selectedProduct.descriptionShort,
         longDescription: this.selectedProduct.descriptionDetailed,
         isActive: this.selectedProduct.isActive,
         logoUrl: this.selectedProduct.logoUrl,
@@ -264,10 +272,10 @@ export class ProductListComponent implements OnInit {
         externalId: (this.selectedProduct as any).externalId || '',
         insuranceEnterprise: (this.selectedProduct as any).insuranceEnterprise || ''
       });
-      
+
       this.logoFileToUpload = null;
       this.isEditModalOpen = true;
-    } 
+    }
     else if (evt.event === 'delete' && evt.dataField) {
       this.selectedProduct = evt.dataField as AppProductItem;
       this.isDeleteModalOpen = true;
@@ -304,11 +312,11 @@ export class ProductListComponent implements OnInit {
     if (!input.files || input.files.length === 0) return;
 
     const file = input.files[0];
-    
+
     if (controlName === 'logoUrl') {
       this.logoFileToUpload = file;
     }
-    
+
     const reader = new FileReader();
     reader.onload = () => {
       const dataUrl = reader.result as string;
@@ -316,11 +324,11 @@ export class ProductListComponent implements OnInit {
       formGroup.get(controlName)?.markAsDirty();
     };
     reader.readAsDataURL(file);
-    input.value = ''; 
+    input.value = '';
   }
 
   onSort(event: any): void {
-    if (event?.key !== 'name') return; 
+    if (event?.key !== 'name') return;
     const direction = event.event;
     const base = [...this.originalProducts];
     if (direction === 'clean') {

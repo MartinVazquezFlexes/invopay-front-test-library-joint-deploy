@@ -1,15 +1,10 @@
 <section class="product-list page" *ngIf="!(loadingService.isLoading$ | async)">
 
-  <div class="ip-title-mobile">
-    <div class="ip-title-mobile__title">
-      {{ 'IP.PRODUCTS.LIST.TITLE' | translate }}
-    </div>
-    <div class="ip-title-mobile__actions" *ngIf="isHandset">
-      <app-ip-button-modal typeBtn="action" (clicked)="onAddNewProduct()" [disabled]="loading">
-        {{ 'IP.PRODUCTS.BUTTONS.ADD' | translate }}
-      </app-ip-button-modal>
-    </div>
-  </div>
+  <app-ip-title-mobile
+  [title]="'IP.PRODUCTS.LIST.TITLE' | translate"
+  [btn]="isHandset ? 'create' : 'none'" [btnText]="'IP.PRODUCTS.BUTTONS.ADD' | translate"
+  (clicked)="onAddNewProduct()">
+  </app-ip-title-mobile>
 
   <section class="product-list__table" *ngIf="!isHandset">
     <app-ip-drag-scroll>
@@ -83,13 +78,11 @@
 
   <footer class="product-list__paginator" *ngIf="!isHandset && !loading">
     <div class="page-size">
-      <select [value]="pageSize" (change)="onPageSizeChange($any($event.target)?.value)">
-        <option [value]="10">10</option>
-        <option [value]="20">20</option>
-        <option [value]="25">25</option>
-        <option [value]="50">50</option>
-        <option [value]="100">100</option>
-      </select>
+      <app-ip-select-input
+          [control]="itemsPerPageControl"
+          [options]="pageOptions"
+          (selectEmitter)="onPageSizeChange($event)"
+        ></app-ip-select-input>
     </div>
     <ng-container *ngIf="!paginatorReload">
       <app-paginator [totalItems]="total" [itemsPerPage]="pageSize" [currentPages]="pageIndex + 1"

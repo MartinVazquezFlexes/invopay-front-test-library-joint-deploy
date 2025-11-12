@@ -56,11 +56,11 @@ $status-inactive-color: $error-color;
       flex: 0 0 auto;
       white-space: nowrap;
 
-      select {
-        width: auto;
-        max-width: 60px;
-        min-width: 50px;
+      ::ng-deep app-ip-select-input {
+      .form-floating {
+        margin: 8px;
       }
+    }
     }
 
     &--mobile {
@@ -74,32 +74,8 @@ $status-inactive-color: $error-color;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    padding: 1rem;
     background: $background-color;
     box-sizing: border-box;
-  }
-}
-
-.ip-title-mobile {
-  background: $header-bg-color;
-  color: $primary-color;
-  padding: 1rem 1.5rem;
-  margin: $header-margin-y $header-margin-x;
-  border-radius: 0.7rem;
-  box-shadow: $header-box-shadow;
-  margin-bottom: 1.25rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &__title {
-    font-family: $font-family-primary;
-    font-weight: 600;
-    font-size: clamp(1rem, 1rem + 0.5vw, 1.125rem);
-    line-height: 1.2;
-    display: flex;
-    align-items: center;
-    gap: .5rem;
   }
 }
 
@@ -353,7 +329,9 @@ $status-inactive-color: $error-color;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-
+    ::ng-deep app-ip-input .form-floating > label{
+      display: none !important;
+    }
     label {
       font-size: 0.75rem;
       font-weight: 600;
