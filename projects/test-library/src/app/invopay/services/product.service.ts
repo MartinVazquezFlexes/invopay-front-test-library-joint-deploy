@@ -143,6 +143,11 @@ export class ProductService {
     return this.http.delete(deleteUrl);
   }
 
+  deactivateProduct(id: number): Observable<Object> {
+    const patchUrl = `${this.apiUrl}/${id}/activation`;
+    return this.http.patch(patchUrl, {});
+  }
+
   private mapApiToProductItem(apiProduct: ApiProduct): ProductItem {
     const currentToken = this.authService.getToken();
     let finalLogoUrl: string | undefined = undefined;

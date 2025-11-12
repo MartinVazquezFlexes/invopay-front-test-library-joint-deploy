@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject, HostListener } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject, HostListener, ChangeDetectorRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationBrokerService } from '../../services/notification-broker.service';
 import { Notification, Observation, NotificationRead } from '../../interface/notificationResponse';
@@ -21,11 +21,29 @@ export class BrokerNotificationTrayComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-  matdialog=inject(MatDialog)
-  private readonly translate = inject(TranslateService);
-  private readonly notificationBrokerService = inject(NotificationBrokerService);
-  private readonly router=inject(Router)  
-  public readonly loadingService=inject(LoadingService)
+  private readonly translate: TranslateService;
+  private readonly notificationBrokerService: NotificationBrokerService;
+  private readonly router: Router;
+  public readonly loadingService: LoadingService;
+  private readonly matdialog: MatDialog;
+  private readonly cdr: ChangeDetectorRef;
+
+  constructor(
+    translate: TranslateService,
+    notificationBrokerService: NotificationBrokerService,
+    router: Router,
+    loadingService: LoadingService,
+    matdialog: MatDialog,
+    cdr: ChangeDetectorRef
+  ) { 
+    this.translate = translate;
+    this.notificationBrokerService = notificationBrokerService;
+    this.router = router;
+    this.loadingService = loadingService;
+    this.matdialog = matdialog;
+    this.cdr = cdr;
+  }
+
   notificationData: NotificationItem[] = [];
   notificationUpdate:NotificationRead={
     notificationId:0
@@ -176,8 +194,7 @@ private originalNotificationData: any[] = [];
   }
 
 onMobileFiltersOpened(): void {
-  
-   const entityOptions = this.notificationTrayConfig.entities.map(entity => ({
+  const entityOptions = this.notificationTrayConfig.entities.map(entity => ({
     label: entity,
     value: entity
   }));
@@ -187,32 +204,46 @@ onMobileFiltersOpened(): void {
     value: user
   }));
 
+  // Reset hasMobileSearched if no filters are active
+  if (!this.selectedAnswered && !this.selectedEntity && !this.selectedUser) {
+    this.hasMobileSearched = false;
+  }
+
   const dialogRef = this.matdialog.open(IpNotificationModalFilterMobileComponent, {
     data: {
-      entities: entityOptions, 
-      users: userOptions,      
+      entities: entityOptions,
+      users: userOptions,
       currentFilters: {
         answered: this.selectedAnswered,
         entity: this.selectedEntity,
-        user: this.selectedUser
+        user: this.selectedUser,
+        hasSearched: this.hasMobileSearched
       },
       mode: 'broker'
-    }
+    },
+    disableClose: true
   });
 
-  const sub = dialogRef.componentInstance.applyFilters.subscribe((filters: any) => {
-    this.selectedAnswered = filters.answered;
-    this.selectedEntity = filters.entity;
-    this.selectedUser = filters.user;
-    this.applyFilters(filters);
-  });
+  const subs = new Subscription();
 
-  dialogRef.componentInstance.clearFilters.subscribe(() => {
-    this.clearFilters();
-  });
+  subs.add(dialogRef.componentInstance.applyFilters.subscribe((filters: any) => {
+    this.hasMobileSearched = filters.hasSearched || false;
+    this.onSearchPerformed(filters);
+    dialogRef.close();
+  }));
+
+  subs.add(dialogRef.componentInstance.clearFilters.subscribe(() => {
+    this.hasMobileSearched = false;
+    this.onFiltersCleared();
+    dialogRef.close();
+  }));
 
   dialogRef.afterClosed().subscribe(() => {
-    sub.unsubscribe();
+    // Reset hasMobileSearched if all filters are cleared when closing the modal
+    if (!this.selectedAnswered && !this.selectedEntity && !this.selectedUser) {
+      this.hasMobileSearched = false;
+    }
+    subs.unsubscribe();
   });
 }
 
@@ -312,6 +343,7 @@ private clearFilters(): void {
   this.selectedAnswered = filters.answered || '';
   this.selectedEntity = filters.entity || '';
   this.selectedUser = filters.user || '';
+  this.hasMobileSearched = true;
 
   let filteredData = [...this.originalNotificationData];
 
@@ -335,17 +367,27 @@ private clearFilters(): void {
   }
 
   this.notificationData = filteredData;
-  this.hasMobileSearched = true;
 }
 
 public onFiltersCleared(): void {
-  if (this.originalNotificationData.length) {
-    this.notificationData = [...this.originalNotificationData];
-  }
+  // Reset all filter values
   this.selectedAnswered = '';
   this.selectedEntity = '';
   this.selectedUser = '';
   this.hasMobileSearched = false;
+  
+  // Reset form controls
+  this.answeredControl.setValue('');
+  this.entityControl.setValue('');
+  this.userControl.setValue('');
+  
+  // Reset notification data
+  if (this.originalNotificationData.length) {
+    this.notificationData = [...this.originalNotificationData];
+  }
+  
+  // Force change detection
+  this.cdr.detectChanges();
 }
 
   onMobileSearch(): void {

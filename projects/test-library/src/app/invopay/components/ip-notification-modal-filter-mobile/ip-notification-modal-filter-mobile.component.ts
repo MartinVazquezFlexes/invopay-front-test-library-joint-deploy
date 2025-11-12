@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnDestroy, SimpleChanges, OnInit, OnChanges, Inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnDestroy, SimpleChanges, OnInit, OnChanges, Inject, ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -14,10 +14,10 @@ export class IpNotificationModalFilterMobileComponent implements OnDestroy,OnIni
   private subscription = new Subscription();
   
   // Inputs
- entities: IpSelectInputOption[] = [];  // Changed from string[]
- users: IpSelectInputOption[] = [];     // Changed from string[]
- currentFilters: any = {};
-@Input() mode: 'broker' | 'insurance' = 'broker';
+  entities: IpSelectInputOption[] = []; 
+  users: IpSelectInputOption[] = [];    
+  currentFilters: any = {};
+  @Input() mode: 'broker' | 'insurance' = 'broker';
 
   // Outputs
   @Output() applyFilters = new EventEmitter<any>();
@@ -48,9 +48,9 @@ export class IpNotificationModalFilterMobileComponent implements OnDestroy,OnIni
   constructor(
     private translate: TranslateService,
     public dialogRef: MatDialogRef<IpNotificationModalFilterMobileComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private cdr: ChangeDetectorRef
   ) {
-    // Initialize from dialog data
     if (data) {
       this.entities = Array.isArray(data.entities) ? [...data.entities] : [];
       this.users = Array.isArray(data.users) ? [...data.users] : [];
@@ -76,9 +76,8 @@ export class IpNotificationModalFilterMobileComponent implements OnDestroy,OnIni
   }
 
   private initializeFilters(): void {
-  this.entityOptions = [...this.entities];
-  this.userOptions = [...this.users];
-
+    this.entityOptions = [...this.entities];
+    this.userOptions = [...this.users];
 
     if (this.currentFilters) {
       this.answeredControl.setValue(this.currentFilters.answered || '');
@@ -87,6 +86,11 @@ export class IpNotificationModalFilterMobileComponent implements OnDestroy,OnIni
       this.selectedAnswered = this.currentFilters.answered || '';
       this.selectedEntity = this.currentFilters.entity || '';
       this.selectedUser = this.currentFilters.user || '';
+      
+      // Initialize hasMobileSearched from parent's hasSearched state
+      if (this.currentFilters.hasSearched) {
+        this.hasMobileSearched = true;
+      }
     }
   }
 
@@ -94,7 +98,13 @@ export class IpNotificationModalFilterMobileComponent implements OnDestroy,OnIni
     this.selectedAnswered = filters.answered || '';
     this.selectedEntity = filters.entity || '';
     this.selectedUser = filters.user || '';
-    this.applyFilters.emit(filters);
+    this.hasMobileSearched = true; // Enable clear button
+    
+    // Emit with hasSearched: true to ensure parent updates its state
+    this.applyFilters.emit({
+      ...filters,
+      hasSearched: true
+    });
   }
 
   onFiltersCleared(): void {
@@ -105,11 +115,25 @@ export class IpNotificationModalFilterMobileComponent implements OnDestroy,OnIni
     this.selectedEntity = '';
     this.selectedUser = '';
     this.hasMobileSearched = false;
+    
+    // Emit the cleared state first
     this.clearFilters.emit();
+    
+    // Then emit empty filters with hasSearched: false
+    this.applyFilters.emit({
+      answered: '',
+      entity: '',
+      user: '',
+      hasSearched: false
+    });
+    
+    // Force update the view
+    this.cdr.detectChanges();
   }
 
   onClose(): void {
     this.closeModal.emit();
+    this.dialogRef.close();
   }
 
   onUserChanged(event: Event): void {
@@ -130,10 +154,14 @@ export class IpNotificationModalFilterMobileComponent implements OnDestroy,OnIni
   }
 
   get isMobileSearchDisabled(): boolean {
-    return !this.selectedAnswered && !this.selectedEntity && !this.selectedUser;
+    if (this.mode === 'insurance') {
+      return !(this.selectedAnswered && this.selectedEntity && this.selectedUser);
+    }
+    return !(this.selectedAnswered || this.selectedEntity || this.selectedUser);
   }
 
   get isMobileClearEnabled(): boolean {
     return this.hasMobileSearched;
+    
   }
 }

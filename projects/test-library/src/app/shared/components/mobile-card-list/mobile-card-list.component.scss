@@ -151,7 +151,11 @@
     color: #84818A;
     font-weight: 400;
     flex-shrink: 0;
-    
+     &--amount {
+      font-weight: 600;
+      color: $primary-color;
+      font-size: 13.6px;
+    }
   }
 
   &__value {

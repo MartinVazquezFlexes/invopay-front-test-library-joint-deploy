@@ -242,23 +242,33 @@ onMobileFiltersOpened(): void {
       currentFilters: {
         answered: this.selectedAnswered,
         entity: this.selectedEntity,
-        user: this.selectedUser
+        user: this.selectedUser,
+        hasSearched: this.hasMobileSearched // Pass the search state
       },
       mode: 'insurance' 
     }
   });
-  const sub = dialogRef.componentInstance.applyFilters.subscribe((filters: any) => {
+  const subs = new Subscription();
+  
+  subs.add(dialogRef.componentInstance.applyFilters.subscribe((filters: any) => {
+    this.hasMobileSearched = filters.hasSearched || false;
     this.onSearchPerformed(filters);
     dialogRef.close();
-  });
+  }));
 
-  dialogRef.componentInstance.clearFilters.subscribe(() => {
+  subs.add(dialogRef.componentInstance.clearFilters.subscribe(() => {
+    this.hasMobileSearched = false;
     this.onFiltersCleared();
     dialogRef.close();
-  });
+  }));
+  
+  // Handle close button click
+  subs.add(dialogRef.componentInstance.closeModal.subscribe(() => {
+    dialogRef.close();
+  }));
 
   dialogRef.afterClosed().subscribe(() => {
-    sub.unsubscribe();
+    subs.unsubscribe();
   });
 }
 onSearchPerformed(filters: any): void {
@@ -397,7 +407,7 @@ onSearchPerformed(filters: any): void {
     this.selectedUser = '';
     this.selectedBrokerId = null;
     this.hasMobileSearched = false;
-    this.notificationData = [...this.originalNotificationData];
+     this.notificationData = [];
     this.answeredControl.reset();
     this.entityControl.reset();
     this.userControl.reset();

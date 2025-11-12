@@ -45,8 +45,8 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() getRowId?: (item: any) => string;
   @Input() selectAllChecked = false;
   @Input() extraDataKeys?: Observable<any[]>;
-  @Input() showExtraData = false; 
-  @Input() actionBtnLabel?: string; 
+  @Input() showExtraData = false;
+  @Input() actionBtnLabel?: string;
   @Output() actionBtn: EventEmitter<TableEvent> = new EventEmitter<TableEvent>();
   @Input() columnWidths?: { [key: string]: string };
   @Input() showAddButtonInHeader: boolean = false;
@@ -289,14 +289,13 @@ export class TableComponent implements OnInit, OnChanges {
         }
         break;
       case 'delete':
-        if (
-          // Checks wether it is a rendition or invoice
-          // (a bill, cause there are other deletable entities)
+        if (dataField.hasOwnProperty('isActive') && dataField.isActive === false) {
+          extension = '-grey';
+          pointerEvents = 'none';
+        } else if (
           dataField.typeStatus &&
-          // As an employee or provider, I can only delete the pending ones
           (((this.type === 'employee' || this.type === 'provider') &&
             !dataField.typeStatus.isInitial) ||
-            // As an enterprise, only the paid ones
             (this.type === 'business' && !dataField.typeStatus.isPaid))
         ) {
           extension = '-grey';
@@ -313,14 +312,16 @@ export class TableComponent implements OnInit, OnChanges {
         }
         break;
       case 'edit':
-        if (dataField.editable !== null && dataField.editable === false) {
+        if (dataField.hasOwnProperty('isActive') && dataField.isActive === false) {
+          extension = '-grey';
+          pointerEvents = 'none';
+        } else if (dataField.editable !== null && dataField.editable === false) {
           extension = '-grey';
           pointerEvents = 'none';
         }
         break;
       case 'pay':
         if (
-          // I can only pay approved bills
           !dataField.typeStatus.isPayable
         ) {
           extension = '-grey';
@@ -342,12 +343,7 @@ export class TableComponent implements OnInit, OnChanges {
       case 'status':
         if (dataField.status === 'PAID') {
           extension = '-grey';
-          pointerEvents = 'none';
         }
-        // if (dataField.is_paid === true) {
-        //   extension = '-grey';
-        //   pointerEvents = 'none';
-        // }
         break;
     }
     return {
@@ -431,10 +427,10 @@ export class TableComponent implements OnInit, OnChanges {
     else return false
   }
 
-  onActionBtnEmit(action: string){
-    this.actionBtn.emit({event:action})
+  onActionBtnEmit(action: string) {
+    this.actionBtn.emit({ event: action })
   }
-  
+
   private booleanMappings: { [key: string]: { true: string, false: string } } = {
     'isActive': { true: 'IP.TABLE.ACTIVE', false: 'IP.TABLE.INACTIVE' },
     'state': { true: 'IP.TABLE.ACTIVE', false: 'IP.TABLE.INACTIVE' },

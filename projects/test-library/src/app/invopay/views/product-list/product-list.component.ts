@@ -222,18 +222,23 @@ export class ProductListComponent implements OnInit {
 
   onConfirmDelete(): void {
     if (!this.selectedProduct) return;
+    const productToDelete = this.selectedProduct;
 
     this.loadingService.setLoadingState(true);;
     this.deleteBusy = true;
 
-    this.productService.deleteProduct(this.selectedProduct.id).subscribe({
+    this.productService.deactivateProduct(productToDelete.id).subscribe({
       next: () => {
-        this.loadPage(this.pageIndex, this.pageSize);
-        this.onDeleteModalClose();
+        const updatedItem = this.withDisplayStatus([{
+          ...productToDelete,
+          isActive: false
+        }])[0];
+
+        this.updateLocalData(updatedItem);
 
         this.deleteBusy = false;
         this.loadingService.setLoadingState(false);
-
+        this.onDeleteModalClose();
       },
       error: (err: any) => {
         console.error(err);

@@ -1,9 +1,7 @@
 <section class="product-list page" *ngIf="!(loadingService.isLoading$ | async)">
 
-  <app-ip-title-mobile
-  [title]="'IP.PRODUCTS.LIST.TITLE' | translate"
-  [btn]="isHandset ? 'create' : 'none'" [btnText]="'IP.PRODUCTS.BUTTONS.ADD' | translate"
-  (clicked)="onAddNewProduct()">
+  <app-ip-title-mobile [title]="'IP.PRODUCTS.LIST.TITLE' | translate" [btn]="isHandset ? 'create' : 'none'"
+    [btnText]="'IP.PRODUCTS.BUTTONS.ADD' | translate" (clicked)="onAddNewProduct()">
   </app-ip-title-mobile>
 
   <section class="product-list__table" *ngIf="!isHandset">
@@ -44,11 +42,11 @@
                 {{ 'IP.PRODUCTS.CARDS.ACTIONS.VIEW' | translate }}
               </button>
               <button type="button" role="menuitem" class="product-card__menu-item"
-                (click)="openMenuId = null; onRowAction({ event: 'edit', dataField: p })">
+                (click)="openMenuId = null; onRowAction({ event: 'edit', dataField: p })" [disabled]="!p.isActive">
                 {{ 'IP.PRODUCTS.CARDS.ACTIONS.EDIT' | translate }}
               </button>
               <button type="button" role="menuitem" class="product-card__menu-item product-card__menu-item--delete"
-                (click)="openMenuId = null; onRowAction({ event: 'delete', dataField: p })">
+                (click)="openMenuId = null; onRowAction({ event: 'delete', dataField: p })" [disabled]="!p.isActive">
                 {{ 'IP.PRODUCTS.CARDS.ACTIONS.DELETE' | translate }}
               </button>
             </div>
@@ -78,11 +76,8 @@
 
   <footer class="product-list__paginator" *ngIf="!isHandset && !loading">
     <div class="page-size">
-      <app-ip-select-input
-          [control]="itemsPerPageControl"
-          [options]="pageOptions"
-          (selectEmitter)="onPageSizeChange($event)"
-        ></app-ip-select-input>
+      <app-ip-select-input [control]="itemsPerPageControl" [options]="pageOptions"
+        (selectEmitter)="onPageSizeChange($event)"></app-ip-select-input>
     </div>
     <ng-container *ngIf="!paginatorReload">
       <app-paginator [totalItems]="total" [itemsPerPage]="pageSize" [currentPages]="pageIndex + 1"
@@ -131,6 +126,21 @@
               <label>{{ 'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_DETAILED' | translate }}</label>
               <p>{{ p.descriptionDetailed }}</p>
             </div>
+            <div class="product-details__section">
+              <label>Documentación Asociada</label>
+              <ul class="product-details__docs-list">
+                <li>
+                  <a href="#" (click)="$event.preventDefault()">
+                    Condiciones Generales (PDF)
+                  </a>
+                </li>
+                <li>
+                  <a href="#" (click)="$event.preventDefault()">
+                    Manual de Siniestros
+                  </a>
+                </li>
+              </ul>
+            </div>
 
           </div>
           <div class="product-details__actions">
@@ -149,7 +159,8 @@
         [showCloseModal]="true" (close)="onDeleteModalClose()">
         <ng-container *ngIf="selectedProduct as p">
           <div class="product-delete-confirm">
-            <p class="product-delete-confirm__message">{{ 'IP.PRODUCTS.DELETE_MODAL.CONFIRM_MESSAGE' | translate }} <strong>"{{ p.name }}"</strong>?</p>
+            <p class="product-delete-confirm__message">{{ 'IP.PRODUCTS.DELETE_MODAL.CONFIRM_MESSAGE' | translate }}
+              <strong>"{{ p.name }}"</strong>?</p>
             <p class="product-delete-confirm__message__warning">
               {{ 'IP.PRODUCTS.DELETE_MODAL.NOTE' | translate }}
             </p>
@@ -216,19 +227,15 @@
 
           <div class="product-details__section">
             <label for="create-long-desc">{{ 'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate }}</label>
-            <app-ip-text-area-input
-              [control]="$any(createForm.get('description'))"
-              [label]="'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate"
-              inputId="create-desc">
+            <app-ip-text-area-input [control]="$any(createForm.get('description'))"
+              [label]="'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate" inputId="create-desc">
             </app-ip-text-area-input>
           </div>
 
           <div class="product-details__section">
             <label for="create-long-desc">{{ 'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate }}</label>
-            <app-ip-text-area-input
-              [control]="$any(createForm.get('longDescription'))"
-              [label]="'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate"
-              inputId="create-long-desc">
+            <app-ip-text-area-input [control]="$any(createForm.get('longDescription'))"
+              [label]="'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate" inputId="create-long-desc">
             </app-ip-text-area-input>
           </div>
 
@@ -300,25 +307,16 @@
 
           <div class="product-details__section">
             <label for="edit-desc-short">{{ 'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate }}</label>
-            <app-ip-text-area-input
-              [control]="$any(editForm.get('description'))"
-              [label]="'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate"
-              inputId="edit-desc-short">
+            <app-ip-text-area-input [control]="$any(editForm.get('description'))"
+              [label]="'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate" inputId="edit-desc-short">
             </app-ip-text-area-input>
           </div>
 
           <div class="product-details__section">
             <label for="edit-long-desc">{{ 'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate }}</label>
-            <app-ip-text-area-input
-              [control]="$any(editForm.get('longDescription'))"
-              [label]="'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate"
-              inputId="edit-long-desc">
+            <app-ip-text-area-input [control]="$any(editForm.get('longDescription'))"
+              [label]="'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate" inputId="edit-long-desc">
             </app-ip-text-area-input>
-          </div>
-
-          <div class="product-details__section is-toggle">
-            <label for="edit-isActive">{{ 'IP.PRODUCTS.FORM.IS_ACTIVE.LABEL' | translate }}</label>
-            <input type="checkbox" id="edit-isActive" class="form-check" formControlName="isActive">
           </div>
 
           <div class="product-details__actions">
