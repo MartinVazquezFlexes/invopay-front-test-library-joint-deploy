@@ -289,13 +289,14 @@ export class TableComponent implements OnInit, OnChanges {
         }
         break;
       case 'delete':
-        if (dataField.hasOwnProperty('isActive') && dataField.isActive === false) {
-          extension = '-grey';
-          pointerEvents = 'none';
-        } else if (
+        if (
+          // Checks wether it is a rendition or invoice
+          // (a bill, cause there are other deletable entities)
           dataField.typeStatus &&
+          // As an employee or provider, I can only delete the pending ones
           (((this.type === 'employee' || this.type === 'provider') &&
             !dataField.typeStatus.isInitial) ||
+            // As an enterprise, only the paid ones
             (this.type === 'business' && !dataField.typeStatus.isPaid))
         ) {
           extension = '-grey';
@@ -312,16 +313,14 @@ export class TableComponent implements OnInit, OnChanges {
         }
         break;
       case 'edit':
-        if (dataField.hasOwnProperty('isActive') && dataField.isActive === false) {
-          extension = '-grey';
-          pointerEvents = 'none';
-        } else if (dataField.editable !== null && dataField.editable === false) {
+        if (dataField.editable !== null && dataField.editable === false) {
           extension = '-grey';
           pointerEvents = 'none';
         }
         break;
       case 'pay':
         if (
+          // I can only pay approved bills
           !dataField.typeStatus.isPayable
         ) {
           extension = '-grey';
@@ -343,7 +342,12 @@ export class TableComponent implements OnInit, OnChanges {
       case 'status':
         if (dataField.status === 'PAID') {
           extension = '-grey';
+          pointerEvents = 'none';
         }
+        // if (dataField.is_paid === true) {
+        //   extension = '-grey';
+        //   pointerEvents = 'none';
+        // }
         break;
     }
     return {

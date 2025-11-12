@@ -74,7 +74,7 @@ selectedTab: string='all';
 
 
   ngOnInit(): void {
-      this.controlsForm.controls.dateEnd.disable()
+    //  this.controlsForm.controls.dateEnd.disable()
       this.loadingService.setLoadingState(true)
       this.loadTitleMap();
       this.checkScreenSize()
@@ -171,10 +171,10 @@ selectedTab: string='all';
         const date = target.value
 
         if(!date){
-          this.controlsForm.controls.dateEnd.disable()
+        //  this.controlsForm.controls.dateEnd.disable()
         }
         else{
-          this.controlsForm.controls.dateEnd.enable()
+        //  this.controlsForm.controls.dateEnd.enable()
         }
 
         this.currentStart= this.formatDate(date)

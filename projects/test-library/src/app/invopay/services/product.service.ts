@@ -182,8 +182,8 @@ export class ProductService {
       descriptionDetailed: apiProduct.longDescription,
       documentation: [],
       descriptionExpanded: '',
-      deletable: apiProduct.deletable,
-      editable: apiProduct.editable
+      deletable: apiProduct.isActive,
+      editable: apiProduct.isActive
     };
   }
 
