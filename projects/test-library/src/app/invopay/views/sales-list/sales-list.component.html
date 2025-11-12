@@ -62,15 +62,15 @@
                     </div>
 
                     <div class="date-wrapper">
-                        <label style="margin-left: 10px;" class="placeholder">{{'IP.FROM' | translate}}</label>
+                        <label  class="placeholder">{{'IP.FROM' | translate}}</label>
                         <app-ip-date-input [control]="controlsForm.controls.dateStart" [max]="maxStart"
                             (changed)="onStartDatechange($event)">
                         </app-ip-date-input>
                     </div>
 
                     <div class="date-wrapper">
-                        <label style="margin-left: 10px;" class="placeholder">{{'IP.TO' | translate}}</label>
-                        <app-ip-date-input [control]="controlsForm.controls.dateEnd" [max]="maxEnd" [min]="minEnd"
+                        <label  class="placeholder">{{'IP.TO' | translate}}</label>
+                        <app-ip-date-input  [control]="controlsForm.controls.dateEnd" [max]="maxEnd" [min]="minEnd"
                             (changed)="onEndDateChange($event)">
                         </app-ip-date-input>
                     </div>

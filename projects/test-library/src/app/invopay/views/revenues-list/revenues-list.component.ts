@@ -191,13 +191,16 @@ export class RevenuesListComponent {
   onApplyFilter(page:number) {
     console.log("apply filter page "+page )
 
-      if (!this.currentStart || !this.currentEnd) return;
-
-        const from = new Date(this.currentStart);
-        const to = new Date(this.currentEnd);
-        const fromNotHour =new Date(from.getFullYear(), from.getMonth(), from.getDate())
-        const toNotHour =new Date(to.getFullYear(), to.getMonth(), to.getDate())
-        const chanelPayment = this.currentPayChannel;
+        let fromNotHour :string|Date =this.currentStart
+        let toNotHour :string|Date =this.currentEnd
+        if (this.currentStart && this.currentEnd){
+           const from = new Date(this.currentStart);
+          const to = new Date(this.currentEnd);
+         fromNotHour =new Date(from.getFullYear(), from.getMonth(), from.getDate())
+         toNotHour =new Date(to.getFullYear(), to.getMonth(), to.getDate())
+         toNotHour.setDate(to.getDate() + 1);
+         toNotHour.setHours(23, 59, 59, 999);
+        }
 
         this.revenueService.getRevenues().pipe(
           map(response => {
@@ -205,8 +208,9 @@ export class RevenuesListComponent {
             return this.revenueData.content.filter(x => {
               const revDate = new Date(x.revenueDate);
               const revDateNotHours=new Date(revDate.getFullYear(), revDate.getMonth(), revDate.getDate())
-              const matchesDate = revDateNotHours >= from && revDateNotHours <= toNotHour;
-              const matchesChannel = !this.currentPayChannel || x.paymentChannel.toLocaleLowerCase() === this.currentPayChannel.toLocaleLowerCase()||this.currentPayChannel=='';
+
+              const matchesDate =  !this.currentStart || !this.currentEnd || (revDateNotHours >= fromNotHour && revDateNotHours <= toNotHour);
+              const matchesChannel = !this.currentPayChannel || x.paymentChannel.toLocaleLowerCase() === this.currentPayChannel.toLocaleLowerCase();
               console.log(this.currentPayChannel)
               console.log(x.paymentChannel)
               console.log(matchesChannel)
@@ -234,7 +238,6 @@ onClearFilters(): void {
   this.currentPayChannel = '';
   this.currentPages = 1;
 
-    this.onApplyFilter(1)
     this.isModalOpen = false;
 
 }
