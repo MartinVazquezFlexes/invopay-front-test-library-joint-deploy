@@ -15,12 +15,12 @@ $status-inactive-color: $error-color;
   &.page {
     display: flex;
     flex-direction: column;
-    background: $background-color;
+    padding: 1rem;
   }
 
   &__table {
     background: $table-bg-color;
-    border-radius: $card-border-radius;
+    border-radius: $card-border-radius $card-border-radius 0 0;
     box-shadow: $box-shadow-table;
     overflow: hidden;
 
@@ -44,7 +44,7 @@ $status-inactive-color: $error-color;
     align-items: center;
     gap: 1rem;
     background: $header-bg-color;
-    border-radius: $header-border-radius;
+    border-radius: 0 0 $card-border-radius $card-border-radius;
     box-shadow: $header-box-shadow;
     padding-right: 1rem;
     padding-left: 2.06rem;
@@ -57,10 +57,10 @@ $status-inactive-color: $error-color;
       white-space: nowrap;
 
       ::ng-deep app-ip-select-input {
-      .form-floating {
-        margin: 8px;
+        .form-floating {
+          margin: 8px;
+        }
       }
-    }
     }
 
     &--mobile {
@@ -329,9 +329,23 @@ $status-inactive-color: $error-color;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    ::ng-deep app-ip-input .form-floating > label{
-      display: none !important;
+
+    ::ng-deep app-ip-input .form-floating {
+      height: 1rem;
+
+      >label {
+        display: none !important;
+      }
     }
+
+    ::ng-deep app-ip-text-area-input .form-floating {
+      height: 2.5rem;
+
+      >label {
+        display: none !important;
+      }
+    }
+
     label {
       font-size: 0.75rem;
       font-weight: 600;

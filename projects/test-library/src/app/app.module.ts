@@ -1,38 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { CommonModule, DatePipe } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from "projects/base/src/shared/shared.module";
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
-import { CurrencySymbolPipe } from 'projects/base/src/shared/Utils/currency-simbol-pipe';
-import { AmountFormatPipe } from 'projects/base/src/shared/Utils/amount-format-pipe.pipe';
-import { CustomDatePipe } from 'projects/base/src/shared/Utils/pipeCustomDate';
 import { InvopayModule } from './invopay/invopay.module';
-import { HomeComponent } from './invopay/views/home/home.component';
 import { TokenInterceptor } from './invopay/services/token.interceptor';
 import { PaymentsEntitiesListComponent } from './invopay/views/payments-entities-list/payments-entities-list.component';
 import { AdditionalFiltersModalComponent } from './shared/components/additional-filters-modal/additional-filters-modal.component';
 import { InsuranceNotificationTrayComponent } from './invopay/views/insurance-notification-tray/insurance-notification-tray.component';
-
 import { BrokerNotificationTrayComponent } from './invopay/views/broker-notification-tray/broker-notification-tray.component';
-
 
 
   export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
   }
-
 
 import { DecryptionService } from './shared/services/decryption.service';
 import { DecryptionInterceptor } from './shared/interceptors/decryption.interceptor';
@@ -46,6 +35,10 @@ import { RevenuesListComponent } from './invopay/views/revenues-list/revenues-li
 import { SalesListComponent } from './invopay/views/sales-list/sales-list.component';
 import { SalesDetailsComponent } from './invopay/views/sales-details/sales-details.component';
 import { PendingSalesComponent } from './invopay/views/pending-sales/pending-sales.component';
+import { SharedModule } from './shared/shared.module';
+import { AmountFormatPipe } from './shared/Utils/amount-format-pipe.pipe';
+import { CurrencySymbolPipe } from './shared/Utils/currency-simbol-pipe';
+import { CustomDatePipe } from './shared/Utils/pipeCustomDate';
 
 
 

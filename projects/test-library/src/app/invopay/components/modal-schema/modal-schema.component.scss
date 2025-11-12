@@ -71,6 +71,7 @@ body {
 p {
   padding-top: 0px;
   @include subTitleText();
+  font-family: 'Poppins', sans-serif;
 }
 
 .modal__header {
@@ -87,6 +88,7 @@ p {
   margin: 0;
   color: rgb(62, 62, 62);
   @include subTitleText();
+  font-family: 'Poppins', sans-serif;
 }
 
 .modal__header button {
@@ -124,6 +126,7 @@ p {
 .modal__section-title {
   color: #0071ce;
   @include mainTabText();
+  font-family: 'Poppins', sans-serif;
   margin: 5px;
   cursor: pointer;
   margin-bottom: 20px;
@@ -304,6 +307,7 @@ p{
   .modal__card-id {
     color: #0071ce;
     @include cardText();
+    font-family: 'Poppins', sans-serif;
   }
 
     .modal__card-row {
@@ -316,16 +320,19 @@ p{
   .modal__card-label {
     color: #0071CE;
     @include generalInputText();
+    font-family: 'Poppins', sans-serif;
   }
 
   .modal__card-value {
     color: #333;
     @include generalInputText();
+    font-family: 'Poppins', sans-serif;
   }
 
   .modal__card-value--date {
     color: #666;
     @include generalInputText();
+    font-family: 'Poppins', sans-serif;
   }
 
   .modal__content {
@@ -411,6 +418,7 @@ p{
   .modal__card-id {
     color: #0071ce;
     @include cardText();
+    font-family: 'Poppins', sans-serif;
   }
 
     .modal__card-row {
@@ -423,16 +431,19 @@ p{
   .modal__card-label {
     color: #0071CE;
     @include generalInputText();
+    font-family: 'Poppins', sans-serif;
   }
 
   .modal__card-value {
     color: #333;
     @include generalInputText();
+    font-family: 'Poppins', sans-serif;
   }
 
   .modal__card-value--date {
     color: #666;
     @include generalInputText();
+    font-family: 'Poppins', sans-serif;
   }
 
   .modal__content {

@@ -490,6 +490,12 @@
         "ACTIONS": "ACCIONES",
         "PAID": "Pagado",
         "GENERATED": "Generado"
+      },
+      "SCHEMES": {
+        "ID": "ID",
+        "SCHEMENAME": "Nombre del esquema",
+        "DESCRIPTION": "Descripción",
+        "ISSCHEMAACTIVE": "Activo"
       }
     },
     "COMMON": {

@@ -215,13 +215,21 @@
           </div>
 
           <div class="product-details__section">
-            <label for="create-desc">{{ 'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate }}</label>
-            <textarea id="create-desc" class="form-control" formControlName="description" rows="3"></textarea>
+            <label for="create-long-desc">{{ 'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate }}</label>
+            <app-ip-text-area-input
+              [control]="$any(createForm.get('description'))"
+              [label]="'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate"
+              inputId="create-desc">
+            </app-ip-text-area-input>
           </div>
 
           <div class="product-details__section">
             <label for="create-long-desc">{{ 'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate }}</label>
-            <textarea id="create-long-desc" class="form-control" formControlName="longDescription" rows="5"></textarea>
+            <app-ip-text-area-input
+              [control]="$any(createForm.get('longDescription'))"
+              [label]="'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate"
+              inputId="create-long-desc">
+            </app-ip-text-area-input>
           </div>
 
           <div class="product-details__section is-toggle">
@@ -292,12 +300,20 @@
 
           <div class="product-details__section">
             <label for="edit-desc-short">{{ 'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate }}</label>
-            <textarea id="edit-desc-short" class="form-control" formControlName="description" rows="3"></textarea>
+            <app-ip-text-area-input
+              [control]="$any(editForm.get('description'))"
+              [label]="'IP.PRODUCTS.FORM.DESCRIPTION.LABEL' | translate"
+              inputId="edit-desc-short">
+            </app-ip-text-area-input>
           </div>
 
           <div class="product-details__section">
             <label for="edit-long-desc">{{ 'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate }}</label>
-            <textarea id="edit-long-desc" class="form-control" formControlName="longDescription" rows="5"></textarea>
+            <app-ip-text-area-input
+              [control]="$any(editForm.get('longDescription'))"
+              [label]="'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate"
+              inputId="edit-long-desc">
+            </app-ip-text-area-input>
           </div>
 
           <div class="product-details__section is-toggle">

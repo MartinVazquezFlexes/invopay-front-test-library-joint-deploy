@@ -23,6 +23,7 @@ body {
 
 .schemes__title {
   @include mainTitleText();
+  font-family: 'Poppins', sans-serif;
   color: #0071ce;
   padding-left: 40px;
   margin: 0;
@@ -86,7 +87,7 @@ body {
     ::ng-deep {
     app-ip-select-input {
       .form-floating {
-        margin: 8px;
+        margin: 11px;
       }
     }
 }
@@ -131,6 +132,7 @@ body {
 
   .schemes__card-id {
     @include cardText();
+    font-family: 'Poppins', sans-serif;
     color: #0071ce;
   }
 
@@ -147,12 +149,14 @@ body {
 
   .schemes__card-label {
     @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
     color: #0071CE;
     font-weight: 600;
   }
 
   .schemes__card-value {
     @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
     color: #333;
     font-weight: 600;
     text-align: end;
@@ -160,12 +164,14 @@ body {
 
   .schemes__card-value--date {
     @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
     color: #666;
     font-weight: 600;
   }
 
   .schemes__card-value--amount {
     @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
     color: #0071ce;
     font-weight: 600;
   }
