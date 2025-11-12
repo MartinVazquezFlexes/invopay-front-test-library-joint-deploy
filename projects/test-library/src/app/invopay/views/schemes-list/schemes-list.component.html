@@ -66,7 +66,7 @@
         <label class="schemes__card-label">{{
           "IP.ADMIN_TABLE.SCHEMENAME" | translate
         }}</label>
-        <span class="schemes__card-value schemes__card-value--amount">{{
+        <span class="schemes__card-value schemes__card-value">{{
           item.schemeName
         }}</span>
       </div>
@@ -79,14 +79,14 @@
       </div>
 
       <div class="schemes__card-row">
-        <label class="schemes__card-label">{{
+        <label class="schemes__card-label--status">{{
           "IP.ADMIN_TABLE.ISSCHEMAACTIVE" | translate
         }}</label>
-        <span class="schemes__card-value" *ngIf="item.isSchemaActive == 'Si'">{{
+        <span class="schemes__card-value--status" *ngIf="item.isSchemaActive == 'Si'">{{
           "IP.YES" | translate
         }}</span>
         <!--*ngIf="item.isActive" cuando ande el endpoint-->
-        <span class="schemes__card-value" *ngIf="item.isSchemaActive == 'No'">{{
+        <span class="schemes__card-value--status" *ngIf="item.isSchemaActive == 'No'">{{
           "IP.NO" | translate
         }}</span
         ><!--*ngIf="item.isActive" cuando ande el endpoint-->

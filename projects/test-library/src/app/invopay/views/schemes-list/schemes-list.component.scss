@@ -126,14 +126,15 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
-    padding: 10px 0px;
+    padding: 0px;
     border-bottom: 1px solid #0071ce;
   }
 
   .schemes__card-id {
     @include cardText();
     font-family: 'Poppins', sans-serif;
-    color: #0071ce;
+    color: rgb(132, 129, 138);
+    font-weight: 600;
   }
 
   .schemes__image-container {
@@ -150,31 +151,31 @@ body {
   .schemes__card-label {
     @include sidenavTextLabel();
     font-family: 'Poppins', sans-serif;
-    color: #0071CE;
-    font-weight: 600;
+    color: rgb(132, 129, 138);
+    font-weight: 400;
+  }
+
+  .schemes__card-label--status {
+    @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
+    color:#0071ce;
+    font-weight: 400;
   }
 
   .schemes__card-value {
     @include sidenavTextLabel();
     font-family: 'Poppins', sans-serif;
-    color: #333;
-    font-weight: 600;
-    text-align: end;
+    color: rgb(132, 129, 138);
+    font-weight: 400;
   }
 
-  .schemes__card-value--date {
-    @include sidenavTextLabel();
-    font-family: 'Poppins', sans-serif;
-    color: #666;
-    font-weight: 600;
-  }
-
-  .schemes__card-value--amount {
+  .schemes__card-value--status {
     @include sidenavTextLabel();
     font-family: 'Poppins', sans-serif;
     color: #0071ce;
-    font-weight: 600;
+    font-weight: 400;
   }
+
 
   body {
     overflow-x: hidden;
