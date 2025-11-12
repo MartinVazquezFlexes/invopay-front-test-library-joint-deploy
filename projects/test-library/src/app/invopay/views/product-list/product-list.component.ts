@@ -231,7 +231,9 @@ export class ProductListComponent implements OnInit {
       next: () => {
         const updatedItem = this.withDisplayStatus([{
           ...productToDelete,
-          isActive: false
+          isActive: false,
+          deletable: false,
+          editable: false
         }])[0];
 
         this.updateLocalData(updatedItem);
