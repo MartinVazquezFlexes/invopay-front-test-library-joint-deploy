@@ -304,44 +304,103 @@
   height: 2.3rem;
   padding: 0 0.75rem;
   border: none;
-  border-radius: 0.5rem;
-  background-color: rgb(33, 107, 245);
+  border-radius: 0.7rem;
+
+  background-color:  #0c77d0;
   color: white;
   position: relative;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0; // 👈 nunca se achica ni baja
-
 
   @include sm() {
-    height: 1.625rem;
     padding: 0 0.625rem;
   }
 
-
+  @include md() {
+    padding: 0 0.6875rem;
+  }
 
   img {
     width: 0.875rem;
     height: 0.875rem;
     display: block;
-    
+
     @include sm() {
       width: 0.8125rem;
-      height: 0.8125rem;
     }
   }
 
   &:hover {
     background-color: rgb(5, 53, 143);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
 
   &::after {
-    content: "BUSCAR"; 
+    content: "BUSCAR";
     position: absolute;
-    top: -2rem; 
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(27, 25, 25, 0.8);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+  
+.clean {
+  height: 2.3rem;
+  padding: 0 0.75rem;
+  border: none;
+  border-radius: 0.7rem;
+
+  background-color:  #0c77d0;
+  color: white;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include sm() {
+    padding: 0 0.625rem;
+  }
+
+  @include md() {
+    padding: 0 0.6875rem;
+  }
+
+  img {
+    width: 0.875rem;
+    height: 0.875rem;
+    display: block;
+
+    @include sm() {
+      width: 0.8125rem;
+    }
+  }
+
+  &:hover {
+    background-color: rgb(5, 53, 143);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  &::after {
+    content: "FILTRAR";
+    position: absolute;
+    top: -2rem;
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(27, 25, 25, 0.8);
@@ -360,6 +419,7 @@
   }
   }
 }
+
 
 
 
@@ -498,18 +558,22 @@ width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #257fe7;
     padding: 1vh;
 
     .card-id-mobile {
-      color: #666;
-      font-size: 0.8125rem;
-      font-weight: 400;
 
+      @include cardText();
+      font-family: 'Poppins', sans-serif;
+      color: rgb(132, 129, 138);
+      font-weight: 600;
       @include sm() {
         font-size: 0.75rem;
       }
     }
+
+
+
 
     .menu-icon-mobile {
       background: none;
@@ -544,28 +608,45 @@ width: 100%;
 
 .info-row-mobile {
   display: grid;
-  grid-template-columns: 1fr 1fr; // ✅ dos columnas iguales
+  grid-template-columns: 1fr 1fr; // dos columnas iguales
   align-items: center;
   width: 100%;
   gap: 0.5rem;
 
   .info-label-mobile {
-    color: #1976d2;
-    font-weight: 500;
-    font-size: 0.875rem;
-    justify-self: start; // ✅ alinea a la izquierda
+    justify-self: start; // alinea a la izquierda
+    @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
+    color: rgb(132, 129, 138);
+    font-weight: 400;
+  }
+  .info-label-mobile__money{
+    justify-self: start; // alinea a la izquierda
+    font-size: 0.95rem;
+    font-family: "Inter", sans-serif;
+    color: #3e3e3e;
+    font-weight: 600;
+    line-height: 1rem;
   }
 
   .info-value-mobile {
-    color: #333;
+    justify-self: end; //  alinea a la derecha
+    @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
+    color: rgb(132, 129, 138);
     font-weight: 400;
-    font-size: 0.875rem;
-    justify-self: end; // ✅ alinea a la derecha
-    word-break: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-    max-width: 100%;
   }
+    .info-value-mobile__money{
+    justify-self: end; // alinea a la derecha
+    font-size: 0.95rem;
+    font-family: "Inter", sans-serif;
+    color: #3e3e3e;
+    font-weight: 600;
+    line-height: 1rem;
+  }
+
+
+
 }
 
 

@@ -41,6 +41,7 @@
           <div class="date-wrapper">
             <label class="placeholder">{{'IP.FILTERS.DATE.TO' | translate}}</label>
             <app-ip-date-input
+              
               [control]="controlsForm.controls.dateEnd"
               [max]="maxEnd"
               [min]="minEnd"
@@ -48,16 +49,19 @@
             </app-ip-date-input>
           </div>
           </div>
-           <div class="date-wrapper">
-              <button class="search" (click)="onClearFilters()">
-                  <img src="../../../../assets/new-styles/icons/cleaning.svg">
-              </button>
-          </div>
+
           <div class="date-wrapper">
             <button class="search" (click)="onClickFiltredSearch()">
               <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
             </button>
           </div>
+
+           <div class="date-wrapper">
+              <button class="search" (click)="onClearFilters()">
+                  <img src="../../../../assets/new-styles/icons/cleaning.svg">
+              </button>
+          </div>
+
           
         </div>
 
@@ -123,8 +127,8 @@
                 </span>
             </div>
             <div class="info-row-mobile">
-                <span class="info-label-mobile">{{'IP.TABLE.CONSOLIDATED.PAY_IN.AMOUNT' | translate}}</span>
-                <span class="info-value-mobile"
+                <span class="info-label-mobile__money">{{'IP.TABLE.CONSOLIDATED.PAY_IN.AMOUNT' | translate}}</span>
+                <span class="info-value-mobile__money"
                 >{{revenue.moneda}} {{ revenue.montoRecaudado }}</span>
             </div>
             </div>

@@ -63,7 +63,7 @@ selectedTab: string='all';
 
   currentStart:string=''
   maxStart:string = this.formatDate(new  Date())
-  maxEnd : string=''
+  maxEnd : string=this.formatDate(new  Date())
   minEnd : string =''
   currentEnd:string=''
 
@@ -199,14 +199,17 @@ selectedTab: string='all';
 
     onApplyFilter(page:number) {
       console.log("apply filter page "+page )
-
-        if (!this.currentStart || !this.currentEnd) return;
-
-          const from = new Date(this.currentStart);
+    
+        let fromNotHour :string|Date =this.currentStart
+        let toNotHour :string|Date =this.currentEnd
+        if (this.currentStart && this.currentEnd){
+           const from = new Date(this.currentStart);
           const to = new Date(this.currentEnd);
-        const fromNotHour =new Date(from.getFullYear(), from.getMonth(), from.getDate())
-        const toNotHour =new Date(to.getFullYear(), to.getMonth(), to.getDate())
-          to.setHours(23, 59, 59, 999);
+         fromNotHour =new Date(from.getFullYear(), from.getMonth(), from.getDate())
+         toNotHour =new Date(to.getFullYear(), to.getMonth(), to.getDate())
+         toNotHour.setDate(to.getDate() + 1);
+         toNotHour.setHours(23, 59, 59, 999);
+        }
 
           this.salesService.getSales().pipe(
             map(response => {
@@ -214,14 +217,20 @@ selectedTab: string='all';
               return this.salesData.content.filter(x => {
               const saleDate = new Date(x.saleDate);
               const saleDateNotHours=new Date(saleDate.getFullYear(), saleDate.getMonth(), saleDate.getDate())
-              const matchesDate = saleDateNotHours >= fromNotHour && saleDateNotHours <= toNotHour;
+
+              const matchesDate =  !this.currentStart || !this.currentEnd || (saleDateNotHours >= fromNotHour && saleDateNotHours <= toNotHour);
               const matchesProduct = !this.currentProduct || x.productName.toLocaleLowerCase() === this.currentProduct.toLocaleLowerCase();
               const matchesBroker = !this.currentBroker || x.brokerName.toLocaleLowerCase() === this.currentBroker.toLocaleLowerCase();
-              if(!matchesDate){ console.log("XXXXXX") ;console.log(x)}
+              if(!matchesDate){ console.log("NOT MATCHDATE") ;console.log(x); console.log(saleDateNotHours,fromNotHour,toNotHour)}
+              if(!matchesBroker){ console.log("NOT BROKER Match") ;console.log(x); console.log(this.currentBroker.toLocaleLowerCase(),x.brokerName.toLowerCase())}
+              if(!matchesBroker){ console.log("NOT PODUCT MATCH") ;console.log(x); console.log(this.currentProduct.toLocaleLowerCase(),x.productName.toLowerCase())}
+
                 return matchesDate && matchesBroker && matchesProduct;
               });
             })
           ).subscribe(filtered => {
+            console.log("FILTERED :")
+            console.log(filtered)
             this.sales = filtered;
             this.loadTable(page);
           });
@@ -248,11 +257,10 @@ onClearFilters(): void {
 
     // Limpiar min y max para permitir nueva selección libre
     this.minEnd = '';
-    this.maxEnd = '';
+    this.maxEnd = this.formatDate(new Date());
     this.maxStart = this.formatDate(new Date());
 
      this.isModalOpen=false
-     this.onApplyFilter(1)
 
      console.log('Filtros limpiados correctamente');
 }
@@ -312,7 +320,9 @@ onClearFilters(): void {
       },
       error: (error) => {
         console.error('Error al cargar ventas:', error);
+        this.loadingService.setLoadingState(false)
       },
+
       complete:()=>{
         this.loadingService.setLoadingState(false)
       }

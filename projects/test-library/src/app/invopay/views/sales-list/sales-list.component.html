@@ -76,15 +76,16 @@
                     </div>
                  </div>
                     <div class="date-wrapper">
-                            <button class="search" (click)="onClearFilters()">
-                                <img src="../../../../assets/new-styles/icons/cleaning.svg">
-                            </button>
-                    </div>
-                    <div class="date-wrapper">
                         <button class="search" (click)="onClickFiltredSearch()">
                             <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
                         </button>
                     </div>
+                    <div class="date-wrapper">
+                            <button class="clean" (click)="onClearFilters()">
+                                <img src="../../../../assets/new-styles/icons/cleaning.svg">
+                            </button>
+                    </div>
+
     
                 </div>
            
@@ -138,8 +139,8 @@
                             <span class="info-value-mobile">{{ sale.cliente}}</span>
                         </div>
                         <div class="info-row-mobile">
-                            <span class="info-label-mobile">{{'NEW_VAR.POLICY_AMOUNT' | translate}}</span>
-                            <span class="info-value-mobile">{{ sale.montoPoliza }}</span>
+                            <span class="info-label-mobile__money">{{'NEW_VAR.POLICY_AMOUNT' | translate}}</span>
+                            <span class="info-value-mobile__money">{{ sale.montoPoliza }}</span>
                         </div>
                     </div>
                 </div>

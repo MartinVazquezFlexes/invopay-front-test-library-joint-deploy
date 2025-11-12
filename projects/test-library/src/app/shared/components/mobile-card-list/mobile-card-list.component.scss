@@ -1,6 +1,6 @@
-@import "../../../../../../base/src/shared/mixins/generalText.scss";
-@import "../../../../../../base/src/shared/mixins/sizes.scss";
-@import "../../../../../../base/src/shared/mixins/utils.scss";
+@import "../../mixins/generalText.scss";
+@import "../../mixins/sizes.scss";
+@import "../../mixins/utils.scss";
 
 .mobile-card-list {
   display: flex;
@@ -21,7 +21,7 @@
     align-items: center;
     margin-bottom: 12px;
     padding-bottom: 12px;
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid $primary-color;
   }
 
   &__header-content {
@@ -32,15 +32,23 @@
 
   &__header-label {
     font-size: 11px;
-    color: #6B7280;
+    color: #84818A;
     font-weight: 500;
     text-transform: uppercase;
   }
 
   &__header-value {
     font-weight: 600;
-    color: $primary-color;
-    font-size: 14px;
+    color: #84818A;
+    font-size: 13.6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__header-hash {
+    font-weight: 600;
+    color: #84818A;
   }
 
   &__action-container {
@@ -70,7 +78,7 @@
       background: white;
       transform: rotate(45deg);
       box-shadow: -1px -1px 1px rgba(0,0,0,0.05);
-      z-index: -1; // Place it behind the dropdown content
+      z-index: -1;
     }
   }
 
@@ -81,11 +89,11 @@
     border: none;
     text-align: left;
     cursor: pointer;
-    font-size: 13px;
-    color: rgb(132, 129, 138);
+    font-size: 14.4px;
+    color: #84818A;
     border-radius: 4px;
     margin: 2px;
-
+    font-weight: 400;
     &:hover {
       background: #F9FAFB;
     }
@@ -139,22 +147,23 @@
   }
 
   &__label {
-    font-size: 12px;
-    color: #6B7280;
-    font-weight: 500;
+    font-size: 13.6px;
+    color: #84818A;
+    font-weight: 400;
     flex-shrink: 0;
+    
   }
 
   &__value {
-    font-size: 13px;
-    color: #1F2937;
+    font-size: 13.6px;
+    color: #84818A;
     text-align: right;
     word-break: break-word;
-
+    font-weight: 400;
     &--amount {
       font-weight: 600;
       color: $primary-color;
-      font-size: 14px;
+      font-size: 13.6px;
     }
   }
 }

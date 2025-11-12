@@ -72,23 +72,22 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
   isClearEnabled: boolean = false;
 
   get isSearchDisabled(): boolean {
-   
-    if (this.selectedAnswered && !this.selectedEntity && !this.selectedUser && !this.selectedBroker) {
-      if (!this.originalData || this.originalData.length === 0) {
+    const isInsuranceTray = this.brokerOptions && this.brokerOptions.length > 0;
+    
+    if (isInsuranceTray) {
+      const allRequiredSelected = this.selectedAnswered && this.selectedEntity && this.selectedBroker;
+      if (!allRequiredSelected) {
         return true;
       }
-      
-      const answerValue = this.selectedAnswered === 'si' ? 'si' : 'no';
-      const hasMatchingAnswers = this.originalData.some(item => item.answered === answerValue);
-      
-      if (!hasMatchingAnswers) {
+    } 
+    else {
+      const hasAnyFilter = this.selectedAnswered || this.selectedEntity || this.selectedUser;
+      if (!hasAnyFilter) {
         return true;
       }
-      return false;
     }
     
-   
-    return !(this.selectedEntity || this.selectedUser || this.selectedBroker || this.selectedAnswered);
+    return false;
   }
 
   ngOnDestroy(): void {
@@ -108,7 +107,6 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
       this.applyCurrentFilters();
     }
     
-    // Initialize entity options if config.entities is available
     if (this.config?.entities) {
       this.entityOptions = this.config.entities.map(entity => ({
         value: entity,
@@ -116,7 +114,7 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
       }));
     }
     
-    // Subscribe to form control changes
+   
     this.answeredControl.valueChanges.subscribe(value => {
       this.selectedAnswered = value || null;
     });
@@ -146,7 +144,6 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
 
   private setupTranslations(): void {
     if (this.config) {
-      // Set up table column translations
       const translationKeys = [
         this.config.translations.table.date,
         this.config.translations.table.entity,
@@ -155,7 +152,6 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
         ...(this.config.translations.table.answered ? [this.config.translations.table.answered] : [])
       ];
 
-      // Add filter translations
       const filterTranslationKeys = [
         'IP.NOTIFICATIONS.FILTERS.ALL',
         'IP.NOTIFICATIONS.FILTERS.YES',
@@ -173,7 +169,7 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
 
       this.subscription.add(
         combineLatest(translationObservables).subscribe((translations: string[]) => {
-          // Set up table column translations
+
           const titlesMap = new Map<string, string>([
             ['notificationDate', translations[0]],
             ['entity', translations[1]],
@@ -188,12 +184,24 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
           this.titlesFile = titlesMap;
 
           this.mobileCardConfig = {
-            headerKey: 'notificationDate',
+            headerKey: 'id',
+            headerLabel: '#',
             fields: [
+              { 
+                label: translations[0], // Notification date
+                key: 'notificationDate',
+                isDate: true
+              },
               { label: translations[1], key: 'entity' },
               { label: translations[2], key: 'brokerName' },
               { label: translations[3], key: 'query' },
-              ...(this.config.translations.table.answered ? [{ label: translations[4], key: 'answered' }] : [])
+              ...(this.config.translations.table.answered ? [
+                { 
+                  label: translations[4], 
+                  key: 'answered',
+                  isAmount: true
+                }
+              ] : [])
             ],
             showActionButton: true,
             actions: ['search', 'comment']
@@ -332,16 +340,24 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
   }
 
   onClearFilters(): void {
-    this.answeredControl.reset();
-    this.entityControl.reset();
-    this.brokerControl.reset();
+    this.answeredControl.reset('', { emitEvent: false });
+    this.entityControl.reset('', { emitEvent: false });
+    this.brokerControl.reset('', { emitEvent: false });
+    this.userInputControl.reset('', { emitEvent: false });
+    
     this.selectedAnswered = null;
     this.selectedEntity = '';
-    this.selectedUser = '';
     this.selectedBroker = '';
+    this.selectedUser = '';
+    
     this.hasSearched = false;
     this.isClearEnabled = false;
     this.showAnsweredPlaceholder = true;
+    
+    this.paginatedData = [...this.originalData];
+    this.currentPages = 1;
+    this.paginatorKey++;
+    
     this.filtersCleared.emit();
     this.applyCurrentFilters();
   }

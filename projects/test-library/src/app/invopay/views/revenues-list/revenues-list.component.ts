@@ -59,6 +59,8 @@ export class RevenuesListComponent {
   minEnd : string =''
   currentEnd:string=''
   currentPayChannel =''
+  
+  dateEndDisabled:boolean = true
 
 
   paymentChannels = [
@@ -155,6 +157,9 @@ export class RevenuesListComponent {
 
         // Convertir a Date
         const date = target.value
+        if(date){
+           this.dateEndDisabled=false
+        }
 
         this.currentStart= this.formatDate(date)
 
@@ -291,6 +296,7 @@ onClearFilters(): void {
       ,
       error: (error) => {
         console.error('Error al cargar las recaudaciones:', error);
+        this.loadingService.setLoadingState(false)
       },
       complete:()=>{
         console.log("asssssssssssssssssssssss")

@@ -40,11 +40,14 @@
   align-items: center;
   margin-right: 0.75rem; /* Espacio entre el ícono y el título */
   margin-left: -0.5rem; /* Lo empuja un poco más a la izquierda */
+   color: inherit;
 
   .back {
     width: 1.5rem;
     height: 1.5rem;
     filter: invert(59%) sepia(81%) saturate(1574%) hue-rotate(180deg) brightness(98%) contrast(101%);
+      color: inherit; // 👈 también hereda el color del título
+
   }
 
   &:hover .back {
@@ -81,6 +84,8 @@
 .back-button.mobile {
   margin-left: 0; /* empuja a la izquierda */
   margin-right: 0.5rem; /* espacio con el texto */
+    color: inherit; // 👈 también hereda el color del título
+
   
   .back {
     width: 1.25rem;

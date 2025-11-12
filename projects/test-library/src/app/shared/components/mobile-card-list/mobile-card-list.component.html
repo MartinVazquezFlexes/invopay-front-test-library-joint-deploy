@@ -2,8 +2,10 @@
   <div class="mobile-card-list__item" *ngFor="let item of data">
     <div class="mobile-card-list__header">
       <div class="mobile-card-list__header-content">
-        <span class="mobile-card-list__header-label" *ngIf="config.headerLabel">{{ config.headerLabel }}</span>
-        <span class="mobile-card-list__header-value">{{ item[config.headerKey] }}</span>
+        <span class="mobile-card-list__header-value">
+          <span *ngIf="config.headerLabel" class="mobile-card-list__header-hash">{{ config.headerLabel }}</span>
+          {{ item[config.headerKey] }}
+        </span>
       </div>
       <div class="mobile-card-list__action-container" *ngIf="config.showActionButton">
         <button 
@@ -31,7 +33,11 @@
         class="mobile-card-list__row" 
         *ngFor="let field of config.fields"
         [class.mobile-card-list__row--highlight]="field.highlight">
-        <span class="mobile-card-list__label">{{ field.label }}</span>
+        <span 
+          class="mobile-card-list__label"
+          [class.mobile-card-list__label--amount]="field.isAmount">
+          {{ field.label }}
+        </span>
         <span 
           class="mobile-card-list__value"
           [class.mobile-card-list__value--amount]="field.isAmount">

@@ -383,3 +383,8 @@ input[type="password"]::-ms-clear {
 .mat-mdc-select-disabled{
   background-color: #e9ecef;
 }
+
+.mat-mdc-select-arrow-wrapper{
+  width: 1rem;
+  justify-content: flex-end;
+}

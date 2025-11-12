@@ -63,23 +63,23 @@
 
 .form-floating > .form-control,
 .form-floating > .form-control-plaintext {
-  padding: 0rem 0.75rem;
+  padding: 0 2rem 0 0.75rem;
   @include generalInputText();
   height: 2.5rem;
   min-height: 2.5rem;
   @include sm(){
-    padding: 0rem 0.6rem;
+    padding: 0 2rem 0 0.6rem;
     @include textMobile();
     height: 2rem;
     min-height: 2rem;
   }
   @include md(){
-    padding: 0rem 0.6rem;
+    padding: 0 2rem 0 0.6rem;
     height: 2rem;
     min-height: 2rem;
   }
   @include lg(){
-    padding: 0rem 0.6rem;
+    padding: 0 2rem 0 0.6rem;
     height: 2rem;
     min-height: 2rem;
   }
@@ -99,7 +99,7 @@
   @include generalInputText();
 
   padding: 0.1rem 0.4rem !important;
-  transform: scale(0.8) translateY(-20px) translateX(10px) !important;
+  transform: scale(0.8) translateY(-13px) translateX(13px) !important;
 
   @include medias(md, lg, xl) {
     transform: scale(0.75) translateY(-14px) translateX(24px) !important;

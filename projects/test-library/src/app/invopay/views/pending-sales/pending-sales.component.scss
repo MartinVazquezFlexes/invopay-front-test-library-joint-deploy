@@ -384,7 +384,7 @@
   padding: 0 0.75rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: rgb(33, 107, 245);
+  background-color: #0c77d0;
   color: white;
   position: relative;
   cursor: pointer;
@@ -441,24 +441,28 @@
 }
 .card-paginator {
   display: flex;
-  justify-content: flex-end;
-  align-items: center; // 👈 CAMBIO: de end a center
+  flex-direction: column; // Cambio a columna para alineación vertical
+  align-items: center;
   background-color: #fff;
   border-top: 1px solid #e5e7eb;
   border-bottom-left-radius: 0.75rem;
   border-bottom-right-radius: 0.75rem;
-  padding: 0.75rem 1.5rem; // 👈 AGREGADO: padding para dar espacio
+  padding: 0.75rem 1.5rem;
+  gap: 1rem; //  Espacio entre select y paginador
+  
   @include sm() {
      background-color: transparent;
      justify-content: center;
      border: none;
      padding: 0%;
+     margin-bottom: 0%;
     }
+
   .paginator-controls {
     display: flex;
-    align-items: center; // 🔹 centra verticalmente el select y el paginador
-    gap: 0.75rem;
-    
+    align-items: center;
+    width: 100%; // 👈 Ancho completo
+    justify-content: flex-start; // 👈 Alinea al inicio
 
     select {
       width: 3rem;
@@ -474,6 +478,8 @@
       cursor: pointer;
       padding: 0;
       line-height: 1.75rem;
+       margin-top: 1srem; //Margen superior para bajar el select
+
 
       &:hover {
         border-color: #3b82f6;
@@ -484,10 +490,17 @@
         border-color: #2563eb;
         box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
       }
+      
       @include sm() {
-        display: none; // ocupa todo el ancho en móvil
+        display: none;
       }
     }
+  }
+  
+  app-paginator {
+    width: 100%; //  Ancho completo para el paginador
+    display: flex;
+    justify-content: flex-end; // Alinea al final
   }
 }
 
@@ -639,14 +652,14 @@ width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #257fe7;
     padding: 1vh;
 
     .card-id-mobile {
-      color: #666;
-      font-size: 0.8125rem;
-      font-weight: 400;
-
+      @include cardText();
+      font-family: 'Poppins', sans-serif;
+      color: rgb(132, 129, 138);
+      font-weight: 600;
       @include sm() {
         font-size: 0.75rem;
       }
@@ -685,27 +698,41 @@ width: 100%;
 
 .info-row-mobile {
   display: grid;
-  grid-template-columns: 1fr 1fr; // ✅ dos columnas iguales
+  grid-template-columns: 1fr 1fr; //  dos columnas iguales
   align-items: center;
   width: 100%;
   gap: 0.5rem;
 
   .info-label-mobile {
-    color: #1976d2;
-    font-weight: 500;
-    font-size: 0.875rem;
-    justify-self: start; // ✅ alinea a la izquierda
+      justify-self: start; // alinea a la izquierda
+      @include sidenavTextLabel();
+      font-family: 'Poppins', sans-serif;
+      color: rgb(132, 129, 138);
+      font-weight: 400;
+    }
+  .info-label-mobile__money{
+    justify-self: start; // alinea a la izquierda
+    font-size: 0.95rem;
+    font-family: "Inter", sans-serif;
+    color: #3e3e3e;
+    font-weight: 600;
+    line-height: 1rem;
   }
 
   .info-value-mobile {
-    color: #333;
+    justify-self: end; //  alinea a la derecha
+    @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
+    color: rgb(132, 129, 138);
     font-weight: 400;
-    font-size: 0.875rem;
-    justify-self: end; // ✅ alinea a la derecha
-    word-break: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-    max-width: 100%;
+  }
+    .info-value-mobile__money{
+    justify-self: end; // alinea a la derecha
+    font-size: 0.95rem;
+    font-family: "Inter", sans-serif;
+    color: #3e3e3e;
+    font-weight: 600;
+    line-height: 1rem;
   }
 }
 
@@ -839,7 +866,7 @@ width: 100%;
   padding: 0 1rem;
   border: none;
   border-radius: 0.75rem;
-  background-color: #0071ce;
+  background-color:#0c77d0;
   color: white;
   cursor: pointer;
   display: flex;

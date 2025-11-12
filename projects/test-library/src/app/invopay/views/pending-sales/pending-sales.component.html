@@ -107,13 +107,14 @@
                             <span class="info-label-mobile">{{'NEW_VAR.INSTALLMENT_NUMBER' | translate}}</span>
                             <span class="info-value-mobile">{{ sale.cuota }}</span>
                         </div>
-                         <div class="info-row-mobile">
-                            <span class="info-label-mobile">{{'IP.ACCOUNTABILITY-DETAILS.AMOUNT' | translate}}</span>
-                            <span class="info-value-mobile">{{ sale.monedaYmonto }}</span>
-                        </div>
+
                         <div class="info-row-mobile">
                             <span class="info-label-mobile">{{'IP.ASSIGN-PROJECTS.EXPIRATION' | translate}}</span>
                             <span class="info-value-mobile">{{ sale.vencimiento }}</span>
+                        </div>
+                        <div class="info-row-mobile">
+                            <span class="info-label-mobile__money">{{'IP.ACCOUNTABILITY-DETAILS.AMOUNT' | translate}}</span>
+                            <span class="info-value-mobile__money">{{ sale.monedaYmonto }}</span>
                         </div>
                     </div>
                 </div>

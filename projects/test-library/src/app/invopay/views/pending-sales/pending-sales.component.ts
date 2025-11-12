@@ -6,6 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { RevenueService } from '../../services/revenue.service';
 import { PendingRevenuesResponse } from '../../interface/revenueResponse';
 import { PendingRevenue } from '../../interface/pendingRevenue';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-pending-sales',
@@ -31,6 +32,7 @@ export class PendingSalesComponent {
        private readonly router: Router ,
        private readonly translate: TranslateService,
        private readonly route: ActivatedRoute,   
+       private readonly loadinService : LoadingService
       ) { }
   
     controlsForm = new FormGroup({
@@ -74,6 +76,7 @@ export class PendingSalesComponent {
         if (!this.saleType) {
             this.saleType = this.route.snapshot.data['type'] || 'pending';
           }
+        this.loadinService.setLoadingState(true)
         this.loadTitleMap();
         this.checkScreenSize()
         this.loadControlsSubscriptions()
@@ -277,6 +280,7 @@ export class PendingSalesComponent {
          console.log(end)
           var getSalesSub= this.revenueService.getPendingRevenues(formatedStart,formatedEnd).pipe(
               map(response => {
+                console.log("response")
                 console.log(response)
                 this.salesData = response;
                 return this.salesData.content.filter(x => {
@@ -284,29 +288,46 @@ export class PendingSalesComponent {
                   return true;
                 });
               })
-            ).subscribe(filtered => {
-              this.sales = filtered;
-                this.auxSetInitialValues();
-              },
-            );
+            ).subscribe({
+                  next: (filtered) => {
+                    this.sales = filtered;
+                    this.auxSetInitialValues();
+                  },
+                  error: (err) => {
+                    console.error('Error al filtrar ventas:', err);
+                    this.loadinService.setLoadingState(false)
+                    
+                  },
+                  complete: () => {
+                    console.log('Filtrado de ventas completado');
+                                        this.loadinService.setLoadingState(false)
+
+                  }
+                }
+            )
             this.subscriptions.add(getSalesSub)
       }
       if(this.saleType==='expired'){
              var getSalesSub= this.revenueService.getExpiryRevenues().subscribe({
               next: (response: PendingRevenuesResponse) => {
+                console.log("response")
+                console.log(response)
                 this.salesData = response;
                 this.sales= this.salesData.content
                 this.auxSetInitialValues();
               },
-              error: (error) => {
-                console.error('Error al cargar ventas:', error);
-              }
+              error: (err) => {
+                    console.error('Error al filtrar ventas:', err);
+                    this.loadinService.setLoadingState(false)
+                    
+                  },
+              complete: () => {
+                    console.log('Filtrado de ventas completado');
+                    this.loadinService.setLoadingState(false)
+                  }
             });
             this.subscriptions.add(getSalesSub)
        }
-
-
-
       }
   
 
