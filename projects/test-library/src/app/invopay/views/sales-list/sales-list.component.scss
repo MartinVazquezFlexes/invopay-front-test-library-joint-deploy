@@ -70,7 +70,7 @@
 
 
 
-
+      /*
       app-ip-date-input {
            min-width: 200px;  // mismo valor que tus selects
            width: 200px;      // fuerza que sea igual
@@ -144,7 +144,7 @@
             transform: scale(0.85) translateY(-0.5rem) translateX(0.25rem) !important;
           }
         }
-      }
+      }*/
     }
   }
   .card-table {
@@ -286,22 +286,24 @@
     width: 200px;
     max-width: 200px;
     }
-    // 👈 AGREGAR ESTO AQUÍ, AL MISMO NIVEL
+    //  AGREGAR ESTO AQUÍ, AL MISMO NIVEL
   @media (max-width: 1200px) {
     .select-wrapper,
     .date-wrapper {
 
-      flex: 0 0 calc(40% - 0.4375rem);  // 👈 45% en vez de 50%
+      flex: 0 0 calc(50% - 0.4375rem);  // 👈 45% en vez de 50%
       min-width: unset;
       width: auto;
-      max-width: calc(40% - 0.4375rem);
+      max-width: calc(50% - 0.4375rem);
     }
     }
   
   }
 
+
+
 .search {
-  height: 2.3rem;
+  height: 2rem;
   padding: 0 0.75rem;
   border: none;
   border-radius: 0.7rem;
@@ -313,14 +315,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1rem;
 
-  @include sm() {
-    padding: 0 0.625rem;
-  }
-
-  @include md() {
-    padding: 0 0.6875rem;
-  }
 
   img {
     width: 0.875rem;
@@ -361,7 +357,7 @@
 
   
 .clean {
-  height: 2.3rem;
+  height: 2rem;
   padding: 0 0.75rem;
   border: none;
   border-radius: 0.7rem;
@@ -373,14 +369,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1rem;
 
-  @include sm() {
-    padding: 0 0.625rem;
-  }
-
-  @include md() {
-    padding: 0 0.6875rem;
-  }
 
   img {
     width: 0.875rem;
@@ -421,97 +411,6 @@
 }
 
 
-
-
- // Estilos para el select wrapper 
-      .select-wrapper {
-        min-width: 150px;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-
-        @include sm() {
-          min-width: 100%;
-        }
-
-
-        .placeholder {
-            position: absolute;
-            top: -0.9rem;
-            left: 0.55rem;
-            background-color: white;
-            padding: 0 0.25rem;
-            font-weight: 200;
-            font-size: 12px;
-            color: #333;
-            z-index: 1;
-            @include sm() {
-              font-size: 10px;
-              top: -0.4rem;
-            }
-        
-        }
-
-
-
-        .custom-select-container {
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-          position: relative;
-          margin-bottom: 0;
-          height: 2.3rem;
-          border: 1.5px solid #e5e7eb;
-          border-radius: 0.5rem;
-          transition: all 0.3s ease;
-          background-color: white;
-
-          @include sm() {
-            height: 1.625rem;
-          }
-
-
-
-          &:focus-within {
-            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
-          }
-
-          &:hover:not(:focus-within) {
-            border-color: #d1d5db;
-          }
-
-          .custom-select {
-            width: 100%;
-            height: 2.3rem;
-            border: none;
-            background: transparent;
-            font-size: 0.8125rem;
-            font-weight: 500;
-            color: #0e1620;
-            padding: 0 2rem 0 0.75rem;
-            outline: none;
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.5rem center;
-
-            @include sm() {
-              height: 1.625rem;
-              font-size: 0.75rem;
-            }
-
-
-            &:focus {
-              box-shadow: none;
-            }
-
-            option {
-              padding: 0.5rem;
-            }
-          }
-        }
-      }
 
       
 //para la card movile 
@@ -572,15 +471,12 @@ width: 100%;
       }
     }
 
-
-
-
     .menu-icon-mobile {
       background: none;
       border: none;
       cursor: pointer;
       font-size: 1.25rem;
-      color: #666;
+      color: #000000;
       padding: 0;
       line-height: 1;
       width: 24px;
@@ -590,7 +486,7 @@ width: 100%;
       justify-content: center;
 
       &:hover {
-        color: #333;
+       // color: #000000;
       }
     }
   }
@@ -806,6 +702,8 @@ ul.menu-movil li:active {
   width: 100%;
 }
 
+
+/*
 app-ip-date-input {
     width: 100%;       
     min-width: 100%;
@@ -873,6 +771,7 @@ app-ip-date-input {
       transform: scale(0.85) translateY(-0.5rem) translateX(0.25rem) !important;
     }
 }
+*/
 
 
 .card-row-tab {
@@ -899,6 +798,7 @@ app-ip-date-input {
     span {
       display: inline-block;
       white-space: nowrap; // 👈 mantiene el texto en una línea
+      font-family: Poppins, Loos, Arial, sans-serif;
     }
 
     &:hover:not(.active) {
@@ -1041,6 +941,31 @@ app-ip-date-input {
     width: 100%; // 👈 Ancho completo para el paginador
     display: flex;
     justify-content: flex-end; // 👈 Alinea al final
+  }
+}
+
+//PARA SOLUCIONAR EL PROBLEMA DE INDEXAMIENTO DE MATERIAL EN LOS MODALES
+
+::ng-deep {
+  .cdk-overlay-container {
+    z-index: 99999 !important;
+  }
+
+  .cdk-overlay-pane {
+    z-index: 99999 !important;
+  }
+
+  .mat-select-panel {
+    z-index: 99999 !important;
+    max-height: 256px !important;
+  }
+}
+
+// O más específico para tu modal
+::ng-deep app-filter-modal-mobile {
+  .mat-select-panel {
+    z-index: 99999 !important;
+    max-height: 256px !important;
   }
 }
 

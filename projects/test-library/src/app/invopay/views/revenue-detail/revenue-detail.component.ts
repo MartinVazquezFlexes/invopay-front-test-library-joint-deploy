@@ -101,7 +101,7 @@ export class RevenueDetailComponent {
                           ? {
                               number: this.revenue.policyData.number,
                               amount: this.formatNumberToArg(this.revenue.policyData.amount),
-                              saleDate:   formatDate( this.revenue.policyData.saleDate,'dd/MM/yyyy','en-US'),
+                              saleDate: this.revenue?.policyData?.saleDate ?  formatDate( this.revenue.policyData.saleDate,'dd/MM/yyyy','en-US'):'-',
                               productName: this.revenue.policyData.productName,
                               premiumAmount: this.formatNumberToArg( this.revenue.policyData.premiumAmount),
                               premiumPaymentInstallments: this.revenue.policyData.premiumPaymentInstallments,

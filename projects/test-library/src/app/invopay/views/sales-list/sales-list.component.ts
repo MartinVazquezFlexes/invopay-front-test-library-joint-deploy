@@ -9,6 +9,7 @@ import { SalesResponse } from '../../interface/salesResponse';
 import { Sale } from '../../interface/sale';
 import { SaleListState } from '../../interface/saleListState';
 import { LoadingService } from '../../../shared/services/loading.service';
+import IpSelectInputOption from '../../interface/ip-select-input-option';
 
 @Component({
   selector: 'app-sales-list',
@@ -55,8 +56,19 @@ selectedTab: string='all';
   filtredData:any[]=[];
   itemsPerpage:number = 0;
   columnsHeaders = ['fila','fecha','producto','broker','cliente','montoPoliza'];
-  products=['Seguro de Vida Total','Seguro de Hogar Premium','Seguro Automotor Plus','Seguro de Accidentes Personales'];
-  brokers= ['Sofía Gómez','María Rodríguez']
+
+  products: IpSelectInputOption[] = [
+  { label: 'Seguro de Vida Total', value: 'Seguro de Vida Total' },
+  { label: 'Seguro de Hogar Premium', value: 'Seguro de Hogar Premium'},
+  { label: 'Seguro Automotor Plus', value: 'Seguro Automotor Plus'},
+  { label: 'Seguro de Accidentes Personales', value: 'Seguro de Accidentes Personales'}];
+
+
+
+  brokers: IpSelectInputOption[] = [
+  { label: 'Sofía Gómez', value: 'Sofía Gómez' },
+  { label: 'María Rodríguez', value: 'María Rodríguez'}];
+
 
   actions = ['detail'];
   titlesMap: Map<string,string>|undefined;
@@ -229,9 +241,9 @@ selectedTab: string='all';
               const matchesDate =  !this.currentStart || !this.currentEnd || (saleDateNotHours >= fromNotHour && saleDateNotHours <= toNotHour);
               const matchesProduct = !this.currentProduct || x.productName.toLocaleLowerCase() === this.currentProduct.toLocaleLowerCase();
               const matchesBroker = !this.currentBroker || x.brokerName.toLocaleLowerCase() === this.currentBroker.toLocaleLowerCase();
-              if(!matchesDate){ console.log("NOT MATCHDATE") ;console.log(x); console.log(saleDateNotHours,fromNotHour,toNotHour)}
+              //if(!matchesDate){ console.log("NOT MATCHDATE") ;console.log(x); console.log(saleDateNotHours,fromNotHour,toNotHour)}
               if(!matchesBroker){ console.log("NOT BROKER Match") ;console.log(x); console.log(this.currentBroker.toLocaleLowerCase(),x.brokerName.toLowerCase())}
-              if(!matchesBroker){ console.log("NOT PODUCT MATCH") ;console.log(x); console.log(this.currentProduct.toLocaleLowerCase(),x.productName.toLowerCase())}
+             // if(!matchesProduct){ console.log("NOT PODUCT MATCH") ;console.log(x); console.log(this.currentProduct.toLocaleLowerCase(),x.productName.toLowerCase())}
 
                 return matchesDate && matchesBroker && matchesProduct;
               });

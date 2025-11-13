@@ -57,10 +57,7 @@ form {
 .card-title {
   display: block;
   color: rgb(51, 47, 47);
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;   /* igual que el header */
-  font-size: 1rem;    /* mismo tamaño */
-  
+  font-family: Poppins, Loos, Arial, sans-serif;
 }
 
 .card-body {
@@ -69,81 +66,51 @@ form {
   gap: 2rem;
   margin-top: 2rem;
   width: 100%;
-  padding-left: 8rem;
 }
 
 .inner-card {
-  background-color: #e9ecef;
-  border-radius: 0.3rem;
+  background-color: #f5f5f5;
+  border-radius: 0.5rem; /* 👈 Aumentar de 0.3rem a 0.5rem para bordes más redondeados */
+  border: 1px solid #ddd; /* 👈 AGREGAR borde sutil */
   padding: 1rem;
-  padding-top: 1.2rem; /* espacio extra arriba para el label flotante */
-  padding-bottom: 0.6rem;/*sobrescribo el paddig bottom para achicar el tamaño total del input*/ 
+  padding-top: 1.5rem; /* 👈 Aumentar espacio arriba para el label */
+  padding-bottom: 1rem; /* 👈 Aumentar de 0.6rem */
   display: inline-flex; /* se ajusta al contenido */
   flex-direction: column;
   box-sizing: border-box;
-  min-width: calc(33% - 2rem); /* ancho mínimo del 25% para forzar máximo 4 columnas */
+  min-width: 200px; 
   max-width: 250px; /* ancho máximo antes de romper línea */
-  flex: 0 1 calc(33% - 2rem); /* no crece, puede encogerse hasta el min-width */
+  flex: 0 1 calc(25% - 2.5rem); /* no crece, puede encogerse hasta el min-width */
   position: relative; /* necesario para posicionar el label */
   margin-top: 0.2rem; /* espacio para que el label no se corte */
-  gap: 2rem;
 }
+
 
 .inner-card label {
   position: absolute;
-  top: -0.5rem;
+  top: -0.6rem; /*  Ajustar posición del label */
   left: 1rem;
   background-color: #ffffff;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.75rem;
-  color: #555;
-  font-weight: 400;
+  padding: 0.2rem 0.5rem; /*  Reducir padding para que sea más compacto */
+  font-size: 0.7rem; /*  Reducir de 0.75rem */
+  color: #999; /* Cambiar de #555 a un gris más claro */
+  font-weight: 500; /*  Cambiar de 400 a 500 */
   border-radius: 0.25rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: none; /*  Eliminar sombra para look más limpio */
   white-space: nowrap;
 }
 
 .inner-card span {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
   color: #5f6a7d;
   word-wrap: break-word; /* rompe palabras largas */
   overflow-wrap: break-word; /* rompe en el límite del contenedor */
   line-height: 1.4; /* mejor legibilidad */
-  font-size: 0.95rem; /* 👈 achica el texto */
+  font-size: 0.75rem; /* 👈 achica el texto */
+  font-family: Poppins, Loos, Arial, sans-serif;
 
 }
 
-/* MEDIA QUERIES PARA RESPONSIVIDAD */
 
-/* Tablets grandes - máximo 3 columnas */
-@media (max-width: 1200px) {
-  .inner-card {
-    min-width: calc(33.333% - 0.75rem);
-    flex: 0 1 calc(33.333% - 0.75rem);
-  }
-
-}
-
-/* Tablets - máximo 2 columnas */
-@media (max-width: 768px) {
-  .inner-card {
-    min-width: calc(50% - 1rem);
-    flex: 0 1 calc(50% - 1rem);
-  }
-  
-  .card {
-    padding: 1.5rem;
-  }
-  .card-body{
-    padding-left: 0;
-  }
-  
-  .card-2 {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-}
 
 /* Móviles - 1 columna */
 @media (max-width: 550px) {

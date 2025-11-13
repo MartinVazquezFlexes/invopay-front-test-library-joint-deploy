@@ -1,8 +1,8 @@
 export interface PolicyData {
   number: string;
   amount: number;
-  saleDate: string;
-  productName: string;
+  saleDate: string|null;
+  productName: string|null;
   premiumAmount: number;
   premiumPaymentInstallments: number | null;
   premiumPaymentPlan: PremiumPaymentPlan[];

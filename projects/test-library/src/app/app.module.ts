@@ -39,6 +39,7 @@ import { SharedModule } from './shared/shared.module';
 import { AmountFormatPipe } from './shared/Utils/amount-format-pipe.pipe';
 import { CurrencySymbolPipe } from './shared/Utils/currency-simbol-pipe';
 import { CustomDatePipe } from './shared/Utils/pipeCustomDate';
+import { IpSearchInputComponent } from "./invopay/components/ip-search-input/ip-search-input.component";
 
 
 
@@ -55,17 +56,18 @@ import { CustomDatePipe } from './shared/Utils/pipeCustomDate';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'es',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
+        defaultLanguage: 'es',
+        loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient],
+        },
     }),
     InvopayModule,
     AdditionalFiltersModalComponent,
-    SharedModule
-  ],
+    SharedModule,
+    IpSearchInputComponent
+],
   providers: [DatePipe,AmountFormatPipe,CurrencySymbolPipe,CustomDatePipe,DecryptionService,
   {provide:HTTP_INTERCEPTORS,
   useClass:TokenInterceptor,

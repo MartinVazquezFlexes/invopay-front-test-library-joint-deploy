@@ -258,7 +258,11 @@ export class PendingSalesComponent {
               }
         this.stateService.saveState(state)
         */
-            this.router.navigate(['sales-detail',id]);
+
+           // this.router.navigate(['sales-detail',id]);
+            this.router.navigate(['sales-detail', id], { state: { type: 'pending-sales-component' } });
+
+
       }
     }
     onSelectedItems(items: any[]) {

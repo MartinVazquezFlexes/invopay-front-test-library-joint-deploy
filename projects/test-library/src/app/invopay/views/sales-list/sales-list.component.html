@@ -18,13 +18,13 @@
                     class="card-tab" 
                     [class.active]="this.selectedTab === 'all'"
                     (click)="selectedTab = 'all'">
-                <span>{{'NEW_VAR.ALL_SALES_TAB'|translate}}</span>
+                    <span>{{'NEW_VAR.ALL_SALES_TAB'|translate}}</span>
                 </div>
                 <div 
                     class="card-tab" 
                     [class.active]="selectedTab === 'pending'"
                     (click)="selectedTab = 'pending'">
-                <span>{{'NEW_VAR.PENDING_SALES_TAB'|translate}}</span>
+                    <span>{{'NEW_VAR.PENDING_SALES_TAB'|translate}}</span>
                 </div>
                 <div 
                     class="card-tab" 
@@ -40,7 +40,7 @@
             <div class="card-filtros">
                 <div *ngIf="!isMobile" class="card-filtros__actions">
                    <div class="filters-container">
-
+                    <!--
                     <div class="select-wrapper">
                         <label class="placeholder">{{'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate}}</label>
                         <div class="custom-select-container">
@@ -50,31 +50,50 @@
                             </select>
                         </div>
                     </div>
+                    -->
+                    <div class="select-wrapper">
+                    <app-ip-select-input 
+                    [control]="this.controlsForm.controls.productFilter"
+                    [options]="products"
+                    [label]="'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate"
+                    [placeholder]="'NEW_VAR.SELECT_PRODUCT' | translate"
+                    ></app-ip-select-input> 
+                    </div> 
+                    <!--
                     <div class="select-wrapper">
                         <label class="placeholder">{{'IP.SETTLEMENTS.DETAILS.BROKER_NAME' | translate}}</label>
                         <div class="custom-select-container">
                             <select formControlName="brokerFilter" class="custom-select">
                                 <option disabled value="">{{'IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.SELECT_BROKER' | translate}}</option>
                                 <option *ngFor="let item of this.brokers" value={{item}}>{{item}}</option>
-
                             </select>
                         </div>
                     </div>
+                    -->
+                   <div class="select-wrapper">
+                    <app-ip-select-input 
+                    [control]="this.controlsForm.controls.brokerFilter"
+                    [options]="brokers"
+                    [label]="'IP.SETTLEMENTS.DETAILS.BROKER_NAME' | translate"
+                    [placeholder]="'IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.SELECT_BROKER' | translate"
+                    ></app-ip-select-input>  
+                    </div>
 
                     <div class="date-wrapper">
-                        <label  class="placeholder">{{'IP.FROM' | translate}}</label>
-                        <app-ip-date-input [control]="controlsForm.controls.dateStart" [max]="maxStart"
-                            (changed)="onStartDatechange($event)">
+                         <app-ip-date-input [label]="'IP.FROM' | translate"  [control]="controlsForm.controls.dateStart" [max]="maxStart" 
+                                (changed)="onEndDateChange($event)">
                         </app-ip-date-input>
                     </div>
 
                     <div class="date-wrapper">
-                        <label  class="placeholder">{{'IP.TO' | translate}}</label>
-                        <app-ip-date-input  [control]="controlsForm.controls.dateEnd" [max]="maxEnd" [min]="minEnd"
-                            (changed)="onEndDateChange($event)">
+                        <app-ip-date-input [label]="'IP.TO' | translate"  [control]="controlsForm.controls.dateEnd" [max]="maxEnd" [min]="minEnd"
+                                (changed)="onEndDateChange($event)">
                         </app-ip-date-input>
-                    </div>
+                     </div>
+                    
                  </div>
+                          
+
                     <div class="date-wrapper">
                         <button class="search" (click)="onClickFiltredSearch()">
                             <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
@@ -85,8 +104,6 @@
                                 <img src="../../../../assets/new-styles/icons/cleaning.svg">
                             </button>
                     </div>
-
-    
                 </div>
            
             </div>
@@ -190,45 +207,35 @@
     </p>
 
     <!-- broker -->
-    <div class="select-wrapper" style="margin-bottom: 3vh;">
-      <label class="placeholder">{{'IP.SETTLEMENTS.DETAILS.BROKER_NAME' | translate}}</label>
-      <div class="custom-select-container">
-        <select [formControl]="controlsForm.controls.brokerFilter" class="custom-select">
-          <option value="">{{'IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.SELECT_BROKER' | translate}}</option>
-          <option *ngFor="let item of brokers" [value]="item">
-            {{item}}
-          </option>
-        </select>
-      </div>
-    </div>
+        <app-ip-select-input 
+        [control]="this.controlsForm.controls.brokerFilter"
+        [options]="brokers"
+        [label]="'IP.SETTLEMENTS.DETAILS.BROKER_NAME' | translate"
+        [placeholder]="'IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.SELECT_BROKER' | translate"
+      ></app-ip-select-input> 
         <!-- Producto -->
-    <div class="select-wrapper" style="margin-bottom: 3vh;">
-      <label class="placeholder">{{'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate}}</label>
-      <div class="custom-select-container">
-        <select [formControl]="controlsForm.controls.productFilter" class="custom-select">
-          <option value="">{{'NEW_VAR.SELECT_PRODUCT' | translate}}</option>
-          <option *ngFor="let item of products" [value]="item">
-            {{item}}
-          </option>
-        </select>
-      </div>
-    </div>
+
+        <app-ip-select-input 
+        [control]="this.controlsForm.controls.productFilter"
+        [options]="products"
+        [label]="'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate"
+        [placeholder]="'NEW_VAR.SELECT_PRODUCT' | translate"
+      ></app-ip-select-input> 
 
     <div class="date-row">
 
     <div class="date-wrapper">
-        <label class="placeholder">{{'IP.FROM' | translate}}</label>
       <app-ip-date-input 
+        [label]="'IP.FROM' | translate"
         [control]="controlsForm.controls.dateStart"
         [max]="maxStart"
         (changed)="onStartDatechange($event)">
       </app-ip-date-input>
     </div>
-
     <!-- Fecha hasta -->
     <div class="date-wrapper">
-        <label class="placeholder">{{'IP.TO' | translate}}</label>
       <app-ip-date-input
+        [label]="'IP.TO' | translate"
         [control]="controlsForm.controls.dateEnd"
         [max]="maxEnd"
         [min]="minEnd"

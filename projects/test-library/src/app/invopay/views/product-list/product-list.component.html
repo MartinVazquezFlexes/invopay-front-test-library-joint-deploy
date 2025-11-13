@@ -104,11 +104,7 @@
             <div class="product-details__header">
               <img [src]="p.logoUrl | safe" [alt]="p.name" class="product-details__logo" *ngIf="p.logoUrl">
               <div class="product-details__header-info">
-                <h3 class="product-details__name">{{ 'IP.PRODUCTS.FORM.NAME.LABEL' | translate }}</h3>
-                <app-ip-input [formGroup]="editForm" controlName="name" inputId="view-name"
-                  labelCode="IP.PRODUCTS.FORM.NAME.LABEL">
-                </app-ip-input>
-
+                <h3 class="product-details__name">{{p.name}}</h3>
                 <div class="product-details__status-container">
                   <span class="product-details__status-label">
                     {{ 'IP.PRODUCTS.FORM.IS_ACTIVE.LABEL' | translate }}:

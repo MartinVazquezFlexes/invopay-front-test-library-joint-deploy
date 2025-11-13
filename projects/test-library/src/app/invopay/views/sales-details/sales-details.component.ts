@@ -55,24 +55,35 @@ isMobile: any;
 
 
   ngOnInit(): void {
-    this.checkScreenSize()
-      this.loadSaleDetail();
-   }
+        this.checkScreenSize()
+        this.loadSaleDetail();
+  }
 
 
-loadSaleDetail() {
-  this.route.paramMap
-    .pipe(
-      switchMap(params => {
-        this.saleId = String(params.get('id'));
-        console.log('ID de venta:', this.saleId);
-        return this.service.getSale(this.saleId);
-      })
-    )
-    .subscribe({
-      next: (res: saleDetail) => {
-        this.sale = res;
-        console.log('Detalle de venta recibido:', res);
+  loadSaleDetail() {
+    this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          this.saleId = String(params.get('id'));
+          console.log('ID de venta:', this.saleId);
+         // const type = this.router.getCurrentNavigation()?.extras.state?.['type'];
+           const type = history.state?.['type'];
+          console.log('Type capturado:', type);
+          //si viene de pending component traemos detalles de una cuota pendiente o vencida
+          if(type==='pending-sales-component'){  
+            console.log("get by installment")
+            return this.service.getSaleByInstallmentId(this.saleId);
+          }
+          else{
+            console.log("get by sale id")
+            return this.service.getSaleById(this.saleId);
+          }
+        })
+      )
+      .subscribe({
+        next: (res: saleDetail) => {
+          this.sale = res;
+          console.log('Detalle de venta recibido:', res);
 
         this.dataShow = {
           id: this.sale.id,
@@ -86,11 +97,11 @@ loadSaleDetail() {
           brokerBusiness: this.sale.brokerNameBussiness,
           brokerName: this.sale.brokerName,
           premiumInstallments: this.sale.premiumPaymentInstallments,
-          customerName: this.sale.customer.fullName,
-          customerEmail: this.sale.customer.email,
-          customerPhone: this.sale.customer.phoneNumber,
+          customerName: this.sale.customer?.fullName,
+          customerEmail: this.sale.customer?.email,
+          customerPhone: this.sale.customer?.phoneNumber,
 
-          installmentPlan: this.sale.policyData.premiumPaymentPlan.map(cuota => ({
+          installmentPlan: this.sale?.policyData?.premiumPaymentPlan.map(cuota => ({
             number: cuota.installmentNumber,
             amount: this.sale.currency+" "+ this.formatNumberToArg(cuota.amount),
             dueDate: formatDate(cuota.dueDate, 'dd/MM/yyyy', 'en-US'),
