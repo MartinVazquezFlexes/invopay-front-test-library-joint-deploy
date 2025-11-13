@@ -31,12 +31,11 @@
       <!-- Paginator Section - Desktop -->
       <div class="payment-entities__paginator-container payment-entities__paginator-container--desktop" *ngIf="paginatedData && paginatedData.length > 0">
         <div class="payment-entities__rows-per-page">
-          <select class="payment-entities__rows-select" [(ngModel)]="itemsPerPage" (ngModelChange)="onItemsPerPageChange($event)">
-            <option [value]="10">10</option>
-            <option [value]="25">25</option>
-            <option [value]="50">50</option>
-            <option [value]="100">100</option>
-          </select>
+          <app-ip-select-input
+            [control]="itemsPerPageControl"
+            [options]="pageOptions"
+            (selectEmitter)="onItemsPerPageChange($event)">
+          </app-ip-select-input>
         </div>
         
         <app-paginator 
@@ -62,15 +61,13 @@
 
       <!-- Paginator Section - Mobile -->
       <div class="payment-entities__paginator-container payment-entities__paginator-container--mobile" *ngIf="paginatedData && paginatedData.length > 0">
-        <div class="payment-entities__rows-per-page">
-          <select class="payment-entities__rows-select" [(ngModel)]="itemsPerPage" (ngModelChange)="onItemsPerPageChange($event)">
-            <option [value]="10">10</option>
-            <option [value]="25">25</option>
-            <option [value]="50">50</option>
-            <option [value]="100">100</option>
-          </select>
+        <div class="schemes__pagination-center">
+          <app-ip-select-input
+            [control]="itemsPerPageControl"
+            [options]="pageOptions"
+            (selectEmitter)="onItemsPerPageChange($event)">
+          </app-ip-select-input>
         </div>
-        
         <app-paginator 
           *ngIf="showPaginator"
           class="payment-entities__paginator"

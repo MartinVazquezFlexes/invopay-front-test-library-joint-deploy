@@ -243,7 +243,7 @@ onMobileFiltersOpened(): void {
         answered: this.selectedAnswered,
         entity: this.selectedEntity,
         user: this.selectedUser,
-        hasSearched: this.hasMobileSearched // Pass the search state
+        hasSearched: this.hasMobileSearched 
       },
       mode: 'insurance' 
     }

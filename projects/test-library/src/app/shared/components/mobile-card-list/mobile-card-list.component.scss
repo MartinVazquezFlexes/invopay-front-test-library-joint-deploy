@@ -6,6 +6,10 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  
+  &__item, &__title, &__subtitle, &__text {
+    font-family: 'Poppins', 'Loos', Arial, sans-serif;
+  }
 
   &__item {
     background: $app-white;

@@ -1,10 +1,12 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { CardConfig } from '../../../shared/models/movile-table';
 import { PaymentProvider } from '../../interface/paymentEntities';
 import { ProvidersService } from '../../services/providers.service';
 import { LoadingService } from '../../../shared/services/loading.service';
+import IpSelectInputOption from '../../interface/ip-select-input-option';
 @Component({
   selector: 'app-payments-entities-list',
   templateUrl: './payments-entities-list.component.html',
@@ -61,7 +63,20 @@ export class PaymentsEntitiesListComponent implements OnInit,OnDestroy,AfterView
   titlesFile = new Map<string, string>();
   tableStyle = 'invopay';
   currentPages: number = 1;
-  itemsPerPage: number = 25;
+  // Pagination properties
+  itemsPerPageControl = new FormControl('25');
+  
+  // Getter to safely convert form control value to number
+  get itemsPerPage(): number {
+    return parseInt(this.itemsPerPageControl.value || '25', 10);
+  }
+  
+  pageOptions: IpSelectInputOption[] = [
+    { label: '10', value: '10' },
+    { label: '25', value: '25' },
+    { label: '50', value: '50' },
+    { label: '100', value: '100' }
+  ];
   paginatedData: any[] = [];
   totalItems: number = 0;
   showPaginator: boolean = true;
@@ -118,14 +133,16 @@ export class PaymentsEntitiesListComponent implements OnInit,OnDestroy,AfterView
   }
 
   updatePaginatedData() {
-    this.itemsPerPage = +this.itemsPerPage;
-    const start = (this.currentPages - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
+    const itemsPerPage = parseInt(this.itemsPerPageControl.value || '25', 10);
+    const start = (this.currentPages - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
     this.paginatedData = this.data.slice(start, end);
   }
   
   loadData(): void {
     this.totalItems = this.data.length;
+    // Initialize the form control with the current items per page value
+    this.itemsPerPageControl.setValue('25', { emitEvent: false });
     this.updatePaginatedData();
   }
 
@@ -140,8 +157,10 @@ export class PaymentsEntitiesListComponent implements OnInit,OnDestroy,AfterView
     console.log('Ver detalle:', item);
   }
   
-  onItemsPerPageChange(newValue: number): void {
-    this.itemsPerPage = Number(newValue);
+  onItemsPerPageChange(event: any): void {
+    const value = event?.value || event; // Handle both event object and direct value
+    const newValue = parseInt(value, 10);
+    this.itemsPerPageControl.setValue(newValue.toString(), { emitEvent: false });
     this.currentPages = 1;
     this.paginatorKey++;
     this.showPaginator = false;

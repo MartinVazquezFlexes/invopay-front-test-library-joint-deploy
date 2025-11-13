@@ -237,6 +237,10 @@ onMobileFiltersOpened(): void {
     this.onFiltersCleared();
     dialogRef.close();
   }));
+    // Handle close button click
+  subs.add(dialogRef.componentInstance.closeModal.subscribe(() => {
+    dialogRef.close();
+  }));
 
   dialogRef.afterClosed().subscribe(() => {
     // Reset hasMobileSearched if all filters are cleared when closing the modal

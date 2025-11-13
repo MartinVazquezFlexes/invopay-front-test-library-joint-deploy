@@ -110,7 +110,8 @@
       "ASSIGN": "Asignar roles",
       "CONCILIATE": "Conciliar con venta",
       "SEND_MAIL": "Enviar email",
-      "DOWNLOAD": "Descargar"
+      "DOWNLOAD": "Descargar",
+      "REPLY":"Responder"
     },
     "ADMIN_SUPPLIER": {
       "ACTIONS": "Acciones",

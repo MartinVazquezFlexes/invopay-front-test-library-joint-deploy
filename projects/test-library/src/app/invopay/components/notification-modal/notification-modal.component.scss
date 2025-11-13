@@ -26,6 +26,50 @@
   background: white !important;
   padding: 20px !important;
   border-radius: 20px !important;
+  
+  *,
+  ::placeholder,
+  ::-webkit-input-placeholder,
+  ::-moz-placeholder,
+  :-ms-input-placeholder,
+  :-moz-placeholder,
+  input,
+  textarea,
+  select,
+  button,
+  .btn-close,
+  [class*='btn-'],
+  label,
+  .btn,
+  .form-control,
+  .form-select,
+  .form-label,
+  .form-check-label,
+  .form-floating > label,
+  .form-floating > .form-control,
+  .form-floating > .form-select,
+  .form-floating > .form-control-plaintext,
+  .form-floating > .form-control:focus,
+  .form-floating > .form-control:not(:placeholder-shown),
+  .form-floating > .form-select:not(:placeholder-shown) {
+    font-family: 'Poppins', 'Loos', Arial, sans-serif !important;
+  }
+  
+  ::ng-deep {
+    .form-control::placeholder,
+    .form-select::placeholder,
+    input::placeholder,
+    textarea::placeholder {
+      font-family: 'Poppins', 'Loos', Arial, sans-serif !important;
+      opacity: 1;
+    }
+    
+    input,
+    select,
+    textarea {
+      font-family: 'Poppins', 'Loos', Arial, sans-serif !important;
+    }
+  }
   z-index: 10000 !important;
   width: min(600px, 95%) !important;
   max-height: 90vh !important;

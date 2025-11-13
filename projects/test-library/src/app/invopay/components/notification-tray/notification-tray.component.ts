@@ -4,7 +4,7 @@ import { Subscription, combineLatest } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { NotificationItem, NotificationTrayConfig } from '../../interface/notification-tray.models';
-import IpSelectInputOption from '../../../../../../base/src/lib/interfaces/ip-select-input-option';
+import IpSelectInputOption from '../../interface/ip-select-input-option';
 
 
 export interface BrokerOption {
@@ -36,12 +36,21 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
   entityControl = new FormControl('');
   brokerControl = new FormControl('');
   userInputControl = new FormControl('');
+  itemsPerPageControl = new FormControl('10');
   
   // Options for selects
   answeredOptions: IpSelectInputOption[] = [
     { label: '', labelCode: 'IP.NOTIFICATIONS.FILTERS.YES', value: 'si' },
     { label: '', labelCode: 'IP.NOTIFICATIONS.FILTERS.NO', value: 'no' }
   ];
+  
+  pageOptions: IpSelectInputOption[] = [
+    { label: '10', value: '10' },
+    { label: '25', value: '25' },
+    { label: '50', value: '50' },
+    { label: '100', value: '100' }
+  ];
+  
   answeredPlaceholder = 'IP.NOTIFICATIONS.FILTERS.ANSWERED_PLACEHOLDER';
   showAnsweredPlaceholder = true;
   
@@ -75,7 +84,7 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
     const isInsuranceTray = this.brokerOptions && this.brokerOptions.length > 0;
     
     if (isInsuranceTray) {
-      const allRequiredSelected = this.selectedAnswered && this.selectedEntity && this.selectedBroker;
+      const allRequiredSelected = this.selectedEntity && this.selectedBroker;
       if (!allRequiredSelected) {
         return true;
       }
@@ -106,6 +115,9 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
       this.originalData = [...this.data];
       this.applyCurrentFilters();
     }
+    
+    // Ensure the form control value is in sync with itemsPerPage
+    this.itemsPerPageControl.setValue(this.itemsPerPage.toString(), { emitEvent: false });
     
     if (this.config?.entities) {
       this.entityOptions = this.config.entities.map(entity => ({
@@ -188,7 +200,7 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
             headerLabel: '#',
             fields: [
               { 
-                label: translations[0], // Notification date
+                label: translations[0],
                 key: 'notificationDate',
                 isDate: true
               },
@@ -204,7 +216,7 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
               ] : [])
             ],
             showActionButton: true,
-            actions: ['search', 'comment']
+            actions: ['search', 'reply']
           };
 
           this.cdr.detectChanges();
@@ -225,8 +237,14 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
     this.updatePaginatedData();
   }
 
+  onItemsPerPageChange(event: any): void {
+    const value = event?.value || event; 
+    this.itemsPerPage = parseInt(value, 10);
+    this.currentPages = 1;
+    this.updatePaginatedData();
+  }
+
   updatePaginatedData() {
-    this.itemsPerPage = +this.itemsPerPage;
     const start = (this.currentPages - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
     this.paginatedData = this.data.slice(start, end);
@@ -281,19 +299,7 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
       if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
       return 0;
     });
-
-    this.updatePaginatedData();
-  }
-
-  onItemsPerPageChange(newValue: number): void {
-    this.itemsPerPage = Number(newValue);
-    this.currentPages = 1;
-    this.paginatorKey++;
-    this.showPaginator = false;
-    setTimeout(() => {
-      this.showPaginator = true;
-      this.cdr.detectChanges();
-    }, 0);
+    
     this.updatePaginatedData();
   }
 

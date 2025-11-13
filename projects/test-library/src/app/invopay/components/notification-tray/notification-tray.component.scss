@@ -14,6 +14,33 @@ $backgrounds-color: #D9D9D9;
   padding: 0;
   margin: 0;
   overflow-x: hidden;
+  
+  &__title, 
+  &__filter-label, 
+  &__filter-btn, 
+  &__mobile-filter-btn, 
+  &__card-title,
+  button,
+  input,
+  select,
+  textarea {
+    font-family: 'Poppins', 'Loos', Arial, sans-serif !important;
+  }
+  
+  ::ng-deep {
+    .form-control,
+    .form-select,
+    .form-floating > label,
+    .form-floating > .form-control,
+    .form-floating > .form-select {
+      font-family: 'Poppins', 'Loos', Arial, sans-serif !important;
+    }
+  }
+  
+  .notification-tray__title,
+  h2.notification-tray__title {
+    font-family: 'Poppins', 'Loos', Arial, sans-serif !important;
+  }
   *, *::before, *::after {
     box-sizing: border-box;
   }
@@ -97,13 +124,13 @@ $backgrounds-color: #D9D9D9;
   &__filters {
     background: $app-white;
     border-radius: $card-border-radius;
-    width:100%;
-    padding: 20px 30px;
+    width: 100%;
+    padding: 10px 20px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     overflow: hidden;
 
-    @include sm {
+    @media (max-width: 699px) {
       display: none;
     }
   }
@@ -133,20 +160,139 @@ $backgrounds-color: #D9D9D9;
 
   &__filters-container {
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    gap: 20px;
-    flex-wrap: wrap;
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px 0;
+    -webkit-overflow-scrolling: touch;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    
+    -ms-overflow-style: none;  
+    scrollbar-width: none; 
+    
+    
+    & > div {
+      display: flex;
+      min-width: max-content; 
+      gap: 10px;
+      align-items: flex-start;
+      margin-left: auto;
+    }
+    
+    @media (min-width: 700px) {
+      .notification-tray__filter-group {
+        width: 160px;
+        flex-shrink: 0;
+        
+        ::ng-deep {
+          .form-floating {
+            width: 100%;
+            margin-top: 10px;
+            
+            select, input {
+              width: 100%;
+              max-width: 100%;
+            }
+          }
+        }
+
+        @media (max-width: 1300px) {
+          width: 140px;
+        }
+      }
+      
+      .notification-tray__filter-actions {
+        display: flex;
+        align-items: flex-start; 
+        gap: 10px;
+        
+        padding-top: 20px;
+        height: auto; 
+      }
+    }
+    
+    @media (min-width: 1300px) and (max-width: 1599px) {
+      gap: 10px;
+      
+      .notification-tray__filter-group {
+        width: 160px;
+        flex: 0 0 auto;
+      }
+      
+      .notification-tray__filter-actions {
+
+        margin-left: 10px;
+      }
+    }
+    
+    @media (min-width: 1600px) {
+      gap: 15px;
+      
+      .notification-tray__filter-group {
+        width: 180px;
+        flex: 0 0 auto;
+      }
+      
+      .notification-tray__filter-actions {
+
+        margin-left: 10px;
+      }
+    }
   }
 
   &__filter-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    min-width: 200px;
     position: relative;
+    min-width: 150px; 
+    flex: 1 1 auto;
+    max-width: 220px; 
+    margin: 0 5px; 
     
-   
+    
+    @media (min-width: 1024px) {
+      min-width: 170px; 
+      max-width: 240px; 
+      margin: 0 8px; 
+    }
+    
+    @media (min-width: 1300px) {
+      min-width: 190px; 
+      max-width: 260px; 
+    }
+    
+    @media (min-width: 1600px) {
+      min-width: 210px; 
+      max-width: 280px; 
+    }
+    
+    @media (min-width: 1920px) {
+      min-width: 240px; 
+      max-width: 350px; 
+      flex: 1 1 350px; 
+    }
+    
+    ::ng-deep {
+      .form-floating {
+        width: 100%;
+        margin-top: 10px;
+        
+        select, input {
+          width: 100%;
+          height: 40px;
+          padding: 0.5rem 1rem;
+          font-size: 0.9rem;
+          border: 1px solid #ced4da;
+          border-radius: 4px;
+          transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+          
+          &:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+          }
+        }
+      }
+    }
   }
 
   &__filter-label {
@@ -160,13 +306,20 @@ $backgrounds-color: #D9D9D9;
     color: #a9adba;
   }
 
-
-
   &__filter-actions {
-    padding-bottom: 16.5px;
     display: flex;
-    gap: 10px;
-    align-items: flex-end;
+    gap: 5px;
+    align-items: flex-start; 
+    margin: -10px 0 0 5px; 
+    padding: 0;
+    height: auto; 
+    min-width: 100px;
+    
+    
+    @media (min-width: 1300px) {
+      gap: 10px;
+      margin-left: 10px;
+    }
   }
 
   &__table-container {
@@ -197,6 +350,22 @@ $backgrounds-color: #D9D9D9;
     width: 100%;
   }
 
+  &__filters-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    min-width: 100%;
+    padding: 5px 0;
+    
+    @media (min-width: 1920px) {
+      justify-content: space-between;
+      gap: 20px;
+    }
+  }
+
   &__paginator-container {
     width: 100%;
     margin-top: 15px;
@@ -206,7 +375,7 @@ $backgrounds-color: #D9D9D9;
     align-items: center;
     padding: 0;
     padding-right: 20px;
-    padding-left: 30px;
+    padding-left: 5px;
   }
 
   &__paginator-container--desktop {
@@ -641,4 +810,18 @@ $backgrounds-color: #D9D9D9;
   }
 }
 
- 
+ .schemes__pagination-center {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+}
+.schemes__pagination-center {
+    ::ng-deep {
+    app-ip-select-input {
+      .form-floating {
+        margin: 11px;
+      }
+    }
+}
+}
