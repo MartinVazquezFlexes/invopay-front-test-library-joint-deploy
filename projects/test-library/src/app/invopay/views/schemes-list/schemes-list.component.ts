@@ -6,7 +6,6 @@ import { Scheme } from '../../interface/scheme';
 import { SchemaContext } from '../../components/modal-schema/modal-schema.component';
 import { LoadingService } from '../../../shared/services/loading.service';
 
-
 @Component({
   selector: 'app-schemes-list',
   templateUrl: './schemes-list.component.html',
@@ -18,7 +17,26 @@ export class SchemesListComponent implements OnInit {
   private readonly schemeService = inject(SchemeService);
 
   ngOnInit() {
+    //metodo para estar atento al cambio de tamaño y setear en 10 la paginacion en mobile
+    this.setItemsPerPageByWindowSize();
+    window.addEventListener(
+      'resize',
+      this.setItemsPerPageByWindowSize.bind(this)
+    );
+
     this.getSchemas();
+  }
+
+  private setItemsPerPageByWindowSize() {
+    if (window.innerWidth <= 768) {
+      this.itemsPerPage = 10;
+      this.itemsPerPageControl.setValue('10');
+    } else {
+      //Valor por defecto en escritorio
+      this.itemsPerPage = 10;
+      this.itemsPerPageControl.setValue(this.itemsPerPage.toString());
+    }
+    this.updatePage();
   }
 
   optPages: boolean = false;
@@ -49,29 +67,27 @@ export class SchemesListComponent implements OnInit {
 
   tableData: Scheme[] = [];
   getSchemas() {
-
     this.loadingService.setLoadingState(true); //mostrar
     //GetAll
     this.schemeService.getSchemes().subscribe({
-        next: (response) => {
-          this.tableData = response.content;
-          console.log('Esquemas: ', this.tableData);
-          console.log('Endpoint: ', response);
-  
-            this.tableData = response.content.map((scheme: Scheme) => ({
-            ...scheme,
-            schemeName: scheme.name,
-            isSchemaActive: scheme.isActive ? 'Si' : 'No',
-  
-          })) as any;
-          this.loadingService.setLoadingState(false);
-          this.currentPage = 1; //cargo la pagina 1
-          this.updatePage(); //actualizo los items de la pagina 1
-        },
-        error: () => {
+      next: (response) => {
+        this.tableData = response.content;
+        console.log('Esquemas: ', this.tableData);
+        console.log('Endpoint: ', response);
+
+        this.tableData = response.content.map((scheme: Scheme) => ({
+          ...scheme,
+          schemeName: scheme.name,
+          isSchemaActive: scheme.isActive ? 'Si' : 'No',
+        })) as any;
+        this.loadingService.setLoadingState(false);
+        this.currentPage = 1; //cargo la pagina 1
+        this.updatePage(); //actualizo los items de la pagina 1
+      },
+      error: () => {
         this.loadingService.setLoadingState(false); //ocultar
       },
-      });
+    });
   }
 
   showModal = false;
@@ -93,7 +109,7 @@ export class SchemesListComponent implements OnInit {
     this.showModal = false;
   }
 
-  updateTable(){
+  updateTable() {
     this.getSchemas();
     this.showModal = false;
   }
@@ -115,7 +131,6 @@ export class SchemesListComponent implements OnInit {
   pagedData: any[] = [];
   currentPage = 1;
   itemsPerPage = 10;
-
 
   onPageChange(page: number) {
     this.currentPage = page;

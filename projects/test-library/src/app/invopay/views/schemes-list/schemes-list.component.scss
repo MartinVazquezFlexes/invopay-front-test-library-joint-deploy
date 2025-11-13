@@ -167,6 +167,7 @@ body {
     font-family: 'Poppins', sans-serif;
     color: rgb(132, 129, 138);
     font-weight: 400;
+    text-align: end;
   }
 
   .schemes__card-value--status {
@@ -174,6 +175,7 @@ body {
     font-family: 'Poppins', sans-serif;
     color: #0071ce;
     font-weight: 400;
+    text-align: end;
   }
 
 
@@ -223,6 +225,7 @@ body {
 
   .schemes__pagination-center {
     padding-left: 0px;
+    display: none;
   }
 
   .schemes__pagination {
