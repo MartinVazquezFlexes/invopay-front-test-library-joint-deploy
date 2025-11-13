@@ -11,8 +11,8 @@ $status-inactive-color: $error-color;
 }
 
 ::ng-deep app-ip-title-mobile {
-    font-family: "Poppins", sans-serif;
-  }
+  font-family: "Poppins", sans-serif;
+}
 
 .product-list {
   &.page {
@@ -262,6 +262,14 @@ $status-inactive-color: $error-color;
     overflow-x: hidden;
     position: relative;
     z-index: 950;
+
+    ::ng-deep app-ip-modal-mobile .ip-block-card-modal {
+      width: 600px;
+
+      @media (max-width: $bp-mobile){
+        width: auto !important;
+      }
+    }
   }
 }
 
@@ -270,20 +278,22 @@ $status-inactive-color: $error-color;
   flex-direction: column;
   gap: 1.25rem;
   padding: 0.5rem;
+
   ::ng-deep app-ip-input .form-floating {
-      height: 1rem;
+    height: 1rem;
 
-      >label {
-        display: none !important;
-      }
+    >label {
+      display: none !important;
     }
+  }
+
   ::ng-deep app-ip-text-area-input .form-floating {
-      height: 2.5rem;
+    height: 2.5rem;
 
-      >label {
-        display: none !important;
-      }
+    >label {
+      display: none !important;
     }
+  }
 
   &__header {
     display: flex;

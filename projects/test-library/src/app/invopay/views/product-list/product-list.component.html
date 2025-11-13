@@ -127,8 +127,8 @@
                 [label]="'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_SHORT' | translate" inputId="view-desc-short">
               </app-ip-text-area-input>
             </div>
-            <!-- Migrado a app-ip-text-area-input (readonly) -->
             <div class="product-details__section" *ngIf="p.descriptionDetailed">
+              <label>{{ 'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_DETAILED' | translate }}</label>
               <app-ip-text-area-input [control]="$any(editForm.get('longDescription'))"
                 [label]="'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_DETAILED' | translate" inputId="view-desc-detailed">
               </app-ip-text-area-input>
