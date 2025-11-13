@@ -98,18 +98,21 @@
       <app-ip-modal-mobile [title]="'IP.PRODUCTS.VIEW_MODAL.TITLE' | translate" [showTitle]="true"
         [showCloseModal]="true" (close)="onViewModalClose()">
         <ng-container *ngIf="selectedProduct as p">
-          <div class="product-details">
+
+          <form class="product-details" [formGroup]="editForm">
 
             <div class="product-details__header">
               <img [src]="p.logoUrl | safe" [alt]="p.name" class="product-details__logo" *ngIf="p.logoUrl">
               <div class="product-details__header-info">
-                <h3 class="product-details__name">{{ p.name }}</h3>
-                <div class="product-details__status-container">
+                <h3 class="product-details__name">{{ 'IP.PRODUCTS.FORM.NAME.LABEL' | translate }}</h3>
+                <app-ip-input [formGroup]="editForm" controlName="name" inputId="view-name"
+                  labelCode="IP.PRODUCTS.FORM.NAME.LABEL">
+                </app-ip-input>
 
+                <div class="product-details__status-container">
                   <span class="product-details__status-label">
                     {{ 'IP.PRODUCTS.FORM.IS_ACTIVE.LABEL' | translate }}:
                   </span>
-
                   <span class="product-details__status" [class.status--active]="p.isActive"
                     [class.status--inactive]="!p.isActive">
                     {{ p.statusText }}
@@ -120,12 +123,17 @@
 
             <div class="product-details__section" *ngIf="p.descriptionShort">
               <label>{{ 'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_SHORT' | translate }}</label>
-              <p>{{ p.descriptionShort }}</p>
+              <app-ip-text-area-input [control]="$any(editForm.get('description'))"
+                [label]="'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_SHORT' | translate" inputId="view-desc-short">
+              </app-ip-text-area-input>
             </div>
+            <!-- Migrado a app-ip-text-area-input (readonly) -->
             <div class="product-details__section" *ngIf="p.descriptionDetailed">
-              <label>{{ 'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_DETAILED' | translate }}</label>
-              <p>{{ p.descriptionDetailed }}</p>
+              <app-ip-text-area-input [control]="$any(editForm.get('longDescription'))"
+                [label]="'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_DETAILED' | translate" inputId="view-desc-detailed">
+              </app-ip-text-area-input>
             </div>
+
             <div class="product-details__section">
               <label>Documentación Asociada</label>
               <ul class="product-details__docs-list">
@@ -142,7 +150,7 @@
               </ul>
             </div>
 
-          </div>
+          </form>
           <div class="product-details__actions">
             <app-ip-button-modal typeBtn="cancel" (clicked)="onViewModalClose()">
               {{ 'IP.PRODUCTS.VIEW_MODAL.BUTTONS.CLOSE' | translate }}
@@ -160,7 +168,8 @@
         <ng-container *ngIf="selectedProduct as p">
           <div class="product-delete-confirm">
             <p class="product-delete-confirm__message">{{ 'IP.PRODUCTS.DELETE_MODAL.CONFIRM_MESSAGE' | translate }}
-              <strong>"{{ p.name }}"</strong>?</p>
+              <strong>"{{ p.name }}"</strong>?
+            </p>
             <p class="product-delete-confirm__message__warning">
               {{ 'IP.PRODUCTS.DELETE_MODAL.NOTE' | translate }}
             </p>

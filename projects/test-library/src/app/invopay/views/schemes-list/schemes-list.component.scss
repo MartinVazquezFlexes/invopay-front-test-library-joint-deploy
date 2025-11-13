@@ -23,7 +23,7 @@ body {
 
 .schemes__title {
   @include mainTitleText();
-  font-family: 'Poppins', sans-serif;
+  font-family: Poppins, Loos, Arial, sans-serif;
   color: #0071ce;
   padding-left: 40px;
   margin: 0;
@@ -132,7 +132,7 @@ body {
 
   .schemes__card-id {
     @include cardText();
-    font-family: 'Poppins', sans-serif;
+    font-family: Poppins, Loos, Arial, sans-serif;
     color: rgb(132, 129, 138);
     font-weight: 600;
   }
@@ -150,21 +150,21 @@ body {
 
   .schemes__card-label {
     @include sidenavTextLabel();
-    font-family: 'Poppins', sans-serif;
+    font-family: Poppins, Loos, Arial, sans-serif;
     color: rgb(132, 129, 138);
     font-weight: 400;
   }
 
   .schemes__card-label--status {
     @include sidenavTextLabel();
-    font-family: 'Poppins', sans-serif;
+    font-family: Poppins, Loos, Arial, sans-serif;
     color:#0071ce;
     font-weight: 400;
   }
 
   .schemes__card-value {
     @include sidenavTextLabel();
-    font-family: 'Poppins', sans-serif;
+    font-family: Poppins, Loos, Arial, sans-serif;
     color: rgb(132, 129, 138);
     font-weight: 400;
     text-align: end;
@@ -172,7 +172,7 @@ body {
 
   .schemes__card-value--status {
     @include sidenavTextLabel();
-    font-family: 'Poppins', sans-serif;
+    font-family: Poppins, Loos, Arial, sans-serif;
     color: #0071ce;
     font-weight: 400;
     text-align: end;

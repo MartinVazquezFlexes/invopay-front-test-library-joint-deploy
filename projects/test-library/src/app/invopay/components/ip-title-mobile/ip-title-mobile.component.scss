@@ -32,6 +32,7 @@
   }
   &__title{
     @include mainTitleText();
+    font-family: "Poppins", sans-serif;
     display: flex;
     align-items: center;
     &-back-icon{
@@ -63,6 +64,7 @@
     background: $app-btn-main-bg-color;
     box-shadow: 0px 0px 20px 0px rgba(215, 222, 227, 0.39);
     @include btnGeneralText();
+    font-family: "Poppins", sans-serif;
     color: $text-white;
     gap: 0.4rem;
       padding: 0 1rem;

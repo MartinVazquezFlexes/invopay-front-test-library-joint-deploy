@@ -62,6 +62,7 @@
       @include sm(){
         @include titleTextMobile();
       }
+      font-family: "Poppins", sans-serif;
     }
     &-close {
       cursor: pointer;

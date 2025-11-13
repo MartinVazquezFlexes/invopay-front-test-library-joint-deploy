@@ -262,6 +262,22 @@ export class ProductListComponent implements OnInit {
   onRowAction(evt: TableActionEvent) {
     if (evt.event === 'detail' && evt.dataField) {
       this.selectedProduct = evt.dataField as AppProductItem;
+
+      this.editForm.patchValue({
+        id: this.selectedProduct.id,
+        code: this.selectedProduct.code,
+        name: this.selectedProduct.name,
+        description: this.selectedProduct.descriptionShort,
+        longDescription: this.selectedProduct.descriptionDetailed,
+        isActive: this.selectedProduct.isActive,
+        logoUrl: this.selectedProduct.logoUrl,
+        type: (this.selectedProduct as any).type || 'INDIVIDUAL',
+        externalId: (this.selectedProduct as any).externalId || '',
+        insuranceEnterprise: (this.selectedProduct as any).insuranceEnterprise || ''
+      });
+
+      this.editForm.disable();
+
       this.isViewModalOpen = true;
     }
     else if (evt.event === 'edit' && evt.dataField) {
@@ -292,6 +308,8 @@ export class ProductListComponent implements OnInit {
   onViewModalClose(): void {
     this.isViewModalOpen = false;
     this.selectedProduct = null;
+
+    this.editForm.enable();
   }
   onDeleteModalClose(): void {
     this.isDeleteModalOpen = false;
