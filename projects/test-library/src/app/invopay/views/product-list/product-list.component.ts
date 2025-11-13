@@ -83,7 +83,7 @@ export class ProductListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.breakpoint.observe(['(max-width: 550px)']).subscribe(state => {
+    this.breakpoint.observe(['(max-width: 768px)']).subscribe(state => {
       const enteringHandset = !!state.matches;
       if (enteringHandset === this.isHandset) return;
       this.isHandset = enteringHandset;

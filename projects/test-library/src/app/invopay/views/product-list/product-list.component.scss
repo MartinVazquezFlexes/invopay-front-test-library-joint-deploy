@@ -1,8 +1,6 @@
 @import '../../../shared/mixins/variables/color.scss';
 
-$bp-desktop: 900px;
-$bp-tablet: 720px;
-$bp-mobile: 550px;
+$bp-mobile: 768px;
 
 $status-active-color: $success-color;
 $status-inactive-color: $error-color;
@@ -48,6 +46,7 @@ $status-inactive-color: $error-color;
     border-radius: 0 0 $card-border-radius $card-border-radius;
     box-shadow: $header-box-shadow;
     padding-right: 1rem;
+    padding-left: 1rem;
 
     .page-size {
       display: inline-flex;
@@ -81,7 +80,6 @@ $status-inactive-color: $error-color;
 
 .product-card {
   width: 100%;
-  max-width: 380px;
   border-radius: 0.5rem;
   box-shadow: $header-box-shadow;
   background: $header-bg-color;
@@ -268,8 +266,6 @@ $status-inactive-color: $error-color;
   flex-direction: column;
   gap: 1.25rem;
   padding: 0.5rem;
-  min-width: 300px;
-  max-width: 500px;
 
   &__header {
     display: flex;
@@ -432,8 +428,6 @@ $status-inactive-color: $error-color;
   flex-direction: column;
   gap: 0.5rem;
   padding: 0.5rem;
-  min-width: 300px;
-  max-width: 450px;
   text-align: center;
 
   &__message {
@@ -584,38 +578,6 @@ $status-inactive-color: $error-color;
 
   &:hover {
     background-color: #e6eef5;
-  }
-}
-
-@media (max-width: $bp-desktop) {
-  .product-list__paginator {
-    gap: .5rem;
-    padding: 12px;
-    flex-direction: column;
-    align-items: stretch;
-
-    .page-size {
-      justify-content: center;
-    }
-  }
-}
-
-@media (max-width: $bp-tablet) {
-  .ip-title-mobile {
-    background: none;
-    box-shadow: none;
-    margin-bottom: 0px;
-  }
-
-  .product-list__paginator {
-    flex-direction: column;
-    align-items: stretch;
-
-    .page-size {
-      select {
-        width: min(180px, 60vw);
-      }
-    }
   }
 }
 
