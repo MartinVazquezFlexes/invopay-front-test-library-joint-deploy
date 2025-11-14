@@ -84,7 +84,7 @@ form {
   flex-direction: column;
   box-sizing: border-box;
   min-width: 150px; /* Tamaño mínimo para que no se colapsen demasiado */
-  max-width: calc(20% - 1rem); /* Alrededor del 20% para un máximo de 5 elementos por fila */
+  max-width: calc(33% - 1rem); /* Alrededor del 20% para un máximo de 5 elementos por fila */
   flex: 1 0 calc(20% - 1rem); /* Se ajusta a un 20% de ancho en cada tarjeta, 5 columnas */
   position: relative;
   margin-top: 0.2rem; 

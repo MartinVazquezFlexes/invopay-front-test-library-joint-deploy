@@ -219,7 +219,7 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
               ] : [])
             ],
             showActionButton: true,
-            actions: ['search', 'reply']
+            actions: ['search', 'comment']
           };
 
           this.cdr.detectChanges();
