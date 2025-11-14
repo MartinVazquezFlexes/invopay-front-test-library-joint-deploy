@@ -28,7 +28,7 @@
       </div>
 
       <div class="menu-item-group">
-        <div class="menu-item has-submenu" [class.open]="notificationsSubmenuOpen" (click)="toggleNotificationsSubmenu()" title="Notificaciones">
+        <div class="menu-item has-submenu" [class.open]="notificationsSubmenuOpen" (click)="toggleNotificationsSubmenu()" title="Notificaciones" *ngIf="userType !== 'ENTERPRISE_USER'">
           <img src="../../../assets/new-styles/icons/bell.svg" alt="Notificaciones" class="bell-icon">
           <span class="label" *ngIf="!isCollapsed" style="color:#0071CE;">{{ 'IP.SIDENAV.OPTIONS.NOTIFICATIONS' | translate }}</span>
           <span class="arrow" *ngIf="!isCollapsed">▼</span> 
@@ -43,12 +43,12 @@
           </a>
         </div>
       </div>
-      <a class="menu-item"  title="Productos" routerLink="/invopay/product-list" routerLinkActive="active">
+      <a class="menu-item"  title="Productos" routerLink="/invopay/product-list" routerLinkActive="active"  *ngIf="userType === 'ENTERPRISE_USER'">
         <img src="../../../assets/icons/sell.svg" alt="Productos">
         <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">Productos</span>
       </a>
 
-      <a class="menu-item"  title="Esquemas" routerLink="/invopay/schemes-list" routerLinkActive="active">
+      <a class="menu-item"  title="Esquemas" routerLink="/invopay/schemes-list" routerLinkActive="active"  *ngIf="userType === 'ENTERPRISE_USER' || userType === 'ENTERPRISE_MANAGER'">
         <img src="../../../assets/new-styles/icons/status-transitions.svg" alt="Esquemas">
         <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.SCHEMES.TITLE' | translate }}</span>
       </a>
