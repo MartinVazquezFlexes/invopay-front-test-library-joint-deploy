@@ -303,7 +303,7 @@
 
 
 .search {
-  height: 2rem;
+  height: 2.5rem;
   padding: 0 0.75rem;
   border: none;
   border-radius: 0.7rem;
@@ -357,7 +357,7 @@
 
   
 .clean {
-  height: 2rem;
+  height: 2.5rem;
   padding: 0 0.75rem;
   border: none;
   border-radius: 0.7rem;
@@ -410,15 +410,12 @@
   }
 }
 
-  @media (max-width: 1600px) {
-    .search,
-    .clean {
-
-      height: 1.5rem;
-
-    
-    }
-    }
+@media (max-width: 1600px) {
+  .search,
+  .clean {
+    height: 2rem !important;
+  }
+}
 
 
       

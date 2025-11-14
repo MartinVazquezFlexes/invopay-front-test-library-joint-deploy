@@ -52,6 +52,11 @@ export class SchemesListComponent implements OnInit {
   initTable = false;
   //Si queremos scroll o no
   scroll = true;
+  columnWidths = {
+    'schemeName': '200px',
+    'description': '300px',
+    'isSchemaActive': '120px' 
+  };
 
   //Cuando se pulsa el boton de detalle le paso el
   // dataField que tiene la informacion del objeto
