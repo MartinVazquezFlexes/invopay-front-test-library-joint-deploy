@@ -78,8 +78,6 @@ form {
   border-radius: 0.5rem; 
   border: 1px solid #ddd;
   padding: 1rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1rem;
   display: inline-flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -88,20 +86,21 @@ form {
   flex: 1 0 calc(20% - 1rem); /* Se ajusta a un 20% de ancho en cada tarjeta, 5 columnas */
   position: relative;
   margin-top: 0.2rem; 
+  justify-content: center; /*CENTRA VERTICALMENTE EL SPAN */
 }
 
 
 .inner-card label {
   position: absolute;
-  top: -0.6rem; /*  Ajustar posición del label */
+  top: -0.9rem;
   left: 1rem;
   background-color: #ffffff;
-  padding: 0.2rem 0.5rem; /*  Reducir padding para que sea más compacto */
-  font-size: 0.7rem; /*  Reducir de 0.75rem */
-  color: #999; /* Cambiar de #555 a un gris más claro */
-  font-weight: 500; /*  Cambiar de 400 a 500 */
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  color: #555;
+  font-weight: 500;
   border-radius: 0.25rem;
-  box-shadow: none; /*  Eliminar sombra para look más limpio */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   white-space: nowrap;
 }
 
@@ -110,7 +109,7 @@ form {
   word-wrap: break-word; /* rompe palabras largas */
   overflow-wrap: break-word; /* rompe en el límite del contenedor */
   line-height: 1.4; /* mejor legibilidad */
-  font-size: 0.75rem; /* 👈 achica el texto */
+  font-size: 1rem; /* 👈 achica el texto */
   font-family: Poppins, Loos, Arial, sans-serif;
 }
 
@@ -274,6 +273,9 @@ width: 100%;
     line-height: 1rem;
   }
 }
-
-
 }
+
+.card-2 .card-mobile{
+  margin-top: 2rem;
+}
+
