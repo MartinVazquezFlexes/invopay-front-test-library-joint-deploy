@@ -18,6 +18,10 @@ import { SalesDetailsComponent } from './views/sales-details/sales-details.compo
 import { RevenuesListComponent } from './views/revenues-list/revenues-list.component';
 import { RevenueDetailComponent } from './views/revenue-detail/revenue-detail.component';
 import { PendingSalesComponent } from './views/pending-sales/pending-sales.component';
+import { BrokerSettlementCommentsComponent } from './views/broker-settlement-comments/broker-settlement-comments.component';
+import { BrokerInvoiceCommentsComponent } from './views/broker-invoice-comments/broker-invoice-comments.component';
+import { AdminSettlementCommentsComponent } from './views/admin-settlement-comments/admin-settlement-comments.component';
+import { AdminInvoiceCommentsComponent } from './views/admin-invoice-comments/admin-invoice-comments.component';
 
 const routes: Routes = [
   {
@@ -68,6 +72,23 @@ const routes: Routes = [
         path: 'assurance/expiry-sales-list',
         component: PendingSalesComponent,
         data: { type: 'expired' },
+      },
+      
+      {
+        path: 'broker/settlement-comments',
+        component: BrokerSettlementCommentsComponent,
+      },
+      {
+        path: 'broker/invoice-comments',
+        component: BrokerInvoiceCommentsComponent,
+      },
+      {
+        path: 'admin/settlement-comments',
+        component: AdminSettlementCommentsComponent,
+      },
+      {
+        path: 'admin/invoice-comments',
+        component: AdminInvoiceCommentsComponent,
       },
     ],
   },

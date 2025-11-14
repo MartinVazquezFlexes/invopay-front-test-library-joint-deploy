@@ -105,20 +105,15 @@
                       <span class="card-id-mobile">{{'NEW_VAR.INSTALLMENT_NUMBER'|translate}} {{ item.number }}</span>
                       </div>
                       <div class="card-body-mobile">
-                      <div class="info-row-mobile">
-                        
-                          <span class="info-label-mobile">{{'NEW_VAR.PAYMENT_VALUE'|translate}}</span>
-                          <span class="info-value-mobile">{{ item.amount }}</span>
-                      </div>
+  
                       <div class="info-row-mobile">
                           <span class="info-label-mobile">{{'IP.ASSIGN-PROJECTS.EXPIRATION'|translate}}</span>
                           <span class="info-value-mobile"
                           >{{item.dueDate}}</span>
                       </div>
                       <div class="info-row-mobile">
-                          <span class="info-label-mobile">{{'IP.ASSIGN-PROJECTS.STATUS'|translate}}</span>
-                          <span class="info-value-mobile"
-                          >{{item.state}}</span>
+                          <span class="info-label-mobile__status">{{'IP.ASSIGN-PROJECTS.STATUS'|translate}}</span>
+                          <span [ngClass]="item.state ==='PAGADA' ? 'info-value-mobile__status__true' : 'info-value-mobile__status__false'">{{item.state}}</span>
                       </div>
                       <div class="info-row-mobile">
                           <span class="info-label-mobile">{{'NEW_VAR.PERCENTAJE_BROKER'|translate}}</span>
@@ -130,6 +125,10 @@
                         <span class="info-value-mobile"
                         >{{item.paymentDate}} </span>
                       </div> 
+                      <div class="info-row-mobile"> 
+                          <span class="info-label-mobile__money">{{'NEW_VAR.PAYMENT_VALUE'|translate}}</span>
+                          <span class="info-value-mobile__money">{{ item.amount }}</span>
+                      </div>
 
                       </div>
                   </div>

@@ -69,6 +69,13 @@ selectedTab: string='all';
   { label: 'Sofía Gómez', value: 'Sofía Gómez' },
   { label: 'María Rodríguez', value: 'María Rodríguez'}];
 
+  rowsCombo: IpSelectInputOption[]=[
+  { label: '5', value: '5' },
+  { label: '10', value: '10' },
+  { label: '20', value: '20' },
+  { label: '50', value: '50' },
+  ]
+
 
   actions = ['detail'];
   titlesMap: Map<string,string>|undefined;

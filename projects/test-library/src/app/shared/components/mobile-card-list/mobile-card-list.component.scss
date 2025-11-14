@@ -76,13 +76,15 @@
       content: "";
       position: absolute;
       top: -6px;
-      right: 5px;  
+      right: 7px;  
       width: 10px;
       height: 10px;
       background: white;
       transform: rotate(45deg);
       box-shadow: -1px -1px 1px rgba(0,0,0,0.05);
       z-index: -1;
+      border-top: 1px solid #E5E7EB;
+    border-left: 1px solid #E5E7EB;
     }
   }
 

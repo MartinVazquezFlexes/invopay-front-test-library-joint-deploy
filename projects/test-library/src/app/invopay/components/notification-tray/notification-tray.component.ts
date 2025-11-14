@@ -30,6 +30,9 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
 
 
   originalData: NotificationItem[] = [];
+    columnWidths = {
+    'notificationDate': '200px'
+  };
   
   // Form Controls
   answeredControl = new FormControl('');

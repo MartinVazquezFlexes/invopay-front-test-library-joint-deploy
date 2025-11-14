@@ -1,3 +1,7 @@
+@import "../../../shared/mixins/sizes.scss";
+@import "../../../shared/mixins/variables/color.scss";
+@import "../../../shared/mixins/generalText.scss";
+
 form {
   padding: 1rem; /* padding del padre */
   width: 100%;
@@ -43,8 +47,8 @@ form {
   left: 2rem;
   background-color: #ffffff;
   padding: 0.5rem 1rem;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 500;
+  font-size: 0.9rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -56,33 +60,34 @@ form {
 
 .card-title {
   display: block;
-  color: rgb(51, 47, 47);
+  color: #0071ce;
   font-family: Poppins, Loos, Arial, sans-serif;
 }
 
 .card-body {
-  display: flex; /* cambio a flexbox */
-  flex-wrap: wrap; /* permite que las cards se envuelvan */
   gap: 2rem;
   margin-top: 2rem;
   width: 100%;
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se acomoden en varias filas */
+  justify-content: space-between; /* Distribute evenly the items in each row */
 }
 
 .inner-card {
   background-color: #f5f5f5;
-  border-radius: 0.5rem; /* 👈 Aumentar de 0.3rem a 0.5rem para bordes más redondeados */
-  border: 1px solid #ddd; /* 👈 AGREGAR borde sutil */
+  border-radius: 0.5rem; 
+  border: 1px solid #ddd;
   padding: 1rem;
-  padding-top: 1.5rem; /* 👈 Aumentar espacio arriba para el label */
-  padding-bottom: 1rem; /* 👈 Aumentar de 0.6rem */
-  display: inline-flex; /* se ajusta al contenido */
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  display: inline-flex;
   flex-direction: column;
   box-sizing: border-box;
-  min-width: 200px; 
-  max-width: 250px; /* ancho máximo antes de romper línea */
-  flex: 0 1 calc(25% - 2.5rem); /* no crece, puede encogerse hasta el min-width */
-  position: relative; /* necesario para posicionar el label */
-  margin-top: 0.2rem; /* espacio para que el label no se corte */
+  min-width: 150px; /* Tamaño mínimo para que no se colapsen demasiado */
+  max-width: calc(20% - 1rem); /* Alrededor del 20% para un máximo de 5 elementos por fila */
+  flex: 1 0 calc(20% - 1rem); /* Se ajusta a un 20% de ancho en cada tarjeta, 5 columnas */
+  position: relative;
+  margin-top: 0.2rem; 
 }
 
 
@@ -107,13 +112,10 @@ form {
   line-height: 1.4; /* mejor legibilidad */
   font-size: 0.75rem; /* 👈 achica el texto */
   font-family: Poppins, Loos, Arial, sans-serif;
-
 }
 
-
-
 /* Móviles - 1 columna */
-@media (max-width: 550px) {
+@media (max-width: 817px) {
   .inner-card {
     min-width: 100%;
     flex: 0 1 100%;
@@ -135,8 +137,6 @@ form {
     font-size: 0.9rem;
   }
 }
-
-
 
 // TODO PARA LA CARD MOBILE
 .card-mobile {
@@ -169,8 +169,6 @@ width: 100%;
   &:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
-
-
 
   .card-header-mobile {
     display: flex;
@@ -218,27 +216,62 @@ width: 100%;
 
 .info-row-mobile {
   display: grid;
-  grid-template-columns: 1fr 1fr; 
+  grid-template-columns: 1fr 1fr; // ✅ dos columnas iguales
   align-items: center;
   width: 100%;
   gap: 0.5rem;
 
-  .info-label-mobile {
-    color: #1976d2;
-    font-weight: 500;
-    font-size: 0.875rem;
-    justify-self: start; 
+.info-label-mobile {
+    justify-self: start; // alinea a la izquierda
+    @include sidenavTextLabel();
+    font-family: 'Inter', sans-serif;
+    color: rgb(132, 129, 138);
+    font-weight: 400;
+  }
+  .info-label-mobile__status {
+    justify-self: start; // alinea a la izquierda
+    @include sidenavTextLabel();
+    font-family: 'Inter', sans-serif;
+    color: rgb(43, 148, 233);
+    font-weight: 400;
+  }
+  .info-label-mobile__money{
+    justify-self: start; // alinea a la izquierda
+    font-size: 0.95rem;
+    font-family: "Inter", sans-serif;
+    color: #3e3e3e;
+    font-weight: 600;
+    line-height: 1rem
   }
 
   .info-value-mobile {
-    color: #333;
+    justify-self: end; //  alinea a la derecha
+    @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
+    color: rgb(132, 129, 138);
     font-weight: 400;
-    font-size: 0.875rem;
-    justify-self: end; // 
-    word-break: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-    max-width: 100%;
+  }
+    .info-value-mobile__status__true {
+    justify-self: end; //  alinea a la derecha
+    @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
+    color: rgb(46, 145, 231);
+    font-weight: 400;
+  }
+      .info-value-mobile__status__false {
+    justify-self: end; //  alinea a la derecha
+    @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
+    color: rgb(227, 36, 15);
+    font-weight: 400;
+  }
+    .info-value-mobile__money{
+    justify-self: end; // alinea a la derecha
+    font-size: 0.95rem;
+    font-family: "Inter", sans-serif;
+    color: #3e3e3e;
+    font-weight: 600;
+    line-height: 1rem;
   }
 }
 

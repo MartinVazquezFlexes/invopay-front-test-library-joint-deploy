@@ -19,19 +19,18 @@
 
         <div *ngIf="!isMobile" class="card-filtros__actions">
           <div class="filters-container">
-          <div class="select-wrapper">
-            <label class="placeholder">{{'NEW_VAR.PAYMEN_CHANNEL'|translate}}</label>
-            <div class="custom-select-container">
-              <select formControlName="chanelPayment" class="custom-select">
-                <option  disabled value="">{{'IP.SETTLEMENTS.SALE-PAYMENT.PAYMENT_METHOD'|translate}}</option>
-                <option *ngFor="let item of paymentChannels" value="{{item.value}}">{{item.label}}</option>
-              </select>
+            <div class="select-wrapper">
+                <app-ip-select-input 
+                [control]="this.controlsForm.controls.chanelPayment"
+                [options]="paymentChannels"
+                [label]="'NEW_VAR.PAYMEN_CHANNEL' | translate"
+                [placeholder]="'IP.SETTLEMENTS.SALE-PAYMENT.PAYMENT_METHOD'|translate"
+                ></app-ip-select-input> 
             </div>
-          </div>
 
           <div class="date-wrapper">
-            <label  class="placeholder">{{'IP.FILTERS.DATE.FROM' | translate}}</label>
             <app-ip-date-input 
+              [label]="'IP.FILTERS.DATE.FROM' | translate"
               [control]="controlsForm.controls.dateStart"
               [max]="maxStart"
               (changed)="onStartDatechange($event)">
@@ -39,9 +38,8 @@
           </div>
 
           <div class="date-wrapper">
-            <label class="placeholder">{{'IP.FILTERS.DATE.TO' | translate}}</label>
             <app-ip-date-input
-              
+              [label]="'IP.FILTERS.DATE.TO' | translate"
               [control]="controlsForm.controls.dateEnd"
               [max]="maxEnd"
               [min]="minEnd"
@@ -140,12 +138,11 @@
     <div class="card-paginator"  *ngIf="revenues.length>5">
 
       <div class="paginator-controls">
-        <select class="page-size-select" formControlName="rowPaginator" title="Filas por pagina" >
-          <option [value]="5">5</option>
-          <option [value]="10">10</option>
-          <option [value]="20">20</option>
-          <option [value]="50">50</option>
-        </select>
+        <app-ip-select-input 
+        [placeholder]="'N°F...'"
+        [control]="this.controlsForm.controls.rowPaginator"
+        [options]="rowsCombo"
+        ></app-ip-select-input>  
         <app-paginator
           (pageChange)="onPageChange($event)"
           [totalItems]="revenues.length"
@@ -170,16 +167,14 @@
 
     <!-- Canal de pago -->
     <div class="select-wrapper" style="margin-bottom: 3vh;">
-      <label class="placeholder">{{'NEW_VAR.PAYMEN_CHANNEL' | translate}}</label>
-      <div class="custom-select-container">
-        <select [formControl]="controlsForm.controls.chanelPayment" class="custom-select">
-          <option disabled value="">{{'IP.SETTLEMENTS.SALE-PAYMENT.PAYMENT_METHOD'|translate}}</option>
-          <option *ngFor="let item of paymentChannels" [value]="item.value">
-            {{item.label}}
-          </option>
-        </select>
-      </div>
-    </div>
+        <app-ip-select-input 
+        [control]="this.controlsForm.controls.chanelPayment"
+        [options]="paymentChannels"
+        [label]="'NEW_VAR.PAYMEN_CHANNEL' | translate"
+        [placeholder]="'IP.SETTLEMENTS.SALE-PAYMENT.PAYMENT_METHOD'|translate"
+        ></app-ip-select-input> 
+     </div>
+
 
     <div class="date-row">
 

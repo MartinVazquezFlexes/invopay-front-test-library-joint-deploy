@@ -15,7 +15,6 @@
             [initTable]="false"
             [propertyOrder]="columns"
             [titlesFile]="titlesFile"
-            [actions]="actions"
             keyTranslate="IP.ADMIN_TABLE"
             [scroll]="true"
             [tableStyle]="tableStyle"
@@ -30,7 +29,7 @@
 
       <!-- Paginator Section - Desktop -->
       <div class="payment-entities__paginator-container payment-entities__paginator-container--desktop" *ngIf="paginatedData && paginatedData.length > 0">
-        <div class="payment-entities__rows-per-page">
+        <div class="schemes__pagination-center">
           <app-ip-select-input
             [control]="itemsPerPageControl"
             [options]="pageOptions"
@@ -61,13 +60,6 @@
 
       <!-- Paginator Section - Mobile -->
       <div class="payment-entities__paginator-container payment-entities__paginator-container--mobile" *ngIf="paginatedData && paginatedData.length > 0">
-        <div class="schemes__pagination-center">
-          <app-ip-select-input
-            [control]="itemsPerPageControl"
-            [options]="pageOptions"
-            (selectEmitter)="onItemsPerPageChange($event)">
-          </app-ip-select-input>
-        </div>
         <app-paginator 
           *ngIf="showPaginator"
           class="payment-entities__paginator"

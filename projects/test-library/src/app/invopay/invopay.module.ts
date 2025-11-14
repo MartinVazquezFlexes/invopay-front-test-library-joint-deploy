@@ -29,6 +29,10 @@ import { Template1Component } from './views/template1/template1.component';
 import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 import { ProductListComponent } from './views/product-list/product-list.component';
 import { IpNotificationModalFilterMobileComponent } from './components/ip-notification-modal-filter-mobile/ip-notification-modal-filter-mobile.component';
+import { BrokerSettlementCommentsComponent } from './views/broker-settlement-comments/broker-settlement-comments.component';
+import { BrokerInvoiceCommentsComponent } from './views/broker-invoice-comments/broker-invoice-comments.component';
+import { AdminSettlementCommentsComponent } from './views/admin-settlement-comments/admin-settlement-comments.component';
+import { AdminInvoiceCommentsComponent } from './views/admin-invoice-comments/admin-invoice-comments.component';
 
 
 @NgModule({
@@ -40,6 +44,10 @@ import { IpNotificationModalFilterMobileComponent } from './components/ip-notifi
         NotificationModalComponent,
         ProductListComponent,
         IpNotificationModalFilterMobileComponent,
+        BrokerSettlementCommentsComponent,
+        BrokerInvoiceCommentsComponent,
+        AdminSettlementCommentsComponent,
+        AdminInvoiceCommentsComponent,
 
     ],
     imports: [

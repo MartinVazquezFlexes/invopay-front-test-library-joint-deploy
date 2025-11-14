@@ -58,8 +58,6 @@ export class PaymentsEntitiesListComponent implements OnInit,OnDestroy,AfterView
     'description'
   ];
   
-  actions = ['detail'];
-  
   titlesFile = new Map<string, string>();
   tableStyle = 'invopay';
   currentPages: number = 1;
@@ -100,7 +98,7 @@ export class PaymentsEntitiesListComponent implements OnInit,OnDestroy,AfterView
                
           return {
             id: prov.id,
-            logoUrl: prov.logoUrl,
+            logoUrl: prov.logoUrl && prov.logoUrl.includes('example.com') ? this.defaultLogo : prov.logoUrl,
             providerName: prov.name,
             channel: prov.paymentChannels,
             active: this.isActive(prov.isActive),

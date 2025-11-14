@@ -10,6 +10,7 @@ import { RevenuesResponse } from '../../interface/revenueResponse';
 import { Revenue } from '../../interface/revenue';
 import { RevenueListState } from '../../services/revenueListState';
 import { LoadingService } from '../../../shared/services/loading.service';
+import IpSelectInputOption from '../../interface/ip-select-input-option';
 @Component({
   selector: 'app-revenues-list',
   templateUrl: './revenues-list.component.html',
@@ -62,14 +63,20 @@ export class RevenuesListComponent {
   
   dateEndDisabled:boolean = true
 
+  paymentChannels: IpSelectInputOption[] = [
+    { label: 'Transferencia', value: 'TRANSFER' },
+    { label: 'Efectivo', value: 'efectivo'},
+    { label: 'Tarjeta', value: 'Tarjeta'},
+    { label: 'Boleto', value: 'boleto'},
+    { label: 'Cheque', value: 'cheque'}];
 
-  paymentChannels = [
-  { label: 'Transferencia', value: 'TRANSFER' },
-  { label: 'Efectivo', value: 'efectivo' },
-  { label: 'Tarjeta', value: 'tarjeta' },
-  { label: 'Boleto', value: 'boleto'},
-  { label: 'Cheque', value: 'cheque'}
-  ];
+    rowsCombo: IpSelectInputOption[]=[
+    { label: '5', value: '5' },
+    { label: '10', value: '10' },
+    { label: '20', value: '20' },
+    { label: '50', value: '50' },
+    ]
+  
 
 
   ngOnInit(): void {
