@@ -123,7 +123,7 @@
                 [label]="'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_SHORT' | translate" inputId="view-desc-short">
               </app-ip-text-area-input>
             </div>
-            <div class="product-details__section" *ngIf="p.descriptionDetailed">
+            <div class="product-details__section product-details__section__long-text" *ngIf="p.descriptionDetailed">
               <label>{{ 'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_DETAILED' | translate }}</label>
               <app-ip-text-area-input [control]="$any(editForm.get('longDescription'))"
                 [label]="'IP.PRODUCTS.VIEW_MODAL.LABELS.DESC_DETAILED' | translate" inputId="view-desc-detailed">
@@ -237,7 +237,7 @@
             </app-ip-text-area-input>
           </div>
 
-          <div class="product-details__section">
+          <div class="product-details__section product-details__section__long-text">
             <label for="create-long-desc">{{ 'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate }}</label>
             <app-ip-text-area-input [control]="$any(createForm.get('longDescription'))"
               [label]="'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate" inputId="create-long-desc">
@@ -317,7 +317,7 @@
             </app-ip-text-area-input>
           </div>
 
-          <div class="product-details__section">
+          <div class="product-details__section product-details__section__long-text">
             <label for="edit-long-desc">{{ 'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate }}</label>
             <app-ip-text-area-input [control]="$any(editForm.get('longDescription'))"
               [label]="'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate" inputId="edit-long-desc">

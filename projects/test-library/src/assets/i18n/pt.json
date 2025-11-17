@@ -273,6 +273,7 @@
       }
     },
     "COMMON": {
+      "BUTTON-CREATE": "Criar",
       "CONFIRM-BUTTON": "Confirmar",
       "CLOSE": "Fechar",
       "REQUIRED-FIELD": "*Campo obrigatório"
@@ -1341,6 +1342,96 @@
         "CHECK": "Cheque"
       },
       "PAYMENT_PLAYCEHOLDER": "Canais"
+    },
+    "PRODUCTS": {
+      "LIST": {
+        "TITLE": "Produtos"
+      },
+      "TABLE": {
+        "ADD_TOOLTIP": "Adicionar produto"
+      },
+      "CARDS": {
+        "ARIA_LABEL": "Lista de produtos",
+        "MENU_ALT": "Menu",
+        "ACTIONS": {
+          "VIEW": "Ver",
+          "EDIT": "Editar",
+          "DELETE": "Eliminar"
+        },
+        "LABELS": {
+          "DESCRIPTION": "Descrição",
+          "ACTIVE": "Ativo"
+        },
+        "NO_DATA": "Não foram encontrados produtos."
+      },
+      "PAGINATOR": {
+        "ROWS_PER_PAGE": "Linhas por página: "
+      },
+      "BUTTONS": {
+        "CANCEL": "Cancelar",
+        "CONFIRM": "Confirmar",
+        "DELETING": "A eliminar...",
+        "SAVING": "A guardar..."
+      },
+      "VIEW_MODAL": {
+        "TITLE": "Detalhes do produto",
+        "LABELS": {
+          "DESC_SHORT": "Descrição breve",
+          "DESC_DETAILED": "Descrição detalhada"
+        },
+        "BUTTONS": {
+          "CLOSE": "Fechar"
+        }
+      },
+      "DELETE_MODAL": {
+        "TITLE": "Confirmar eliminação",
+        "CONFIRM_MESSAGE": "Tem a certeza de que deseja eliminar o produto?",
+        "NOTE": "Esta ação realizará uma eliminação lógica e o produto será apresentado como \"Inativo\"."
+      },
+      "CREATE_MODAL": {
+        "TITLE": "Adicionar novo produto",
+        "BUTTONS": {
+          "SAVE": "Guardar produto"
+        }
+      },
+      "EDIT_MODAL": {
+        "TITLE": "Editar produto",
+        "BUTTONS": {
+          "SAVE": "Guardar alterações"
+        }
+      },
+      "FORM": {
+        "CODE": {
+          "LABEL": "Código do produto",
+          "LABEL_READONLY": "Código do produto (somente leitura)"
+        },
+        "LOGO": {
+          "LABEL": "Logótipo do produto",
+          "PREVIEW_ALT": "Pré-visualização do logótipo",
+          "UPLOAD_BUTTON": "Carregar ficheiro..."
+        },
+        "NAME": {
+          "LABEL": "Nome do produto"
+        },
+        "TYPE": {
+          "LABEL": "Tipo"
+        },
+        "DESCRIPTION": {
+          "LABEL": "Descrição (breve)"
+        },
+        "LONG_DESCRIPTION": {
+          "LABEL": "Descrição longa"
+        },
+        "EXTERNAL_ID": {
+          "LABEL": "ID externo"
+        },
+        "ENTERPRISE": {
+          "LABEL": "Empresa Seguradora"
+        },
+        "IS_ACTIVE": {
+          "LABEL": "Ativo"
+        }
+      }
     }
   },
   "OBSERVATIONS": {
@@ -1490,96 +1581,6 @@
         "APPLY": "Aplicar",
         "CANCEL": "Fechar",
         "CLEAR": "Limpar filtros"
-      }
-    },
-    "PRODUCTS": {
-      "LIST": {
-        "TITLE": "Produtos"
-      },
-      "TABLE": {
-        "ADD_TOOLTIP": "Adicionar produto"
-      },
-      "CARDS": {
-        "ARIA_LABEL": "Lista de produtos",
-        "MENU_ALT": "Menu",
-        "ACTIONS": {
-          "VIEW": "Ver",
-          "EDIT": "Editar",
-          "DELETE": "Eliminar"
-        },
-        "LABELS": {
-          "DESCRIPTION": "Descrição",
-          "ACTIVE": "Ativo"
-        },
-        "NO_DATA": "Não foram encontrados produtos."
-      },
-      "PAGINATOR": {
-        "ROWS_PER_PAGE": "Linhas por página: "
-      },
-      "BUTTONS": {
-        "CANCEL": "Cancelar",
-        "CONFIRM": "Confirmar",
-        "DELETING": "A eliminar...",
-        "SAVING": "A guardar..."
-      },
-      "VIEW_MODAL": {
-        "TITLE": "Detalhes do produto",
-        "LABELS": {
-          "DESC_SHORT": "Descrição breve",
-          "DESC_DETAILED": "Descrição detalhada"
-        },
-        "BUTTONS": {
-          "CLOSE": "Fechar"
-        }
-      },
-      "DELETE_MODAL": {
-        "TITLE": "Confirmar eliminação",
-        "CONFIRM_MESSAGE": "Tem a certeza de que deseja eliminar o produto?",
-        "NOTE": "Esta ação realizará uma eliminação lógica e o produto será apresentado como \"Inativo\"."
-      },
-      "CREATE_MODAL": {
-        "TITLE": "Adicionar novo produto",
-        "BUTTONS": {
-          "SAVE": "Guardar produto"
-        }
-      },
-      "EDIT_MODAL": {
-        "TITLE": "Editar produto",
-        "BUTTONS": {
-          "SAVE": "Guardar alterações"
-        }
-      },
-      "FORM": {
-        "CODE": {
-          "LABEL": "Código do produto",
-          "LABEL_READONLY": "Código do produto (somente leitura)"
-        },
-        "LOGO": {
-          "LABEL": "Logótipo do produto",
-          "PREVIEW_ALT": "Pré-visualização do logótipo",
-          "UPLOAD_BUTTON": "Carregar ficheiro..."
-        },
-        "NAME": {
-          "LABEL": "Nome do produto"
-        },
-        "TYPE": {
-          "LABEL": "Tipo"
-        },
-        "DESCRIPTION": {
-          "LABEL": "Descrição (breve)"
-        },
-        "LONG_DESCRIPTION": {
-          "LABEL": "Descrição longa"
-        },
-        "EXTERNAL_ID": {
-          "LABEL": "ID externo"
-        },
-        "ENTERPRISE": {
-          "LABEL": "Empresa Seguradora"
-        },
-        "IS_ACTIVE": {
-          "LABEL": "Ativo"
-        }
       }
     }
   }

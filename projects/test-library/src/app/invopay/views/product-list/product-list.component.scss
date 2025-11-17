@@ -388,6 +388,28 @@ $status-inactive-color: $primary-color;
         font-weight: 500;
       }
     }
+    &__long-text {
+
+      // Apunta al componente hijo
+      ::ng-deep app-ip-text-area-input {
+
+        // Aplica solo en mobile (usando el breakpoint $bp-mobile)
+        @media (max-width: $bp-mobile) {
+
+          // Anula la altura del contenedor
+          .form-floating {
+            height: 10rem !important; // Altura más grande (ajusta según necesites)
+          }
+          
+          // Anula la altura del textarea
+          textarea.form-control {
+            height: 10rem !important;
+            min-height: 10rem !important; // Importante
+            overflow-y: auto !important; // Muestra el scroll si 10rem no es suficiente
+          }
+        }
+      }
+    }
   }
 
   &__docs-list {
@@ -433,6 +455,8 @@ $status-inactive-color: $primary-color;
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+
+
 }
 
 .product-delete-confirm {
@@ -636,23 +660,6 @@ $status-inactive-color: $primary-color;
     margin-top: 6px;
   }
 }
-
-:host ::ng-deep app-ip-text-area-input {
-
-    // 1. Anula la altura fija del DIV contenedor .form-floating
-    .form-floating {
-      height: auto !important;
-      min-height: unset !important; // Fundamental
-    }
-
-    // 2. Anula la altura fija del TEXTAREA .form-control
-    textarea.form-control {
-      height: auto !important;      // Permite que crezca
-      min-height: unset !important;  // Quita la altura mínima de Bootstrap
-      overflow-y: hidden !important; // Oculta el scroll
-      resize: none;
-    }
-  }
 
 :host ::ng-deep .product-list-table {
   .table thead .table__head-row>th:last-child .table__head-row-item--text {
