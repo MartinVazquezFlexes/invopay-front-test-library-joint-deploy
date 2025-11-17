@@ -77,7 +77,9 @@ form {
   background-color: #f5f5f5;
   border-radius: 0.5rem; 
   border: 1px solid #ddd;
-  padding: 1rem;
+  padding: 0.5rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.3rem;
   display: inline-flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -91,24 +93,22 @@ form {
 
 
 .inner-card label {
+  @include labelGeneralText();
   position: absolute;
   top: -0.9rem;
   left: 1rem;
   background-color: #ffffff;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.75rem;
-  color: #555;
-  font-weight: 500;
+  padding: 0.3rem;
+  padding-bottom: 0;
   border-radius: 0.25rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   white-space: nowrap;
 }
 
 .inner-card span {
-  color: #5f6a7d;
+  @include generalTextValue;
   word-wrap: break-word; /* rompe palabras largas */
   overflow-wrap: break-word; /* rompe en el límite del contenedor */
-  line-height: 1.4; /* mejor legibilidad */
   font-size: 1rem; /* 👈 achica el texto */
   font-family: Poppins, Loos, Arial, sans-serif;
 }

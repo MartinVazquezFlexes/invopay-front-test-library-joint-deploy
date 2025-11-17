@@ -361,9 +361,9 @@ onClearFilters(): void {
             'NEW_VAR.PAYMEN_CHANNEL',
             'NEW_VAR.CONSOLIDATED',
             'NEW_VAR.POLICY_NUMBER',
-            'IP.CARD_TABLE.SALES.PRODUCTNAME',
-            'IP.CARD_TABLE.SALES.SALEAMOUNT',
-            'IP.CARD_TABLE.INVOICE.BROKERFULLNAME'
+            'NEW_VAR.PRODUCT_NAME',
+            'NEW_VAR.SALE_AMOUNT',
+            'NEW_VAR.BROKER_NAME',
           ]).subscribe(translations => {
             this.titlesMap = new Map<string, string>([
               ['fecha', translations['NEW_VAR.PAYMENT_DATE']],
@@ -373,9 +373,9 @@ onClearFilters(): void {
               ['canalPago', translations['NEW_VAR.PAYMEN_CHANNEL']],
               ['consolidada', translations['NEW_VAR.CONSOLIDATED']],
               ['nroPoliza', translations['NEW_VAR.POLICY_NUMBER']],
-              ['producto', translations['IP.CARD_TABLE.SALES.PRODUCTNAME']],
-              ['montoPrima', translations['IP.CARD_TABLE.SALES.SALEAMOUNT']],
-              ['broker', translations['IP.CARD_TABLE.INVOICE.BROKERFULLNAME']],
+              ['producto', translations['NEW_VAR.PRODUCT_NAME']],
+              ['montoPrima', translations['NEW_VAR.SALE_AMOUNT']],
+              ['broker', translations['NEW_VAR.BROKER_NAME']],
             ]);
           });
   }

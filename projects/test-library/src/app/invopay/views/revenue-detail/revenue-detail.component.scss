@@ -96,12 +96,14 @@ form {
   background-color: #f5f5f5;
   border-radius: 0.5rem; 
   border: 1px solid #ddd;
-  padding: 1rem;
+  padding: 0.5rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.3rem;
   display: inline-flex;
   flex-direction: column;
   box-sizing: border-box;
   min-width: 150px; /* Tamaño mínimo para que no se colapsen demasiado */
-  max-width: calc(20% - 1rem); /* Alrededor del 20% para un máximo de 5 elementos por fila */
+  max-width: calc(24% - 1rem); /* Alrededor del 20% para un máximo de 5 elementos por fila */
   flex: 1 0 calc(20% - 1rem); /* Se ajusta a un 20% de ancho en cada tarjeta, 5 columnas */
   position: relative;
   margin-top: 0.2rem; 
@@ -110,29 +112,22 @@ form {
 }
 
 .inner-card label {
+  @include labelGeneralText();
   position: absolute;
   top: -0.9rem;
   left: 1rem;
   background-color: #ffffff;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.75rem;
-  color: #555;
-  font-weight: 500;
+  padding: 0.3rem;
+  padding-bottom: 0;
   border-radius: 0.25rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   white-space: nowrap;
 }
 
-/* Oculta scrollbar en Chrome, Edge, Safari */
-.inner-card textarea::-webkit-scrollbar {
-  display: none;
-}
-
 .inner-card span {
-  color: #5f6a7d;
+  @include generalTextValue;
   word-wrap: break-word; /* rompe palabras largas */
   overflow-wrap: break-word; /* rompe en el límite del contenedor */
-  line-height: 1.4; /* mejor legibilidad */
   font-size: 1rem; /* 👈 achica el texto */
   font-family: Poppins, Loos, Arial, sans-serif;
 }

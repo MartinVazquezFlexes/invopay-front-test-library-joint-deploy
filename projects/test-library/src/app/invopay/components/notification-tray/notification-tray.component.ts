@@ -119,14 +119,24 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
       this.applyCurrentFilters();
     }
     
-    // Ensure the form control value is in sync with itemsPerPage
     this.itemsPerPageControl.setValue(this.itemsPerPage.toString(), { emitEvent: false });
     
     if (this.config?.entities) {
-      this.entityOptions = this.config.entities.map(entity => ({
-        value: entity,
-        label: entity
-      }));
+     const entityMap: {[key: string]: string} = {
+    'Liquidación': 'SETTLEMENT',
+    'Factura': 'INVOICE',
+    'Comisión': 'COMMISSION',
+    'Pago': 'PAYMENT'
+  };
+
+  this.entityOptions = this.config.entities.map(entity => {
+    const entityKey = entityMap[entity] || entity;
+    const translationKey = `IP.NOTIFICATIONS.ENTITIES.${entityKey.toUpperCase()}`;
+    return {
+      value: entity,
+      label: this.translate.instant(translationKey) || entity
+    };
+  });
     }
     
    
@@ -263,7 +273,8 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
     if (action === 'search') {
       this.onViewNotification(dataField);
     } else if (action === 'comment') {
-      this.onReplyNotification(dataField);
+      //this.onReplyNotification(dataField);
+      return
     }
   }
 
@@ -272,7 +283,8 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
     if (action === 'search') {
       this.onViewNotification(item);
     } else if (action === 'comment') {
-      this.onReplyNotification(item);
+      //this.onReplyNotification(item);
+      return
     }
   }
 

@@ -2,8 +2,8 @@
 
 $bp-mobile: 768px;
 
-$status-active-color: $success-color;
-$status-inactive-color: $error-color;
+$status-active-color: $primary-color;
+$status-inactive-color: $primary-color;
 
 :host {
   --action-col-width: calc(12ch + 16px);
@@ -207,7 +207,7 @@ $status-inactive-color: $error-color;
       gap: 0.25rem;
 
       .product-card__value {
-        text-align: left;
+        text-align: right;
         max-width: 100%;
         font-size: 0.8rem;
         line-height: 1.4;
@@ -266,7 +266,7 @@ $status-inactive-color: $error-color;
     ::ng-deep app-ip-modal-mobile .ip-block-card-modal {
       width: 600px;
 
-      @media (max-width: $bp-mobile){
+      @media (max-width: $bp-mobile) {
         width: auto !important;
       }
     }
@@ -617,12 +617,42 @@ $status-inactive-color: $error-color;
       }
     }
   }
+
 }
 
 :host ::ng-deep app-paginator .ip-paginator {
   width: auto !important;
   height: auto !important;
 }
+
+:host ::ng-deep .overlay .overlay__center {
+  app-ip-input .form-floating .error-message {
+    font-size: 0.7rem;
+    margin-top: 6px;
+  }
+
+  app-ip-text-area-input .form-floating .error-message {
+    font-size: 0.7rem;
+    margin-top: 6px;
+  }
+}
+
+:host ::ng-deep app-ip-text-area-input {
+
+    // 1. Anula la altura fija del DIV contenedor .form-floating
+    .form-floating {
+      height: auto !important;
+      min-height: unset !important; // Fundamental
+    }
+
+    // 2. Anula la altura fija del TEXTAREA .form-control
+    textarea.form-control {
+      height: auto !important;      // Permite que crezca
+      min-height: unset !important;  // Quita la altura mínima de Bootstrap
+      overflow-y: hidden !important; // Oculta el scroll
+      resize: none;
+    }
+  }
 
 :host ::ng-deep .product-list-table {
   .table thead .table__head-row>th:last-child .table__head-row-item--text {

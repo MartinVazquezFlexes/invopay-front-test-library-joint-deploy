@@ -1,10 +1,11 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
-import { switchMap } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 import { saleDetail } from '../../interface/saleDetail';
 import { SalesListStateService } from '../../services/sales-list-state.service';
 import { SalesService } from '../../services/sales.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { SalesService } from '../../services/sales.service';
   templateUrl: './sales-details.component.html',
   styleUrls: ['./sales-details.component.scss']
 })
-export class SalesDetailsComponent {
+export class SalesDetailsComponent implements OnInit,OnDestroy {
 
   
   saleId!: string
@@ -39,8 +40,18 @@ export class SalesDetailsComponent {
     ]);
 isMobile: any;
 
-  constructor(private route: ActivatedRoute,private readonly stateSaleService :SalesListStateService,private readonly service:SalesService,private readonly router: Router) {}
+  constructor(private route: ActivatedRoute,
+    private readonly stateSaleService :SalesListStateService,
+    private readonly service:SalesService,
+    private readonly router: Router,
+    private readonly translate : TranslateService
 
+  ) {}
+  ngOnDestroy(): void {
+  this.subscriptions.unsubscribe()
+  }
+
+  private readonly subscriptions = new Subscription();
 
 
     onBackButtonClick() {
@@ -57,8 +68,43 @@ isMobile: any;
   ngOnInit(): void {
         this.checkScreenSize()
         this.loadSaleDetail();
+        this.loadTitleMap()
   }
 
+    loadTitleMap() {
+
+        /*    ['number', 'Cuota Nro'],
+      ['amount', 'Valor'],
+      ['dueDate', 'Vencimiento'],
+      ['state', 'Estado'],
+      ['brokerCommissionPaid', 'Pago comisión broker'],
+      ['commissionValue', 'Valor comisión'],
+      ['paymentDate', 'Fecha pago']
+    ]);
+*/
+
+
+          const subsTitles = this.translate.get([
+            'NEW_VAR.INSTALLMENT_NUMBER',
+            'NEW_VAR.PAYMENT_DATE',
+            'NEW_VAR.EXPIRATION',
+            'NEW_VAR.STATUS',
+            'NEW_VAR.PAYMENT_COMMISSION_BROKER',
+            'NEW_VAR.POLICY_AMOUNT',
+            'NEW_VAR.DATE_PAYMENT'
+          ]).subscribe(translations => {
+            this.titlesMap = new Map<string, string>([
+              ['number', translations['NEW_VAR.INSTALLMENT_NUMBER']],
+              ['amount', translations['NEW_VAR.PAYMENT_DATE']],
+              ['dueDate', translations['NEW_VAR.EXPIRATION']],
+              ['state', translations['NEW_VAR.STATUS']],
+              ['brokerCommissionPaid', translations['NEW_VAR.PAYMENT_COMMISSION_BROKER']],
+              ['commissionValue', translations['NEW_VAR.POLICY_AMOUNT']],
+              ['paymentDate',translations['NEW_VAR.DATE_PAYMENT']]
+            ]);
+          });
+          this.subscriptions.add(subsTitles);
+    }
 
   loadSaleDetail() {
     this.route.paramMap

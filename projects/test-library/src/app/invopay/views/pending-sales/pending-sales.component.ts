@@ -426,9 +426,9 @@ export class PendingSalesComponent {
     
     loadTitleMap() {
             const subsTitles = this.translate.get([
-              'IP.TABLE.CONSOLIDATED.SALES.BROKER',
+              'NEW_VAR.BROKER_NAME',
               'NEW_VAR.CLIENT',
-              'IP.CARD_TABLE.SALES.PRODUCTNAME',
+              'NEW_VAR.PRODUCTNAME',
               'NEW_VAR.POLICY_NUMBER',
               'NEW_VAR.INSTALLMENT_NUMBER',
               'IP.BILL.FIELDS.AMOUNT',
@@ -436,9 +436,9 @@ export class PendingSalesComponent {
               'IP.ACCOUNTABILITY-DETAILS.AMOUNT'
             ]).subscribe(translations => {
               this.titlesMap = new Map<string,string>([
-                ['corredor', translations['IP.TABLE.CONSOLIDATED.SALES.BROKER']],
+                ['corredor', translations['NEW_VAR.BROKER_NAME']],
                 ['cliente', translations['NEW_VAR.CLIENT']],
-                ['producto', translations['IP.CARD_TABLE.SALES.PRODUCTNAME']],
+                ['producto', translations['NEW_VAR.PRODUCTNAME']],
                 ['nroPoliza', translations['NEW_VAR.POLICY_NUMBER']],
                 ['cuota', translations['NEW_VAR.INSTALLMENT_NUMBER']],
                 ['monedaYmonto', translations['IP.ACCOUNTABILITY-DETAILS.AMOUNT']],

@@ -139,7 +139,7 @@
 
       <div class="paginator-controls">
         <app-ip-select-input 
-        [placeholder]="'N°F...'"
+        [placeholder]="this.itemsPerpage.toString()"
         [control]="this.controlsForm.controls.rowPaginator"
         [options]="rowsCombo"
         ></app-ip-select-input>  

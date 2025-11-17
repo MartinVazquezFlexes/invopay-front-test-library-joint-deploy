@@ -22,6 +22,7 @@
       "INSTALLMENT_NUMBER":"Parcela N°",
       "SELECT_PRODUCT": "Selecione um produto",
       "CLIENT":"Cliente",
+      "PRODUCT_NAME":"Produto",
       "PERCENTAJE_BROKER":"Comissão Corretor",
       "AMOUNT_PAY": "Quantidade de pagamentos",
       "CLIENT_INF":"Informações do cliente",
@@ -35,9 +36,25 @@
       "PENDING_EXPIRY_SALES":"Vendas a receber vencidas",
       "PENDING_SALES_TAB":"Cobrança pendente",
       "EXPIRY_SALES_TAB": "Cobrança Vencida",
-      "ALL_SALES_TAB":"Todas"
+      "ALL_SALES_TAB":"Todas",
+      "PRODUCTNAME":"Produto",
+      "BROKER_NAME":"Agente de venda",
+      "EMAIL":"E-mail",
+      "TELEPHONE":"Telefone",
+      "VALUE":"Valor",
+      "EXPIRATION":"Maturidade",
+      "STATUS":"Estado",
+      "PAYMENT_COMMISSION_BROKER":"Pagamento comissão corretagem",
+      "DATE_PAYMENT":"Data pagamento",
+      "COMMISSION_VALUE":"Valor Comissão",
+      "SALE_AMOUNT": "Monto venta"
+
+
   },
   "IP": {
+    "FROM":"De",
+    "TO":"Até",
+
     "SALES": {
       "IMPORT": {
         "CSV": {
@@ -57,7 +74,7 @@
         }
       }
     },
-    "CURRENCY": "",
+    "CURRENCY": "Moeda",
     "CURRENCY_TYPES": "Taxas de câmbio utilizadas:",
     "CURRENCY_CONVERTIONS": "Gerar conversões",
     "ENTERPRISE": "Empresa:",
@@ -98,7 +115,9 @@
       "REPORT": "Reportar",
       "REPORTED": "Reportada",
       "SEARCH": "Ver",
-      "REPLY":"Observações"
+      "REPLY":"Observações",
+      "COMMENT":"Observações e Comentários",
+      "DETAIL":"Ver Detalhes"
     },
     "ADMIN_TABLE": {
       "ACTIONS": "AÇÕES",
@@ -638,7 +657,10 @@
         "INVOICE_TAB": "Fatura",
         "IS-PAID": "Paga",
         "OBSERVATIONS": "Observaciones",
-        "INFORMATION": "Información"
+        "INFORMATION": "Información",
+        "PRODUCT_NAME": "Produto",
+        "BROKER_NAME":"Agente de vendas",
+        "ROW":"Linha"
       },
       "HISTORY": {
         "MODIF_DATE": "Data da modificação",
@@ -685,7 +707,10 @@
         "DATE_PAYMENT": "Data do pagamento",
         "PAYMENT_METHOD": "Selecionar método de pagamento",
         "PAYMENT_METHOD_ENTITY": "Selecione uma entidade",
-        "PAYMENT_DESCRIPTION": "Descrição do pagamento"
+        "PAYMENT_DESCRIPTION": "Descrição do pagamento",
+        "FILTERS": {
+          "CLOSE": "Fechar"
+        }
       },
       "SETTLEMENT_DETAILS": {
         "NAME_BROKER": "Agente de vendas",
@@ -856,7 +881,7 @@
           "PAYMENTS_DONE": "Pagamentos efetuados",
           "PAYMENTS_ONGOING": "Pagamentos enviados"
         },
-        "PAYMENTS": "pagamentos",
+        "PAYMENTS": "Pagamentos",
         "CONSOLIDATED": "Ver pagamentos consolidados",
         "PAY_INVOICES": "Gerar pagamentos consolidados",
         "BILL": "Faturação",
@@ -882,7 +907,25 @@
           "PAID": "Pago"
         },
         "SUPPLIER": "Fornecedores",
-        "USER": "Usuários"
+        "USER": "Usuários",
+        "SALES": "Vendas",
+        "SALES_REGISTRY": "Registro de vendas",
+        "ALL_SALES_TAB": "Todas as vendas",
+        "PENDING_SALES": "Vendas pendentes",
+        "EXPIRY_SALES_TAB": "Vendas vencidas",
+        "PAY_IN": "Arrecadações",
+        "NOTIFICATIONS":"Notificações",
+        "NOTIFICATIONS_OPTIONS": {
+          "INSURANCE": "Seguros",
+          "BROKER": "Corretor"
+        },
+        "PRODUCTION": "Comissão",
+        "SETTLEMENTS":"Liquidação",
+        "MANAGEMENT":"Gestão",
+        "COLLECTION_OPTIONS":{
+          "TITLE":"Cobrança"
+        },
+      "PRODUCTS":"Produtos"
       }
     },
     "SUPPLIER": {
@@ -1236,6 +1279,68 @@
         "USERNAME": "EMPLEADO"
       },
       "TITLE": "RENDIÇÕES"
+    },
+        "NOTIFICATIONS": {
+      "TITLE": "Notificações",
+      "MODAL": {
+        "TITLE": "Notificação"
+      },
+      "FILTERS": {
+        "TITLE": "Filtros",
+        "ANSWERED": "Vistado",
+        "ANSWERED_PLACEHOLDER": "Selecionar estado",
+        "YES": "Sim",
+        "NO": "Não",
+        "ENTITY": "Conceito",
+        "ENTITY_PLACEHOLDER": "Selecionar conceito",
+        "USER": "Usuário",
+        "USER_PLACEHOLDER": "Selecionar usuário"
+      },
+      "TABLE": {
+        "DATE": "Data",
+        "ENTITY": "Conceito",
+        "BROKER": "Corretor",
+        "USER": "Usuário",
+        "QUERY": "Consulta",
+        "ANSWERED": "Vistado"
+      },
+      "ENTITIES": {
+        "SETTLEMENT": "Liquidação",
+        "COMMISSION": "Comissão",
+        "INVOICE": "Fatura",
+        "PAYMENT": "Pagamento"
+      }
+    },
+     "REVENUE_LIST": {
+      "TITLE": "Arrecadações",
+      "FILTERS_TITLE":"Filtrar",
+      "FILTERS": {
+        "TITLE": "Filtros",
+        "DATE_FROM": "De",
+        "DATE_TO": "Até",
+        "PAYMEN_CHANNEL": "Canal de pagamento"
+      },
+      "TABLE": {
+        "REVENUE_DATE": "Data e hora",
+        "CURRENCY": "Moeda",
+        "AMOUNT": "Valor",
+        "POLICY_NUMBER": "Nº apólice",
+        "PRODUCT_NAME": "Produto",
+        "BROKER_NAME": "Corretor",
+        "CONSOLIDATED": "Consolidado",
+        "PAYMENT_CHANNEL": "Canal de pagamento",
+        "PAYMENT_AMOUNT": "Valor do prêmio",
+        "DETAIL": "Detalhe",
+        "PROVIDEER": "Provedor",
+        "VIEW": "Ver"
+      },
+      "PAYMENT_CHANNELS": {
+        "TICKET": "Bilhete",
+        "CARD": "Cartão",
+        "BANK_TRANSFER": "Transferência",
+        "CHECK": "Cheque"
+      },
+      "PAYMENT_PLAYCEHOLDER": "Canais"
     }
   },
   "OBSERVATIONS": {
@@ -1276,37 +1381,7 @@
       "FISCAL_ID": "ID fiscal:",
       "FINISH": "Fim"
     },
-    "REVENUE_LIST": {
-      "TITLE": "Arrecadações",
-      "FILTERS_TITLE": "Filtrar",
-      "FILTERS": {
-        "TITLE": "Filtros",
-        "DATE_FROM": "De",
-        "DATE_TO": "Até",
-        "PAYMEN_CHANNEL": "Canal de pagamento"
-      },
-      "TABLE": {
-        "REVENUE_DATE": "Data e hora",
-        "CURRENCY": "Moeda",
-        "AMOUNT": "Valor",
-        "POLICY_NUMBER": "Nº apólice",
-        "PRODUCT_NAME": "Produto",
-        "BROKER_NAME": "Corretor",
-        "CONSOLIDATED": "Consolidado",
-        "PAYMENT_CHANNEL": "Canal de pagamento",
-        "PAYMENT_AMOUNT": "Valor do prêmio",
-        "DETAIL": "Detalhe",
-        "PROVIDEER": "Provedor",
-        "VIEW": "Ver"
-      },
-      "PAYMENT_CHANNELS": {
-        "TICKET": "Bilhete",
-        "CARD": "Cartão",
-        "BANK_TRANSFER": "Transferência",
-        "CHECK": "Cheque"
-      },
-      "PAYMENT_PLAYCEHOLDER": "Canais"
-    },
+   
     "REVENUE_DETAIL": {
       "TITLE": "Detalhe da Arrecadação",
       "ROWS_PER_PAGE": "Linhas por página",
@@ -1417,37 +1492,6 @@
         "CLEAR": "Limpar filtros"
       }
     },
-    "NOTIFICATIONS": {
-      "TITLE": "Caixa de Notificações",
-      "MODAL": {
-        "TITLE": "Notificação"
-      },
-      "FILTERS": {
-        "TITLE": "Filtros",
-        "ANSWERED": "Estado respondido",
-        "ANSWERED_PLACEHOLDER": "Selecionar estado",
-        "YES": "Sim",
-        "NO": "Não",
-        "ENTITY": "Conceito",
-        "ENTITY_PLACEHOLDER": "Selecionar conceito",
-        "USER": "Usuário",
-        "USER_PLACEHOLDER": "Selecionar usuário"
-      },
-      "TABLE": {
-        "DATE": "Data",
-        "ENTITY": "Conceito",
-        "BROKER": "Corretor",
-        "USER": "Usuário",
-        "QUERY": "Consulta",
-        "ANSWERED": "Respondido"
-      },
-      "ENTITIES": {
-        "SETTLEMENT": "Liquidação",
-        "COMMISSION": "Comissão",
-        "INVOICE": "Fatura",
-        "PAYMENT": "Pagamento"
-      }
-    },
     "PRODUCTS": {
       "LIST": {
         "TITLE": "Produtos"
@@ -1539,4 +1583,5 @@
       }
     }
   }
+  
 }

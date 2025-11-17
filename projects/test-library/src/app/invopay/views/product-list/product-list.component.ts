@@ -69,6 +69,7 @@ export class ProductListComponent implements OnInit {
   isCreateModalOpen = false;
   createBusy = false;
   createForm!: FormGroup;
+  
 
   private logoFileToUpload: File | null = null;
 

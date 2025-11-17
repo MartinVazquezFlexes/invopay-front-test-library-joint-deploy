@@ -6,7 +6,7 @@ import { IpLoginComponent } from './components/ip-login/ip-login.component';
 import { IpAuthService } from './services/ip-auth.service';
 import { IpProfileService } from './services/ip-profile.service';
 import { IpSnackbarService } from './services/ip-snackbar.service';
-
+import { IpTextAreaInputComponent } from './components/ip-text-area-input/ip-text-area-input.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -75,6 +75,7 @@ import { AdminInvoiceCommentsComponent } from './views/admin-invoice-comments/ad
     ],
     exports: [
         IpLoginComponent,
+        IpTextAreaInputComponent,
         MobileCardListComponent,
         NotificationModalComponent
     ]

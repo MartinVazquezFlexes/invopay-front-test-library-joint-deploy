@@ -5,7 +5,6 @@ export interface ApiProduct {
   id: number;
   name: string;
   description: string;
-  // ... (otros campos de la API)
   isActive: boolean;
   logoUrl: string;
   longDescription: string;

@@ -427,31 +427,22 @@ onClearFilters(): void {
   }
 
 
-  loadTitleMa2p(){
-      this.titlesMap = new Map<string,string>([
-      ['fila', 'IP.SETTLEMENTS.DETAILS.ROW'],
-      ['fecha', 'IP.TABLE.PAYMENTS-DONE.CARD.DATE'],
-      ['producto', 'IP.CARD_TABLE.SALES.PRODUCTNAME'],
-      ['broker', 'IP.NEW-INVOICE.FORM.BROKER'],
-      ['cliente', 'NEW_VAR.CLIENT'],
-      ['montoPoliza', 'NEW_VAR.POLICY_AMOUNT'],
-    ]);
-  }
+
   
   loadTitleMap() {
           const subsTitles = this.translate.get([
             'IP.SETTLEMENTS.DETAILS.ROW',
-            'IP.TABLE.PAYMENTS-DONE.CARD.DATE',
-            'IP.CARD_TABLE.SALES.PRODUCTNAME',
-            'IP.NEW-INVOICE.FORM.BROKER',
+            'NEW_VAR.PAYMENT_DATE',
+            'NEW_VAR.PRODUCTNAME',
+            'NEW_VAR.BROKER_NAME',
             'NEW_VAR.CLIENT',
             'NEW_VAR.POLICY_AMOUNT'
           ]).subscribe(translations => {
             this.titlesMap = new Map<string, string>([
               ['fila', translations['IP.SETTLEMENTS.DETAILS.ROW']],
-              ['fecha', translations['IP.TABLE.PAYMENTS-DONE.CARD.DATE']],
-              ['producto', translations['IP.CARD_TABLE.SALES.PRODUCTNAME']],
-              ['broker', translations['IP.NEW-INVOICE.FORM.BROKER']],
+              ['fecha', translations['NEW_VAR.PAYMENT_DATE']],
+              ['producto', translations['NEW_VAR.PRODUCTNAME']],
+              ['broker', translations['NEW_VAR.BROKER_NAME']],
               ['cliente', translations['NEW_VAR.CLIENT']],
               ['montoPoliza', translations['NEW_VAR.POLICY_AMOUNT']],
             ]);

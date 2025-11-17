@@ -36,10 +36,20 @@
 
       "PENDING_SALES":"Ventas a cobrar pendientes",
       "PENDING_EXPIRY_SALES":"Ventas a cobrar vencidas",
-
       "PENDING_SALES_TAB":"Cobro pendiente",
       "EXPIRY_SALES_TAB": "Cobro Vencido",
-      "ALL_SALES_TAB":"Todas"
+      "ALL_SALES_TAB":"Todas",
+      "PRODUCT_NAME": "Producto",
+      "BROKER_NAME": "Agente de venta",
+      "EMAIL":"Correo electrónico",
+      "TELEPHONE":"Télefono",
+      "VALUE":"Valor",
+      "EXPIRATION":"Vencimiento",
+      "STATUS":"Estado",
+      "PAYMENT_COMMISSION_BROKER":"Pago comisión broker",
+      "DATE_PAYMENT":"Fecha Pago",
+      "COMMISSION_VALUE":"Valor Comisión",
+      "SALE_AMOUNT":"Valor venda"
 
   },
   "IP": {
@@ -1601,7 +1611,8 @@
         "NOTIFICATIONS_OPTIONS": {
           "INSURANCE": "Seguros",
           "BROKER": "Broker"
-        }
+        },
+        "PRODUCTS": "Productos"
       }
     },
     "CONSOLIDATED": {

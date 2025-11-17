@@ -56,7 +56,7 @@ import { IpSearchInputComponent } from "./invopay/components/ip-search-input/ip-
     ReactiveFormsModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
-        defaultLanguage: 'es',
+        defaultLanguage: 'pt',
         loader: {
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,
@@ -80,5 +80,7 @@ import { IpSearchInputComponent } from "./invopay/components/ip-search-input/ip-
   }],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
 
+
+ }

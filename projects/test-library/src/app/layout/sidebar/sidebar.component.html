@@ -4,7 +4,7 @@
     <div class="menu-items">
       <a class="menu-item" routerLink="/invopay/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" title="Inicio">
         <img src="../../../assets/new-styles/icons/sidebar/home-icon.svg" alt="Inicio">
-        <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.SIDENAV.HOME' | translate }}</span>
+        <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.SIDENAV.OPTIONS.HOME' | translate }}</span>
       </a>
         <a class="menu-item" routerLink="/invopay/sales-list" routerLinkActive="active" title="Ventas">
         <img src="../../../assets/icons/sell.svg" alt="Ventas">
@@ -45,7 +45,7 @@
       </div>
       <a class="menu-item"  title="Productos" routerLink="/invopay/product-list" routerLinkActive="active"  *ngIf="userType === 'ENTERPRISE_USER'">
         <img src="../../../assets/icons/sell.svg" alt="Productos">
-        <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">Productos</span>
+        <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.SIDENAV.OPTIONS.PRODUCTS' | translate }}</span>
       </a>
 
       <a class="menu-item"  title="Esquemas" routerLink="/invopay/schemes-list" routerLinkActive="active"  *ngIf="userType === 'ENTERPRISE_USER' || userType === 'ENTERPRISE_MANAGER'">
