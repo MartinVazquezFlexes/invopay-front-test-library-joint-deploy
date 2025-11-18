@@ -7,13 +7,23 @@ $backgrounds-color: #D9D9D9;
 .payment-entities {
   background: transparent;
   width: 100%;
-  min-height: calc(100vh - 45px); 
+  min-height: calc(100vh - 45px);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   font-family: 'Poppins', 'Loos', Arial, sans-serif;
+  
+  &__content {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: 5px;
+  }
   
   *,
   ::placeholder,
@@ -69,22 +79,8 @@ $backgrounds-color: #D9D9D9;
     box-sizing: border-box;
   }
 
-  &__title-section {
-    text-align: left;
-    width: 100%;
-    background: $app-white;
-    border-radius: $card-border-radius;
-    display: flex;
-    flex-direction: column;
-    padding: 25px 30px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-  }
-
-  &__title {
-    @include mainTitleText();
-    color: $primary-color;
-    margin: 0;
+  app-ip-title-mobile {
+    display: block;
   }
 
   &__table-container {

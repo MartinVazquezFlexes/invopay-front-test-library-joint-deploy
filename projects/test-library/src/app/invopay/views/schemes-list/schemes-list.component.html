@@ -8,9 +8,12 @@
 </app-modal-schema>
 
 <div class="schemes" *ngIf="!(loadingService.isLoading$ | async)">
-  <div class="schemes__header">
-    <h2 class="schemes__title">{{ "IP.SCHEMES.TITLE" | translate }}</h2>
-  </div>
+
+    <app-ip-title-mobile 
+      [title]="'IP.SCHEMES.TITLE' | translate"
+      [back]="false">
+    </app-ip-title-mobile>
+
 
   <div class="schemes__card">
     <div class="schemes__table-view">

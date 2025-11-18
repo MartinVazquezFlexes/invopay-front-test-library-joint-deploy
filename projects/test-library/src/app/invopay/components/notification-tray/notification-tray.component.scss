@@ -44,39 +44,19 @@ $backgrounds-color: #D9D9D9;
   *, *::before, *::after {
     box-sizing: border-box;
   }
-  &__card {
+  &__content {
     display: flex;
     width: 100%;
     flex-direction: column;
     gap: 15px;
     padding: 0;
     box-sizing: border-box;
+    margin-top: 5px; /* Space between title and content */
   }
 
-  &__title-section {
-    text-align: left;
-    width:100%;
-    background: $app-white;
-    border-radius: $card-border-radius;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 25px 30px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-
-    @include mmd {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 15px;
-    }
-  }
-
-  &__title {
-    @include mainTitleText();
-    color: $primary-color;
-    margin: 0;
+  /* Let ip-title-mobile handle its own styling */
+  app-ip-title-mobile {
+    display: block;
   }
 
   &__mobile-filter-btn {
@@ -131,7 +111,7 @@ $backgrounds-color: #D9D9D9;
     background: $app-white;
     border-radius: $card-border-radius;
     width: 100%;
-    padding: 10px 20px;
+    padding: 15px 20px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     overflow: hidden;

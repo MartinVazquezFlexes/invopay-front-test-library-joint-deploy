@@ -1,9 +1,13 @@
 <div class="payment-entities" *ngIf="!(loadingService.isLoading$ | async)">
-  <div class="payment-entities__card">
-    <!-- Title Section -->
-    <div class="payment-entities__title-section">
-      <h1 class="payment-entities__title">{{ 'IP.PAYMENTS_ENTITIES.TITTLE' | translate }}</h1>
-    </div>
+  <!-- Title Section -->
+  <app-ip-title-mobile 
+    [title]="'IP.PAYMENTS_ENTITIES.TITTLE' | translate"
+    [btn]="'none'"
+    [back]="false">
+  </app-ip-title-mobile>
+  
+  <!-- Content Section -->
+  <div class="payment-entities__content">
 
     <!-- Table Container - Desktop -->
     <div class="payment-entities__table-container payment-entities__table-container--desktop">

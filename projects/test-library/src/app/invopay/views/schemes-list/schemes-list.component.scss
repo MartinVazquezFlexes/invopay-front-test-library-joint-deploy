@@ -20,13 +20,8 @@ body {
   padding: 20px;
   box-sizing: border-box;
 }
-
-.schemes__title {
-  @include mainTitleText();
-  font-family: Poppins, Loos, Arial, sans-serif;
-  color: #0071ce;
-  padding-left: 40px;
-  margin: 0;
+app-ip-title-mobile {
+  width: 100%;
 }
 
 .schemes__card {
@@ -39,15 +34,6 @@ body {
   box-shadow: 0 5px 10px rgba(5, 5, 5, 0.1);
 }
 
-.schemes__header {
-  background-color: #ffffff;
-  border-radius: 15px;
-  width: 100%;
-  max-width: 100%;
-  padding: 20px 0px;
-  margin-bottom: 20px;
-  box-shadow: 0 5px 10px rgba(5, 5, 5, 0.1);
-}
 
 .schemes__pagination {
   display: flex;
