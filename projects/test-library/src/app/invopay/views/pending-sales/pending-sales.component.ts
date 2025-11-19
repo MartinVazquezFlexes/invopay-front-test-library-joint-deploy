@@ -277,8 +277,10 @@ export class PendingSalesComponent {
          const end = new Date()
          const start = new Date()
          end.setMonth(end.getMonth()+1)
+         end.setDate(1);       
          const formatedStart= this.formatDateTo00Hours(start)
          const formatedEnd = this.formatDateTo00Hours(end)
+         
          console.log(start.toISOString())
          console.log(end.toISOString())
          console.log(end)

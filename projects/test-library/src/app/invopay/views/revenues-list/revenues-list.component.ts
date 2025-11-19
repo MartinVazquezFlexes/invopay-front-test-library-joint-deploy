@@ -192,44 +192,74 @@ export class RevenuesListComponent {
           this.currentEnd = ''
           this.controlsForm.controls.dateEnd.setValue('')
         }  
+        console.log(this.currentStart)
     }
 
+onApplyFilter(page: number) {
+  console.log("========== APPLY FILTER START ==========");
+  console.log("apply filter page " + page);
+  console.log("currentStart (raw):", this.currentStart);
+  console.log("currentEnd (raw):", this.currentEnd);
+  console.log("currentPayChannel:", this.currentPayChannel);
 
-  onApplyFilter(page:number) {
-    console.log("apply filter page "+page )
+  let fromNotHour: string | Date = this.currentStart;
+  let toNotHour: string | Date = this.currentEnd;
+  
+  if (this.currentStart && this.currentEnd) {
+    console.log("--- Normalizando fechas ---");
+    console.log("currentStart antes de normalize:", this.currentStart);
+    console.log("currentEnd antes de normalize:", this.currentEnd);
+    
+    const from = this.normalizeStart(this.currentStart);
+    const to = this.normalizeEnd(this.currentEnd);
+    
+    console.log("from después de normalizeStart:", from);
+    console.log("to después de normalizeEnd:", to);
 
-        let fromNotHour :string|Date =this.currentStart
-        let toNotHour :string|Date =this.currentEnd
-        if (this.currentStart && this.currentEnd){
-           const from = new Date(this.currentStart);
-          const to = new Date(this.currentEnd);
-         fromNotHour =new Date(from.getFullYear(), from.getMonth(), from.getDate())
-         toNotHour =new Date(to.getFullYear(), to.getMonth(), to.getDate())
-         toNotHour.setDate(to.getDate() + 1);
-         toNotHour.setHours(23, 59, 59, 999);
-        }
-
-        this.revenueService.getRevenues().pipe(
-          map(response => {
-            this.revenueData = response;
-            return this.revenueData.content.filter(x => {
-              const revDate = new Date(x.revenueDate);
-              const revDateNotHours=new Date(revDate.getFullYear(), revDate.getMonth(), revDate.getDate())
-
-              const matchesDate =  !this.currentStart || !this.currentEnd || (revDateNotHours >= fromNotHour && revDateNotHours <= toNotHour);
-              const matchesChannel = !this.currentPayChannel || x.paymentChannel.toLocaleLowerCase() === this.currentPayChannel.toLocaleLowerCase();
-              console.log(this.currentPayChannel)
-              console.log(x.paymentChannel)
-              console.log(matchesChannel)
-              return matchesDate && matchesChannel;
-            });
-          })
-        ).subscribe(filtered => {
-          this.revenues = filtered;
-          this.loadTable(page);
-          this.isModalOpen=false
-        });
+    fromNotHour = from;
+    toNotHour = to;
   }
+
+
+
+  this.revenueService.getRevenues().pipe(
+    map(response => {
+      console.log("--- Response recibida ---");
+      console.log("Total records:", response.content.length);
+      this.revenueData = response;
+      
+      return this.revenueData.content.filter((x, index) => {
+        const revDate = this.normalizeStart(x.revenueDate);
+        
+        console.log(`\n--- Registro ${index + 1} ---`);
+        console.log("x.revenueDate (raw):", x.revenueDate);
+        console.log("revDate (normalized):", revDate);
+        console.log("from:", fromNotHour);
+        console.log("to:", toNotHour);
+        
+        const matchesDate = !this.currentStart || !this.currentEnd || (revDate >= fromNotHour && revDate <= toNotHour);
+        console.log("matchesDate:", matchesDate);
+        console.log("  !this.currentStart:", !this.currentStart);
+        console.log("  !this.currentEnd:", !this.currentEnd);
+        console.log("  revDate >= fromNotHour:", revDate >= fromNotHour);
+        console.log("  revDate <= toNotHour:", revDate <= toNotHour);
+        
+        const matchesChannel = !this.currentPayChannel || x.paymentChannel.toLowerCase() === this.currentPayChannel.toLowerCase();
+
+        
+        const result = matchesDate && matchesChannel;
+        console.log("RESULTADO FINAL (pasa filtro?):", result);
+        
+        return result;
+      });
+    })
+  ).subscribe(filtered => {
+    this.revenues = filtered;
+    this.loadTable(page);
+    this.isModalOpen = false;
+    console.log("========== APPLY FILTER END ==========\n");
+  });
+}
   
 onClearFilters(): void {
   this.controlsForm.reset({
@@ -381,12 +411,18 @@ onClearFilters(): void {
   }
   
 
-  formatDate(date: string | Date): string {
-    if (typeof date === 'string') {
-      return date;
-    }
-    return date.toISOString().split('T')[0];
+formatDate(date: string | Date): string {
+  if (typeof date === 'string') {
+    return date;
   }
+  
+  // Formatear en hora local en vez de UTC
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  
+  return `${year}-${month}-${day}`;
+}
 
   formatDate2(date: string | Date): string {
     const d = new Date(date);
@@ -453,7 +489,33 @@ onClearFilters(): void {
     }
   }
 
+
+normalizeStart(date: Date | string): Date {
+  let d: Date;
   
+  if (typeof date === 'string') {
+    // Si es string YYYY-MM-DD, parsearlo correctamente
+    const parts = date.split('-');
+    d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+  } else {
+    d = date;
+  }
+  
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0);
+}
+
+normalizeEnd(date: Date | string): Date {
+  let d: Date;
+  
+  if (typeof date === 'string') {
+    const parts = date.split('-');
+    d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+  } else {
+    d = date;
+  }
+  
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 999);
+}
 
 }
 
