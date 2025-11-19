@@ -47,8 +47,8 @@
       "PAYMENT_COMMISSION_BROKER":"Pagamento comissão corretagem",
       "DATE_PAYMENT":"Data pagamento",
       "COMMISSION_VALUE":"Valor Comissão",
-      "SALE_AMOUNT": "Monto venta"
-
+      "SALE_AMOUNT": "Monto venta",
+      "AMOUNT_INSTALLMENT":"Valor taxa"
 
   },
   "IP": {

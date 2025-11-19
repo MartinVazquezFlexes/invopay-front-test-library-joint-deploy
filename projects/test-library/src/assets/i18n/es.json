@@ -49,7 +49,8 @@
       "PAYMENT_COMMISSION_BROKER":"Pago comisión broker",
       "DATE_PAYMENT":"Fecha Pago",
       "COMMISSION_VALUE":"Valor Comisión",
-      "SALE_AMOUNT":"Valor venda"
+      "SALE_AMOUNT":"Valor venda",
+      "AMOUNT_INSTALLMENT":"Monto cuota"
 
   },
   "IP": {

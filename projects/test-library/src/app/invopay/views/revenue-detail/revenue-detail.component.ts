@@ -1,12 +1,13 @@
 import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { switchMap, take } from 'rxjs';
 import { formatDate } from '@angular/common';
 
 import { TranslateService } from '@ngx-translate/core';
 import { RevenueDetail } from '../../interface/revenueDetail';
 import { RevenuesListStateService } from '../../services/revenues-list-state.service';
 import { RevenueService } from '../../services/revenue.service';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-revenue-detail',
@@ -15,10 +16,7 @@ import { RevenueService } from '../../services/revenue.service';
 })
 export class RevenueDetailComponent {
 
-     isMobile: boolean=false;
-
-
-    
+    isMobile: boolean=false;
     saleId!: string
     revenue!:RevenueDetail
     title=''
@@ -30,18 +28,20 @@ export class RevenueDetailComponent {
         ];
      titlesMap: Map<string, string> = new Map([
        ['installmentNumber', 'NEW_VAR.INSTALLMENT_NUMBER'],  
-       ['amount', 'NEW_VAR.PAYMENT_VALUE'],                   // YA CREADA: "PAYMENT_VALUE": "Valor Pago"
-       ['dueDate', 'IP.BILL_DETAILS.EXPIRY_DATE'],           // YA EXISTE: "EXPIRY_DATE": "Fecha de vencimiento"
+       ['amount', 'NEW_VAR.PAYMENT_VALUE'],                   
+       ['dueDate', 'IP.BILL_DETAILS.EXPIRY_DATE'],          
       ]);
   
     constructor(private route: ActivatedRoute,
       private readonly stateRevenueService:RevenuesListStateService,
       private readonly service:RevenueService,
       private readonly router: Router,
-      private readonly translate: TranslateService   
+      private readonly translate: TranslateService ,
+      private readonly loadingService : LoadingService  
       ) {}
   
       ngOnInit(): void {
+          this.loadingService.setLoadingState(true)
           this.checkScreenSize();
           this.loadTitleMap()
           this.loadRevenueDetail();
@@ -64,6 +64,7 @@ export class RevenueDetailComponent {
   loadRevenueDetail() {
     this.route.paramMap
       .pipe(
+        take(1),
         switchMap(params => {
           this.saleId = String(params.get('id'));
           console.log('ID de venta:', this.saleId);
@@ -120,6 +121,10 @@ export class RevenueDetailComponent {
         error: err => {
           console.error('Error cargando detalle', err);
         },
+       complete: () => {
+        console.log('Filtrado de ventas completado');
+         this.loadingService.setLoadingState(false)
+      }
       });
     }
 

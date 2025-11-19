@@ -1,11 +1,12 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
-import { Subscription, switchMap } from 'rxjs';
+import { Subscription, switchMap, take } from 'rxjs';
 import { saleDetail } from '../../interface/saleDetail';
 import { SalesListStateService } from '../../services/sales-list-state.service';
 import { SalesService } from '../../services/sales.service';
 import { TranslateService } from '@ngx-translate/core';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 
 @Component({
@@ -44,7 +45,8 @@ isMobile: any;
     private readonly stateSaleService :SalesListStateService,
     private readonly service:SalesService,
     private readonly router: Router,
-    private readonly translate : TranslateService
+    private readonly translate : TranslateService,
+    private readonly loandingService : LoadingService
 
   ) {}
   ngOnDestroy(): void {
@@ -66,6 +68,7 @@ isMobile: any;
 
 
   ngOnInit(): void {
+        this.loandingService.setLoadingState(true)
         this.checkScreenSize()
         this.loadSaleDetail();
         this.loadTitleMap()
@@ -86,7 +89,7 @@ isMobile: any;
 
           const subsTitles = this.translate.get([
             'NEW_VAR.INSTALLMENT_NUMBER',
-            'NEW_VAR.PAYMENT_DATE',
+            'NEW_VAR.AMOUNT_INSTALLMENT',
             'NEW_VAR.EXPIRATION',
             'NEW_VAR.STATUS',
             'NEW_VAR.PAYMENT_COMMISSION_BROKER',
@@ -95,7 +98,7 @@ isMobile: any;
           ]).subscribe(translations => {
             this.titlesMap = new Map<string, string>([
               ['number', translations['NEW_VAR.INSTALLMENT_NUMBER']],
-              ['amount', translations['NEW_VAR.PAYMENT_DATE']],
+              ['amount', translations['NEW_VAR.AMOUNT_INSTALLMENT']],
               ['dueDate', translations['NEW_VAR.EXPIRATION']],
               ['state', translations['NEW_VAR.STATUS']],
               ['brokerCommissionPaid', translations['NEW_VAR.PAYMENT_COMMISSION_BROKER']],
@@ -109,6 +112,7 @@ isMobile: any;
   loadSaleDetail() {
     this.route.paramMap
       .pipe(
+       take(1), // Toma solo el primer valor y completa
         switchMap(params => {
           this.saleId = String(params.get('id'));
           console.log('ID de venta:', this.saleId);
@@ -121,7 +125,7 @@ isMobile: any;
             return this.service.getSaleByInstallmentId(this.saleId);
           }
           else{
-            console.log("get by sale id")
+            console.log("get by sale overdue")
             return this.service.getSaleById(this.saleId);
           }
         })
@@ -153,7 +157,7 @@ isMobile: any;
             dueDate: formatDate(cuota.dueDate, 'dd/MM/yyyy', 'en-US'),
             paid: cuota.isPaid ? 'PAGADA' : 'NO PAGADA',
             state: cuota.isPaid ? 'PAGADA' : 'NO PAGADA',
-            brokerCommissionPaid:this.calcularPorcentaje(this.sale.amount, this.sale.policyData.amount) > 0 ? 'SI' : 'NO',
+            brokerCommissionPaid:((this.calcularPorcentaje(this.sale.amount, this.sale.policyData.amount) > 0)&&(cuota.isPaid))? 'SI' : 'NO',
             commissionValue:
               this.sale.currency+" "+
               this.formatNumberToArg(
@@ -161,8 +165,10 @@ isMobile: any;
                   cuota.amount,
                   this.calcularPorcentaje(this.sale.amount, this.sale.policyData.amount)
                 )
-              ),
-            paymentDate: cuota.dueDate ? formatDate(cuota.dueDate, 'dd/MM/yyyy', 'en-US') : '-',
+              ),//TODO : pedir al back campo con la fecha de pago
+          //  paymentDate: (cuota.dueDate && cuota.isPaid) ? formatDate(cuota.dueDate, 'dd/MM/yyyy', 'en-US') : '-',
+
+
           })),
         };
 
@@ -172,6 +178,10 @@ isMobile: any;
       error: err => {
         console.error('Error cargando detalle de venta:', err);
       },
+      complete: () => {
+      console.log('Filtrado de ventas completado');
+        this.loandingService.setLoadingState(false)
+       }
     });
 }
     calcularValorDePorcentaje(monto: number, porcentaje: number): number {

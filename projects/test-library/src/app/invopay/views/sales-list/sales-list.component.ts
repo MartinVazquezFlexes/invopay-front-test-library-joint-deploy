@@ -224,72 +224,92 @@ selectedTab: string='all';
 }
 
 
-    onApplyFilter(page:number) {
-      console.log("apply filter page "+page )
-    
-        let fromNotHour :string|Date =this.currentStart
-        let toNotHour :string|Date =this.currentEnd
-        if (this.currentStart && this.currentEnd){
-           const from = new Date(this.currentStart);
-          const to = new Date(this.currentEnd);
-         fromNotHour =new Date(from.getFullYear(), from.getMonth(), from.getDate())
-         toNotHour =new Date(to.getFullYear(), to.getMonth(), to.getDate())
-         toNotHour.setDate(to.getDate() + 1);
-         toNotHour.setHours(23, 59, 59, 999);
+onApplyFilter(page: number) {
+  console.log("=== INICIO FILTRO ===");
+  console.log("currentStart:", this.currentStart);
+  console.log("currentEnd:", this.currentEnd);
+   console.log("=== FILTRO APLICADO ===");
+  console.log("currentStart RAW:", this.currentStart, "tipo:", typeof this.currentStart);
+  console.log("currentEnd RAW:", this.currentEnd, "tipo:", typeof this.currentEnd);
+
+  this.salesService.getSales().pipe(
+    map(response => {
+      this.salesData = response;
+      return this.salesData.content.filter(x => {
+        // Normalizar la fecha de venta a medianoche UTC
+        const saleDate = new Date(x.saleDate);
+        const saleDateOnly = Date.UTC(saleDate.getFullYear(), saleDate.getMonth(), saleDate.getDate());
+
+        if (this.currentStart && this.currentEnd) {
+          // Parsear las fechas del filtro en UTC
+          const [startYear, startMonth, startDay] = this.currentStart.split('-').map(Number);
+          const [endYear, endMonth, endDay] = this.currentEnd.split('-').map(Number);
+          
+          const startDateOnly = Date.UTC(startYear, startMonth - 1, startDay);
+          const endDateOnly = Date.UTC(endYear, endMonth - 1, endDay);
+          
+          console.log("---");
+          console.log("Sale:", x.saleDate, "→ UTC:", saleDateOnly);
+          console.log("Start:", this.currentStart, "→ UTC:", startDateOnly);
+          console.log("End:", this.currentEnd, "→ UTC:", endDateOnly);
+          console.log("Match:", saleDateOnly >= startDateOnly && saleDateOnly <= endDateOnly);
+          
+          const matchesDate = saleDateOnly >= startDateOnly && saleDateOnly <= endDateOnly;
+          
+          if (!matchesDate) {
+            return false;
+          }
         }
 
-          this.salesService.getSales().pipe(
-            map(response => {
-              this.salesData = response;
-              return this.salesData.content.filter(x => {
-              const saleDate = new Date(x.saleDate);
-              const saleDateNotHours=new Date(saleDate.getFullYear(), saleDate.getMonth(), saleDate.getDate())
+        const matchesProduct = !this.currentProduct || 
+          x.productName.toLowerCase() === this.currentProduct.toLowerCase();
+        const matchesBroker = !this.currentBroker || 
+          x.brokerName.toLowerCase() === this.currentBroker.toLowerCase();
 
-              const matchesDate =  !this.currentStart || !this.currentEnd || (saleDateNotHours >= fromNotHour && saleDateNotHours <= toNotHour);
-              const matchesProduct = !this.currentProduct || x.productName.toLocaleLowerCase() === this.currentProduct.toLocaleLowerCase();
-              const matchesBroker = !this.currentBroker || x.brokerName.toLocaleLowerCase() === this.currentBroker.toLocaleLowerCase();
-              //if(!matchesDate){ console.log("NOT MATCHDATE") ;console.log(x); console.log(saleDateNotHours,fromNotHour,toNotHour)}
-              if(!matchesBroker){ console.log("NOT BROKER Match") ;console.log(x); console.log(this.currentBroker.toLocaleLowerCase(),x.brokerName.toLowerCase())}
-             // if(!matchesProduct){ console.log("NOT PODUCT MATCH") ;console.log(x); console.log(this.currentProduct.toLocaleLowerCase(),x.productName.toLowerCase())}
+        return matchesProduct && matchesBroker;
+      });
+    })
+  ).subscribe(filtered => {
+    console.log("FILTERED TOTAL:", filtered.length);
+    this.sales = filtered;
+    this.loadTable(page);
+  });
+}
 
-                return matchesDate && matchesBroker && matchesProduct;
-              });
-            })
-          ).subscribe(filtered => {
-            console.log("FILTERED :")
-            console.log(filtered)
-            this.sales = filtered;
-            this.loadTable(page);
-          });
-    }
-
-  onClickFiltredSearch() {
+onClickFiltredSearch() {
 
     this.onApplyFilter(1)
-  }
+}
+
 onClearFilters(): void {
-    this.controlsForm.patchValue({
-      brokerFilter: '',
-      productFilter: '',
-      rowPaginator: this.itemsPerpage, // mantiene el valor actual del paginador
-      dateStart: '',
-      dateEnd: ''
-    });
+   const today = new Date();
+  const oneMonthAgo = new Date();
+  oneMonthAgo.setMonth(today.getMonth() - 1);
 
-    // Limpiar variables internas de filtros
-    this.currentBroker = '';
-    this.currentProduct = '';
-    this.currentStart = '';
-    this.currentEnd = '';
+  const endStr = this.formatDate(today);
+  const startStr = this.formatDate(oneMonthAgo);
 
-    // Limpiar min y max para permitir nueva selección libre
-    this.minEnd = '';
-    this.maxEnd = this.formatDate(new Date());
-    this.maxStart = this.formatDate(new Date());
+  this.controlsForm.patchValue({
+    brokerFilter: '',
+    productFilter: '',
+    rowPaginator: this.itemsPerpage,
+    dateStart: startStr,
+    dateEnd: endStr
+  });
 
-     this.isModalOpen=false
+  // Seteo variables internas
+  this.currentBroker = '';
+  this.currentProduct = '';
+  this.currentStart = startStr;
+  this.currentEnd = endStr;
 
-     console.log('Filtros limpiados correctamente');
+  // Reset de rangos
+  this.minEnd = this.formatDate(new Date(startStr));
+  this.maxEnd = endStr;
+  this.maxStart = endStr;
+
+  this.isModalOpen = false;
+
 }
 
 
@@ -433,7 +453,7 @@ onClearFilters(): void {
           const subsTitles = this.translate.get([
             'IP.SETTLEMENTS.DETAILS.ROW',
             'NEW_VAR.PAYMENT_DATE',
-            'NEW_VAR.PRODUCTNAME',
+            'NEW_VAR.PRODUCT_NAME',
             'NEW_VAR.BROKER_NAME',
             'NEW_VAR.CLIENT',
             'NEW_VAR.POLICY_AMOUNT'
@@ -441,7 +461,7 @@ onClearFilters(): void {
             this.titlesMap = new Map<string, string>([
               ['fila', translations['IP.SETTLEMENTS.DETAILS.ROW']],
               ['fecha', translations['NEW_VAR.PAYMENT_DATE']],
-              ['producto', translations['NEW_VAR.PRODUCTNAME']],
+              ['producto', translations['NEW_VAR.PRODUCT_NAME']],
               ['broker', translations['NEW_VAR.BROKER_NAME']],
               ['cliente', translations['NEW_VAR.CLIENT']],
               ['montoPoliza', translations['NEW_VAR.POLICY_AMOUNT']],

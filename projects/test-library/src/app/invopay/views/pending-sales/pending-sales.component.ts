@@ -276,7 +276,7 @@ export class PendingSalesComponent {
      if(this.saleType==='pending'){ 
          const end = new Date()
          const start = new Date()
-         start.setMonth(start.getMonth()-1);
+         end.setMonth(end.getMonth()+1)
          const formatedStart= this.formatDateTo00Hours(start)
          const formatedEnd = this.formatDateTo00Hours(end)
          console.log(start.toISOString())
@@ -303,8 +303,8 @@ export class PendingSalesComponent {
                     
                   },
                   complete: () => {
-                    console.log('Filtrado de ventas completado');
-                                        this.loadinService.setLoadingState(false)
+                    console.log('carga de venta completada');
+                     this.loadinService.setLoadingState(false)
 
                   }
                 }
@@ -428,7 +428,7 @@ export class PendingSalesComponent {
             const subsTitles = this.translate.get([
               'NEW_VAR.BROKER_NAME',
               'NEW_VAR.CLIENT',
-              'NEW_VAR.PRODUCTNAME',
+              'NEW_VAR.PRODUCT_NAME',
               'NEW_VAR.POLICY_NUMBER',
               'NEW_VAR.INSTALLMENT_NUMBER',
               'IP.BILL.FIELDS.AMOUNT',
@@ -438,7 +438,7 @@ export class PendingSalesComponent {
               this.titlesMap = new Map<string,string>([
                 ['corredor', translations['NEW_VAR.BROKER_NAME']],
                 ['cliente', translations['NEW_VAR.CLIENT']],
-                ['producto', translations['NEW_VAR.PRODUCTNAME']],
+                ['producto', translations['NEW_VAR.PRODUCT_NAME']],
                 ['nroPoliza', translations['NEW_VAR.POLICY_NUMBER']],
                 ['cuota', translations['NEW_VAR.INSTALLMENT_NUMBER']],
                 ['monedaYmonto', translations['IP.ACCOUNTABILITY-DETAILS.AMOUNT']],
