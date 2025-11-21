@@ -10,6 +10,7 @@ export interface ApiProduct {
   longDescription: string;
   code: string;
   logoFile: string;
+  documents: ApiDocument[]
   deletable: boolean;
   editable: boolean;
 }
@@ -29,7 +30,17 @@ export interface ApiProductPage {
 /** El objeto para el FormArray de Documentación */
 export interface ProductDocument {
   description: string;
-  url: string;
+  url?: string;
+  filePath?: string;
+}
+
+export interface ApiDocument {
+  id: number;
+  fileName: string;         // <-- Esto será nuestra 'description'
+  filePath: string;
+  url: string;              // <-- Probablemente sea el nombre para descargar
+  insuranceProductId: number;
+  enterpriseId: number;
 }
 
 /** El objeto Producto como lo usa nuestra app (Mapeado desde 'ApiProduct') */
@@ -42,7 +53,7 @@ export interface ProductItem {
   descriptionDetailed?: string;
   descriptionExpanded?: string;
   isActive: boolean;
-  documentation: ProductDocument[];
+  documents: ProductDocument[];
   deletable: boolean; 
   editable: boolean;
 }
@@ -72,7 +83,7 @@ export interface CreateProductDTO {
   descriptionDetailed?: string;
   descriptionExpanded?: string;
   isActive: boolean;
-  documentation: ProductDocument[];
+  documents: ProductDocument[];
   // (Añade cualquier otro campo que la API espere al crear)
 }
 

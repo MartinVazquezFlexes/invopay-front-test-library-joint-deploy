@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of, forkJoin, EMPTY, Subject } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { IpAuthService } from './ip-auth.service';
@@ -10,8 +10,8 @@ import {
   AppProductPage,
   ProductItem,
   ApiProduct,
-  CreateProductDTO,
-  UpdateProductDTO
+  ProductDocument,
+  ApiDocument
 } from '../interface/product-interfaces';
 
 @Injectable({
@@ -96,6 +96,14 @@ export class ProductService {
       formData.append('insuranceEnterprise', productData.insuranceEnterprise);
     }
 
+    if (productData.documents && productData.documents.length > 0) {
+      const docsPayload = productData.documents.map((doc: ProductDocument) => ({
+        fileName: doc.description,
+        filePath: doc.filePath
+      }));
+      
+      formData.append('documents', JSON.stringify(docsPayload));
+    }
     console.log('--- Contenido del FormData (POST) ---');
     formData.forEach((value, key) => { console.log(`${key}: `, value); });
     console.log('------------------------------------');
@@ -129,6 +137,14 @@ export class ProductService {
       formData.append('insuranceEnterprise', productData.insuranceEnterprise);
     }
 
+    if (productData.documents && productData.documents.length > 0) {
+      const docsPayload = productData.documents.map((doc: ProductDocument) => ({
+        fileName: doc.description,
+        filePath: doc.filePath
+      }));
+      formData.append('documents', JSON.stringify(docsPayload));
+    }
+
     console.log('--- Contenido del FormData (PUT) ---');
     formData.forEach((value, key) => { console.log(`${key}: `, value); });
     console.log('------------------------------------');
@@ -146,6 +162,14 @@ export class ProductService {
   deactivateProduct(id: number): Observable<Object> {
     const patchUrl = `${this.apiUrl}/${id}/activation`;
     return this.http.patch(patchUrl, {});
+  }
+
+  deleteDocument(productId: number, documentName: string): Observable<Object> {
+    const params = new HttpParams()
+      .set('insuranceProductId', productId.toString())
+      .set('documentName', documentName);
+
+    return this.http.delete(`${this.apiUrl}/documents`, { params });
   }
 
   private mapApiToProductItem(apiProduct: ApiProduct): ProductItem {
@@ -169,7 +193,12 @@ export class ProductService {
 
       finalLogoUrl = `${this.serverBaseUrl}/files/download-by-token?filename=${filename}&token=${currentToken}`;
     }
-
+    const mappedDocs: ProductDocument[] = (apiProduct.documents || []).map((doc: ApiDocument) => {
+      return {
+        description: doc.fileName, // La API llama 'fileName' a lo que nosotros llamamos descripción/nombre visible
+        url: `${this.serverBaseUrl}/files/download-by-token?filename=${doc.filePath}&token=${currentToken}`, // Generamos el link de descarga
+        filePath: doc.filePath // Guardamos el path original
+      };});
     console.log(`[ProductService Mapeo] ID: ${apiProduct.id}, URL Generada: ${finalLogoUrl}`);
 
     return {
@@ -180,13 +209,37 @@ export class ProductService {
       isActive: apiProduct.isActive,
       descriptionShort: apiProduct.description,
       descriptionDetailed: apiProduct.longDescription,
-      documentation: [],
+      documents: mappedDocs,
       descriptionExpanded: '',
       deletable: apiProduct.isActive,
       editable: apiProduct.isActive
     };
   }
 
+  uploadDocumentFile(file: File): Observable<{ filePath: string }> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // 1. ELIMINAMOS { responseType: 'text' }
+    // Dejamos que Angular maneje el JSON para que el Interceptor funcione.
+    return this.http.post<any>(`${this.apiUrl}/documents`, formData).pipe(
+      map(response => {
+        
+        console.log('--- RESPUESTA DE SUBIDA (POST) ---', response);
+
+        // AHORA 'response' ya debería estar desencriptado por el interceptor.
+        
+        // Caso A: El backend devuelve un objeto { filePath: "..." }
+        if (response && response.filePath) {
+          return response;
+        }
+
+        // Caso B: El backend devuelve el string directo (nombre del archivo)
+        // (Puede venir como string puro o dentro de un objeto genérico)
+        return { filePath: response };
+      })
+    );
+  }
   private convertBlobToBase64(blob: Blob): Observable<string> {
     const reader = new FileReader();
     const subject = new Subject<string>();

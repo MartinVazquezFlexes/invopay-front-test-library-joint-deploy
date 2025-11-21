@@ -130,17 +130,13 @@
               </app-ip-text-area-input>
             </div>
 
-            <div class="product-details__section">
+            <div class="product-details__section" *ngIf="p.documents?.length">
               <label>Documentación Asociada</label>
+              
               <ul class="product-details__docs-list">
-                <li>
-                  <a href="#" (click)="$event.preventDefault()">
-                    Condiciones Generales (PDF)
-                  </a>
-                </li>
-                <li>
-                  <a href="#" (click)="$event.preventDefault()">
-                    Manual de Siniestros
+                <li *ngFor="let doc of p.documents">
+                  <a [href]="doc.url | safe" target="_blank" rel="noopener noreferrer">
+                    {{ doc.description }}
                   </a>
                 </li>
               </ul>
@@ -248,7 +244,42 @@
             <label for="create-isActive">{{ 'IP.PRODUCTS.FORM.IS_ACTIVE.LABEL' | translate }}</label>
             <input type="checkbox" id="create-isActive" class="form-check" formControlName="isActive">
           </div>
+          <div class="product-details__section">
+            <label>Documentación</label>
+            
+            <div class="docs-array-container" formArrayName="documents">
+              
+              <div class="docs-array-row" 
+                   *ngFor="let docGroup of documentationFormArray(createForm).controls; let i = index" 
+                   [formGroupName]="i">
+                
+                <input type="text" class="form-control" formControlName="description" placeholder="Descripción del documento">
+                
+                <div class="file-input-wrapper">
+                  <button type="button" class="file-upload-btn--small" (click)="docInput.click()">
+                    Subir...
+                  </button>
+                  
+                  <input type="file" 
+                         class="file-upload-input" 
+                         #docInput
+                         (change)="onDocumentFileSelected($event, createForm, i)">
+                  
+                  <span *ngIf="docGroup.get('filePath')?.value" class="file-name-preview" style="color: green;">
+                    ✓ Cargado
+                  </span>
+                </div>
 
+                <button type="button" class="docs-array-remove-btn" (click)="removeDocumentRow(createForm, i)">
+                  <img src="../../../../assets/icons/unassing.svg" alt="Eliminar fila">
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="docs-array-add-btn" (click)="addDocumentRow(createForm)">
+              + Agregar Documento
+            </button>
+          </div>
           <div class="product-details__actions">
             <app-ip-button-modal typeBtn="cancel" (clicked)="onCreateModalClose()" [disabled]="createBusy">
               {{ 'IP.PRODUCTS.BUTTONS.CANCEL' | translate }}
@@ -322,6 +353,42 @@
             <app-ip-text-area-input [control]="$any(editForm.get('longDescription'))"
               [label]="'IP.PRODUCTS.FORM.LONG_DESCRIPTION.LABEL' | translate" inputId="edit-long-desc">
             </app-ip-text-area-input>
+          </div>
+          <div class="product-details__section">
+            <label>Documentación</label>
+            
+            <div class="docs-array-container" formArrayName="documents">
+              
+              <div class="docs-array-row" 
+                   *ngFor="let docGroup of documentationFormArray(editForm).controls; let i = index" 
+                   [formGroupName]="i">
+                
+                <input type="text" class="form-control" formControlName="description" placeholder="Descripción del documento">
+                
+                <div class="file-input-wrapper">
+                  <button type="button" class="file-upload-btn--small" (click)="docInput.click()">
+                    Subir...
+                  </button>
+                  
+                  <input type="file" 
+                         class="file-upload-input" 
+                         #docInput
+                         (change)="onDocumentFileSelected($event, editForm, i)">
+                  
+                  <span *ngIf="docGroup.get('filePath')?.value" class="file-name-preview" style="color: green;">
+                    ✓ Cargado
+                  </span>
+                </div>
+
+                <button type="button" class="docs-array-remove-btn" (click)="removeDocumentRow(editForm, i)">
+                  <img src="../../../../assets/icons/unassing.svg" alt="Eliminar fila">
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="docs-array-add-btn" (click)="addDocumentRow(editForm)">
+              + Agregar Documento
+            </button>
           </div>
 
           <div class="product-details__actions">
