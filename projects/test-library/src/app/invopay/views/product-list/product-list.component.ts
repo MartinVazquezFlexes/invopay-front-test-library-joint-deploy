@@ -334,35 +334,26 @@ export class ProductListComponent implements OnInit {
   documentationFormArray(form: FormGroup): FormArray {
     return form.get('documents') as FormArray;
   }
-  /**
-   * Elimina una fila de documento.
-   * Si estamos en modo EDICIÓN y el documento existe, llama a la API.
-   */
+
   removeDocumentRow(form: FormGroup, index: number): void {
     const formArray = this.documentationFormArray(form);
     const docValue = formArray.at(index).value;
 
-    // CASO A: Estamos CREANDO o es una fila nueva sin guardar (no tiene filePath o estamos en createForm)
     if (this.isCreateModalOpen || !docValue.description) {
       formArray.removeAt(index);
       return;
     }
 
-    // CASO B: Estamos EDITANDO y es un documento existente
     if (confirm(`¿Desea eliminar el documento "${docValue.description}"?`)) {
       
       this.loadingService.setLoadingState(true);
       
-      // Llamamos al endpoint DELETE de documentos
-      // Nota: docValue.description es el 'fileName' que la API usa como ID para borrar
       this.productService.deleteDocument(this.selectedProduct!.id, docValue.description)
         .subscribe({
           next: () => {
-            formArray.removeAt(index); // Borramos de la vista
+            formArray.removeAt(index);
             
-            // Actualizamos el objeto local para que no reaparezca si reabrimos el modal
             if (this.selectedProduct && this.selectedProduct.documents) {
-               // Filtramos el documento borrado
                this.selectedProduct.documents = this.selectedProduct.documents.filter(
                  d => d.description !== docValue.description
                );
@@ -378,26 +369,20 @@ export class ProductListComponent implements OnInit {
         });
     }
   }
-  /**
-   * Sube el archivo inmediatamente y guarda el filePath en el formulario.
-   */
+
   onDocumentFileSelected(event: Event, formGroup: FormGroup, index: number): void {
     const input = event.target as HTMLInputElement;
     if (!input.files || input.files.length === 0) return;
     
     const file = input.files[0];
     
-    // Bloqueamos la pantalla mientras sube
     this.loadingService.setLoadingState(true);
 
     this.productService.uploadDocumentFile(file).subscribe({
       next: (response) => {
-        // El servicio devuelve { filePath: "..." }
-        
         const formArray = this.documentationFormArray(formGroup);
         const rowGroup = formArray.at(index);
         const currentDescription = rowGroup.get('description')?.value;
-        // Guardamos el path y usamos el nombre del archivo como descripción por defecto
         rowGroup.patchValue({
           filePath: response.filePath, 
           description: currentDescription ? currentDescription : file.name
@@ -409,7 +394,7 @@ export class ProductListComponent implements OnInit {
         console.error('Error subiendo documento:', err);
         alert('Error al subir el documento.');
         this.loadingService.setLoadingState(false);
-        input.value = ''; // Limpiamos para permitir reintentar
+        input.value = '';
       }
     });
   }
@@ -482,15 +467,12 @@ export class ProductListComponent implements OnInit {
     this.mobilePageIndex = Math.max(0, page1Based - 1);
     this.rebuildMobileSlice();
   }
-  private currentBaseForClient(): AppProductItem[] {
-    return this.originalProducts ?? [];
-  }
 
   private newDocumentGroup(): FormGroup {
     return this.formBuilder.group({
       description: ['', Validators.required],
-      filePath: ['', Validators.required], // Campo oculto clave
-      url: [''] // Opcional, para visualización
+      filePath: ['', Validators.required],
+      url: ['']
     });
   }
   addDocumentRow(form: FormGroup): void {
@@ -503,7 +485,7 @@ export class ProductListComponent implements OnInit {
       docs.forEach(doc => {
         formArray.push(this.formBuilder.group({
           description: [doc.description, Validators.required],
-          filePath: [doc.filePath], // Importante: guardar el filePath existente
+          filePath: [doc.filePath],
           url: [doc.url]
         }));
       });

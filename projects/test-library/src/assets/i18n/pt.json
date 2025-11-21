@@ -1,60 +1,58 @@
 {
-  "NEW_VAR":{
-      "INF_GENERAL":"Informações gerais",
-      "PAYMEN_CHANNEL": "Canal de pagamento",
-      "PAYMENT_DATE": "Data",
-      "COLLECTED_AMOUNT": "Valor Arrecadado",
-      "PAYMENT_PROVIDER": "Provedor de Pagamento",
-      "CONSOLIDATED": "Consolidada",
-      "POLICY_NUMBER": "Nº Apólice",
-      "POLICY_NUMER_EXTEND" :"Número de apólice",
-      "POLICY":"Apólice",
-      "POLICY_VALUE":"Valor da apólice",
-      "DETAIL_RECAUDATION":"Detalhes da arrecadação",
-      "TRANSACCION_DATA" :"Dados da transação",
-      "CONSILIATION_DATA":"Dados de conciliação",
-      "PAYMENT_VALUE":"Valor do pagamento",
-      "POLICY_DATA":"Dados da apólice",
-      "POLICY_AMOUNT":"Valor da apólice",
-      "PREMIUM_AMOUNT":"Valor do prêmio",
-      "PAYMENT_PLAN":"Plano de pagamento",
-      "PREMIUM_PLAN_PAYMENT":"Plano de pagamento do prêmio",
-      "INSTALLMENT_NUMBER":"Parcela N°",
-      "SELECT_PRODUCT": "Selecione um produto",
-      "CLIENT":"Cliente",
-      "PRODUCT_NAME":"Produto",
-      "PERCENTAJE_BROKER":"Comissão Corretor",
-      "AMOUNT_PAY": "Quantidade de pagamentos",
-      "CLIENT_INF":"Informações do cliente",
-      "ASSURANCE_NOTIF":"Notificações da seguradora",
-      "RESPONSED": "Respondida",
-      "REPLY":"Responder",
-      "ENTITY":"Entidade",
-      "SELECT_SUPPLIER_OR_BROKER":"Selecione fornecedor ou corretor",
-      "CONSULT":"Consulta",
-      "PENDING_SALES":"Vendas a receber pendentes",
-      "PENDING_EXPIRY_SALES":"Vendas a receber vencidas",
-      "PENDING_SALES_TAB":"Cobrança pendente",
-      "EXPIRY_SALES_TAB": "Cobrança Vencida",
-      "ALL_SALES_TAB":"Todas",
-      "PRODUCTNAME":"Produto",
-      "BROKER_NAME":"Agente de venda",
-      "EMAIL":"E-mail",
-      "TELEPHONE":"Telefone",
-      "VALUE":"Valor",
-      "EXPIRATION":"Maturidade",
-      "STATUS":"Estado",
-      "PAYMENT_COMMISSION_BROKER":"Pagamento comissão corretagem",
-      "DATE_PAYMENT":"Data pagamento",
-      "COMMISSION_VALUE":"Valor Comissão",
-      "SALE_AMOUNT": "Monto venta",
-      "AMOUNT_INSTALLMENT":"Valor taxa"
-
+  "NEW_VAR": {
+    "INF_GENERAL": "Informações gerais",
+    "PAYMEN_CHANNEL": "Canal de pagamento",
+    "PAYMENT_DATE": "Data",
+    "COLLECTED_AMOUNT": "Valor Arrecadado",
+    "PAYMENT_PROVIDER": "Provedor de Pagamento",
+    "CONSOLIDATED": "Consolidada",
+    "POLICY_NUMBER": "Nº Apólice",
+    "POLICY_NUMER_EXTEND": "Número de apólice",
+    "POLICY": "Apólice",
+    "POLICY_VALUE": "Valor da apólice",
+    "DETAIL_RECAUDATION": "Detalhes da arrecadação",
+    "TRANSACCION_DATA": "Dados da transação",
+    "CONSILIATION_DATA": "Dados de conciliação",
+    "PAYMENT_VALUE": "Valor do pagamento",
+    "POLICY_DATA": "Dados da apólice",
+    "POLICY_AMOUNT": "Valor da apólice",
+    "PREMIUM_AMOUNT": "Valor do prêmio",
+    "PAYMENT_PLAN": "Plano de pagamento",
+    "PREMIUM_PLAN_PAYMENT": "Plano de pagamento do prêmio",
+    "INSTALLMENT_NUMBER": "Parcela N°",
+    "SELECT_PRODUCT": "Selecione um produto",
+    "CLIENT": "Cliente",
+    "PRODUCT_NAME": "Produto",
+    "PERCENTAJE_BROKER": "Comissão Corretor",
+    "AMOUNT_PAY": "Quantidade de pagamentos",
+    "CLIENT_INF": "Informações do cliente",
+    "ASSURANCE_NOTIF": "Notificações da seguradora",
+    "RESPONSED": "Respondida",
+    "REPLY": "Responder",
+    "ENTITY": "Entidade",
+    "SELECT_SUPPLIER_OR_BROKER": "Selecione fornecedor ou corretor",
+    "CONSULT": "Consulta",
+    "PENDING_SALES": "Vendas a receber pendentes",
+    "PENDING_EXPIRY_SALES": "Vendas a receber vencidas",
+    "PENDING_SALES_TAB": "Cobrança pendente",
+    "EXPIRY_SALES_TAB": "Cobrança Vencida",
+    "ALL_SALES_TAB": "Todas",
+    "PRODUCTNAME": "Produto",
+    "BROKER_NAME": "Agente de venda",
+    "EMAIL": "E-mail",
+    "TELEPHONE": "Telefone",
+    "VALUE": "Valor",
+    "EXPIRATION": "Maturidade",
+    "STATUS": "Estado",
+    "PAYMENT_COMMISSION_BROKER": "Pagamento comissão corretagem",
+    "DATE_PAYMENT": "Data pagamento",
+    "COMMISSION_VALUE": "Valor Comissão",
+    "SALE_AMOUNT": "Monto venta",
+    "AMOUNT_INSTALLMENT": "Valor taxa"
   },
   "IP": {
-    "FROM":"De",
-    "TO":"Até",
-
+    "FROM": "De",
+    "TO": "Até",
     "SALES": {
       "IMPORT": {
         "CSV": {
@@ -115,9 +113,9 @@
       "REPORT": "Reportar",
       "REPORTED": "Reportada",
       "SEARCH": "Ver",
-      "REPLY":"Observações",
-      "COMMENT":"Observações e Comentários",
-      "DETAIL":"Ver Detalhes"
+      "REPLY": "Observações",
+      "COMMENT": "Observações e Comentários",
+      "DETAIL": "Ver Detalhes"
     },
     "ADMIN_TABLE": {
       "ACTIONS": "AÇÕES",
@@ -139,8 +137,8 @@
       "SHORTDESCRIPTION": "Breve Descrição",
       "ACTIVE": "Ativar",
       "DEACTIVED": "Desativar",
-      "MESSAGEPARTONE":"Deseja alterar o estado para ",
-      "MESSAGEPARTTWO":" para o esquema ",
+      "MESSAGEPARTONE": "Deseja alterar o estado para ",
+      "MESSAGEPARTTWO": " para o esquema ",
       "ACTUALSTATUS": "Estado Atual",
       "SEE": "Ver"
     },
@@ -660,8 +658,8 @@
         "OBSERVATIONS": "Observaciones",
         "INFORMATION": "Información",
         "PRODUCT_NAME": "Produto",
-        "BROKER_NAME":"Agente de vendas",
-        "ROW":"Linha"
+        "BROKER_NAME": "Agente de vendas",
+        "ROW": "Linha"
       },
       "HISTORY": {
         "MODIF_DATE": "Data da modificação",
@@ -915,18 +913,18 @@
         "PENDING_SALES": "Vendas pendentes",
         "EXPIRY_SALES_TAB": "Vendas vencidas",
         "PAY_IN": "Arrecadações",
-        "NOTIFICATIONS":"Notificações",
+        "NOTIFICATIONS": "Notificações",
         "NOTIFICATIONS_OPTIONS": {
           "INSURANCE": "Seguros",
           "BROKER": "Corretor"
         },
         "PRODUCTION": "Comissão",
-        "SETTLEMENTS":"Liquidação",
-        "MANAGEMENT":"Gestão",
-        "COLLECTION_OPTIONS":{
-          "TITLE":"Cobrança"
+        "SETTLEMENTS": "Liquidação",
+        "MANAGEMENT": "Gestão",
+        "COLLECTION_OPTIONS": {
+          "TITLE": "Cobrança"
         },
-      "PRODUCTS":"Produtos"
+        "PRODUCTS": "Produtos"
       }
     },
     "SUPPLIER": {
@@ -1281,7 +1279,7 @@
       },
       "TITLE": "RENDIÇÕES"
     },
-        "NOTIFICATIONS": {
+    "NOTIFICATIONS": {
       "TITLE": "Notificações",
       "MODAL": {
         "TITLE": "Notificação"
@@ -1312,9 +1310,9 @@
         "PAYMENT": "Pagamento"
       }
     },
-     "REVENUE_LIST": {
+    "REVENUE_LIST": {
       "TITLE": "Arrecadações",
-      "FILTERS_TITLE":"Filtrar",
+      "FILTERS_TITLE": "Filtrar",
       "FILTERS": {
         "TITLE": "Filtros",
         "DATE_FROM": "De",
@@ -1430,6 +1428,12 @@
         },
         "IS_ACTIVE": {
           "LABEL": "Ativo"
+        },
+        "DOCUMENTS": {
+          "LABEL": "Documentos",
+          "UPLOAD_BUTTON": "Carregar...",
+          "UPLOAD_CONFIRMED": "✓ Carregado",
+          "ADD_BUTTON": "+ Adicionar Documento"
         }
       }
     }
@@ -1472,7 +1476,6 @@
       "FISCAL_ID": "ID fiscal:",
       "FINISH": "Fim"
     },
-   
     "REVENUE_DETAIL": {
       "TITLE": "Detalhe da Arrecadação",
       "ROWS_PER_PAGE": "Linhas por página",
@@ -1584,5 +1587,4 @@
       }
     }
   }
-  
 }

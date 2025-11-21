@@ -164,6 +164,24 @@ export class ProductService {
     return this.http.patch(patchUrl, {});
   }
 
+  uploadDocumentFile(file: File): Observable<{ filePath: string }> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post<any>(`${this.apiUrl}/documents`, formData).pipe(
+      map(response => {
+        
+        console.log('--- RESPUESTA DE SUBIDA (POST) ---', response);
+
+        if (response && response.filePath) {
+          return response;
+        }
+
+        return { filePath: response };
+      })
+    );
+  }
+
   deleteDocument(productId: number, documentName: string): Observable<Object> {
     const params = new HttpParams()
       .set('insuranceProductId', productId.toString())
@@ -195,9 +213,9 @@ export class ProductService {
     }
     const mappedDocs: ProductDocument[] = (apiProduct.documents || []).map((doc: ApiDocument) => {
       return {
-        description: doc.fileName, // La API llama 'fileName' a lo que nosotros llamamos descripción/nombre visible
-        url: `${this.serverBaseUrl}/files/download-by-token?filename=${doc.filePath}&token=${currentToken}`, // Generamos el link de descarga
-        filePath: doc.filePath // Guardamos el path original
+        description: doc.fileName,
+        url: `${this.serverBaseUrl}/files/download-by-token?filename=${doc.filePath}&token=${currentToken}`,
+        filePath: doc.filePath
       };});
     console.log(`[ProductService Mapeo] ID: ${apiProduct.id}, URL Generada: ${finalLogoUrl}`);
 
@@ -216,30 +234,6 @@ export class ProductService {
     };
   }
 
-  uploadDocumentFile(file: File): Observable<{ filePath: string }> {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    // 1. ELIMINAMOS { responseType: 'text' }
-    // Dejamos que Angular maneje el JSON para que el Interceptor funcione.
-    return this.http.post<any>(`${this.apiUrl}/documents`, formData).pipe(
-      map(response => {
-        
-        console.log('--- RESPUESTA DE SUBIDA (POST) ---', response);
-
-        // AHORA 'response' ya debería estar desencriptado por el interceptor.
-        
-        // Caso A: El backend devuelve un objeto { filePath: "..." }
-        if (response && response.filePath) {
-          return response;
-        }
-
-        // Caso B: El backend devuelve el string directo (nombre del archivo)
-        // (Puede venir como string puro o dentro de un objeto genérico)
-        return { filePath: response };
-      })
-    );
-  }
   private convertBlobToBase64(blob: Blob): Observable<string> {
     const reader = new FileReader();
     const subject = new Subject<string>();

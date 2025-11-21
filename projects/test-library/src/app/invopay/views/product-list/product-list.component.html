@@ -131,7 +131,7 @@
             </div>
 
             <div class="product-details__section" *ngIf="p.documents?.length">
-              <label>Documentación Asociada</label>
+              <label>{{ 'IP.PRODUCTS.FORM.DOCUMENTS.LABEL' | translate }}</label>
               
               <ul class="product-details__docs-list">
                 <li *ngFor="let doc of p.documents">
@@ -245,7 +245,7 @@
             <input type="checkbox" id="create-isActive" class="form-check" formControlName="isActive">
           </div>
           <div class="product-details__section">
-            <label>Documentación</label>
+            <label>{{ 'IP.PRODUCTS.FORM.DOCUMENTS.LABEL' | translate }}</label>
             
             <div class="docs-array-container" formArrayName="documents">
               
@@ -257,7 +257,7 @@
                 
                 <div class="file-input-wrapper">
                   <button type="button" class="file-upload-btn--small" (click)="docInput.click()">
-                    Subir...
+                    {{ 'IP.PRODUCTS.FORM.DOCUMENTS.UPLOAD_BUTTON' | translate }}
                   </button>
                   
                   <input type="file" 
@@ -266,7 +266,7 @@
                          (change)="onDocumentFileSelected($event, createForm, i)">
                   
                   <span *ngIf="docGroup.get('filePath')?.value" class="file-name-preview" style="color: green;">
-                    ✓ Cargado
+                    {{ 'IP.PRODUCTS.FORM.DOCUMENTS.UPLOAD_CONFIRMED' | translate }}
                   </span>
                 </div>
 
@@ -277,7 +277,7 @@
             </div>
 
             <button type="button" class="docs-array-add-btn" (click)="addDocumentRow(createForm)">
-              + Agregar Documento
+              {{ 'IP.PRODUCTS.FORM.DOCUMENTS.ADD_BUTTON' | translate }}
             </button>
           </div>
           <div class="product-details__actions">
@@ -355,7 +355,7 @@
             </app-ip-text-area-input>
           </div>
           <div class="product-details__section">
-            <label>Documentación</label>
+            <label>{{ 'IP.PRODUCTS.FORM.DOCUMENTS.LABEL' | translate }}</label>
             
             <div class="docs-array-container" formArrayName="documents">
               
@@ -363,11 +363,11 @@
                    *ngFor="let docGroup of documentationFormArray(editForm).controls; let i = index" 
                    [formGroupName]="i">
                 
-                <input type="text" class="form-control" formControlName="description" placeholder="Descripción del documento">
+                <input type="text" class="form-control-disabled" formControlName="description" readonly>
                 
-                <div class="file-input-wrapper">
+                <!--<div class="file-input-wrapper">
                   <button type="button" class="file-upload-btn--small" (click)="docInput.click()">
-                    Subir...
+                    {{ 'IP.PRODUCTS.FORM.DOCUMENTS.UPLOAD_BUTTON' | translate }}
                   </button>
                   
                   <input type="file" 
@@ -376,9 +376,9 @@
                          (change)="onDocumentFileSelected($event, editForm, i)">
                   
                   <span *ngIf="docGroup.get('filePath')?.value" class="file-name-preview" style="color: green;">
-                    ✓ Cargado
+                    {{ 'IP.PRODUCTS.FORM.DOCUMENTS.UPLOAD_CONFIRMED' | translate }}
                   </span>
-                </div>
+                </div> -->
 
                 <button type="button" class="docs-array-remove-btn" (click)="removeDocumentRow(editForm, i)">
                   <img src="../../../../assets/icons/unassing.svg" alt="Eliminar fila">
@@ -386,9 +386,9 @@
               </div>
             </div>
 
-            <button type="button" class="docs-array-add-btn" (click)="addDocumentRow(editForm)">
-              + Agregar Documento
-            </button>
+           <!-- <button type="button" class="docs-array-add-btn" (click)="addDocumentRow(editForm)">
+              {{ 'IP.PRODUCTS.FORM.DOCUMENTS.UPLOAD_BUTTON' | translate }}
+            </button>-->
           </div>
 
           <div class="product-details__actions">

@@ -2711,13 +2711,13 @@
     "CREATE_MODAL": {
       "TITLE": "Agregar Nuevo Producto",
       "BUTTONS": {
-        "SAVE": "Guardar Producto"
+        "SAVE": "Guardar"
       }
     },
     "EDIT_MODAL": {
       "TITLE": "Editar Producto",
       "BUTTONS": {
-        "SAVE": "Guardar Cambios"
+        "SAVE": "Guardar"
       }
     },
     "FORM": {
@@ -2750,6 +2750,12 @@
       },
       "IS_ACTIVE": {
         "LABEL": "Activo"
+      },
+      "DOCUMENTS": {
+        "LABEL": "Documentos",
+        "UPLOAD_BUTTON": "Subir...",
+        "UPLOAD_CONFIRMED": "✓ Cargado",
+        "ADD_BUTTON": "+ Agregar Documento"
       }
     }
   }
