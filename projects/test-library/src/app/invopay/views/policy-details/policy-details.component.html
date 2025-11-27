@@ -1,0 +1,280 @@
+<div class="policy-details" *ngIf="!(loadingService.isLoading$ | async)">
+  <app-title-page
+    [title]="'IP.POLICY_DETAILS.TITLE' | translate"
+    [showBackButton]="true"
+    (backButtonClick)="onBackButtonClick()"
+  ></app-title-page>
+
+  <!--Aca irian los controles para cambiar de pestaña-->
+  <div class="policy-details__sections-titles">
+        <!--se ve siempre que se abre la pagina-->
+        <h3
+          class="policy-details__section-title"
+          [class.policy-details__section-title--active]="activeSection === 'policy'"
+          (click)="showPolicySection()"
+        >
+          {{ 'IP.POLICY_DETAILS.SECTION_TITLE' | translate }}
+        </h3>
+        <!--se ven solo cuando la recaudacion esta consolidada-->
+        <!--<h3
+          *ngIf="ispolicyConsolidated"
+          class="policy-details__section-title"
+          [class.policy-details__section-title--active]="activeSection === 'conciliation'"
+          (click)="showConciliationSection()"
+        >
+          {{ 'IP.TABLE.CONSOLIDATED.PAY_IN.CONCILIATION' | translate }}
+        </h3>-->
+    </div>
+
+  <!--Esta seria la pestaña/seccion 1-->
+  <div *ngIf="showPolicy">
+    <form class="policy-details__form" [formGroup]="detailedInfoForm">
+      <!-- FILA 1: Cliente y Broker -->
+      <div class="policy-details__row">
+        <!--Datos Cliente-->
+        <div class="policy-details__card-row">
+          <h4 class="policy-details__subtitle">
+            {{ "IP.POLICY_DETAILS.SECTION_1" | translate }}
+          </h4>
+          <div class="policy-details__inputs">
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="clientFullName"
+                [control]="getControl('clientFullName')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.CLIENT' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="clientEmail"
+                [control]="getControl('clientEmail')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.CLIENT_EMAIL' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+          </div>
+        </div>
+
+        <div class="policy-details__card-row">
+          <h4 class="policy-details__subtitle">
+            {{ "IP.POLICY_DETAILS.SECTION_4" | translate }}
+          </h4>
+          <div class="policy-details__inputs">
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="commissionSchemeName"
+                [control]="getControl('commissionSchemeName')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.CLIENT' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="percentageUsed"
+                [control]="getControl('percentageUsed')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.PERCENTAGE' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILA 2: Datos de la Póliza y Esquemas de Comisiones -->
+      <div class="policy-details__row">
+        <!--Datos de la Poliza-->
+        <div class="policy-details__card-row">
+          <h4 class="policy-details__subtitle">
+            {{ "IP.POLICY_DETAILS.SECTION_3" | translate }}
+          </h4>
+          <div class="policy-details__inputs">
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="policyNumber"
+                [control]="getControl('policyNumber')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.POLICY_NUMBER' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="productName"
+                [control]="getControl('productName')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.PRODUCT' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="creationDate"
+                [control]="getControl('creationDate')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.CREATION_DATE' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="emissionDate"
+                [control]="getControl('emissionDate')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.EMISSION_DATE' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="expirationDate"
+                [control]="getControl('expirationDate')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.EXPIRATION_DATE' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="brokerPremiumValue"
+                [control]="getControl('brokerPremiumValue')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.PREMIUM_VALUE' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="installmentsCount"
+                [control]="getControl('installmentsCount')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.COUNT' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+          </div>
+        </div>
+
+        <!--Esquemas de Comisiones-->
+        <!--Datos del broker-->
+        <div
+          class="policy-details__card-row"
+          *ngIf="
+            userType == 'ENTERPRISE_USER' || userType == 'ENTERPRISE_MANAGER'
+          "
+        >
+          <h4 class="policy-details__subtitle">
+            {{ "IP.POLICY_DETAILS.SECTION_2" | translate }}
+          </h4>
+          <div class="policy-details__inputs">
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="brokerFullName"
+                [control]="getControl('brokerFullName')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.CLIENT' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="brokerEmail"
+                [control]="getControl('brokerEmail')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.CLIENT_EMAIL' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+
+            <div class="policy-details__input-wrapper">
+              <app-ip-input
+                inputId="brokerCategory"
+                [control]="getControl('brokerCategory')"
+                [label]="'IP.POLICY_DETAILS.INPUTS.CATEGORY' | translate"
+                type="text"
+              ></app-ip-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Tabla de plan de pagos -->
+    <div class="policy-details__card">
+      <h4 class="policy-details__subtitle policy-details__subtitle--card">
+        {{ "IP.POLICY_DETAILS.SECTION_5" | translate }}
+      </h4>
+      <div class="policy-details__table-view">
+        <app-table
+          *ngIf="tableData.length > 0"
+          [propertyOrder]="propertyOrder"
+          [data]="tableData"
+          [keyTranslate]="keyTranslate"
+          [tableStyle]="'invopay'"
+          [initTable]="initTable"
+          [scroll]="scroll"
+          (action)="onAction($event)"
+          (selectedItemsChange)="onSelectedItemsChange($event)"
+        >
+        </app-table>
+      </div>
+      <!--(sort)="onSort($event)"-->
+
+      <!--Mostrar si es mobile-->
+      <!--Hacer card la info para mobile-->
+      <div class="policy-details__card-view" *ngFor="let item of tableData">
+        <div class="policy-details__card-header">
+          <span class="policy-details__card-id"
+            >N°{{ item.installmentNumber }}</span
+          >
+        </div>
+
+        <div class="policy-details__card-row-mobile">
+          <label class="policy-details__card-label--amount">{{
+            "IP.POLICY_DETAILS.INSTALLMENTVALUE" | translate
+          }}</label>
+          <span
+            class="policy-details__card-value policy-details__card-value--amount"
+            >{{ item.installmentValue }}</span
+          >
+        </div>
+
+        <div class="policy-details__card-row-mobile">
+          <label class="policy-details__card-label">{{
+            "IP.POLICY_DETAILS.DUEDATE" | translate
+          }}</label>
+          <span class="policy-details__card-value">{{
+            item.dueDate | date : "dd/MM/yyyy"
+          }}</span>
+        </div>
+
+        <div class="policy-details__card-row-mobile">
+          <label class="policy-details__card-label--status">{{
+            "IP.POLICY_DETAILS.STATUS" | translate
+          }}</label>
+          <span class="policy-details__card-value--status">{{
+            item.status
+          }}</span>
+        </div>
+
+        <div class="policy-details__card-row-mobile">
+          <label class="policy-details__card-label--amount">{{
+            "IP.POLICY_DETAILS.BROKERCOMMISION" | translate
+          }}</label>
+          <span class="policy-details__card-value--amount">{{
+            item.brokerCommission
+          }}</span>
+        </div>
+
+        <div class="policy-details__card-row-mobile">
+          <label class="policy-details__card-label">{{
+            "IP.POLICY_DETAILS.PAYMENTDATE" | translate
+          }}</label>
+          <span class="policy-details__card-value">{{
+            item.paymentDate | date : "dd/MM/yyyy"
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

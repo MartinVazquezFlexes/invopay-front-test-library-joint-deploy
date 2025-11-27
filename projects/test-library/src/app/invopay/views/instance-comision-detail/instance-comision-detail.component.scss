@@ -1,0 +1,206 @@
+@import "../../../shared/mixins/generalText.scss";
+@import "../../../shared/mixins/utils.scss";
+@import "../../../shared/mixins/sizes.scss";
+@import '../../../shared/mixins/variables/color.scss';
+
+.instance-detail,
+.card-container,
+.card,
+.card-header,
+.card-title,
+.card-body,
+.info-fields,
+app-ip-input,
+app-ip-select-input,
+app-ip-instance-detail-info {
+  font-family: 'Poppins', 'Loos', Arial, sans-serif !important;
+}
+
+.instance-detail {
+  background: transparent;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0.4rem;
+  margin: 0;
+  overflow-x: hidden;
+  
+  &__title, 
+  &__card-title,
+  button,
+  input,
+  select,
+  textarea {
+    font-family: 'Poppins', 'Loos', Arial, sans-serif !important;
+  }
+  
+  ::ng-deep {
+    .form-control,
+    .form-select,
+    .form-floating > label,
+    .form-floating > .form-control,
+    .form-floating > .form-select {
+      font-family: 'Poppins', 'Loos', Arial, sans-serif !important;
+    }
+  }
+
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    flex: 1;
+    padding: 20px 40px;
+    box-shadow: 0 5px 10px rgba(5, 5, 5, 0.1);
+    box-sizing: border-box;
+    overflow: hidden;
+
+    &-header {
+      padding: 0.5rem 1.5rem 1rem;
+      background: $app-component-bg;
+      border-bottom: none;
+      
+      .card-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: $primary-color;
+        margin: 0;
+        font-family: $font-family-primary;
+      }
+    }
+
+    &-body {
+      padding: 1.5rem;
+    }
+  }
+
+  .info-fields {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 100%;
+    
+    app-ip-input,
+    app-ip-select-input {
+      width: 100%;
+    }
+  }
+
+  .related-section {
+    margin-bottom: 2rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-subtitle {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: $primary-color-text;
+      margin: 0 0 1rem 0;
+      font-family: $font-family-primary;
+    }
+
+    .items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+
+      // Estilos del scrollbar
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $app-lines;
+        border-radius: 3px;
+        
+        &:hover {
+          background: darken($app-lines, 10%);
+        }
+      }
+
+      // Para Firefox
+      scrollbar-width: thin;
+      scrollbar-color: $app-lines transparent;
+
+      .item {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.6rem;
+        background: #f8f9fa;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid $app-lines;
+        flex-shrink: 0;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: #f0f1f3;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .badge {
+          font-size: 0.75rem;
+          font-weight: 500;
+          padding: 0.35rem 0.75rem;
+          border-radius: 12px;
+          white-space: nowrap;
+          color: $primary-color-text;
+        }
+      }
+    }
+
+    .no-items {
+      font-size: 0.875rem;
+      color: $secondary-color-text;
+      font-style: italic;
+      margin: 0.5rem 0 0;
+      padding: 1rem;
+      text-align: center;
+      background: #f8f9fa;
+      border-radius: 6px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+
+    .info-fields {
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      padding: 1rem;
+      
+      &-header {
+        padding: 0.7rem;
+      }
+
+      &-body {
+        padding: 0;
+      }
+    }
+
+    .related-section {
+      .items-list {
+        max-height: 300px;
+      }
+    }
+  }
+}

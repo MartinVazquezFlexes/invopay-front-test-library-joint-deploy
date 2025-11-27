@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   userProfile?: IpUserProfile;
   currentLang: string = 'es';
   
-  /*Descomentar si a rodri le gusta cuando se lo mostremos
+  //Descomentar si a rodri le gusta cuando se lo mostremos
   
   //control
   languageControl = new FormControl('es');
@@ -29,14 +29,14 @@ export class NavbarComponent implements OnInit {
   languageOptions = [
     { value: 'es', label: 'ES' },
     { value: 'pt', label: 'PT' }
-  ];*/
+  ];
 
   ngOnInit(): void {
     // Cargar idioma guardado
-    /*const savedLang = localStorage.getItem('language') || 'es';
+    const savedLang = localStorage.getItem('language') || 'es';
     this.currentLang = savedLang;
     this.languageControl.setValue(savedLang);
-    this.translate.use(savedLang);*/
+    this.translate.use(savedLang);
 
     this.ipProfileService.getUserProfile().subscribe({
       next: (profile) => {

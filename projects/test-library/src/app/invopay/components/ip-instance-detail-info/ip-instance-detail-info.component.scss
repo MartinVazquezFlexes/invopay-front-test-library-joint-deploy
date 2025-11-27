@@ -1,0 +1,171 @@
+@import "../../../shared/mixins/generalText.scss";
+@import "../../../shared/mixins/sizes.scss";
+@import "../../../shared/mixins/variables/color.scss";
+
+.tabs-container,
+.related-data__tabs,
+.related-data__tab,
+.content-area,
+.card,
+.card-header,
+.card-title,
+.card-body,
+app-table,
+app-mobile-card-list,
+app-no-data {
+  font-family: 'Poppins', 'Loos', Arial, sans-serif !important;
+}
+
+::ng-deep {
+  .form-control,
+  .form-select,
+  .form-floating > label,
+  .form-floating > .form-control,
+  .form-floating > .form-select {
+    font-family: 'Poppins', 'Loos', Arial, sans-serif !important;
+  }
+}
+
+.content-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  flex: 1;
+  padding: 0;
+  box-shadow: 0 5px 10px rgba(5, 5, 5, 0.1);
+  box-sizing: border-box;
+  overflow: hidden;
+
+  &-header {
+    padding: 1rem 1.5rem 1rem;
+    background: $app-component-bg;
+    border-bottom: none;
+    
+    .card-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: $primary-color;
+      margin: 0;
+      font-family: $font-family-primary;
+    }
+  }
+
+  &-body {
+    padding: 0;
+  }
+}
+
+
+
+// Tabs Navigation
+.related-data__tabs {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0 20px;
+  margin-bottom: 0;
+  border-bottom: 1px solid $app-lines;
+}
+
+.related-data__tab {
+  color: $secondary-color-text;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: $font-family-primary;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+  bottom: -1px;
+  white-space: nowrap;
+
+  &:hover {
+    background: #f0f7ff;
+    color: #005a9e;
+  }
+
+  &--active {
+    color: #0071ce;
+    background: #f0f7ff;
+    border-bottom: 2px solid #0071ce;
+    font-weight: 600;
+  }
+}
+
+.no-items {
+  font-size: 0.875rem;
+  color: $secondary-color-text;
+  font-style: italic;
+  margin: 0.5rem 0 0;
+  padding: 1rem;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+// Responsive: Show table on desktop, cards on mobile
+app-table {
+  display: block !important;
+}
+
+app-mobile-card-list {
+  display: none !important;
+}
+
+@media (max-width: 1024px) {
+  app-table {
+    display: none !important;
+  }
+
+  app-mobile-card-list {
+    display: block !important;
+  }
+  .card {
+    &-header {
+      padding: 0.75rem 1rem;
+    }
+
+    &-body {
+      padding: 1rem;
+    }
+  }
+
+  .related-data__tabs {
+    gap: 15px;
+    padding: 0 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $app-lines;
+      border-radius: 2px;
+    }
+  }
+
+  .related-data__tab {
+    padding: 10px 16px;
+    font-size: 0.8125rem;
+  }
+}

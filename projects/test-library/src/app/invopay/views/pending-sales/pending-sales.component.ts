@@ -7,6 +7,7 @@ import { RevenueService } from '../../services/revenue.service';
 import { PendingRevenuesResponse } from '../../interface/revenueResponse';
 import { PendingRevenue } from '../../interface/pendingRevenue';
 import { LoadingService } from '../../../shared/services/loading.service';
+import { CardConfig } from '../../../shared/models/movile-table';
 
 @Component({
   selector: 'app-pending-sales',
@@ -68,10 +69,30 @@ export class PendingSalesComponent {
   
     currentProduct:string =''
     currentBroker :string =''
-  
-  
-  
-  
+
+    configCardMobile: CardConfig = {
+      headerKey: '',
+      fields: []
+    };
+
+   handleCardAction(event: any): void {
+      console.log('Evento recibido:', event);
+      
+      const item = event.item || event;
+      const action = event.action || 'detail';
+      
+      console.log('Acción:', action, 'Item:', item);
+      
+      if (action === 'detail') {
+        const id = item.realSale?.id;
+        if (id) {
+
+          this.router.navigate(['sales-detail', id], { state: { type: 'pending-sales-component' } });
+        }
+      }
+    }
+ 
+
     ngOnInit(): void {
         if (!this.saleType) {
             this.saleType = this.route.snapshot.data['type'] || 'pending';
@@ -259,9 +280,8 @@ export class PendingSalesComponent {
         this.stateService.saveState(state)
         */
 
-           // this.router.navigate(['sales-detail',id]);
-            this.router.navigate(['sales-detail', id], { state: { type: 'pending-sales-component' } });
-
+          this.router.navigate(['sales-detail', id], { state: { type: 'pending-sales-component' } });
+        
 
       }
     }
@@ -391,14 +411,15 @@ export class PendingSalesComponent {
     }  
     }
     
+    
     onMobileMenuAction(accion: string, revenue: any) {
       console.log('Action', accion);
       console.log('Card :', revenue);
       const id = revenue.id
       console.log(id)
-    if (accion === 'detail') {
-      this.router.navigate(['sales-detail',id]);
-    }
+      if (accion === 'detail') {
+        this.router.navigate(['sales-detail',id]);
+      }
     }
   
     @HostListener('window:resize', ['$event'])
@@ -422,10 +443,6 @@ export class PendingSalesComponent {
         }).format(value);
     }
   
-
-  
- 
-    
     loadTitleMap() {
             const subsTitles = this.translate.get([
               'NEW_VAR.BROKER_NAME',
@@ -446,6 +463,21 @@ export class PendingSalesComponent {
                 ['monedaYmonto', translations['IP.ACCOUNTABILITY-DETAILS.AMOUNT']],
                 ['vencimiento', translations['IP.ASSIGN-PROJECTS.EXPIRATION']],
               ]);
+             this.configCardMobile= {
+              headerLabel: '#',
+              headerKey: 'id',
+              showActionButton: true,
+              actions: ['detail'],
+              fields: [
+                { label: translations['NEW_VAR.INSTALLMENT_NUMBER'], key: 'cuota' }, 
+                { label: translations['NEW_VAR.CLIENT'], key: 'cliente' }, 
+                { label: translations['NEW_VAR.PRODUCT_NAME'], key: 'producto' }, 
+                { label: translations['NEW_VAR.BROKER_NAME'], key: 'corredor' }, 
+                { label: translations['NEW_VAR.POLICY_NUMBER'], key: 'nroPoliza' }, 
+                { label: translations['IP.ASSIGN-PROJECTS.EXPIRATION'], key: 'vencimiento' }, 
+                { label: translations['IP.ACCOUNTABILITY-DETAILS.AMOUNT'], key: 'monedaYmonto', isAmount: true }, 
+              ]
+            }
             });
             this.subscriptions.add(subsTitles);
       }

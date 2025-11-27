@@ -1,0 +1,54 @@
+<div class="tabs-container">
+  <div class="related-data__tabs">
+    <div 
+      class="related-data__tab" 
+      [class.related-data__tab--active]="activeTab === 'products'"
+      (click)="setActiveTab('products')">
+      {{ 'IP.COMISSION_SCHEME.PRODUCTS' | translate }}
+    </div>
+    <div 
+      class="related-data__tab" 
+      [class.related-data__tab--active]="activeTab === 'brokers'"
+      (click)="setActiveTab('brokers')">
+      {{ 'IP.COMISSION_SCHEME.BROKERS' | translate }}
+    </div>
+    <div 
+      class="related-data__tab" 
+      [class.related-data__tab--active]="activeTab === 'policies'"
+      (click)="setActiveTab('policies')">
+      {{ 'IP.COMISSION_SCHEME.POLICIES' | translate }}
+    </div>
+  </div>
+  
+  <div class="content-area">
+    <!-- Datos Relacionados Card -->
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{ 'IP.COMISSION_SCHEME.RELATED_DATA' | translate }}</h4>
+      </div>
+      <div class="card-body">
+        <!-- Desktop: Shared Table Component -->
+        <app-table
+          *ngIf="getCurrentTitlesFile() && getCurrentTitlesFile().size > 0 && getCurrentData().length > 0"
+          [data]="getCurrentData()"
+          [initTable]="false"
+          [propertyOrder]="getCurrentConfig().columns"
+          [titlesFile]="getCurrentTitlesFile()"
+          keyTranslate="IP.TABLE"
+          [tableStyle]="'commissions'">
+        </app-table>
+
+        <!-- Mobile: Card List Component -->
+        <app-mobile-card-list
+          *ngIf="mobileCardConfig && getCurrentData().length > 0"
+          [data]="getCurrentData()"
+          [config]="mobileCardConfig">
+        </app-mobile-card-list>
+
+        <!-- No Data Component -->
+        <app-no-data *ngIf="getCurrentData().length === 0">
+        </app-no-data>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<app-ip-modal-mobile
+  [title]="'Filtrar polizas' | translate"
+  [showTitle]="true"
+  [showCloseModal]="true"
+  (close)="onClose()"
+>
+  <div class="filters-dialog-content">
+    
+    <!-- MENSAJE DE VALIDACIÓN -->
+    <div *ngIf="showValidationError" class="validation-error">
+      <img src="../../../../assets/new-styles/icons/warning.svg" alt="warning">
+      <span>{{ 'IP.FILTERS.VALIDATION.AT_LEAST_ONE' | translate }}</span>
+    </div>
+    
+    <div class="filters-container">
+      
+      <!-- Select Producto -->
+      <div class="filter-field">
+        <app-ip-select-input 
+          [withSearch]="true"
+          [control]="data.controlsForm.controls.productFilter"
+          [options]="data.products"
+          [label]="'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate"
+          [placeholder]="'NEW_VAR.SELECT_PRODUCT' | translate"
+        ></app-ip-select-input> 
+      </div>
+      
+      <!-- Select Cliente -->
+      <div class="filter-field">
+        <app-ip-select-input 
+          [withSearch]="true"
+          [control]="data.controlsForm.controls.clientFilter"
+          [options]="data.clients"
+          [label]="'NEW_VAR.CLIENT' | translate"
+          [placeholder]="'NEW_VAR.SELECT_CLIENT' | translate"
+        ></app-ip-select-input> 
+      </div>
+      
+      <!-- Select Broker (solo assurance) -->
+      <div *ngIf="data.userType === 'assurance'" class="filter-field">
+        <app-ip-select-input 
+          [withSearch]="true"
+          [control]="data.controlsForm.controls.brokerFilter"
+          [options]="data.brokers"
+          [label]="'IP.SETTLEMENTS.DETAILS.BROKER_NAME' | translate"
+          [placeholder]="'IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.SELECT_BROKER' | translate"
+        ></app-ip-select-input>  
+      </div>
+
+      <!-- Fecha Desde -->
+      <div class="filter-field">
+        <app-ip-date-input 
+          [label]="'IP.FROM' | translate"  
+          [control]="data.controlsForm.controls.dateStart" 
+          [max]="data.maxStart"
+        ></app-ip-date-input>
+      </div>
+
+      <!-- Fecha Hasta -->
+      <div class="filter-field">
+        <app-ip-date-input 
+          [label]="'IP.TO' | translate"  
+          [control]="data.controlsForm.controls.dateEnd" 
+          [max]="data.maxEnd" 
+          [min]="data.minEnd"
+        ></app-ip-date-input>
+      </div>
+      
+    </div>
+
+    <!-- BOTONES DE ACCIÓN -->
+    <div class="dialog-actions">
+
+      <app-ip-button-modal  [typeBtn]="'cancel'" (click)="onClear()">
+        {{'IP.NOTIFICATIONS.MODAL.CLEAR'|translate}}
+      </app-ip-button-modal>
+      <app-ip-button-modal [typeBtn]="'cancel'" (click)="onClose()">
+        {{'IP.GO_OUT'|translate}}
+      </app-ip-button-modal>
+      
+      <app-ip-button-modal [disabled]="!canSearch" [typeBtn]="'action'" (click)="onSearch()">
+        {{'IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.APPLY'|translate}}
+      </app-ip-button-modal>
+    </div>
+
+  </div>
+</app-ip-modal-mobile>

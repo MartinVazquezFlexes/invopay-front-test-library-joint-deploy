@@ -26,6 +26,14 @@
           </a>
         </div>
       </div>
+         <a *ngIf="userType==='BROKER_MANAGER'" class="menu-item" routerLink="/invopay/policy-list/broker" routerLinkActive="active" title="Polizas">
+        <img src="../../../assets/icons/settlements-icon.svg" alt="Polizas">
+        <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'NEW_VAR.POLICIES' | translate }}</span>
+        </a>
+        <a *ngIf="userType==='ENTERPRISE_MANAGER'" class="menu-item" routerLink="/invopay/policy-list/assurance" routerLinkActive="active" title="Polizas">
+        <img src="../../../assets/icons/settlements-icon.svg" alt="Polizas">
+        <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'NEW_VAR.POLICIES' | translate }}</span>
+        </a>
 
       <div class="menu-item-group">
         <div class="menu-item has-submenu" [class.open]="notificationsSubmenuOpen" (click)="toggleNotificationsSubmenu()" title="Notificaciones" *ngIf="userType !== 'ENTERPRISE_USER'">
@@ -47,12 +55,22 @@
         <img src="../../../assets/icons/sell.svg" alt="Productos">
         <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.SIDENAV.OPTIONS.PRODUCTS' | translate }}</span>
       </a>
-
-      <a class="menu-item"  title="Esquemas" routerLink="/invopay/schemes-list" routerLinkActive="active"  *ngIf="userType === 'ENTERPRISE_USER' || userType === 'ENTERPRISE_MANAGER'">
-        <img src="../../../assets/new-styles/icons/status-transitions.svg" alt="Esquemas">
-        <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.SCHEMES.TITLE' | translate }}</span>
+      <div class="menu-item-group">
+        <div class="menu-item has-submenu" [class.open]="schemeSubmenuOpen" (click)="toggleSchemeSubmenu()" title="Esquemas" *ngIf="userType === 'ENTERPRISE_USER' || userType === 'ENTERPRISE_MANAGER'">
+          <img src="../../../assets/new-styles/icons/status-transitions.svg" alt="Esquemas" class="bell-icon">
+          <span class="label" *ngIf="!isCollapsed" style="color:#0071CE;">{{ 'IP.SCHEMES.TITLE' | translate }}</span>
+          <span class="arrow" *ngIf="!isCollapsed">▼</span> 
+        </div>
+        
+        <div class="submenu" *ngIf="schemeSubmenuOpen && !isCollapsed">
+          <a class="menu-item"  title="Esquemas" routerLink="/invopay/schemes-list" routerLinkActive="active"  *ngIf="userType === 'ENTERPRISE_USER' || userType === 'ENTERPRISE_MANAGER'">
+        <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.SCHEMES.LIST' | translate }}</span>
       </a>
-
+      <a class="menu-item"  title="Instancias" routerLink="/invopay/schemes-instances-list" routerLinkActive="active"  *ngIf="userType === 'ENTERPRISE_USER' || userType === 'ENTERPRISE_MANAGER'">
+        <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TITLE' | translate }}</span>
+      </a>
+        </div>
+      </div>
       <a class="menu-item"  title="Comisiones">
         <img src="../../../assets/icons/finances-icon.svg" alt="Comisiones">
         <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.SIDENAV.OPTIONS.PRODUCTION' | translate }}</span>

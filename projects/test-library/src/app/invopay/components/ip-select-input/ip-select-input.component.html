@@ -36,10 +36,10 @@
     [placeholder]="placeholder"
   >
     <mat-option *ngIf="withSearch">
-      <!-- <ngx-mat-select-search 
+      <ngx-mat-select-search 
         [placeholderLabel]="'IP.FILTERS.SEARCH' | translate" [formControl]="searchCtrl"
         [noEntriesFoundLabel]="'IP.FILTERS.SEARCH_NO_RESULTS' | translate"
-      /> -->
+      ></ngx-mat-select-search>
     </mat-option>
     <mat-option *ngIf="noneOption">{{ 'IP.SELECT-INPUT.NONE-OPTION' | translate }}</mat-option>
     <mat-option *ngFor="let option of filteredOptions | async" [value]="option.value">

@@ -45,13 +45,15 @@ $backgrounds-color: #D9D9D9;
     box-sizing: border-box;
   }
   &__content {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+    margin-bottom: 20px;
     display: flex;
-    width: 100%;
     flex-direction: column;
-    gap: 15px;
-    padding: 0;
-    box-sizing: border-box;
-    margin-top: 5px; /* Space between title and content */
+    gap: 20px;
+    overflow: hidden;
   }
 
   /* Let ip-title-mobile handle its own styling */
@@ -108,14 +110,11 @@ $backgrounds-color: #D9D9D9;
   }
 
   &__filters {
-    background: $app-white;
-    border-radius: $card-border-radius;
     width: 100%;
-    padding: 15px 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    overflow: hidden;
-
+    padding: 0;
+    background: transparent;
+    overflow: visible;
+   
     @media (max-width: 767px) {
       display: none;
     }
@@ -149,6 +148,7 @@ $backgrounds-color: #D9D9D9;
     width: 100%;
     overflow-x: auto;
     padding: 10px 0;
+    padding-right: 20px;
     -webkit-overflow-scrolling: touch;
     
     &::-webkit-scrollbar {
@@ -309,24 +309,22 @@ $backgrounds-color: #D9D9D9;
   }
 
   &__table-container {
-    background: $app-white;
-    border-radius: $card-border-radius;
     width: 100%;
-    padding: 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-
-    &--desktop {
-      display: block;
-    }
+    overflow-x: auto;
+    border: none;
+    margin: 0;
   }
 
   &__cards-container {
     display: none;
+    border: none;
+    box-shadow: none;
 
     &--mobile {
       @include sm {
         display: block;
+        border: none;
+        box-shadow: none;
       }
     }
   }
@@ -334,6 +332,8 @@ $backgrounds-color: #D9D9D9;
   &__body {
     overflow-x: auto;
     width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   &__filters-row {

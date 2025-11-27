@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from '../../shared/models/MenuItem';
 
@@ -11,8 +11,10 @@ export class SidebarComponent {
   @Input() isCollapsed = false;
   revenueSubmenuOpen = false;
   notificationsSubmenuOpen = false;
+  schemeSubmenuOpen = false;
 
   constructor(private translate: TranslateService) {}
+
 
   get userType(): string | null {
     return sessionStorage.getItem('userType');
@@ -37,6 +39,11 @@ export class SidebarComponent {
   toggleNotificationsSubmenu() {
     if (!this.isCollapsed) {
       this.notificationsSubmenuOpen = !this.notificationsSubmenuOpen;
+    }
+  }
+  toggleSchemeSubmenu() {
+    if (!this.isCollapsed) {
+      this.schemeSubmenuOpen = !this.schemeSubmenuOpen;
     }
   }
 }

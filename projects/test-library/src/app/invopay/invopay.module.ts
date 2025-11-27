@@ -33,6 +33,12 @@ import { BrokerSettlementCommentsComponent } from './views/broker-settlement-com
 import { BrokerInvoiceCommentsComponent } from './views/broker-invoice-comments/broker-invoice-comments.component';
 import { AdminSettlementCommentsComponent } from './views/admin-settlement-comments/admin-settlement-comments.component';
 import { AdminInvoiceCommentsComponent } from './views/admin-invoice-comments/admin-invoice-comments.component';
+import { InstanceComisionDetailComponent } from './views/instance-comision-detail/instance-comision-detail.component';
+import { IpInstanceDetailInfoComponent } from './components/ip-instance-detail-info/ip-instance-detail-info.component';
+import { SchemeInstanceComponent } from './views/scheme-instance/scheme-instance.component';
+import { PolicyListComponent } from './views/policy-list/policy-list.component';
+import { PolicyListFiltersModalDialogComponent } from './components/policy-list-filters-modal-dialog/policy-list-filters-modal-dialog.component';
+
 
 
 @NgModule({
@@ -48,7 +54,10 @@ import { AdminInvoiceCommentsComponent } from './views/admin-invoice-comments/ad
         BrokerInvoiceCommentsComponent,
         AdminSettlementCommentsComponent,
         AdminInvoiceCommentsComponent,
-
+        InstanceComisionDetailComponent,
+        IpInstanceDetailInfoComponent,
+        SchemeInstanceComponent,
+        PolicyListFiltersModalDialogComponent,
     ],
     imports: [
         CommonModule,

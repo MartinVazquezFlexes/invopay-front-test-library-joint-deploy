@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import FilterValues from '../../interfaces/ip-filter-values';
 import { filter } from 'rxjs';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import FilterValues from '../../interface/ip-filter-values';
 
 @Component({
   standalone: true,

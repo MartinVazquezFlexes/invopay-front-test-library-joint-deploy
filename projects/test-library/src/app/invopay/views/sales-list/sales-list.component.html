@@ -1,8 +1,5 @@
 <form [formGroup]="controlsForm">
 
-
-
-
    <app-title-page *ngIf="!isMobile" [isMobile]="isMobile" [title]="'IP.SIDENAV.OPTIONS.SALES' | translate"></app-title-page>
     <div *ngIf="isMobile" class="mobile-header">
             <app-title-page [isMobile]="isMobile" [title]="'IP.SIDENAV.OPTIONS.SALES' | translate"></app-title-page>
@@ -168,7 +165,7 @@
 
         <div class="card-paginator"  *ngIf="sales.length>5" >
             <div class="paginator-controls">
-                    <app-ip-select-input 
+                    <app-ip-select-input *ngIf="!isMobile"
                     [placeholder]="itemsPerpage.toString()"
                     [control]="this.controlsForm.controls.rowPaginator"
                     [options]="rowsCombo"

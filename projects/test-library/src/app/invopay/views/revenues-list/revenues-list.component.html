@@ -1,4 +1,5 @@
 
+
 <form [formGroup]="controlsForm">
   <app-title-page *ngIf="!isMobile" [isMobile]="isMobile" [title]="'IP.SIDENAV.OPTIONS.PAY_IN' | translate"></app-title-page>
 
@@ -9,8 +10,6 @@
                 {{'IP.FILTERS_MODAL.FILTER' | translate}}    
             </button>
         </div>
-
-
 
   <div class="card-table-filters">
     <div class="card-body">
@@ -55,7 +54,7 @@
           </div>
 
            <div class="date-wrapper">
-              <button class="search" (click)="onClearFilters()">
+              <button class="clean" (click)="onClearFilters()">
                   <img src="../../../../assets/new-styles/icons/cleaning.svg">
               </button>
           </div>
@@ -87,7 +86,18 @@
 
     </div>
     <div *ngIf="isMobile" class="card-mobile">
+
+            <!--  TODO : implement mobile card and clean css
+        <app-mobile-card-list
+                  [data]="tableRevDto"
+                  [config]="configCardMobile"
+                  [showNoData]="tableRevDto.length === 0"
+                  (cardAction)="handleCardAction($event)">
+        </app-mobile-card-list>
+          -->
+
         <div   class="payment-card-mobile-container" *ngFor="let revenue of tableRevDto; let i = index">
+        
             <div class="payment-card-mobile-data">
             <div class="card-header-mobile">
             <span class="card-id-mobile">#{{ revenue.fila }}</span>
@@ -133,12 +143,11 @@
         <app-no-data *ngIf="revenues.length < 1"></app-no-data>
         </div>
     </div>
- 
-  
+
     <div class="card-paginator"  *ngIf="revenues.length>5">
 
       <div class="paginator-controls">
-        <app-ip-select-input 
+        <app-ip-select-input *ngIf="!isMobile"
         [placeholder]="this.itemsPerpage.toString()"
         [control]="this.controlsForm.controls.rowPaginator"
         [options]="rowsCombo"

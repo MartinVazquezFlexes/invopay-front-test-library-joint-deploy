@@ -40,12 +40,16 @@ import { AmountFormatPipe } from './shared/Utils/amount-format-pipe.pipe';
 import { CurrencySymbolPipe } from './shared/Utils/currency-simbol-pipe';
 import { CustomDatePipe } from './shared/Utils/pipeCustomDate';
 import { IpSearchInputComponent } from "./invopay/components/ip-search-input/ip-search-input.component";
+import { PolicyListComponent } from './invopay/views/policy-list/policy-list.component';
+import { PolicyDetailsComponent } from './invopay/views/policy-details/policy-details.component';
+import { IpFiltersComponent } from "./invopay/components/ip-filters/ip-filters.component";
 
 
 
 
 @NgModule({
-  declarations: [AppComponent,NavbarComponent,SidebarComponent,MainLayoutComponent, PaymentsEntitiesListComponent, InsuranceNotificationTrayComponent, NotificationTrayComponent, NotificationTrayComponent, BrokerNotificationTrayComponent, SchemesListComponent, ModalSchemaComponent,TitlePageComponent,FilterModalMobileComponent,RevenueDetailComponent,RevenuesListComponent,SalesListComponent,SalesDetailsComponent,PendingSalesComponent],
+  declarations: [AppComponent,NavbarComponent,SidebarComponent,MainLayoutComponent, PaymentsEntitiesListComponent, InsuranceNotificationTrayComponent, NotificationTrayComponent, NotificationTrayComponent, BrokerNotificationTrayComponent, SchemesListComponent, ModalSchemaComponent,TitlePageComponent,FilterModalMobileComponent,RevenueDetailComponent,RevenuesListComponent,SalesListComponent,SalesDetailsComponent,PendingSalesComponent, PolicyDetailsComponent, PolicyListComponent]
+,
 
   imports: [
     BrowserModule,
@@ -66,7 +70,7 @@ import { IpSearchInputComponent } from "./invopay/components/ip-search-input/ip-
     InvopayModule,
     AdditionalFiltersModalComponent,
     SharedModule,
-    IpSearchInputComponent
+    IpSearchInputComponent,
 ],
   providers: [DatePipe,AmountFormatPipe,CurrencySymbolPipe,CustomDatePipe,DecryptionService,
   {provide:HTTP_INTERCEPTORS,

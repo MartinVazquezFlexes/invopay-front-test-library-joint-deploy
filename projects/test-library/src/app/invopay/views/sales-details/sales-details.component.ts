@@ -125,7 +125,7 @@ isMobile: any;
             return this.service.getSaleByInstallmentId(this.saleId);
           }
           else{
-            console.log("get by sale overdue")
+            console.log("get by sale ")
             return this.service.getSaleById(this.saleId);
           }
         })

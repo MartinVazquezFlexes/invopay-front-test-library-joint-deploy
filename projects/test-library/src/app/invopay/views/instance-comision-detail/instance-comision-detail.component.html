@@ -1,0 +1,82 @@
+<div class="instance-detail" *ngIf="!(loadingService.isLoading$ | async)">
+  <app-ip-title-mobile
+    [title]="'IP.COMISSION_SCHEME.INSTANCE_DETAIL' | translate"
+    [back]="true"
+    (backClick)="onBack()">
+  </app-ip-title-mobile>
+
+  <div class="card-container">
+    <!-- Información General -->
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{ 'IP.COMISSION_SCHEME.GENERAL_INFO' | translate }}</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="form" class="info-fields">
+          <!-- Nombre -->
+          <app-ip-input
+            inputId="name"
+            [control]="nameControl"
+            [label]="'IP.COMISSION_SCHEME.NAME' | translate"
+            type="text">
+          </app-ip-input>
+
+          <!-- Tipo de Esquema -->
+          <app-ip-input
+            inputId="schemeType"
+            [control]="schemeTypeControl"
+            [label]="'IP.COMISSION_SCHEME.SCHEME_TYPE' | translate"
+            type="text">
+          </app-ip-input>
+
+          <!-- Ámbito de Regla -->
+          <app-ip-input
+            inputId="ruleScope"
+            [control]="ruleScopeControl"
+            [label]="'IP.COMISSION_SCHEME.RULE_SCOPE' | translate"
+            type="text">
+          </app-ip-input>
+
+          <!-- Categoría Incentivo -->
+          <app-ip-input
+            inputId="hasIncentiveCategory"
+            [control]="hasIncentiveCategoryControl"
+            [label]="'IP.COMISSION_SCHEME.INCENTIVE_CATEGORY' | translate"
+            type="text">
+          </app-ip-input>
+
+          <!-- Categoría del Broker (solo visible si tiene categoría de incentivo) -->
+       <!---  <app-ip-input
+            *ngIf="isTrueInsance"
+            inputId="brokerCategory"
+            [control]="brokerCategoryControl"
+            [label]="'IP.COMMISSION_SCHEME.BROKER_CATEGORY' | translate"
+            type="text">
+         </app-ip-input>
+        -->
+          <!-- Activa -->
+          <app-ip-input
+            inputId="isActive"
+            [control]="isActiveControl"
+            [label]="'IP.COMISSION_SCHEME.ACTIVE' | translate"
+            type="text">
+          </app-ip-input>
+
+          <!-- Porcentaje -->
+          <app-ip-input
+            inputId="percentage"
+            [control]="percentageControl"
+            [label]="'IP.COMISSION_SCHEME.PERCENTAGE' | translate"
+            type="number">
+            <span suffix>%</span>
+          </app-ip-input>
+        </form>
+      </div>
+    </div>
+
+    <app-ip-instance-detail-info
+    [brokers]="brokers"
+    [products]="products"
+    ></app-ip-instance-detail-info>
+  </div>
+</div>

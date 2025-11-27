@@ -114,9 +114,6 @@
   position: relative;
 }
 
-
-
-
 //para la card movile 
 
 .card-mobile {
@@ -133,7 +130,6 @@ width: 100%;
       margin-bottom: -3vh;
   }
 }
-
 
 .payment-card-mobile-container{
   background-color: #ffffff;
@@ -571,7 +567,7 @@ ul.menu-movil li:active {
   }
 
   &::after {
-    content: "FILTRAR";
+    content: "LIMPIAR";
     position: absolute;
     top: -2rem;
     left: 50%;

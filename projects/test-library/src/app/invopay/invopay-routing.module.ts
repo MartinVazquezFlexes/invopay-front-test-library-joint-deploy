@@ -22,6 +22,11 @@ import { BrokerSettlementCommentsComponent } from './views/broker-settlement-com
 import { BrokerInvoiceCommentsComponent } from './views/broker-invoice-comments/broker-invoice-comments.component';
 import { AdminSettlementCommentsComponent } from './views/admin-settlement-comments/admin-settlement-comments.component';
 import { AdminInvoiceCommentsComponent } from './views/admin-invoice-comments/admin-invoice-comments.component';
+import { InstanceComisionDetailComponent } from './views/instance-comision-detail/instance-comision-detail.component';
+import { SchemeInstanceComponent } from './views/scheme-instance/scheme-instance.component';
+import { PolicyDetailsComponent } from './views/policy-details/policy-details.component';
+import { PolicyListComponent } from './views/policy-list/policy-list.component';
+
 
 const routes: Routes = [
   {
@@ -59,10 +64,22 @@ const routes: Routes = [
         path: 'product-list',
         component: ProductListComponent,
       },
-      { path: 'sales-list', component: SalesListComponent },
-      { path: 'sales-detail/:id', component: SalesDetailsComponent },
-      { path: 'revenues-list', component: RevenuesListComponent },
-      { path: 'revenue-detail/:id', component: RevenueDetailComponent },
+      { 
+        path: 'sales-list',
+        component: SalesListComponent 
+      },
+      {
+         path: 'sales-detail/:id',
+        component: SalesDetailsComponent 
+      },
+      { 
+        path: 'revenues-list',
+        component: RevenuesListComponent 
+      },
+      { 
+        path: 'revenue-detail/:id',
+        component: RevenueDetailComponent 
+      },
       {
         path: 'assurance/pending-sales-list',
         component: PendingSalesComponent,
@@ -72,6 +89,16 @@ const routes: Routes = [
         path: 'assurance/expiry-sales-list',
         component: PendingSalesComponent,
         data: { type: 'expired' },
+      },
+      { 
+        path: 'policy-list/broker',
+        component: PolicyListComponent,
+        data: { type: 'broker' },
+      },
+      { 
+        path: 'policy-list/assurance',
+        component: PolicyListComponent,
+        data: { type: 'assurance' },
       },
       
       {
@@ -89,6 +116,18 @@ const routes: Routes = [
       {
         path: 'admin/invoice-comments',
         component: AdminInvoiceCommentsComponent,
+      },
+      {
+        path:'instance-detail/:id',
+        component:InstanceComisionDetailComponent
+      },
+
+      {  path: 'schemes-instances-list',
+        component: SchemeInstanceComponent,
+      },      
+      {
+        path: 'policy-details',
+        component: PolicyDetailsComponent,
       },
     ],
   },

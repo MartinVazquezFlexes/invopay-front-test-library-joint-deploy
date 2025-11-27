@@ -11,6 +11,7 @@ import { Revenue } from '../../interface/revenue';
 import { RevenueListState } from '../../services/revenueListState';
 import { LoadingService } from '../../../shared/services/loading.service';
 import IpSelectInputOption from '../../interface/ip-select-input-option';
+import { CardConfig } from '../../../shared/components/mobile-card-list/mobile-card-list.component';
 @Component({
   selector: 'app-revenues-list',
   templateUrl: './revenues-list.component.html',
@@ -42,7 +43,7 @@ export class RevenuesListComponent {
     chanelPayment: new FormControl<string>('')
     });
 
-  revenueData: RevenuesResponse | null = null;
+  revenueData: RevenuesResponse | null | undefined ;
   revenues: Revenue[] = [];
   tableRevDto: any[] = [];
   currentPages=1
@@ -66,7 +67,7 @@ export class RevenuesListComponent {
   paymentChannels: IpSelectInputOption[] = [
     { label: 'Transferencia', value: 'TRANSFER' },
     { label: 'Efectivo', value: 'efectivo'},
-    { label: 'Tarjeta', value: 'Tarjeta'},
+    { label: 'Tarjeta', value: 'tarjeta'},
     { label: 'Boleto', value: 'boleto'},
     { label: 'Cheque', value: 'cheque'}];
 
@@ -76,15 +77,43 @@ export class RevenuesListComponent {
     { label: '20', value: '20' },
     { label: '50', value: '50' },
     ]
-  
+    configCardMobile: CardConfig = {
+      headerKey: '',
+      fields: []
+    };
 
-
+   handleCardAction(event: any): void {
+      console.log('Evento recibido:', event);
+      
+      const item = event.item || event;
+      const action = event.action || 'detail';
+      
+      console.log('Acción:', action, 'Item:', item);
+      
+      if (action === 'detail') {
+        const id = item.realSale?.id;
+        if (id) {
+          const state: RevenueListState = {
+            scrollPosition: window.scrollY,
+            startFilterValue: this.currentStart,
+            endFilterValue: this.currentEnd,
+            currentPage: this.currentPages,
+            itemsXPage: this.itemsPerpage,
+            chanelPaymentFilterValue: this.currentPayChannel,
+            enabled: false
+          };
+          this.stateService.saveState(state);
+          this.router.navigate(['revenue-detail', id]);
+        }
+      }
+  }
+ 
   ngOnInit(): void {
 
    console.log('isMobile:', this.isMobile);
    console.log('RevenueListComponent init');
    console.log('controlsForm:', this.controlsForm);
-
+      
       console.log('RevenueListComponent init ');
       console.log(this.formatDate(new Date()))
       this.loadingService.setLoadingState(true)
@@ -94,7 +123,6 @@ export class RevenuesListComponent {
       this.loadControlsSubscriptions()
       this.loadRevenues()
 
-      
   }
 
 
@@ -109,10 +137,9 @@ export class RevenuesListComponent {
         this.currentPayChannel= stateSaved.chanelPaymentFilterValue
         this.controlsForm.controls.chanelPayment.setValue(this.currentPayChannel)
         this.onApplyFilter(this.currentPages)
-
-            setTimeout(() => {
-              window.scrollTo(0, stateSaved.scrollPosition);
-              }, 100);
+        setTimeout(() => {
+          window.scrollTo(0, stateSaved.scrollPosition);
+          }, 300);
   }
 
   loadControlsSubscriptions() {
@@ -159,10 +186,7 @@ export class RevenuesListComponent {
 
         console.log(startDate1)
         const target = startDate1.target as HTMLInputElement;
-        
         console.log(target.value);  
-
-        // Convertir a Date
         const date = target.value
         if(date){
            this.dateEndDisabled=false
@@ -179,7 +203,6 @@ export class RevenuesListComponent {
 
         const now = new Date();
 
-
         if(startPlus3Months>now){
           this.maxEnd=this.formatDate(now)
         }
@@ -195,60 +218,56 @@ export class RevenuesListComponent {
         console.log(this.currentStart)
     }
 
+
+
+
+
 onApplyFilter(page: number) {
+  /*
   console.log("========== APPLY FILTER START ==========");
   console.log("apply filter page " + page);
   console.log("currentStart (raw):", this.currentStart);
   console.log("currentEnd (raw):", this.currentEnd);
   console.log("currentPayChannel:", this.currentPayChannel);
-
+  */
   let fromNotHour: string | Date = this.currentStart;
   let toNotHour: string | Date = this.currentEnd;
   
   if (this.currentStart && this.currentEnd) {
-    console.log("--- Normalizando fechas ---");
-    console.log("currentStart antes de normalize:", this.currentStart);
-    console.log("currentEnd antes de normalize:", this.currentEnd);
     
     const from = this.normalizeStart(this.currentStart);
     const to = this.normalizeEnd(this.currentEnd);
-    
-    console.log("from después de normalizeStart:", from);
-    console.log("to después de normalizeEnd:", to);
-
     fromNotHour = from;
     toNotHour = to;
   }
 
-
-
   this.revenueService.getRevenues().pipe(
     map(response => {
-      console.log("--- Response recibida ---");
-      console.log("Total records:", response.content.length);
+    
       this.revenueData = response;
       
       return this.revenueData.content.filter((x, index) => {
         const revDate = this.normalizeStart(x.revenueDate);
-        
+        /*
         console.log(`\n--- Registro ${index + 1} ---`);
         console.log("x.revenueDate (raw):", x.revenueDate);
         console.log("revDate (normalized):", revDate);
         console.log("from:", fromNotHour);
         console.log("to:", toNotHour);
-        
+        */
         const matchesDate = !this.currentStart || !this.currentEnd || (revDate >= fromNotHour && revDate <= toNotHour);
+        /*
         console.log("matchesDate:", matchesDate);
         console.log("  !this.currentStart:", !this.currentStart);
         console.log("  !this.currentEnd:", !this.currentEnd);
         console.log("  revDate >= fromNotHour:", revDate >= fromNotHour);
         console.log("  revDate <= toNotHour:", revDate <= toNotHour);
-        
+        */
         const matchesChannel = !this.currentPayChannel || x.paymentChannel.toLowerCase() === this.currentPayChannel.toLowerCase();
 
         
         const result = matchesDate && matchesChannel;
-        console.log("RESULTADO FINAL (pasa filtro?):", result);
+       // console.log("RESULTADO FINAL (pasa filtro?):", result);
         
         return result;
       });
@@ -257,25 +276,22 @@ onApplyFilter(page: number) {
     this.revenues = filtered;
     this.loadTable(page);
     this.isModalOpen = false;
-    console.log("========== APPLY FILTER END ==========\n");
   });
 }
   
 onClearFilters(): void {
   this.controlsForm.reset({
-    rowPaginator: this.itemsPerpage, // mantiene el tamaño actual de página
+    rowPaginator: this.itemsPerpage,
     dateStart: '',
     dateEnd: '',
     chanelPayment: ''
   });
 
-  // Resetear variables internas
   this.currentStart = '';
   this.currentEnd = '';
   this.currentPayChannel = '';
   this.currentPages = 1;
-
-    this.isModalOpen = false;
+  this.isModalOpen = false;
 
 }
 
@@ -339,7 +355,6 @@ onClearFilters(): void {
         this.loadingService.setLoadingState(false)
       },
       complete:()=>{
-        console.log("asssssssssssssssssssssss")
         this.loadingService.setLoadingState(false)
       }
     });
@@ -371,9 +386,10 @@ onClearFilters(): void {
           producto: item.isConsolidated ?  item.productName :'-',
           montoPrima: item.isConsolidated ? this.formatNumberToArg(item.premiumAmount):'-',
           broker: item.isConsolidated ? item.brokerName : '-',
+          monedaYmonto: item.currency +" "+this.formatNumberToArg(item.revenueAmount),
           realSale: item
         }))];
-
+        console.log("tableRev LOAD --------------")
         console.log(this.tableRevDto)
   }
 
@@ -407,6 +423,22 @@ onClearFilters(): void {
               ['montoPrima', translations['NEW_VAR.SALE_AMOUNT']],
               ['broker', translations['NEW_VAR.BROKER_NAME']],
             ]);
+              this.configCardMobile= {
+              headerLabel: '#',
+              headerKey: 'id',
+              showActionButton: true,
+              actions: ['detail'],
+              fields: [
+                { label: translations['NEW_VAR.PAYMENT_DATE'], key: 'fecha' }, 
+                { label: translations['NEW_VAR.PRODUCT_NAME'], key: 'producto' }, 
+                { label: translations['NEW_VAR.PAYMEN_CHANNEL'], key: 'canalPago' }, 
+                { label: translations['NEW_VAR.CONSOLIDATED'], key: 'consolidada' }, 
+                { label: translations['NEW_VAR.POLICY_NUMBER'], key: 'nroPoliza' }, 
+                { label: translations['NEW_VAR.BROKER_NAME'], key: 'broker' }, 
+                { label: translations['NEW_VAR.COLLECTED_AMOUNT'], key: 'monedaYmonto', isAmount: true }, 
+
+              ]
+            };
           });
   }
   
@@ -455,20 +487,21 @@ formatDate(date: string | Date): string {
 
   toggleMobileMenu(index: number) {
     if (this.showMobileMenuIndex === index) {
-        this.showMobileMenuIndex = null; // cierra si se vuelve a hacer click
+        this.showMobileMenuIndex = null; 
       } else {
-        this.showMobileMenuIndex = index; // abre solo ese menú
+        this.showMobileMenuIndex = index; 
       }  
     }
-  onMobileMenuAction(accion: string, revenue: any) {
-    console.log('Action', accion);
-    console.log('Card :', revenue);
-    const id = revenue.id
-    console.log(id)
-    if (accion === 'detail') {
-          this.router.navigate(['revenue-detail',id]);
-    }
-  }
+    
+      onMobileMenuAction(accion: string, revenue: any) {
+      console.log('Action', accion);
+      console.log('Card :', revenue);
+      const id = revenue.id
+      console.log(id)
+      if (accion === 'detail') {
+            this.router.navigate(['revenue-detail',id]);
+      }
+    } 
 
    onClickFiltredSearchMobile() {
     if (this.isMobile) {
@@ -494,7 +527,6 @@ normalizeStart(date: Date | string): Date {
   let d: Date;
   
   if (typeof date === 'string') {
-    // Si es string YYYY-MM-DD, parsearlo correctamente
     const parts = date.split('-');
     d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
   } else {

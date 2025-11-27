@@ -109,6 +109,51 @@
       opacity: 1;
     }
   }
+    .clean {
+    height: 1.75rem;
+    padding: 0 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: rgb(33, 107, 245);
+    color: white;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 0.875rem;
+      height: 0.875rem;
+      display: block;
+    }
+
+    &:hover {
+      background-color: rgb(5, 53, 143);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    &::after {
+      content: "LIMPIAR";
+      position: absolute;
+      top: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(27, 25, 25, 0.8);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+  }
     
   .select-wrapper, .date-wrapper {
     min-width: 200px;

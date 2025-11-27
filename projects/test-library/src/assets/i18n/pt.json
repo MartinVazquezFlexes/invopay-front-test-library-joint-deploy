@@ -22,6 +22,7 @@
     "INSTALLMENT_NUMBER": "Parcela N°",
     "SELECT_PRODUCT": "Selecione um produto",
     "CLIENT": "Cliente",
+    "SELECT_CLIENT":"Selecione um cliente",
     "PRODUCT_NAME": "Produto",
     "PERCENTAJE_BROKER": "Comissão Corretor",
     "AMOUNT_PAY": "Quantidade de pagamentos",
@@ -47,8 +48,11 @@
     "PAYMENT_COMMISSION_BROKER": "Pagamento comissão corretagem",
     "DATE_PAYMENT": "Data pagamento",
     "COMMISSION_VALUE": "Valor Comissão",
-    "SALE_AMOUNT": "Monto venta",
-    "AMOUNT_INSTALLMENT": "Valor taxa"
+    "SALE_AMOUNT": "Valor venda",
+    "AMOUNT_INSTALLMENT": "Valor taxa",
+    "POLICIES":"Politica"
+    
+
   },
   "IP": {
     "FROM": "De",
@@ -142,6 +146,33 @@
       "ACTUALSTATUS": "Estado Atual",
       "SEE": "Ver"
     },
+    "POLICY_DETAILS":{
+      "TITLE":"Detalhes da apólice",
+      "SECTION_TITLE":"Informações Apólice",
+      "SECTION_1":"Informações do Cliente",
+      "SECTION_2":"Dados do corretor",
+      "SECTION_3":"Dados da apólice",
+      "SECTION_4":"Esquema de Comissões",
+      "SECTION_5":"Plano de pagamento de parcelas",
+      "INSTALLMENTVALUE":"Valor",
+      "DUEDATE":"Data de vencimento",
+      "STATUS":"Estado",
+      "BROKERCOMMISION":"Comissão",
+      "PAYMENTDATE":"Data de pagamento",
+      "INPUTS":{
+        "CLIENT":"Nome",
+        "CLIENT_EMAIL":"Email",
+        "CATEGORY":"Categoria",
+        "POLICY_NUMBER":"Número da apólice",
+        "PRODUCT":"Produto",
+        "CREATION_DATE":"Data de criação",
+        "EMISSION_DATE":"Fecha Emisión",
+        "EXPIRATION_DATE":"Data de validade",
+        "PREMIUM_VALUE":"Prima",
+        "COUNT":"Cantidad Cuotas",
+        "PERCENTAGE":"Porcentagem utilizada"
+      }
+    },
     "ADMIN_TABLE_ENTERPRISE": {
       "ACTIONS": "Ações",
       "ADD": "Registro da empresa",
@@ -230,6 +261,7 @@
       "RENDITIONS": "Rendimentos"
     },
     "FILTERS": {
+      "SEARCH":"Procurar",
       "AMOUNT_RANGE": "Faixa de valor",
       "CLEAN": "Limpar o filtro",
       "ADD": "Adicionar filtro",
@@ -274,7 +306,9 @@
       "BUTTON-CREATE": "Criar",
       "CONFIRM-BUTTON": "Confirmar",
       "CLOSE": "Fechar",
-      "REQUIRED-FIELD": "*Campo obrigatório"
+      "REQUIRED-FIELD": "*Campo obrigatório",
+      "YES": "Sim",
+      "NO": "Não"
     },
     "PAY_BILL_DETAILS": {
       "CONCEPT": "Conceito:",
@@ -1436,7 +1470,87 @@
           "ADD_BUTTON": "+ Adicionar Documento"
         }
       }
+    },
+     "COMISSION_SCHEME": {
+      "INSTANCE_DETAIL": "Detalhes da Instancia",
+      "GENERAL_INFO": "Informação Geral",
+      "SCHEME_TYPE": "Tipo de Esquema",
+      "RULE_SCOPE": "Âmbito da Regra",
+      "GENERAL": "Geral",
+      "BROKER_ONLY": "Solo Corretor",
+      "PRODUCT_ONLY": "Solo Produto",
+      "PRODUCT_BROKER": "Produto-Corretor",
+      "POLICY_BROKER": "Apólice-Corretor",
+      "INCENTIVE_CATEGORY": "Categoria Incentivo",
+      "BROKER_CATEGORY": "Categoria Corretor",
+      "PLATINUM": "Platino",
+      "DIAMOND": "Diamante",
+      "GOLD": "Oro",
+      "SILVER": "Plata",
+      "BRONZE": "Bronce",
+      "NAME": "Nome",
+      "ACTIVE": "Ativo",
+      "PERCENTAGE": "Porcentaje",
+      "RELATED_DATA": "Dados Relacionados",
+      "PRODUCTS": "Produtos",
+      "BROKERS": "Corredores",
+      "POLICIES": "Apólices",
+      "TABLE":{
+        "NAME":"Nome",
+        "DESCRIPTION":"Descrição",
+        "PRODUCT_TYPE": "Tipo de Produto",
+        "BROKER_NAME": "Nome",
+        "BROKER_EMAIL": "Email ",
+        "POLICY_NUMBER": "Nº Apólice",
+        "ACTIVE": "Ativo",
+        "TYPE":"Tipo",
+        "CREATION_DATE":"Data da alta",
+        "LAST_LOGIN":"Ultimo inicialização"
+      }
+    },
+    
+    "COMMISSIONS": {
+    "SCHEME-INSTANCE": {
+      "TITLE": "Instâncias",
+      "LIST": {
+        "TITLE": "Instâncias de Esquemas"
+      },
+      "TABLE": {
+        "ADD_TOOLTIP": "Criar nova instância de esquema",
+        "HEADERS": {
+          "NAME": "Nome",
+          "SCHEME_TYPE": "Tipo de esquema",
+          "RULE_SCOPE": "Âmbito da regra",
+          "PREMIUM_PERCENTAGE": "% Prémio",
+          "IS_ACTIVE_TEXT": "Ativo",
+          "ACTIONS": "Ações"
+        }
+      },
+      "BUTTONS": {
+        "ADD": "Adicionar instância de esquema",
+        "CLOSE": "Fechar",
+        "CONFIRM": "Confirmar",
+        "VIEW": "Detalhes da instância de esquema",
+        "EDIT": "Editar Instância de Esquema",
+        "SAVE": "Guardar",
+        "SAVING": "A guardar...",
+        "MENU-VIEW": "Ver",
+        "MENU-EDIT": "Editar"
+      },
+      "CREATE_MODAL": {
+        "TITLE": "Criar nova instância de esquema",
+        "BUTTONS": {
+          "SAVE": "Guardar"
+        }
+      },
+      "EDIT_MODAL": {
+        "TITLE": "Editar instância do esquema",
+        "BUTTONS": {
+          "SAVE": "Guardar"
+        }
+      }
     }
+  }
   },
   "OBSERVATIONS": {
     "TITLE": "Observações",
