@@ -23,7 +23,7 @@
 
         <header class="scheme-card__header">
           <div class="scheme-card__title">
-            <span class="scheme-card__name">{{ s.name }}</span>
+            <span class="scheme-card__name">#{{ s.id }}</span>
           </div>
 
           <div class="scheme-card__menu-container" #menuRef [attr.data-id]="s.id">
@@ -51,10 +51,13 @@
         <div class="scheme-card__body">
 
           <div class="scheme-card__row">
+            <span class="scheme-card__label">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.NAME' | translate }}:</span>
+            <span class="scheme-card__value">{{ s.name }}</span>
+          </div>
+          <div class="scheme-card__row">
             <span class="scheme-card__label">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.SCHEME_TYPE' | translate }}:</span>
             <span class="scheme-card__value">{{ s.schemaType }}</span>
           </div>
-
           <div class="scheme-card__row">
             <span class="scheme-card__label">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.RULE_SCOPE' | translate }}:</span>
             <span class="scheme-card__value">{{ s.scope }}</span>
@@ -67,7 +70,7 @@
           </div>
 
           <div class="scheme-card__row">
-            <span class="scheme-card__label">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.IS_ACTIVE_TEXT' | translate }}:</span>
+            <span class="scheme-card__label__status" >{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.IS_ACTIVE_TEXT' | translate }}:</span>
             <span class="scheme-card__value" [class.status--active]="s.isActive" 
             [class.status--inactive]="!s.isActive">
               {{ s.isActiveText }}
@@ -86,13 +89,18 @@
 
   <footer class="schemes-instances-list__paginator" *ngIf="!isHandset">
     <div class="page-size">
-      <app-ip-select-input [control]="itemsPerPageControl" [options]="pageOptions"
+      <app-ip-select-input 
+        [control]="itemsPerPageControl" 
+        [options]="pageOptions"
         (selectEmitter)="onPageSizeChange($event)">
       </app-ip-select-input>
     </div>
 
     <ng-container *ngIf="!paginatorReload">
-      <app-paginator [totalItems]="total" [itemsPerPage]="pageSize" [currentPages]="pageIndex + 1"
+      <app-paginator 
+        [totalItems]="total" 
+        [itemsPerPage]="pageSize" 
+        [currentPages]="pageIndex + 1"
         (pageChange)="onPageChange($event)">
       </app-paginator>
     </ng-container>

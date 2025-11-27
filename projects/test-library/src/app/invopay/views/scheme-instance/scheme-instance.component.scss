@@ -216,26 +216,29 @@ $status-inactive-color: $primary-color;
   }
 
   &__label {
-    font-weight: 500;
-    color: $primary-color;
+    font-weight: 400;
+    color: rgb(132, 129, 138);
     flex-shrink: 0;
     margin-right: 0.5rem;
+
+    &__status{
+      color: $primary-color
+    }
   }
 
   &__value {
     text-align: right;
     font-weight: 400;
+    color: rgb(132, 129, 138);
     word-break: break-word;
     max-width: 55%;
 
     &.status--active {
       color: $status-active-color;
-      font-weight: 600;
     }
 
     &.status--inactive {
       color: $status-inactive-color;
-      font-weight: 600;
     }
   }
 
