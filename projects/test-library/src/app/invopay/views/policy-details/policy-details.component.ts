@@ -335,6 +335,14 @@ export class PolicyDetailsComponent implements OnInit {
   }
 
   onBackButtonClick() {
-    this.router.navigate(['/invopay/policy-list/broker'])
+    if (
+      this.userType == 'ENTERPRISE_USER' ||
+      this.userType == 'ENTERPRISE_MANAGER'
+    ){
+      this.router.navigate(['/invopay/policy-list/assurance']);
+    }
+    else {
+      this.router.navigate(['/invopay/policy-list/broker']);      
+    }
   }
 }
