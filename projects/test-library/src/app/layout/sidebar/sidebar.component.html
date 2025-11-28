@@ -66,7 +66,7 @@
           <a class="menu-item"  title="Esquemas" routerLink="/invopay/schemes-list" routerLinkActive="active"  *ngIf="userType === 'ENTERPRISE_USER' || userType === 'ENTERPRISE_MANAGER'">
         <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.SCHEMES.LIST' | translate }}</span>
       </a>
-      <a class="menu-item"  title="Instancias" routerLink="/invopay/schemes-instances-list" routerLinkActive="active"  *ngIf="userType === 'ENTERPRISE_USER' || userType === 'ENTERPRISE_MANAGER'">
+      <a class="menu-item"  title="Instancias" routerLink="/invopay/schemes-instances-list" routerLinkActive="active"  *ngIf="userType === 'ENTERPRISE_USER'">
         <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TITLE' | translate }}</span>
       </a>
         </div>
