@@ -23,7 +23,7 @@ app-ip-instance-detail-info {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 0.4rem;
+  padding: 0.1rem;
   margin: 0;
   overflow-x: hidden;
   
@@ -179,7 +179,7 @@ app-ip-instance-detail-info {
   }
 
   @media (max-width: 768px) {
-    padding: 1rem;
+    padding: 0.01rem;
 
     .info-fields {
       grid-template-columns: 1fr;
