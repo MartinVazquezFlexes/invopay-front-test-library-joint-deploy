@@ -78,6 +78,18 @@ onClickOpenMoreFilters() {
   });
 
     dialogRef.afterClosed().subscribe(result => {
+        console.log("close modal")
+        console.log(result)
+        const dateStartValue = this.controlsForm.controls.dateStart.value;
+        const dateEndValue = this.controlsForm.controls.dateEnd.value;
+        // Forzar re-renderizado reseteando y volviendo a setear
+        this.controlsForm.controls.dateStart.setValue('', { emitEvent: false });
+        this.controlsForm.controls.dateEnd.setValue('', { emitEvent: false });
+        
+        setTimeout(() => {
+          this.controlsForm.controls.dateStart.setValue(dateStartValue);
+          this.controlsForm.controls.dateEnd.setValue(dateEndValue);
+        }, 0);
       if (result?.action === 'search') {
         this.onClickFiltredSearch();
       } else if (result?.action === 'clear') {
@@ -125,9 +137,7 @@ onClickOpenMoreFilters() {
   return this.hasAtLeastOneFilter();
   }
 
-  
 
-  
     controlsForm = new FormGroup({
       brokerFilter :new FormControl<string>(''),
       productFilter : new FormControl<string>(''),
@@ -215,6 +225,7 @@ onClickOpenMoreFilters() {
 
   loadSelects() {
 
+ if(this.userType==='assurance'){
    this.auxFiltersService.getAuxBrokers().subscribe({
       next: (value: any[]) => {
         console.log("Respuesta brokers:", value);
@@ -229,6 +240,42 @@ onClickOpenMoreFilters() {
         this.brokers = [
           { label: 'broker1', value: 'broker1' },
           { label: 'broker2', value: 'broker2' }
+        ];
+      }
+    });
+  }
+
+    this.auxFiltersService.getAuxClients().subscribe({
+      next: (value: any[]) => {
+        console.log("Respuesta clients:", value);
+
+        this.clients = value.map((item: any) => ({
+          label: item.username,
+          value: item.username
+        }));
+      },
+      error: () => {
+        console.log("ERROR loading brokers filter");
+        this.clients = [
+          { label: 'client1', value: 'client1' },
+          { label: 'client2', value: 'client2' }
+        ];
+      }
+    });
+    this.auxFiltersService.getAuxProducts().subscribe({
+      next: (value: any[]) => {
+        console.log("Respuesta products:", value);
+
+        this.products = value.map((item: any) => ({
+          label: item.username,
+          value: item.username
+        }));
+      },
+      error: () => {
+        console.log("ERROR loading brokers filter");
+        this.products = [
+          { label: 'product1', value: 'product1' },
+          { label: 'product1', value: 'product2' }
         ];
       }
     });
@@ -278,19 +325,45 @@ onClickOpenMoreFilters() {
 
         this.subscriptions.add(
           this.controlsForm.controls.brokerFilter.valueChanges.subscribe(value => {
+           console.log("NEW")
+           console.log(value)
+
             this.currentBroker = value ?? '';
           })
         );
 
         this.subscriptions.add(
           this.controlsForm.controls.productFilter.valueChanges.subscribe(value => {
+            console.log("NEW")
+           console.log(value)
+
             this.currentProduct = value ?? '';
           })
         );
 
+
         this.subscriptions.add(
           this.controlsForm.controls.clientFilter.valueChanges.subscribe(value => {
+          console.log("NEW")
+          console.log(value)
+
             this.currentClient = value ?? '';
+          })
+        );
+        this.subscriptions.add(
+          this.controlsForm.controls.dateStart.valueChanges.subscribe(value => {
+            console.log("NEW")
+           console.log(value)
+
+            this.currentStart = value ?? '';
+          })
+        );
+       this.subscriptions.add(
+          this.controlsForm.controls.dateEnd.valueChanges.subscribe(value => {
+            console.log("NEW")
+           console.log(value)
+
+            this.currentEnd = value ?? '';
           })
         );
       }
@@ -306,19 +379,17 @@ onApplyFilter(page: number) {
   console.log("currentEnd (raw):", this.currentEnd);
   console.log("currentPayChannel:", this.currentPayChannel);
   */
-
-
-  if(this.userType==='assurance'){
-    this.getPolicyForAssurance(page);
-  }
-  if(this.userType==='broker'){
-
-  }
+    if(this.userType==='assurance'){
+      this.getPolicyForAssurance(page);
+    }
+    if(this.userType==='broker'){
+      this.getPolicyForBroker(page)
+    }
 
 }
 
 
-  getPolicyForAssurance(page:number){
+    getPolicyForBroker(page:number){
         let fromNotHour: string | Date = this.currentStart;
         let toNotHour: string | Date = this.currentEnd;
         
@@ -329,7 +400,7 @@ onApplyFilter(page: number) {
           fromNotHour = from;
           toNotHour = to;
         }
-        this.policyService.getPolicies().pipe(
+        this.policyService.getPoliciesForBroker().pipe(
         map(response => {
           this.policyData = response;
           
@@ -362,7 +433,69 @@ onApplyFilter(page: number) {
             const result = matchesDate && matchesBroker && matchesProduct && matchesClient;
           // console.log("RESULTADO FINAL (pasa filtro?):", result);
             
+            console.log("")
+            console.log(result)
+            if(!result) console.log(x)
+            return result;
+          });
+        })
+      ).subscribe(filtered => {
+        this.policies = filtered;
+        this.loadTable(page);
+        this.isModalOpen = false;
+      });
+  }
+
+
+  getPolicyForAssurance(page:number){
+  console.log("---------------------getPolicyForAssurance-------------------------------")
+        let fromNotHour: string | Date = this.currentStart;
+        let toNotHour: string | Date = this.currentEnd;
+        if (this.currentStart && this.currentEnd) {
+          
+          const from = this.normalizeStart(this.currentStart);
+          const to = this.normalizeEnd(this.currentEnd);
+          fromNotHour = from;
+          toNotHour = to;
+        }
+        this.policyService.getPolicies().pipe(
+        map(response => {
+          this.policyData = response;
+          
+          return this.policyData.content.filter((x, index) => {
+            const revDate = this.normalizeStart(x.endDate);
+            /*
+            console.log(`\n--- Registro ${index + 1} ---`);
+            console.log("x.revenueDate (raw):", x.revenueDate);
+            console.log("revDate (normalized):", revDate);
+            console.log("from:", fromNotHour);
+            console.log("to:", toNotHour);
+            */
+            const matchesDate = !this.currentStart || !this.currentEnd || (revDate >= fromNotHour && revDate <= toNotHour);
+            console.log("current S Date :",fromNotHour)
+            console.log("current E Date :",toNotHour)
+            console.log("item Date:",revDate)
+            
+            console.log("matchesDate:", matchesDate);
+            console.log("  !this.currentStart:", !this.currentStart);
+            console.log("  !this.currentEnd:", !this.currentEnd);
+            console.log("  revDate >= fromNotHour:", revDate >= fromNotHour);
+            console.log("  revDate <= toNotHour:", revDate <= toNotHour);
+            
+            const matchesBroker = !this.currentBroker || x.brokerName.toLowerCase() === this.currentBroker.toLowerCase();
+            console.log("matchesBroker:", matchesBroker);
+            console.log(this.currentBroker+"===" +x.brokerName)
+            const matchesProduct = !this.currentProduct|| x.insuranceName.toLowerCase()===this.currentProduct.toLowerCase()
+            console.log("matchesProduct:", matchesProduct);
+            console.log(this.currentProduct+"===" +x.insuranceName)
+            const matchesClient =!this.currentClient|| x.customerName.toLocaleLowerCase()===this.currentClient.toLocaleLowerCase()
+            console.log("matchesClient:", matchesClient);
+            console.log(this.currentClient+"===" +x.customerName)
+            const result = matchesDate && matchesBroker && matchesProduct && matchesClient;
+          // console.log("RESULTADO FINAL (pasa filtro?):", result);
+            
             if(result) console.log(x)
+              console.log(result)
             return result;
           });
         })
@@ -486,6 +619,7 @@ onApplyFilter(page: number) {
     }
 
     loadTable(pagina:number) {
+    console.log("---------------------LOAD TABLE-------------------------------")
       console.log("pagina:"+pagina)
       console.log("itms x pag : "+this.itemsPerpage)
           const itemsPerPage =Number(this.itemsPerpage)
@@ -494,7 +628,6 @@ onApplyFilter(page: number) {
           console.log("start :"+startIndex)
           console.log("end :"+endIndex)
           const filteredSales = [...this.policies.slice(startIndex, endIndex)]
-         console.log("----------------------------------------------------")
 
           console.log(this.policies)
           console.log(filteredSales)

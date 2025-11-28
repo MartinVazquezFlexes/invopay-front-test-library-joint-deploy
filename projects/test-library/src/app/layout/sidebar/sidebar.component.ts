@@ -7,13 +7,16 @@ import { MenuItem } from '../../shared/models/MenuItem';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   @Input() isCollapsed = false;
   revenueSubmenuOpen = false;
   notificationsSubmenuOpen = false;
   schemeSubmenuOpen = false;
 
   constructor(private translate: TranslateService) {}
+  ngOnInit(): void {
+    console.log(this.userType)
+  }
 
 
   get userType(): string | null {

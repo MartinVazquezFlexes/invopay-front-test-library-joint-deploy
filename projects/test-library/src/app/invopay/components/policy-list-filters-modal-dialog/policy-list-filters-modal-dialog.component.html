@@ -4,7 +4,9 @@
   [showCloseModal]="true"
   (close)="onClose()"
 >
-  <div class="filters-dialog-content">
+
+<form [formGroup]="data.controlsForm"> 
+   <div class="filters-dialog-content">
     
     <!-- MENSAJE DE VALIDACIÓN -->
     <div *ngIf="showValidationError" class="validation-error">
@@ -84,4 +86,6 @@
     </div>
 
   </div>
+</form > 
+
 </app-ip-modal-mobile>
