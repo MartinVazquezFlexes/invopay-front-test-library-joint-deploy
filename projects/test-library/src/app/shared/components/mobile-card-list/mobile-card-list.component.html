@@ -35,12 +35,14 @@
         [class.mobile-card-list__row--highlight]="field.highlight">
         <span 
           class="mobile-card-list__label"
-          [class.mobile-card-list__label--amount]="field.isAmount">
+          [class.mobile-card-list__label--status]="field.isStatus"
+          [class.mobile-card-list__label--amount-bold]="field.isAmountBold">
           {{ field.label }}
         </span>
         <span 
           class="mobile-card-list__value"
-          [class.mobile-card-list__value--amount]="field.isAmount">
+          [class.mobile-card-list__value--status]="field.isStatus"
+          [class.mobile-card-list__value--amount-bold]="field.isAmountBold">
           {{ item[field.key] }}
         </span>
       </div>

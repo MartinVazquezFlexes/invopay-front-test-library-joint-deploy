@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { BrokerCategory, Instance, Product } from '../../interface/ip-instance-detail';
+import { BrokerCategory, Instance, InsurancePolicies, Product } from '../../interface/ip-instance-detail';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -40,6 +40,7 @@ export class InstanceComisionDetailComponent implements OnInit,OnDestroy {
   commissionSchemeId:number=0;
   brokers: BrokerCategory[] = [];
   products: Product[] = [];
+  insurances:InsurancePolicies[]=[];
   schemeTypeOptions: IpSelectInputOption[] = [];
   ruleScopeOptions: IpSelectInputOption[] = [];
   brokerCategoryOptions: IpSelectInputOption[] = [];
@@ -120,21 +121,53 @@ export class InstanceComisionDetailComponent implements OnInit,OnDestroy {
     deletable: values.deletable || false,
     editable: values.editable || false,
     brokers: values.brokers || [],
-    products: values.products || []
+    products: values.products || [],
+    insurancePolicies:values.insurancePolicies || [],
+    incentiveCategories:values.incentiveCategories || [],
+    hasIncentiveCategory:values.hasIncentiveCategory || false,
   };
 }
 
-  private loadInstanceData(id:number): void {
-    const sub = this.instanceService.getInstance(id).subscribe(instance => {
-      this.instance = instance;
-      console.log(this.instance);
-    
-    this.isTrueInsance=instance.hasIncentiveScheme;
-    this.form.patchValue({
+  private loadInstanceData(id: number): void {
+    const sub = this.instanceService.getInstance(id).subscribe({
+      next: (instance) => {
+        try {
+          this.instance = instance;
+          this.isTrueInsance = instance.hasIncentiveCategory;
+          
+          // Batch form updates for better performance
+          const formValues = this.buildFormValues(instance);
+          this.form.patchValue(formValues, { emitEvent: false });
+          
+          // Assign arrays separately to avoid deep form processing
+          this.assignInstanceData(instance);
+          
+          // Set broker category safely
+          this.setBrokerCategory(instance);
+          
+          // Final validation
+          this.form.updateValueAndValidity();
+          
+        } catch (error) {
+          console.error('Error processing instance data:', error);
+        } finally {
+          this.loadingService.setLoadingState(false);
+        }
+      },
+      error: (error) => {
+        console.error('Error loading instance data:', error);
+        this.loadingService.setLoadingState(false);
+      }
+    });
+    this.subscription.add(sub);
+  }
+
+  private buildFormValues(instance: Instance): any {
+    return {
       name: instance.name || '',
       schemeType: instance.schemaType || '',
       ruleScope: instance.scope || '',
-      hasIncentiveCategory: instance.hasIncentiveScheme ? this.translate.instant('IP.YES') : this.translate.instant('IP.NO'),
+      hasIncentiveCategory: instance.hasIncentiveCategory ? this.translate.instant('IP.YES') : this.translate.instant('IP.NO'),
       brokerCategory: 'No aplica',
       isActive: instance.isActive ? this.translate.instant('IP.YES') : this.translate.instant('IP.NO'),
       percentage: instance.commissionPercentage || 0,
@@ -149,18 +182,24 @@ export class InstanceComisionDetailComponent implements OnInit,OnDestroy {
       validUntil: instance.validUntil || '',
       enterpriseId: instance.enterpriseId || 0,
       deletable: instance.deletable || false,
-      editable: instance.editable || false,
+      editable: instance.editable || false
+    };
+  }
+
+  private assignInstanceData(instance: Instance): void {
+    // Use Object.assign for better performance with large arrays
+    Object.assign(this, {
       brokers: instance.brokers || [],
-      products: instance.products || []
+      products: instance.products || [],
+      insurances: instance.insurancePolicies || [],
+      commissionSchemeId: instance.commissionSchemeId
     });
-      this.brokers=instance.brokers;
-      this.products=instance.products;
-      this.commissionSchemeId=instance.commissionSchemeId;
-      this.brokerCategoryControl.setValue('No aplica');
-      this.form.updateValueAndValidity();
-      this.loadingService.setLoadingState(false);
-    });
-    this.subscription.add(sub);
+  }
+
+  private setBrokerCategory(instance: Instance): void {
+    if (instance.incentiveCategories?.length > 0) {
+      this.brokerCategoryControl.setValue(instance.incentiveCategories[0].name, { emitEvent: false });
+    }
   }
   onBack(): void {
     this.router.navigate(['schemes-instances-list'], { relativeTo: this.route });

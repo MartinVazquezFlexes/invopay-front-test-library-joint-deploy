@@ -3,6 +3,8 @@ export interface CardField {
   key: string;
   highlight?: boolean;
   isAmount?: boolean;
+  isStatus?: boolean;
+  isAmountBold?: boolean;
 }
 
 export interface CardConfig {

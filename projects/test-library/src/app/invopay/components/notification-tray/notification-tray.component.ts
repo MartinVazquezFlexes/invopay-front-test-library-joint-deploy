@@ -224,7 +224,7 @@ export class NotificationTrayComponent implements OnInit, OnChanges, AfterViewIn
                 { 
                   label: translations[4], 
                   key: 'answered',
-                  isAmount: true
+                  isStatus: true
                 }
               ] : [])
             ],

@@ -36,7 +36,7 @@ export class PaymentsEntitiesListComponent implements OnInit,OnDestroy,AfterView
       fields: [
         {label:this.translate.instant('IP.PAYMENTS_ENTITIES.TABLE.PROVIDEER'),key:'providerName'},
         { label: this.translate.instant('IP.PAYMENTS_ENTITIES.TABLE.PAYMENT_CHANNEL'), key: 'channel' },
-        { label: this.translate.instant('IP.PAYMENTS_ENTITIES.TABLE.ACTIVE'), key: 'active',isAmount: true },
+        { label: this.translate.instant('IP.PAYMENTS_ENTITIES.TABLE.ACTIVE'), key: 'active',isStatus: true },
         { label: this.translate.instant('IP.PAYMENTS_ENTITIES.TABLE.DESCRIPTION'), key: 'description' }
       ],
       showActionButton: true,

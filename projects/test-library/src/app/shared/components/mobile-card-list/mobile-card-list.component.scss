@@ -157,10 +157,22 @@
     color: #84818A;
     font-weight: 400;
     flex-shrink: 0;
-     &--amount {
+    &--amount {
+      font-weight: 600;
+      color: #3e3e3e;
+      font-size: 13.6px;
+        font-family: "Inter", sans-serif !important;
+    }
+    &--status {
       font-weight: 600;
       color: $primary-color;
       font-size: 13.6px;
+    }
+    &--amount-bold {
+      font-weight: 600;
+      color: #3e3e3e;
+      font-size: 13.6px;
+      font-family: "Inter", sans-serif !important;
     }
   }
 
@@ -172,7 +184,18 @@
     font-weight: 400;
     &--amount {
       font-weight: 600;
+      color:#3e3e3e;
+      font-size: 13.6px;
+        font-family: "Inter", sans-serif !important;
+    }
+    &--status {
+      font-weight: 600;
       color: $primary-color;
+      font-size: 13.6px;
+    }
+    &--amount-bold {
+      font-weight: 600;
+      color: #3e3e3e;
       font-size: 13.6px;
     }
   }

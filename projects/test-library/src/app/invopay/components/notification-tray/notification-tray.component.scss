@@ -545,7 +545,7 @@ $backgrounds-color: #D9D9D9;
     background: $primary-color;
 
     &:disabled, &--disabled {
-      background: #7FB6FF;
+      background: #62a6ff;
       cursor: not-allowed;
 
       svg path {
@@ -554,7 +554,7 @@ $backgrounds-color: #D9D9D9;
 
       &:hover {
         transform: none;
-        background: #7FB6FF;
+        background:  #62a6ff;
       }
     }
   }
@@ -563,16 +563,16 @@ $backgrounds-color: #D9D9D9;
     background: $primary-color;
 
     &:disabled, &--disabled {
-      background: #7FB6FF;
+      background: #62a6ff;
       cursor: not-allowed;
 
       img {
-        background: #7FB6FF;
+        background: #62a6ff;
       }
 
       &:hover {
         transform: none;
-        background: #7FB6FF;
+        background:#62a6ff;
       }
     }
   }

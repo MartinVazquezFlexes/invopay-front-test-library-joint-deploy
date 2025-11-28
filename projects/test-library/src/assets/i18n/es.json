@@ -2825,7 +2825,13 @@
         "ACTIVE": "Activo",
         "TYPE":"Tipo",
         "CREATION_DATE":"Fecha de alta",
-        "LAST_LOGIN":"Ultimo inicio"
+        "LAST_LOGIN":"Ultimo inicio",
+        "BROKER":"Corredor",
+        "AMOUNT":"Monto",
+        "INACTIVE":"Inactivo",
+        "STATUS":"Estado",
+        "CUSTOMER_NAME":"Nombre cliente",
+        "EMISSION_DATE":"Fecha Emisión"
       }
     },
      "COMMISSIONS": {

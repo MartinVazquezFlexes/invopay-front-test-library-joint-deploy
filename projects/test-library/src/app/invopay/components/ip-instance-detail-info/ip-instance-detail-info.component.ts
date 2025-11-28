@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
-import { BrokerCategory, Product, Policy } from '../../interface/ip-instance-detail';
+import { BrokerCategory, Product, InsurancePolicies } from '../../interface/ip-instance-detail';
 import { CardConfig } from '../../../shared/models/movile-table';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription, combineLatest } from 'rxjs';
 import { CustomDatePipe } from '../../../shared/Utils/pipeCustomDate';
+import { CurrencySymbolPipe } from '../../../shared/Utils/currency-simbol-pipe';
 
 @Component({
   selector: 'app-ip-instance-detail-info',
@@ -13,9 +14,10 @@ import { CustomDatePipe } from '../../../shared/Utils/pipeCustomDate';
 export class IpInstanceDetailInfoComponent implements OnInit {
   @Input() brokers:BrokerCategory[]=[];
   @Input() products:Product[]=[];
+  @Input() insurancePolicies:InsurancePolicies[]=[];
   
   activeTab: 'products' | 'brokers' | 'policies' = 'products';
-  policies: Policy[] = [];
+  policies: InsurancePolicies[] = [];
   
   titlesFile = new Map<string, string>();
   initTable = false;
@@ -23,6 +25,7 @@ export class IpInstanceDetailInfoComponent implements OnInit {
   private subscription = new Subscription();
   private cdr=inject(ChangeDetectorRef)
   private customDatePipe = inject(CustomDatePipe);
+  private currencySymbolPipe = inject(CurrencySymbolPipe);
   constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
@@ -36,29 +39,7 @@ export class IpInstanceDetailInfoComponent implements OnInit {
   }
 
   loadData(): void {
- 
-    this.policies = [
-      { 
-        id: '1',
-        number: 'POL-001-2024'
-      },
-      { 
-        id: '2',
-        number: 'POL-002-2024'
-      },
-      { 
-        id: '3',
-        number: 'POL-003-2024'
-      },
-      { 
-        id: '4',
-        number: 'POL-004-2024'
-      },
-      { 
-        id: '5',
-        number: 'POL-005-2024'
-      }
-    ];
+    this.policies = this.insurancePolicies || [];
   }
 
   private setupTranslations(): void {
@@ -137,7 +118,13 @@ export class IpInstanceDetailInfoComponent implements OnInit {
 
   private setupPoliciesTranslations(): void {
     const translationKeys = [
-      'IP.COMISSION_SCHEME.TABLE.POLICY_NUMBER'
+      'IP.COMISSION_SCHEME.TABLE.NAME',
+      'IP.COMISSION_SCHEME.TABLE.BROKER',
+      'IP.COMISSION_SCHEME.TABLE.AMOUNT',
+      'IP.COMISSION_SCHEME.TABLE.STATUS',
+      'IP.COMISSION_SCHEME.TABLE.POLICY_NUMBER',
+      'IP.COMISSION_SCHEME.TABLE.CUSTOMER_NAME',
+      'IP.COMISSION_SCHEME.TABLE.EMISSION_DATE'
     ];
 
     const translationObservables = translationKeys.map(key => this.translate.get(key));
@@ -145,7 +132,13 @@ export class IpInstanceDetailInfoComponent implements OnInit {
     this.subscription.add(
       combineLatest(translationObservables).subscribe((translations: string[]) => {
         const titlesMap = new Map<string, string>([
-          ['number', translations[0]]
+          ['name', translations[0]],
+          ['brokerName', translations[1]],
+          ['amount', translations[2]],
+          ['status', translations[3]],
+          ['policyNumber', translations[4]],
+          ['customerName', translations[5]],
+          ['emissionDate', translations[6]]
         ]);
         
         this.titlesFile = titlesMap;
@@ -156,6 +149,14 @@ export class IpInstanceDetailInfoComponent implements OnInit {
 
   yesNoTranslator(value: boolean): string {
     return value ? this.translate.instant('COMMON.YES') : this.translate.instant('COMMON.NO');
+  }
+  statusTranslate(value:string):string{
+    if(value==="ACTIVE"){
+      return this.translate.instant('IP.COMISSION_SCHEME.TABLE.ACTIVE')
+    }
+    else{
+      return this.translate.instant('IP.COMISSION_SCHEME.TABLE.INACTIVE')
+    }
   }
 
   getCurrentData() {
@@ -173,7 +174,17 @@ export class IpInstanceDetailInfoComponent implements OnInit {
           lastLogin: this.customDatePipe.transformDateTime(broker.lastLoginDate),
           id: broker.id
         }));
-      case 'policies': return this.policies;
+      case 'policies': 
+        return this.policies.map(policy => ({
+          name: policy.name,
+          brokerName: policy.brokerName,
+          amount: this.currencySymbolPipe.transform(policy.currency) + ' ' + policy.amount.toLocaleString(),
+          status: this.statusTranslate(policy.status),
+          policyNumber: policy.policyNumber,
+          customerName: policy.customerName,
+          emissionDate: this.customDatePipe.transform(policy.emissionDate),
+          id: policy.id
+        }));
       default: return [];
     }
   }
@@ -185,7 +196,7 @@ export class IpInstanceDetailInfoComponent implements OnInit {
       case 'brokers':
         return { columns: ['brokerName', 'brokerEmail', 'creationDate', 'lastLogin'] };
       case 'policies':
-        return { columns: ['number'] };
+        return { columns: ['name', 'brokerName', 'amount', 'status', 'policyNumber', 'customerName', 'emissionDate'] };
       default: 
         return { columns: [] };
     }
@@ -262,9 +273,35 @@ export class IpInstanceDetailInfoComponent implements OnInit {
           headerLabel: '#',
           fields: [
             { 
-              label: this.translate.instant('IP.COMISSION_SCHEME.TABLE.POLICY_NUMBER'),
-              key: 'number',
+              label: this.translate.instant('IP.COMISSION_SCHEME.TABLE.NAME'),
+              key: 'name',
               highlight: true
+            },
+            { 
+              label: this.translate.instant('IP.COMISSION_SCHEME.TABLE.BROKER'), 
+              key: 'brokerName'
+            },
+            { 
+              label: this.translate.instant('IP.COMISSION_SCHEME.TABLE.AMOUNT'), 
+              key: 'amount',
+              isAmountBold: true
+            },
+            { 
+              label: this.translate.instant('IP.COMISSION_SCHEME.TABLE.STATUS'), 
+              key: 'status',
+              isStatus: true
+            },
+            { 
+              label: this.translate.instant('IP.COMISSION_SCHEME.TABLE.POLICY_NUMBER'), 
+              key: 'policyNumber'
+            },
+            { 
+              label: this.translate.instant('IP.COMISSION_SCHEME.TABLE.CUSTOMER_NAME'), 
+              key: 'customerName'
+            },
+            { 
+              label: this.translate.instant('IP.COMISSION_SCHEME.TABLE.EMISSION_DATE'), 
+              key: 'emissionDate'
             }
           ],
           showActionButton: false

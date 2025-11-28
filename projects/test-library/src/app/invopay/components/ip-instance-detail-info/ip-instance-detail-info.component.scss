@@ -120,6 +120,57 @@ app-no-data {
 // Responsive: Show table on desktop, cards on mobile
 app-table {
   display: block !important;
+  
+  // Center specific columns for each table
+  ::ng-deep .table {
+    // Products table: center "Activo" column (4th)
+    .table__body-row {
+      td:nth-child(4) {
+        text-align: center !important;
+        padding-left: 0 !important;
+        padding-right: 1.5rem !important;
+        
+        span {
+          text-align: center !important;
+          display: block !important;
+        }
+      }
+    }
+    
+    // Policies table: center columns 2, 3, 4, 5, 6, 7
+    .table__body-row {
+      td:nth-child(2),
+      td:nth-child(3),
+      td:nth-child(4),
+      td:nth-child(5),
+      td:nth-child(6),
+      td:nth-child(7) {
+        text-align: center !important;
+        padding-left: 0 !important;
+        padding-right: 1.5rem !important;
+        
+        span {
+          text-align: center !important;
+          display: block !important;
+        }
+      }
+    }
+    
+    // Brokers table: center dates (3rd and 4th columns)
+    .table__body-row {
+      td:nth-child(3),
+      td:nth-child(4) {
+        text-align: center !important;
+        padding-left: 0 !important;
+        padding-right: 1.5rem !important;
+        
+        span {
+          text-align: center !important;
+          display: block !important;
+        }
+      }
+    }
+  }
 }
 
 app-mobile-card-list {

@@ -57,6 +57,34 @@ export interface Instance {
   commissionFixedAmount:number;
   brokers:BrokerCategory[];
   products:Product[];
+  insurancePolicies:InsurancePolicies[];
+  incentiveCategories:IncentiveCategory[];
+  hasIncentiveCategory:boolean;
+}
+
+export interface InsurancePolicies{
+      id: number;
+      name: string;
+      policyNumber: string;
+      externalId: string;
+      emissionDate: string;
+      initDate: string;
+      endDate: string;
+      amount: number;
+      currency: string;
+      status: string;
+      creationAt: string;
+      updatedAt: string;
+      insuranceId: number;
+      insuranceName: string;
+      customerId: number;
+      customerName: string;
+      brokerId: number;
+      brokerName: string;
+      saleId: number;
+      deletable: boolean;
+      editable: boolean;
+      primeAmount: number;
 }
 
 export interface BrokerProduct {
@@ -74,4 +102,16 @@ export interface BrokerProduct {
   enterpriseId:number;
   deletable:boolean;
   editable:boolean;
+}
+
+export interface IncentiveCategory{
+   id: number;
+   name: string;
+   creationTime: string;
+   lastUpdate: string;
+   isActive: boolean;
+   enterpriseId: number;
+   deletable: boolean;
+   editable: boolean;
+   code: string;
 }

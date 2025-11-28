@@ -46,14 +46,14 @@
           </app-ip-input>
 
           <!-- Categoría del Broker (solo visible si tiene categoría de incentivo) -->
-       <!---  <app-ip-input
+        <app-ip-input
             *ngIf="isTrueInsance"
             inputId="brokerCategory"
             [control]="brokerCategoryControl"
-            [label]="'IP.COMMISSION_SCHEME.BROKER_CATEGORY' | translate"
+            [label]="'IP.COMISSION_SCHEME.BROKER_CATEGORY' | translate"
             type="text">
          </app-ip-input>
-        -->
+        
           <!-- Activa -->
           <app-ip-input
             inputId="isActive"
@@ -77,6 +77,7 @@
     <app-ip-instance-detail-info
     [brokers]="brokers"
     [products]="products"
+    [insurancePolicies]="insurances"
     ></app-ip-instance-detail-info>
   </div>
 </div>
