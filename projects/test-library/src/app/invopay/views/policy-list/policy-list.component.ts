@@ -23,6 +23,7 @@ import { Broker } from '../../interface/broker';
 })
 export class PolicyListComponent implements OnInit , OnDestroy{
 
+
      userType : 'broker' | 'assurance' = 'assurance';
          private readonly subscriptions = new Subscription();
     isModalOpen: boolean=false
@@ -48,7 +49,8 @@ export class PolicyListComponent implements OnInit , OnDestroy{
     
       showFilterModal = false;
 
-      
+      paginatorReload = false;
+
 
       onClickFiltredSearchMobile() {
         if (this.isMobile) {
@@ -313,15 +315,16 @@ export class PolicyListComponent implements OnInit , OnDestroy{
   
       loadControlsSubscriptions() {
         
-        this.subscriptions.add(
-          this.controlsForm.controls.rowPaginator.valueChanges.subscribe(n => {
-            if (n) {
-              this.itemsPerpage = Number(n);
-              this.loadTable(1);
-              this.currentPages = 1;
-            }
-          })
-        );
+      this.subscriptions.add(
+            this.controlsForm.controls.rowPaginator.valueChanges.subscribe(n => {
+              if (n) {
+                this.itemsPerpage = Number(n);
+                this.currentPages = 1;
+                this.loadTable(1);
+                this.triggerPaginatorReload();  
+              }
+            })
+          );
 
         this.subscriptions.add(
           this.controlsForm.controls.brokerFilter.valueChanges.subscribe(value => {
@@ -368,6 +371,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       }
 
  
+
   
   
   onApplyFilter(page: number) {
@@ -378,6 +382,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       console.log("currentEnd (raw):", this.currentEnd);
       console.log("currentPayChannel:", this.currentPayChannel);
       */
+        this.currentPages=page
         if(this.userType==='assurance'){
           this.getPolicyForAssurance(page);
         }
@@ -440,13 +445,15 @@ export class PolicyListComponent implements OnInit , OnDestroy{
         })
       ).subscribe(filtered => {
         this.policies = filtered;
-        this.loadTable(page);
+        this.currentPages=1
+        this.loadTable(1);
         this.isModalOpen = false;
       });
   }
 
 
   getPolicyForAssurance(page:number){
+
   console.log("---------------------getPolicyForAssurance-------------------------------")
         let fromNotHour: string | Date = this.currentStart;
         let toNotHour: string | Date = this.currentEnd;
@@ -500,7 +507,8 @@ export class PolicyListComponent implements OnInit , OnDestroy{
         })
       ).subscribe(filtered => {
         this.policies = filtered;
-        this.loadTable(page);
+        this.currentPages=1
+        this.loadTable(1);
         this.isModalOpen = false;
       });
   }
@@ -515,6 +523,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       return date instanceof Date && !isNaN(date.getTime());
     }
   
+
   
     onTableAction(event: { event: string; dataField?: any }) {
       console.log('Action', event);
@@ -602,7 +611,13 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       }
   
 
+    private triggerPaginatorReload(): void {
+        this.paginatorReload = true;
+        setTimeout(() => (this.paginatorReload = false));
+    }
+
     auxSetInitialValues(){
+
 
           this.itemsPerpage=20;
           this.controlsForm.controls.rowPaginator.setValue(this.itemsPerpage)
@@ -612,13 +627,31 @@ export class PolicyListComponent implements OnInit , OnDestroy{
           this.currentEnd = this.formatDate(new Date())
           this.controlsForm.controls.dateStart.setValue(this.currentStart)
           this.controlsForm.controls.dateEnd.setValue(this.currentEnd)
-          this.loadTable(1);
-
+          this.currentPages = 1;  // <-- Agrega esto para sincronizar
+  
+          setTimeout(() => {
+            this.loadTable(1);
+          }, 0);
          // this.onApplyFilter(1)
     }
 
+
+    
+
     loadTable(pagina:number) {
+
     console.log("---------------------LOAD TABLE-------------------------------")
+      const totalPages = Math.ceil(this.policies.length / this.itemsPerpage);
+      console.log("POLICIES LENGTH",this.policies.length)
+      console.log("Items x Page",this.itemsPerpage)
+      console.log("TOTAL PAGES",totalPages)
+      console.log("CURRENT PAGES",this.currentPages)
+    
+      // Validación: Si la página excede el total, resetea a 1
+      if (pagina > totalPages && totalPages > 0) {
+        pagina = 1;
+        this.currentPages = 1;
+      }
       console.log("pagina:"+pagina)
       console.log("itms x pag : "+this.itemsPerpage)
           const itemsPerPage =Number(this.itemsPerpage)
@@ -641,9 +674,12 @@ export class PolicyListComponent implements OnInit , OnDestroy{
                     realSale: item
           }))];
           console.log(this.tableDto)
+          this.cdr.detectChanges();
     }
+    
   
     onPageChange(pageNumber: number): void {
+      console.log(pageNumber)
       this.currentPages=pageNumber
       this.loadTable(pageNumber);
     }

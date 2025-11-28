@@ -2,7 +2,7 @@
 @import "../../../shared/mixins/variables/color.scss";
 @import "../../../shared/mixins/generalText.scss";
 
-
+//Para solucionar  problemas de rennderizado entre title y table al vovler de los detalles
 :host {
   display: block;
   
@@ -46,6 +46,7 @@ app-title-page + .card-table-filters {
     margin-top: 0rem !important;
   }
 }
+//hasta aqui llega la solucion de problemas de renderizados
 
 .card-table-filters {
   width: 100%;
@@ -907,12 +908,13 @@ app-ip-date-input {
 
   .paginator-controls {
     display: flex;
-    align-items: center;
+    align-items: end;
     width: 100%; // 👈 Ancho completo
     justify-content: flex-start; // 👈 Alinea al inicio
 
   }
   app-ip-select-input{
+    padding-top: 1.06rem;
     width: 5rem
   }
   

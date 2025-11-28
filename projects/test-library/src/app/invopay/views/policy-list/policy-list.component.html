@@ -137,12 +137,14 @@
                     [options]="rowsCombo"
                 ></app-ip-select-input>  
 
-                <app-paginator 
-                    (pageChange)="onPageChange($event)" 
-                    [totalItems]="policies.length"
-                    [itemsPerPage]="itemsPerpage" 
-                    [currentPages]="currentPages"
-                ></app-paginator>
+                <ng-container *ngIf="!paginatorReload">
+                    <app-paginator 
+                        (pageChange)="onPageChange($event)" 
+                        [totalItems]="policies.length"
+                        [itemsPerPage]="itemsPerpage" 
+                        [currentPages]="currentPages"
+                    ></app-paginator>
+                </ng-container>
             </div>
         </div>
     </div>

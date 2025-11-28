@@ -465,13 +465,15 @@ ul.menu-movil li:active {
 
   .paginator-controls {
     display: flex;
-    align-items: center;
+    align-items: end;
     width: 100%; // 👈 Ancho completo
     justify-content: flex-start; // 👈 Alinea al inicio
   }
 
   app-ip-select-input{
-    width: 5rem
+    width: 5rem;
+    padding-top: 1.06rem;
+    
   }
   app-paginator {
     width: 100%; // 👈 Ancho completo para el paginador
