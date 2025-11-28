@@ -136,7 +136,7 @@ export class RevenueDetailComponent {
         state.enabled=true
         this.stateRevenueService.saveState(state)
         }
-        this.router.navigate(['revenues-list'])
+        this.router.navigate(['invopay/revenues-list'])
        }
     
       formatNumberToArg(value: number): string {

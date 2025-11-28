@@ -1,10 +1,10 @@
 <form [formGroup]="controlsForm">
 
     <!-- HEADER -->
-    <app-title-page *ngIf="!isMobile" [isMobile]="isMobile" [title]="'NEW_VAR.POLICIES' | translate"></app-title-page>
+    <app-title-page *ngIf="!isMobile" [isMobile]="false" [title]="'NEW_VAR.POLICIES' | translate"></app-title-page>
     
     <div *ngIf="isMobile" class="mobile-header">
-        <app-title-page [isMobile]="isMobile" [title]="'NEW_VAR.POLICIES' | translate"></app-title-page>
+        <app-title-page [isMobile]="true" [title]="'NEW_VAR.POLICIES' | translate"></app-title-page>
         <button class="search-mobile" (click)="onClickFiltredSearchMobile()">
             <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg" />
             {{'IP.FILTERS_MODAL.FILTER' | translate}}
@@ -158,43 +158,48 @@
 <!-- MODAL FILTERS - MOBILE  -->
 <!-- ============================================ -->
 
-
 <app-filter-modal-mobile  
   *ngIf="isMobile"
   [isOpen]="isModalOpen" 
-  (closed)="isModalOpen = false"
->
+  (closed)="isModalOpen = false">
   
   <div class="modal-filters-content">
     <p style="margin-bottom: 6vh;margin-left: 3vh; color: rgb(110, 109, 106);" class="modal-title">
       {{'IP.FILTERS_MODAL.FILTER' | translate}} {{'IP.SIDENAV.OPTIONS.PAY_IN' | translate | lowercase}}
     </p>
 
-    <div class="select-wrapper">
-      <app-ip-select-input 
-        [control]="this.controlsForm.controls.productFilter"
-        [options]="products"
-        [label]="'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate"
-        [placeholder]="'NEW_VAR.SELECT_PRODUCT' | translate"
-      ></app-ip-select-input> 
-    </div> 
-        <div class="select-wrapper">
-      <app-ip-select-input 
-        [control]="this.controlsForm.controls.productFilter"
-        [options]="clients"
-        [label]="'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate"
-        [placeholder]="'NEW_VAR.SELECT_PRODUCT' | translate"
-      ></app-ip-select-input> 
-    </div> 
-
-    <div *ngIf="userType==='assurance'" class="select-wrapper">
-      <app-ip-select-input 
-        [control]="this.controlsForm.controls.brokerFilter"
-        [options]="brokers"
-        [label]="'IP.SETTLEMENTS.DETAILS.BROKER_NAME' | translate"
-        [placeholder]="'IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.SELECT_BROKER' | translate"
-      ></app-ip-select-input>  
-    </div>
+        <!-- Select Producto -->
+     <div class="select-wrapper">
+        <app-ip-select-input 
+          [withSearch]="true"
+          [control]="this.controlsForm.controls.productFilter"
+          [options]="products"
+          [label]="'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate"
+          [placeholder]="'NEW_VAR.SELECT_PRODUCT' | translate"
+        ></app-ip-select-input> 
+      </div>
+      
+      <!-- Select Cliente -->
+     <div class="select-wrapper">
+        <app-ip-select-input 
+          [withSearch]="true"
+          [control]="controlsForm.controls.clientFilter"
+          [options]="clients"
+          [label]="'NEW_VAR.CLIENT' | translate"
+          [placeholder]="'NEW_VAR.SELECT_CLIENT' | translate"
+        ></app-ip-select-input> 
+      </div>
+      
+      <!-- Select Broker (solo assurance) -->
+      <div *ngIf="userType === 'assurance'" class="select-wrapper">
+        <app-ip-select-input 
+          [withSearch]="true"
+          [control]="controlsForm.controls.brokerFilter"
+          [options]="brokers"
+          [label]="'IP.SETTLEMENTS.DETAILS.BROKER_NAME' | translate"
+          [placeholder]="'IP.SETTLEMENTS.SALE-PAYMENT.FILTERS.SELECT_BROKER' | translate"
+        ></app-ip-select-input>  
+      </div>
 
     <div class="date-row">
       <div class="date-wrapper">
@@ -217,11 +222,12 @@
 
     <!-- Botones de acción -->
     <div class="card-filtros__actions">
-      <button style="margin-right: 6px;" class="clean" (click)="onClearFilters('modal')">
-        <img src="../../../../assets/new-styles/icons/cleaning.svg">
-      </button>
-      <button class="search" (click)="onClickFiltredSearch()">
+
+    <button class="search" style="margin-right: 6px;" (click)="onClickFiltredSearch()">
         <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
+      </button>
+      <button  class="clean" (click)="onClearFilters('modal')">
+        <img src="../../../../assets/new-styles/icons/cleaning.svg">
       </button>
     </div>
   </div>

@@ -2,6 +2,49 @@
 @import "../../../shared/mixins/variables/color.scss";
 @import "../../../shared/mixins/generalText.scss";
 
+:host {
+  display: block;
+  
+  app-title-page {
+    display: block;
+    margin-bottom: 0rem;
+  }
+}
+
+::ng-deep app-title-page {
+  display: block !important;
+  margin-bottom: 0 !important;
+  
+  .title-container {
+    margin-bottom: 0 !important;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  
+  @include sm() {
+    gap: 0rem;
+  }
+}
+
+app-title-page + .card-table-filters {
+  margin-top: 0rem !important;
+  
+  @include sm() {
+    margin-top: 0rem !important;
+  }
+}
+
+.mobile-header + .card-table-filters {
+  margin-top: 0rem !important;
+  
+  @include sm() {
+    margin-top: 0rem !important;
+  }
+}
 
 .card-table-filters {
   width: 100%;

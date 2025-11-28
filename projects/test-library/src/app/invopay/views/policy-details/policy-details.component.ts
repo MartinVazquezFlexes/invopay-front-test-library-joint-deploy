@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoadingService } from '../../../shared/services/loading.service';
 import { PolicyService } from '../../services/policy.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -15,12 +15,15 @@ import {
   templateUrl: './policy-details.component.html',
   styleUrls: ['./policy-details.component.scss'],
 })
-export class PolicyDetailsComponent implements OnInit {
+export class PolicyDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private policyService: PolicyService,
     public loadingService: LoadingService,
     public router: Router
   ) {}
+  ngOnDestroy(): void {
+
+  }
 
   policyId: number = 0;
   /*policyDetails : any = {
@@ -335,14 +338,16 @@ export class PolicyDetailsComponent implements OnInit {
   }
 
   onBackButtonClick() {
+
+ 
     if (
       this.userType == 'ENTERPRISE_USER' ||
       this.userType == 'ENTERPRISE_MANAGER'
     ){
-      this.router.navigate(['/invopay/policy-list/assurance']);
+      this.router.navigate(['invopay/policy-list/assurance']);
     }
     else {
-      this.router.navigate(['/invopay/policy-list/broker']);      
+      this.router.navigate(['invopay/policy-list/broker']);      
     }
   }
 }

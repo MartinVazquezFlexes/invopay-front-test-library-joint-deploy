@@ -47,6 +47,7 @@ export class InstanceComisionDetailComponent implements OnInit,OnDestroy {
   private currentId?: string
   instance: Instance | null = null;
   isTrueInsance:boolean=false;
+  general:string=''
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -134,7 +135,7 @@ export class InstanceComisionDetailComponent implements OnInit,OnDestroy {
         try {
           this.instance = instance;
           this.isTrueInsance = instance.hasIncentiveCategory;
-          
+          this.general=instance.scope
           // Batch form updates for better performance
           const formValues = this.buildFormValues(instance);
           this.form.patchValue(formValues, { emitEvent: false });

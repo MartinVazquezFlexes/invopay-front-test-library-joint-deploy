@@ -15,7 +15,7 @@ export class IpInstanceDetailInfoComponent implements OnInit {
   @Input() brokers:BrokerCategory[]=[];
   @Input() products:Product[]=[];
   @Input() insurancePolicies:InsurancePolicies[]=[];
-  
+  @Input() general:string='';
   activeTab: 'products' | 'brokers' | 'policies' = 'products';
   policies: InsurancePolicies[] = [];
   
@@ -29,6 +29,7 @@ export class IpInstanceDetailInfoComponent implements OnInit {
   constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
+    this.loadMockData();
     this.loadData();
     this.setupTranslations();
     this.setupMobileConfig();
@@ -36,6 +37,55 @@ export class IpInstanceDetailInfoComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  loadMockData(): void {
+    if (!this.general) return;
+    
+    // Limpiar todos los datos primero
+    this.brokers = [];
+    this.products = [];
+    this.insurancePolicies = [];
+    
+    const mockBrokers: BrokerCategory[] = [
+      { id: 1, username: 'Broker 1', userEmail: 'broker1@pasantia.com', userCreationDate: '2025-10-13', lastLoginDate: '2025-11-28T00:00:00' },
+      { id: 2, username: 'Broker 2', userEmail: 'broker2@pasantia.com', userCreationDate: '2025-10-14', lastLoginDate: '2025-11-29T00:00:00' },
+      { id: 3, username: 'Broker 3', userEmail: 'broker3@pasantia.com', userCreationDate: '2025-10-15', lastLoginDate: '2025-11-30T00:00:00' },
+      { id: 4, username: 'Broker 4', userEmail: 'broker4@pasantia.com', userCreationDate: '2025-10-16', lastLoginDate: '2025-12-01T00:00:00' }
+    ];
+    
+    const mockProducts: Product[] = [
+      { id: '1', name: 'Seguro de Robo', description: 'Cubre robo de vehículos', externalId: 'SR001', type: 'INDIVIDUAL', insuranceEnterprise: 'Seguros SA', isActive: true, enterpriseId: 1, logoUrl: '', longDescription: 'Seguro completo contra robo', code: 'SR001', logoFile: '', deletable: true, editable: true, documents: [] },
+      { id: '2', name: 'Seguro de robo total', description: 'Cubre robo total', externalId: 'SR002', type: 'INDIVIDUAL', insuranceEnterprise: 'Seguros SA', isActive: true, enterpriseId: 1, logoUrl: '', longDescription: 'Seguro contra robo total', code: 'SR002', logoFile: '', deletable: true, editable: true, documents: [] },
+      { id: '3', name: 'Seguro de Vida', description: 'Seguro individual', externalId: 'SI001', type: 'INDIVIDUAL', insuranceEnterprise: 'Seguros SA', isActive: true, enterpriseId: 1, logoUrl: '', longDescription: 'Seguro para personas', code: 'SI001', logoFile: '', deletable: true, editable: true, documents: [] }
+    ];
+    
+    const mockPolicies: InsurancePolicies[] = [
+      { id: 1, name: 'Poliza 23', policyNumber: 'Poliza023', externalId: 'POL023', emissionDate: '2025-10-22', initDate: '2025-10-22', endDate: '2026-10-22', amount: 100000, currency: '$', status: 'ACTIVE', creationAt: '2025-10-22', updatedAt: '2025-10-22', insuranceId: 1, insuranceName: 'Seguros SA', customerId: 1, customerName: 'Jorge Perez', brokerId: 1, brokerName: 'Broker 01', saleId: 1, deletable: true, editable: true, primeAmount: 5000 },
+      { id: 2, name: 'Poliza 24', policyNumber: 'Poliza024', externalId: 'POL024', emissionDate: '2025-10-23', initDate: '2025-10-23', endDate: '2026-10-23', amount: 150000, currency: '$', status: 'ACTIVE', creationAt: '2025-10-23', updatedAt: '2025-10-23', insuranceId: 1, insuranceName: 'Seguros SA', customerId: 2, customerName: 'Maria Lopez', brokerId: 1, brokerName: 'Broker 01', saleId: 2, deletable: true, editable: true, primeAmount: 7500 },
+      { id: 3, name: 'Poliza 25', policyNumber: 'Poliza025', externalId: 'POL025', emissionDate: '2025-10-24', initDate: '2025-10-24', endDate: '2026-10-24', amount: 200000, currency: '$', status: 'ACTIVE', creationAt: '2025-10-24', updatedAt: '2025-10-24', insuranceId: 1, insuranceName: 'Seguros SA', customerId: 3, customerName: 'Carlos Ruiz', brokerId: 2, brokerName: 'Broker 02', saleId: 3, deletable: true, editable: true, primeAmount: 10000 }
+    ];
+    
+    switch (this.general.toUpperCase()) {
+      case 'GENERAL':
+        this.brokers = mockBrokers;
+        this.products = mockProducts;
+        this.insurancePolicies = mockPolicies;
+        break;
+      case 'INSURANCE_POLICY':
+        this.insurancePolicies = mockPolicies;
+        break;
+      case 'PRODUCT':
+        this.products = mockProducts;
+        break;
+      case 'BROKER':
+        this.brokers = mockBrokers;
+        break;
+      case 'BROKER_PRODUCT':
+        this.brokers = mockBrokers;
+        this.products = mockProducts;
+        break;
+    }
   }
 
   loadData(): void {
@@ -160,6 +210,7 @@ export class IpInstanceDetailInfoComponent implements OnInit {
   }
 
   getCurrentData() {
+    
     switch (this.activeTab) {
       case 'products': 
         return this.products.map(product => ({
@@ -167,6 +218,7 @@ export class IpInstanceDetailInfoComponent implements OnInit {
           isActiveText: this.yesNoTranslator(product.isActive)
         }));
       case 'brokers': 
+        console.log('Returning brokers data, count:', this.brokers.length);
         return this.brokers.map(broker => ({
           brokerName: broker.username,
           brokerEmail: broker.userEmail,
@@ -208,8 +260,23 @@ export class IpInstanceDetailInfoComponent implements OnInit {
 
   setActiveTab(tab: 'products' | 'brokers' | 'policies'): void {
     this.activeTab = tab;
+    
+    // Limpiar títulos para forzar recarga
+    this.titlesFile = new Map<string, string>();
+    
+    if (this.general) {
+      this.loadMockData();
+    } else {
+      this.brokers = [];
+      this.products = [];
+      this.insurancePolicies = [];
+    }
+    
     this.updateTranslations();
     this.setupMobileConfig();
+    
+    // Forzar detección de cambios
+    this.cdr.detectChanges();
   }
 
   private setupMobileConfig(): void {

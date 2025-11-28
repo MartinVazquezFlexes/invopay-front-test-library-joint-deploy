@@ -1,4 +1,4 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { map, Subscription } from 'rxjs';
 import { CardConfig } from '../../../shared/models/movile-table';
@@ -21,7 +21,7 @@ import { Broker } from '../../interface/broker';
   templateUrl: './policy-list.component.html',
   styleUrls: ['./policy-list.component.scss']
 })
-export class PolicyListComponent {
+export class PolicyListComponent implements OnInit , OnDestroy{
 
      userType : 'broker' | 'assurance' = 'assurance';
          private readonly subscriptions = new Subscription();
@@ -34,6 +34,8 @@ export class PolicyListComponent {
        private readonly loadinService : LoadingService,
        private readonly auxFiltersService : AuxFiltersService,
        private readonly matDialog : MatDialog,
+      private readonly cdr: ChangeDetectorRef
+
 
       ) { }
 
@@ -56,17 +58,17 @@ export class PolicyListComponent {
 
 
 
-onClickOpenMoreFilters() {
-  const dialogData: FiltersDialogData = {
-    controlsForm: this.controlsForm,
-    products: this.products,
-    clients: this.clients,
-    brokers: this.brokers,
-    userType: this.userType,
-    maxStart: this.maxStart,
-    maxEnd: this.maxEnd,
-    minEnd: this.minEnd
-  };
+  onClickOpenMoreFilters() {
+    const dialogData: FiltersDialogData = {
+      controlsForm: this.controlsForm,
+      products: this.products,
+      clients: this.clients,
+      brokers: this.brokers,
+      userType: this.userType,
+      maxStart: this.maxStart,
+      maxEnd: this.maxEnd,
+      minEnd: this.minEnd
+    };
 
   const dialogRef = this.matDialog.open(PolicyListFiltersModalDialogComponent, {
     width: '800px',
@@ -77,7 +79,7 @@ onClickOpenMoreFilters() {
     autoFocus: true
   });
 
-    dialogRef.afterClosed().subscribe(result => {
+  dialogRef.afterClosed().subscribe(result => {
         console.log("close modal")
         console.log(result)
         const dateStartValue = this.controlsForm.controls.dateStart.value;
@@ -95,32 +97,29 @@ onClickOpenMoreFilters() {
       } else if (result?.action === 'clear') {
         this.onClearFilters('modal');
       }
-      // Si result es undefined, el usuario cerró sin hacer nada
+      // Si result es undefined, el usuario cerro sin hacer nada
     });
   }
 
   onClearFilters(procedence :string) {
-    // Limpiar los controles del formulario
+
     this.controlsForm.controls.productFilter.setValue('');
     this.controlsForm.controls.clientFilter.setValue('');
     this.controlsForm.controls.brokerFilter.setValue('');
     this.controlsForm.controls.dateStart.setValue('');
     this.controlsForm.controls.dateEnd.setValue('');
     
-    // Limpiar las variables locales
     this.currentProduct = '';
     this.currentBroker = '';
     this.currentStart = '';
     this.currentEnd = '';
-  
-
   }
 
 
 
 
   /**
-   * Validate min one filter selected
+   * valido minimo un filtro selecc
    */
   hasAtLeastOneFilter(): boolean {
     const form = this.controlsForm
@@ -210,16 +209,21 @@ onClickOpenMoreFilters() {
 
     ngOnInit(): void {
       
-       
+      
         this.userType = this.route.snapshot.data['type'] || 'assurance';
         console.log(this.userType)
-        
         this.loadinService.setLoadingState(true)
         this.loadTitleMap();
         this.checkScreenSize()
         this.loadControlsSubscriptions()
         this.loadSelects();
        // this.loadPolicies()
+
+        setTimeout(() => {
+          window.scrollTo(0, 0);  // Va al top de la página
+        }, 300);  // Delay para que el DOM se renderice primero
+      
+        
        
     }
 
@@ -227,23 +231,23 @@ onClickOpenMoreFilters() {
 
  if(this.userType==='assurance'){
    this.auxFiltersService.getAuxBrokers().subscribe({
-      next: (value: any[]) => {
-        console.log("Respuesta brokers:", value);
+        next: (value: any[]) => {
+          console.log("Respuesta brokers:", value);
 
-        this.brokers = value.map((item: any) => ({
-          label: item.username,
-          value: item.username
-        }));
-      },
-      error: () => {
-        console.log("ERROR loading brokers filter");
-        this.brokers = [
-          { label: 'broker1', value: 'broker1' },
-          { label: 'broker2', value: 'broker2' }
-        ];
-      }
-    });
-  }
+          this.brokers = value.map((item: any) => ({
+            label: item.username,
+            value: item.username
+          }));
+        },
+        error: () => {
+          console.log("ERROR loading brokers filter");
+          this.brokers = [
+            { label: 'broker1', value: 'broker1' },
+            { label: 'broker2', value: 'broker2' }
+          ];
+        }
+      });
+    }
 
     this.auxFiltersService.getAuxClients().subscribe({
       next: (value: any[]) => {
@@ -279,11 +283,7 @@ onClickOpenMoreFilters() {
         ];
       }
     });
-
-
-
       this.loadinService.setLoadingState(false)
-
   }
   
   /*
@@ -341,7 +341,6 @@ onClickOpenMoreFilters() {
           })
         );
 
-
         this.subscriptions.add(
           this.controlsForm.controls.clientFilter.valueChanges.subscribe(value => {
           console.log("NEW")
@@ -371,22 +370,22 @@ onClickOpenMoreFilters() {
  
   
   
-onApplyFilter(page: number) {
-  /*
-  console.log("========== APPLY FILTER START ==========");
-  console.log("apply filter page " + page);
-  console.log("currentStart (raw):", this.currentStart);
-  console.log("currentEnd (raw):", this.currentEnd);
-  console.log("currentPayChannel:", this.currentPayChannel);
-  */
-    if(this.userType==='assurance'){
-      this.getPolicyForAssurance(page);
-    }
-    if(this.userType==='broker'){
-      this.getPolicyForBroker(page)
-    }
+  onApplyFilter(page: number) {
+      /*
+      console.log("========== APPLY FILTER START ==========");
+      console.log("apply filter page " + page);
+      console.log("currentStart (raw):", this.currentStart);
+      console.log("currentEnd (raw):", this.currentEnd);
+      console.log("currentPayChannel:", this.currentPayChannel);
+      */
+        if(this.userType==='assurance'){
+          this.getPolicyForAssurance(page);
+        }
+        if(this.userType==='broker'){
+          this.getPolicyForBroker(page)
+        }
 
-}
+  }
 
 
     getPolicyForBroker(page:number){
@@ -664,7 +663,9 @@ onApplyFilter(page: number) {
       const id = revenue.id
       console.log(id)
       if (accion === 'detail') {
-        this.router.navigate(['sales-detail',id]);
+        this.router.navigate(['/invopay/policy-details'], {
+          state: { id: id }
+        });
       }
     }
   

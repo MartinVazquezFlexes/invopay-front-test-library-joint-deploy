@@ -28,15 +28,17 @@
       </div>
       <div class="card-body">
         <!-- Desktop: Shared Table Component -->
-        <app-table
-          *ngIf="getCurrentTitlesFile() && getCurrentTitlesFile().size > 0 && getCurrentData().length > 0"
-          [data]="getCurrentData()"
-          [initTable]="false"
-          [propertyOrder]="getCurrentConfig().columns"
-          [titlesFile]="getCurrentTitlesFile()"
-          keyTranslate="IP.TABLE"
-          [tableStyle]="'commissions'">
-        </app-table>
+        <ng-container *ngIf="activeTab && general">
+          <app-table
+            *ngIf="getCurrentTitlesFile() && getCurrentTitlesFile().size > 0 && getCurrentData().length > 0"
+            [data]="getCurrentData()"
+            [initTable]="false"
+            [propertyOrder]="getCurrentConfig().columns"
+            [titlesFile]="getCurrentTitlesFile()"
+            keyTranslate="IP.TABLE"
+            [tableStyle]="'commissions'">
+          </app-table>
+        </ng-container>
 
         <!-- Mobile: Card List Component -->
         <app-mobile-card-list
