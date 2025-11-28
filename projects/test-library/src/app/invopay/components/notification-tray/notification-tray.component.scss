@@ -443,12 +443,19 @@ $backgrounds-color: #D9D9D9;
     &__card {
       padding: 10px;
       gap: 10px;
+      background: transparent;
+      box-shadow: none;
     }
 
     &__title-section {
       padding: 1px 10px;
       background: transparent !important;
       border: none !important;
+      box-shadow: none !important;
+    }
+
+    &__content {
+      background: transparent !important;
       box-shadow: none !important;
     }
 
@@ -513,13 +520,13 @@ $backgrounds-color: #D9D9D9;
   @include btnGeneralText();
   padding: 8px 12px;
   border: none;
-  border-radius: 6px;
+  border-radius: .7rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  min-width: 40px;
+  min-width: 38px;
   font-size: 13px;
    @media (min-width: 1920px) {
     padding: 11px 12px;
@@ -545,7 +552,8 @@ $backgrounds-color: #D9D9D9;
     background: $primary-color;
 
     &:disabled, &--disabled {
-      background: #62a6ff;
+      background:$primary-color;
+      opacity: 0.65;
       cursor: not-allowed;
 
       svg path {
@@ -563,7 +571,8 @@ $backgrounds-color: #D9D9D9;
     background: $primary-color;
 
     &:disabled, &--disabled {
-      background: #62a6ff;
+      background:$primary-color;
+      opacity: 0.65;
       cursor: not-allowed;
 
       img {
@@ -581,7 +590,8 @@ $backgrounds-color: #D9D9D9;
     background: $primary-color;
 
     &:disabled, &--disabled {
-      background: #7FB6FF;
+     background:$primary-color;
+      opacity: 0.65;
       cursor: not-allowed;
 
       svg path {
