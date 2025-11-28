@@ -302,7 +302,7 @@ export class IpInstanceDetailInfoComponent implements OnInit {
             { 
               label: this.translate.instant('IP.COMISSION_SCHEME.TABLE.ACTIVE'), 
               key: 'isActiveText',
-              isAmount: true
+              isStatus: true
             }
           ],
           showActionButton: false
