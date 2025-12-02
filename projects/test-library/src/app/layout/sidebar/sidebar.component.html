@@ -26,7 +26,7 @@
           </a>
         </div>
       </div>
-         <a *ngIf="userType==='SUPPLIER_MANAGER'" class="menu-item" routerLink="/invopay/policy-list/broker" routerLinkActive="active" title="Polizas">
+        <a *ngIf="userType !== 'ENTERPRISE_USER' && userType !== 'ENTERPRISE_MANAGER'" class="menu-item" routerLink="/invopay/policy-list/broker" routerLinkActive="active" title="Polizas">
         <img src="../../../assets/icons/settlements-icon.svg" alt="Polizas">
         <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'NEW_VAR.POLICIES' | translate }}</span>
         </a>
