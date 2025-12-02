@@ -38,6 +38,7 @@ import { IpInstanceDetailInfoComponent } from './components/ip-instance-detail-i
 import { SchemeInstanceComponent } from './views/scheme-instance/scheme-instance.component';
 import { PolicyListComponent } from './views/policy-list/policy-list.component';
 import { PolicyListFiltersModalDialogComponent } from './components/policy-list-filters-modal-dialog/policy-list-filters-modal-dialog.component';
+import { PolicyEditModalDialogComponent } from './components/policy-edit-modal-dialog/policy-edit-modal-dialog.component';
 
 
 
@@ -58,6 +59,7 @@ import { PolicyListFiltersModalDialogComponent } from './components/policy-list-
         IpInstanceDetailInfoComponent,
         SchemeInstanceComponent,
         PolicyListFiltersModalDialogComponent,
+        PolicyEditModalDialogComponent,
     ],
     imports: [
         CommonModule,

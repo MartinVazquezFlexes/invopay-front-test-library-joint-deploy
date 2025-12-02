@@ -787,11 +787,11 @@ app-ip-date-input {
   width: 100%;
   gap: 0.5rem;
   padding-left: 0.5rem;
-  justify-content: flex-start; // 👈 mantiene todo alineado a la izquierda
-  flex-wrap: nowrap; // 👈 no bajan de línea
+  justify-content: flex-start; //  mantiene todo alineado a la izquierda
+  flex-wrap: nowrap; // no bajan de línea
 
   .card-tab {
-    flex: 0 0 auto; // 👈 ancho según contenido
+    flex: 0 0 auto; //  ancho según contenido
     padding: 6px 12px;
     text-align: center;
     cursor: pointer;
@@ -805,7 +805,7 @@ app-ip-date-input {
 
     span {
       display: inline-block;
-      white-space: nowrap; // 👈 mantiene el texto en una línea
+      white-space: nowrap; //  mantiene el texto en una línea
       font-family: Poppins, Loos, Arial, sans-serif;
     }
 
@@ -830,11 +830,11 @@ app-ip-date-input {
   width: 100%;
   gap: 0.5rem;
   padding-left: 0.5rem;
-  justify-content: flex-start; // 👈 mantiene todo alineado a la izquierda
-  flex-wrap: nowrap; // 👈 no bajan de línea
+  justify-content: flex-start; // mantiene todo alineado a la izquierda
+  flex-wrap: nowrap; // no bajan de línea
 
   .card-tab {
-    flex: 0 0 auto; // 👈 ancho según contenido
+    flex: 0 0 auto; //  ancho según contenido
     padding: 6px 12px;
     text-align: center;
     cursor: pointer;
@@ -867,7 +867,7 @@ app-ip-date-input {
 // Responsive
 @media (max-width: 768px) {
   .card-row-tab {
-    flex-wrap: wrap; // 👈 si el espacio no alcanza, recién ahí baja
+    flex-wrap: wrap; // si el espacio no alcanza, recién ahí baja
     .card-tab {
       flex: 0 1 45%;
       max-width: 35%;
@@ -909,8 +909,8 @@ app-ip-date-input {
   .paginator-controls {
     display: flex;
     align-items: end;
-    width: 100%; // 👈 Ancho completo
-    justify-content: flex-start; // 👈 Alinea al inicio
+    width: 100%; // Ancho completo
+    justify-content: flex-start; // Alinea al inicio
 
   }
   app-ip-select-input{
@@ -919,9 +919,9 @@ app-ip-date-input {
   }
   
   app-paginator {
-    width: 100%; // 👈 Ancho completo para el paginador
+    width: 100%; //Ancho completo para el paginador
     display: flex;
-    justify-content: flex-end; // 👈 Alinea al final
+    justify-content: flex-end; // Alinea al final
   }
 }
 

@@ -65,9 +65,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
     // // Double-check
     // this.pageChange.emit(this.currentPage);
 
-
-     // ✅ AGREGA ESTOS LOGS
-    console.log('🔧 PAGINATOR ngOnChanges:');
+    console.log(' PAGINATOR ngOnChanges:');
     console.log('  totalItems:', this.totalItems);
     console.log('  itemsPerPage:', this.itemsPerPage);
     console.log('  totalPages:', this.totalPages);

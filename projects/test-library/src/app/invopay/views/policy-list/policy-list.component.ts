@@ -435,8 +435,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
             console.log("matchesClient:", matchesClient);
             console.log(this.currentClient+"===" +x.customerName)
             const result = matchesDate && matchesBroker && matchesProduct && matchesClient;
-          // console.log("RESULTADO FINAL (pasa filtro?):", result);
-            
+          // console.log("RESULTADO FINAL (pasa filtro?):", result);  
             console.log("")
             console.log(result)
             if(!result) console.log(x)

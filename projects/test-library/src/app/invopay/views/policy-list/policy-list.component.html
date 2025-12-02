@@ -23,7 +23,7 @@
                     <!-- Fecha Desde -->
                     <div class="date-wrapper">
                         <app-ip-date-input 
-                            [label]="'IP.FROM' | translate"  
+                            [label]="'NEW_VAR.EXPIRATION_FROM' | translate"  
                             [control]="controlsForm.controls.dateStart" 
                             [max]="maxStart"
                         ></app-ip-date-input>
@@ -32,7 +32,7 @@
                     <!-- Fecha Hasta -->
                     <div class="date-wrapper">
                         <app-ip-date-input 
-                            [label]="'IP.TO' | translate"  
+                            [label]="'NEW_VAR.EXPIRATION_TO'|translate " 
                             [control]="controlsForm.controls.dateEnd" 
                             [max]="maxEnd" 
                             [min]="minEnd"
@@ -203,17 +203,17 @@
         ></app-ip-select-input>  
       </div>
 
-    <div class="date-row">
+    <div style="margin-top: 1rem;" class="date-row">
       <div class="date-wrapper">
-        <label class="placeholder">{{'IP.FILTERS.DATE.FROM' | translate}}</label>
+        <label class="placeholder">{{'NEW_VAR.EXPIRATION_FROM' | translate}}</label>
         <app-ip-date-input 
           [control]="controlsForm.controls.dateStart"
           [max]="maxStart"
         ></app-ip-date-input>
       </div>
-
+ 
       <div class="date-wrapper">
-        <label class="placeholder">{{'IP.FILTERS.DATE.TO' | translate}}</label>
+        <label class="placeholder">{{'NEW_VAR.EXPIRATION_FROM'|translate}}</label>
         <app-ip-date-input
           [control]="controlsForm.controls.dateEnd"
           [max]="maxEnd"

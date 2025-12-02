@@ -46,13 +46,16 @@
       "TELEPHONE":"Télefono",
       "VALUE":"Valor",
       "EXPIRATION":"Vencimiento",
+      "EXPIRATION_FROM":"Vencimiento Desde",
+      "EXPIRATION_TO":"Vencimiento Hasta",
       "STATUS":"Estado",
       "PAYMENT_COMMISSION_BROKER":"Pago comisión broker",
       "DATE_PAYMENT":"Fecha Pago",
       "COMMISSION_VALUE":"Valor Comisión",
       "SALE_AMOUNT":"Monto venta",
       "AMOUNT_INSTALLMENT":"Monto cuota",
-      "POLICIES": "Polizas"
+      "POLICIES": "Polizas",
+      "FILTER_POLICIES":"Filtrar polizas"
 
   },
   "IP": {
