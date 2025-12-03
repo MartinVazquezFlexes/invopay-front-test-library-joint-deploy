@@ -428,6 +428,20 @@ app-title-page + .card-table-filters {
   &:hover::after {
     opacity: 1;
   }
+      /* ------------- */
+  /* ESTADO DISABLED */
+  /* ------------- */
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;                /* efecto típico de disabled */
+    background-color: #0c77d0;    /* mismo color, solo más apagado */
+    box-shadow: none;             /* sin hover */
+  }
+
+  /* Evita que el tooltip aparezca cuando está disabled */
+  &:disabled::after {
+    opacity: 0 !important;
+  }
   }
   
 }

@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="date-wrapper">
-                    <button class="more-filters" (click)="onClickOpenMoreFilters()">
+                    <button [disabled]="!canSearch" class="more-filters" (click)="onClickOpenMoreFilters()">
                         <img src="../../../../assets/icons/filter3.svg">
                     </button>
                 </div>
@@ -225,7 +225,7 @@
     <!-- Botones de acción -->
     <div class="card-filtros__actions">
 
-    <button class="search" style="margin-right: 6px;" (click)="onClickFiltredSearch()">
+    <button [disabled]="!canSearch" class="search" style="margin-right: 6px;" (click)="onClickFiltredSearch()">
         <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
       </button>
       <button  class="clean" (click)="onClearFilters('modal')">

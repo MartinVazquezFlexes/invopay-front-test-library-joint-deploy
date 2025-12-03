@@ -124,16 +124,21 @@ export class PolicyListComponent implements OnInit , OnDestroy{
    * valido minimo un filtro selecc
    */
   hasAtLeastOneFilter(): boolean {
-    const form = this.controlsForm
+      const form = this.controlsForm;
     
-    const hasProduct = !!form.controls.productFilter.value;
-    const hasClient = !!form.controls.clientFilter.value;
-    const hasBroker = !!form.controls.brokerFilter.value;
+    // Las fechas son OBLIGATORIAS
     const hasDateStart = !!form.controls.dateStart.value;
     const hasDateEnd = !!form.controls.dateEnd.value;
     
-    return hasProduct || hasClient || hasBroker || hasDateStart || hasDateEnd;
+    // Si no tiene ambas fechas, retorna false
+    if (!hasDateStart || !hasDateEnd) {
+      return false;
+    }
+    
+    // Si tiene las fechas, ya puede buscar (los otros filtros son opcionales)
+    return true;
   }
+  
   get canSearch(): boolean {
   return this.hasAtLeastOneFilter();
   }
