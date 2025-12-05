@@ -282,14 +282,6 @@ $status-inactive-color: $primary-color;
   gap: 1.25rem;
   padding: 0.5rem;
 
-  ::ng-deep app-ip-input .form-floating {
-    height: 1rem;
-
-    >label {
-      display: none !important;
-    }
-  }
-
   ::ng-deep app-ip-text-area-input .form-floating {
     height: 2.5rem;
 
@@ -363,6 +355,9 @@ $status-inactive-color: $primary-color;
     flex-direction: column;
     gap: 0.25rem;
 
+    &__name {
+      margin-top: 1rem;
+    }
     label {
       font-size: 0.75rem;
       font-weight: 600;
@@ -384,6 +379,7 @@ $status-inactive-color: $primary-color;
       padding: 0.5rem;
       background: #f9f9f9;
       border-radius: 4px;
+      margin-bottom: 1rem;
 
       label {
         text-transform: none;
@@ -448,6 +444,22 @@ $status-inactive-color: $primary-color;
           text-decoration: underline;
         }
       }
+    }
+  }
+
+  &__dynamic-section {
+    &-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: $primary-color;
+      margin: 0;
+      font-family: $font-family-primary;
+      display: block;       // Asegura que ocupe la línea
+      margin-bottom: 0.5rem; // Espacio visual recomendado antes de la tabla
+    }
+
+    .scheme-details__table-container {
+      margin-bottom: 1rem;
     }
   }
 
@@ -557,7 +569,7 @@ $status-inactive-color: $primary-color;
   }
 }
 
-:host ::ng-deep .schemes-instances-list__table {
+:host ::ng-deep .schemes-instances-list {
   .table thead .table__head-row>th:last-child .table__head-row-item--text {
 
     color: transparent;

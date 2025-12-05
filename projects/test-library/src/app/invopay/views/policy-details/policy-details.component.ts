@@ -330,16 +330,24 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
 
   //Aca irian las nuevas pestañas/secciones
   showPolicy: boolean = true;
+  showSection: boolean = false;
   activeSection: string = 'policy';
 
   showPolicySection() {
     //ocultar las otras pestañas/secciones
     this.showPolicy = true;
+    this.showSection = false;
+    this.activeSection = 'policy';
+  }
+
+  showSectionSection() {
+    //ocultar las otras pestañas/secciones
+    this.showPolicy = false;
+    this.showSection = true;
+    this.activeSection = 'section';
   }
 
   onBackButtonClick() {
-
- 
     if (
       this.userType == 'ENTERPRISE_USER' ||
       this.userType == 'ENTERPRISE_MANAGER'

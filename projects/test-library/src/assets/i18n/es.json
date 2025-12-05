@@ -116,6 +116,7 @@
       "FILE": "Ver detalle",
       "IMPORT": "Descargar",
       "STATUS": "Estado",
+      "SELECT": "Seleccionar",
       "INFO": "Asignar proyectos",
       "PAY": "Pagar",
       "REPORT": "Reportar",
@@ -203,6 +204,14 @@
         "PREMIUM_VALUE":"Prima",
         "COUNT":"Cantidad Cuotas",
         "PERCENTAGE":"Porcentaje Usado"
+      },
+      "AUDIT":{
+        "TITLE":"Auditoría",
+        "CHANGEDATE":"Fecha Edición",
+        "CHANGEDBYUSERNAME":"Editor",
+        "PREVIOUSPERCENTAGE":"Porcentaje Previo",
+        "NEWPERCENTAGE":"Nuevo Porcentaje",
+        "NOT_FOUND":"No hay auditoría registrada para esta póliza."
       }
     },
     "ADMIN_TABLE_ENTERPRISE": {
@@ -1637,6 +1646,9 @@
           "SALES_CREATION": "Ventas creadas desde proceso de conciliación"
         },
         "PRODUCTION": "Comisiones",
+        "OBJECTIVES":"Objetivos",
+        "GOALS":"Metas",
+        "OBJECTIVES_GOALS":"Objetivos/Metas",
         "COLLECTION_OPTIONS": {
           "TITLE": "Cobranza",
           "PENDING_PAYMENTS": "Pagos pendientes"
@@ -2835,6 +2847,30 @@
         "STATUS":"Estado",
         "CUSTOMER_NAME":"Nombre cliente",
         "EMISSION_DATE":"Fecha Emisión"
+      }
+    },
+    "OBJECTIVES":{
+      "TITLE":"Objetivos",
+      "TABLE":{
+        "NAME":"Nombre",
+        "CATEGORY":"Categoria",
+        "START_DATE":"Fecha de inicio",
+        "END_DATE":"Fecha de cierre",
+        "ACTIONS":"Acciones"
+      }
+    },
+    "GOALS":{
+      "TITLE":"Metas",
+      "TABLE":{
+        "NAME":"Nombre",
+        "PERIOD":"Periodo",
+        "CATEGORY":"Categoria de Broker",
+        "START_DATE":"Fecha de inicio",
+        "END_DATE":"Fecha de fin",
+        "POLICES":"Polizas nuevas",
+        "NEW_PRUIMUM":"Prima nueva",
+        "WALLET":"Crec. de cartera",
+        "GRADE":"Grado de Cumplimiento"
       }
     },
      "COMMISSIONS": {

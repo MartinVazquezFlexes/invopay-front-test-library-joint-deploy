@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { IpLoginComponent } from './components/ip-login/ip-login.component';
-
+import {IpSearchInputComponent} from './components/ip-search-input/ip-search-input.component';
 import { IpAuthService } from './services/ip-auth.service';
 import { IpProfileService } from './services/ip-profile.service';
 import { IpSnackbarService } from './services/ip-snackbar.service';
@@ -39,6 +39,9 @@ import { SchemeInstanceComponent } from './views/scheme-instance/scheme-instance
 import { PolicyListComponent } from './views/policy-list/policy-list.component';
 import { PolicyListFiltersModalDialogComponent } from './components/policy-list-filters-modal-dialog/policy-list-filters-modal-dialog.component';
 import { PolicyEditModalDialogComponent } from './components/policy-edit-modal-dialog/policy-edit-modal-dialog.component';
+import { ObjectiveListComponent } from './views/objective-list/objective-list.component';
+import { GoalsListComponent } from './views/goals-list/goals-list.component';
+
 
 
 
@@ -59,7 +62,9 @@ import { PolicyEditModalDialogComponent } from './components/policy-edit-modal-d
         IpInstanceDetailInfoComponent,
         SchemeInstanceComponent,
         PolicyListFiltersModalDialogComponent,
-        PolicyEditModalDialogComponent,
+
+        ObjectiveListComponent,
+        GoalsListComponent,
     ],
     imports: [
         CommonModule,
@@ -76,7 +81,8 @@ import { PolicyEditModalDialogComponent } from './components/policy-edit-modal-d
         MatProgressSpinnerModule,
         MatDialogModule,
         RouterModule,
-        SharedModule
+        SharedModule,
+        IpSearchInputComponent
     ],
     providers: [
         IpAuthService,

@@ -44,13 +44,13 @@ app-no-data {
   background-color: #ffffff;
   border-radius: 15px;
   flex: 1;
-  padding: 0;
+  padding: 20px 40px;
   box-shadow: 0 5px 10px rgba(5, 5, 5, 0.1);
   box-sizing: border-box;
   overflow: hidden;
 
   &-header {
-    padding: 1rem 1.5rem 1rem;
+    padding: 0.5rem 1.5rem 1rem;
     background: $app-component-bg;
     border-bottom: none;
     
@@ -65,6 +65,7 @@ app-no-data {
 
   &-body {
     padding: 0;
+    margin: 0 -40px -20px;
   }
 }
 

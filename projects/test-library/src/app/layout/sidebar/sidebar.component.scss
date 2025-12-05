@@ -85,6 +85,12 @@
     filter: invert(60%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%) contrast(90%);
   }
 
+  .menu-item img.gray-icon,
+  .menu-item.active img.gray-icon,
+  .menu-item.router-link-active img.gray-icon {
+    filter: brightness(0) saturate(100%) invert(50%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(90%) !important;
+  }
+
   .menu-item {
     display: flex;
     align-items: center;

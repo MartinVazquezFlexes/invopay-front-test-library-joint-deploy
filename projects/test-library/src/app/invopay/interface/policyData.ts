@@ -64,6 +64,7 @@ export interface PolicyDetailsResponse {
   broker: Broker;
   brokerId: number;
   brokerName: string | null;
+  commissionChangeAudits: CommissionChangeAudit[];
   creationAt: string;
   currency: string;
   customer: Customer;
@@ -105,4 +106,20 @@ export interface PolicyTableDetails {
   status: string;
   brokerCommission: string;
   paymentDate: string;
+}
+
+export interface CommissionChangeAudit {
+  id: number;
+  insurancePolicyId: number;
+  previousFixedValue: number;
+  newFixedValue: number;
+  newPercentage: number;
+  previousPercentage: number;
+  changeReason: string;
+  changedByUserId: number;
+  changeDate: string;
+  enterpriseId: number;
+  creationTime: string;
+  lastUpdate: string;
+  changedByUserName: string;
 }

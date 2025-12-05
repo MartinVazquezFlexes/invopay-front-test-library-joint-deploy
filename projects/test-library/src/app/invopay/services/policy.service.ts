@@ -10,36 +10,28 @@ import { Broker } from '../interface/broker';
 })
 export class PolicyService {
 
-   private readonly apiUrl=  environment.api+'/invopay/insurance-policies'
-    constructor(private http: HttpClient) {}
-  
-     getPolicies(): Observable<PolicyResponse> {
-      const headers = new HttpHeaders({
-          'Authorization': `Bearer `,
-          'Content-Type': 'application/json'
-        });
-        return this.http.get<PolicyResponse>(`${this.apiUrl}`, {headers});
-      }
+  private readonly apiUrl = environment.api + '/invopay/insurance-policies'
+  private readonly insurancePoliciesApi = environment.api + '/invopay/insurance-policies/all';
+  constructor(private http: HttpClient) { }
 
-      getPoliciesForBroker(): Observable<PolicyResponse> {
-      const headers = new HttpHeaders({
-          'Authorization': `Bearer `,
-          'Content-Type': 'application/json'
-        });
-        return this.http.get<PolicyResponse>(`${this.apiUrl}`+'/broker', {headers});
-      }
+  getPolicies(): Observable<PolicyResponse> {
+    return this.http.get<PolicyResponse>(`${this.apiUrl}`);
+  }
 
+  getPoliciesForBroker(): Observable<PolicyResponse> {
+    return this.http.get<PolicyResponse>(`${this.apiUrl}` + '/broker');
+  }
 
-  
+  //GetById
+  getPolicyBrokerById(id: number): Observable<any> { //Crear models
+    return this.http.get<any>(`${this.apiUrl}/${id}/broker`);
+  }
 
-//GetById
-getPolicyBrokerById(id: number): Observable<any> { //Crear models
-  return this.http.get<any>(`${this.apiUrl}/${id}/broker`);
-}
-
-//GetById
-getPolicyAdminById(id: number): Observable<any> { //Crear models
-  return this.http.get<any>(`${this.apiUrl}/${id}`);
-}
-
+  //GetById
+  getPolicyAdminById(id: number): Observable<any> { //Crear models
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+  getAllPolicies(): Observable<any> {
+    return this.http.get<any>(this.insurancePoliciesApi);
+  }
 }

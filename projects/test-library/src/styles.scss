@@ -29,15 +29,11 @@ $finsuite-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$finsuite-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $finsuite-primary,
-      accent: $finsuite-accent,
-      warn: $finsuite-warn,
-    ),
-  )
-);
+$finsuite-theme: mat.define-light-theme((color: (primary: $finsuite-primary,
+        accent: $finsuite-accent,
+        warn: $finsuite-warn,
+      ),
+    ));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -54,11 +50,14 @@ body {
   margin: 0;
   font-family: Inter, Roboto, "Helvetica Neue", sans-serif;
   font-variant-numeric: tabular-nums;
+
   .mat-mdc-dialog-container .mdc-dialog__surface {
     border-radius: 2rem !important;
+
     @media (max-width: 1600px) {
       border-radius: 1.5rem !important;
     }
+
     @media (max-width: 1366px) {
       border-radius: 1.4rem !important;
     }
@@ -112,6 +111,7 @@ body {
 .mat-calendar-period-button {
   pointer-events: none;
 }
+
 .mat-calendar-arrow {
   display: none !important;
 }
@@ -123,8 +123,10 @@ body {
       opacity: 0.8;
       color: #fff;
     }
+
     &.mat-focus-indicator {
       background: #fff !important;
+
       &:hover {
         background-color: var(--loginButtonBackgroundColor) !important;
       }
@@ -142,6 +144,7 @@ body {
     }
   }
 }
+
 .mat-datepicker-content {
   .mat-calendar {
     width: 15rem !important;
@@ -162,19 +165,11 @@ body {
   --mdc-snackbar-container-color: #33a3aa;
 }
 
-.mat-mdc-radio-button
-  .mdc-radio
-  .mdc-radio__native-control:enabled:checked
-  + .mdc-radio__background
-  .mdc-radio__outer-circle {
+.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:checked+.mdc-radio__background .mdc-radio__outer-circle {
   border-color: $secondary-color !important;
 }
 
-.mat-mdc-radio-button
-  .mdc-radio
-  .mdc-radio__native-control:enabled
-  + .mdc-radio__background
-  .mdc-radio__inner-circle {
+.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled+.mdc-radio__background .mdc-radio__inner-circle {
   border-color: $secondary-color !important;
 }
 
@@ -186,7 +181,7 @@ body {
   background-color: $secondary-color !important;
 }
 
-.mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background{
+.mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background {
   background-color: $secondary-color !important;
   border-color: $secondary-color !important;
 }
@@ -197,24 +192,26 @@ body {
   border-color: $secondary-color !important;
 }
 
-.mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full{
+.mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full {
   background-color: $secondary-color !important;
   border-color: $secondary-color !important;
 }
 
-.mat-mdc-checkbox .mdc-checkbox__background{
-  @include sm(){
+.mat-mdc-checkbox .mdc-checkbox__background {
+  @include sm() {
     transform: scale(0.8);
   }
-  @include md(){
-    transform: scale(0.8);
-  }
-  @include lg(){
-    transform: scale(0.8);
-  }  
-} 
 
-.mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background{
+  @include md() {
+    transform: scale(0.8);
+  }
+
+  @include lg() {
+    transform: scale(0.8);
+  }
+}
+
+.mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background {
   background-color: $secondary-color !important;
   border-color: $secondary-color !important;
 }
@@ -240,72 +237,85 @@ button:focus {
 }
 
 .mdc-tab__text-label {
-  @include mainTabText; 
+  @include mainTabText;
 }
 
 .mat-mdc-tab .mdc-tab-indicator__content--underline {
   border-color: $secondary-color !important;
 }
 
-    
+
 .mat-mdc-tab.mdc-tab {
-  @include lg{
+  @include lg {
     height: 2rem !important;
   }
-  @include md{
+
+  @include md {
     height: 2rem !important;
   }
-  @include sm{
+
+  @include sm {
     height: 2rem !important;
   }
 }
+
 .mdc-tab__text-label {
-  @include lg{
+  @include lg {
     font-size: 0.8rem !important;
   }
-  @include md{
+
+  @include md {
     font-size: 0.8rem !important;
   }
-  @include sm{
+
+  @include sm {
     font-size: 0.8rem !important;
   }
 }
 
-.mat-mdc-select-trigger{
+.mat-mdc-select-trigger {
   height: 2.5rem;
-  padding: 0rem 0.75rem ;
-  @include sm(){
+  padding: 0rem 0.75rem;
+
+  @include sm() {
     height: 2rem;
   }
-  @include md(){
+
+  @include md() {
     height: 2rem;
   }
-  @include lg(){
+
+  @include lg() {
     height: 2rem;
   }
 }
 
-.mat-mdc-option{
+.mat-mdc-option {
   min-height: 2.5rem !important;
-  @include lg(){
+
+  @include lg() {
     min-height: 2rem !important;
   }
-  @include md(){
+
+  @include md() {
     min-height: 2rem !important;
   }
-  @include sm(){
+
+  @include sm() {
     min-height: 2rem !important;
   }
 }
 
-.mat-mdc-option .mat-pseudo-checkbox-full{
-  @include lg(){
+.mat-mdc-option .mat-pseudo-checkbox-full {
+  @include lg() {
     transform: scale(0.7) !important;
   }
-  @include md(){
+
+  @include md() {
     transform: scale(0.7) !important;
   }
-  @include sm(){
+
+  @include sm() {
     transform: scale(0.7) !important;
   }
 }
@@ -313,52 +323,61 @@ button:focus {
 .cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel {
   border-radius: 1rem;
   font-size: 0.85rem;
-  @include lg(){
+
+  @include lg() {
     font-size: 0.75rem;
   }
-  @include md(){
+
+  @include md() {
     font-size: 0.75rem;
   }
-  @include sm(){
+
+  @include sm() {
     font-size: 0.75rem;
   }
 }
 
-.mat-select-search-clear{
+.mat-select-search-clear {
   transform: scale(0.7) translateY(-20%);
-  @include lg(){
+
+  @include lg() {
     transform: scale(0.5) translateY(-30%);
   }
-  @include md(){
+
+  @include md() {
     transform: scale(0.5) translateY(-30%);
   }
-  @include sm(){
+
+  @include sm() {
     transform: scale(0.5) translateY(-30%);
   }
 }
 
-.mat-horizontal-stepper-header .mat-step-icon{
-  @include lg(){
+.mat-horizontal-stepper-header .mat-step-icon {
+  @include lg() {
     transform: scale(0.7);
   }
-  @include md(){
+
+  @include md() {
     transform: scale(0.7);
   }
-  @include sm(){
+
+  @include sm() {
     transform: scale(0.7);
   }
 }
 
-.mat-horizontal-stepper-header-container{
-  @include lg(){
+.mat-horizontal-stepper-header-container {
+  @include lg() {
     margin-top: 0rem !important;
   }
-  @include md(){
+
+  @include md() {
     margin-top: 0rem !important;
   }
 }
 
-input[type=checkbox]{
+input[type=checkbox] {
   accent-color: $primary-color;
 }
 
@@ -366,25 +385,32 @@ input[type=checkbox]{
   filter: $filter-primary-color;
 }
 
-.mat-mdc-tab-labels{
+.mat-mdc-tab-labels {
   margin-left: 0.5rem;
 }
 
 input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
-  display: none;}
-  .form-floating>.form-control:not(:placeholder-shown)~label::after{
+  display: none;
+}
+
+.form-floating>.form-control:not(:placeholder-shown)~label::after {
   height: 0.5rem;
-  @include xl{
+
+  @include xl {
     height: 1rem;
   }
 }
 
-.mat-mdc-select-disabled{
+.mat-mdc-select-disabled {
   background-color: #e9ecef;
 }
 
-.mat-mdc-select-arrow-wrapper{
+.mat-mdc-select-arrow-wrapper {
   width: 1rem;
   justify-content: flex-end;
+}
+
+.cdk-overlay-container {
+  z-index: 99999 !important;
 }

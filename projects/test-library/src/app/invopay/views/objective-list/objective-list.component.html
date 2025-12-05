@@ -1,0 +1,75 @@
+  <div class="objective-list" *ngIf="config && !(loader.isLoading$ | async)" >
+  <app-ip-title-mobile 
+    [title]="config.title | translate"
+    [back]="false">
+  </app-ip-title-mobile>
+
+  <!-- Main Content Container -->
+  <div class="objective-list__content">
+    <!-- Table Container -->
+    <div class="objective-list__table-container">
+      <div class="objective-list__body">
+        <app-table
+          *ngIf="titlesFile && titlesFile.size > 0 && paginatedData && paginatedData.length > 0"
+          [data]="paginatedData"
+          [initTable]="false"
+          [propertyOrder]="config.columns"
+          [titlesFile]="titlesFile"
+          [actions]="config.actions"
+          keyTranslate="IP.OBJECTIVES.TABLE"
+          [scroll]="true"
+          [tableStyle]="config.tableStyle"
+          (action)="onTableAction($event)"
+          (sort)="onTableSort($event)">
+        </app-table>
+
+        <app-no-data 
+          *ngIf="titlesFile && titlesFile.size > 0 && (!paginatedData || paginatedData.length === 0)">
+        </app-no-data>
+      </div>
+
+      <!-- Paginator Section -->
+      <div class="objective-list__paginator-container" *ngIf="paginatedData && paginatedData.length > 0">
+        <div class="schemes__pagination-center">
+          <app-ip-select-input
+            [control]="itemsPerPageControl"
+            [options]="pageOptions"
+            (selectEmitter)="onItemsPerPageChange($event)">
+          </app-ip-select-input>
+        </div>
+
+        <app-paginator
+          *ngIf="showPaginator"
+          class="objective-list__paginator"
+          [totalItems]="totalItems"
+          [itemsPerPage]="itemsPerPage"
+          [currentPages]="currentPages"
+          (pageChange)="onPageChange($event)">
+        </app-paginator>
+      </div>
+    </div>
+
+    <!-- Cards Container - Mobile -->
+    <div class="objective-list__cards-container objective-list__cards-container--mobile">
+      <app-mobile-card-list
+        [data]="paginatedData"
+        [config]="mobileCardConfig"
+        [showNoData]="!paginatedData || paginatedData.length === 0"
+        (cardAction)="onMobileCardAction($event)">
+        <app-no-data no-data></app-no-data>
+      </app-mobile-card-list>
+
+      <!-- Paginator Section - Mobile -->
+      <div class="objective-list__paginator-container objective-list__paginator-container--mobile" *ngIf="paginatedData && paginatedData.length > 0">
+        <app-paginator
+          *ngIf="showPaginator"
+          class="objective-list__paginator"
+          [totalItems]="totalItems"
+          [itemsPerPage]="itemsPerPage"
+          [currentPages]="currentPages"
+          (pageChange)="onPageChange($event)">
+        </app-paginator>
+      </div>
+    </div>
+  </div>
+</div>

@@ -26,7 +26,7 @@
           </a>
         </div>
       </div>
-        <a *ngIf="userType !== 'ENTERPRISE_USER' && userType !== 'ENTERPRISE_MANAGER'" class="menu-item" routerLink="/invopay/policy-list/broker" routerLinkActive="active" title="Polizas">
+         <a *ngIf="userType==='BROKER_MANAGER'" class="menu-item" routerLink="/invopay/policy-list/broker" routerLinkActive="active" title="Polizas">
         <img src="../../../assets/icons/settlements-icon.svg" alt="Polizas">
         <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'NEW_VAR.POLICIES' | translate }}</span>
         </a>
@@ -71,10 +71,22 @@
       </a>
         </div>
       </div>
-      <a class="menu-item"  title="Comisiones">
-        <img src="../../../assets/icons/finances-icon.svg" alt="Comisiones">
-        <span class="label" *ngIf="!isCollapsed"style="color:#0071CE;">{{ 'IP.SIDENAV.OPTIONS.PRODUCTION' | translate }}</span>
-      </a>
+      <div class="menu-item-group">
+        <div class="menu-item has-submenu" [class.open]="objectivesSubmenuOpen" (click)="toggleObjectivesSubmenu()" title="Objetivos/Metas" *ngIf="userType === 'ENTERPRISE_USER' || userType === 'ENTERPRISE_MANAGER'">
+          <img src="../../../assets/new-styles/icons/racing-flag-svgrepo-com.svg" alt="Objetivos/Metas" class="gray-icon">
+          <span class="label" *ngIf="!isCollapsed" style="color:#0071CE;">{{ 'IP.SIDENAV.OPTIONS.OBJECTIVES_GOALS' | translate }}</span>
+          <span class="arrow" *ngIf="!isCollapsed">▼</span>
+        </div>
+        
+        <div class="submenu" *ngIf="objectivesSubmenuOpen && !isCollapsed">
+          <a class="menu-item" routerLink="/invopay/objective-list" routerLinkActive="active" title="Objetivos">
+            <span class="label">{{ 'IP.SIDENAV.OPTIONS.OBJECTIVES' | translate }}</span>
+          </a>
+          <a class="menu-item" routerLink="/invopay/goals-list" routerLinkActive="active" title="Metas">
+            <span class="label">{{ 'IP.SIDENAV.OPTIONS.GOALS' | translate }}</span>
+          </a>
+        </div>
+      </div>
 
       <a class="menu-item"  title="Liquidaciones">
         <img src="../../../assets/icons/payments.svg" alt="Liquidaciones">

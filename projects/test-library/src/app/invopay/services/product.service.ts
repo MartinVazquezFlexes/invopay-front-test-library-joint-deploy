@@ -21,6 +21,7 @@ export class ProductService {
 
   private serverBaseUrl = environment.api;
   private apiUrl = `${this.serverBaseUrl}/invopay/insurance-products`;
+  private readonly productsApi = this.serverBaseUrl + '/invopay/insurance-products/all';
 
   constructor(private http: HttpClient, private authService: IpAuthService) { }
 
@@ -74,6 +75,11 @@ export class ProductService {
       })
     );
   }
+
+  getAllProducts(): Observable<any> {
+    return this.http.get<any>(this.productsApi);
+  }
+
   createProduct(productData: any, logoFile: File): Observable<ProductItem> {
 
     const formData = new FormData();

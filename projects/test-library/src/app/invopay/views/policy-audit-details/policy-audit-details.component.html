@@ -1,0 +1,83 @@
+<div class="audits" *ngIf="!(loadingService.isLoading$ | async)">
+
+  <div class="audits__card">
+    <div class="audits__table-view">
+      <!--[actions]="actions"-->
+      <app-table
+        *ngIf="pagedData.length > 0"
+        [propertyOrder]="propertyOrder"
+        [data]="pagedData"
+        [keyTranslate]="keyTranslate"
+        [tableStyle]="'invopay'"
+        [actionsIf]="actionsIf"
+        [actions]="actions"
+        [initTable]="initTable"
+        [scroll]="scroll"
+        (action)="onAction($event)"
+        [columnWidths]="columnWidths"
+        (selectedItemsChange)="onSelectedItemsChange($event)"
+      >
+      </app-table>
+      
+    </div>
+
+<!--Mostrar si es mobile-->
+<!--Hacer card la info para mobile-->
+<div class="audits__card-view" *ngFor="let item of pagedData">
+  <div class="audits__card-header">
+    <span class="audits__card-id">#{{ item.id }}</span>
+  </div>
+
+  <div class="audits__card-row">
+    <label class="audits__card-label">{{
+      "IP.POLICY_DETAILS.AUDIT.CHANGEDATE" | translate
+    }}</label>
+    <span class="audits__card-value">{{
+      item.changeDate
+    }}</span>
+  </div>
+
+  <div class="audits__card-row">
+    <label class="audits__card-label">{{
+      "IP.POLICY_DETAILS.AUDIT.CHANGEDBYUSERNAME" | translate
+    }}</label>
+    <span class="audits__card-value">{{ item.changedByUserName }}</span>
+  </div>
+
+  <div class="audits__card-row">
+    <label class="audits__card-label">{{
+      "IP.POLICY_DETAILS.AUDIT.PREVIOUSPERCENTAGE" | translate
+    }}</label>
+    <span class="audits__card-value">{{ item.previousPercentage }}</span>
+  </div>
+
+  <div class="audits__card-row">
+    <label class="audits__card-label">{{
+      "IP.POLICY_DETAILS.AUDIT.NEWPERCENTAGE" | translate
+    }}</label>
+    <span class="audits__card-value">{{ item.newPercentage }}</span>
+  </div>
+</div>
+
+<p class="audits__not-found-text" *ngIf="pagedData.length == 0">{{'IP.POLICY_DETAILS.AUDIT.NOT_FOUND' | translate}}</p>
+
+    <div class="audits__pagination" *ngIf="pagedData.length > 0">
+      <div class="audits__pagination-center">
+        <app-ip-select-input
+          [control]="itemsPerPageControl"
+          [options]="pageOptions"
+          (selectEmitter)="onItemsPerPageChange($event)"
+        ></app-ip-select-input>
+      </div>
+      <div>
+        <app-paginator
+          [totalItems]="tableData.length"
+          [itemsPerPage]="itemsPerPage"
+          [currentPages]="currentPage"
+          (pageChange)="onPageChange($event)"
+        >
+        </app-paginator>
+      </div>
+    </div>
+  </div>
+</div>

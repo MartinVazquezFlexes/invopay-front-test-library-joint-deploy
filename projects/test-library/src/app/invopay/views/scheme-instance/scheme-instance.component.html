@@ -1,6 +1,7 @@
 <section class="schemes-instances-list page" *ngIf="!(loadingService.isLoading$ | async)">
-  <app-ip-title-mobile [title]="'IP.COMMISSIONS.SCHEME-INSTANCE.LIST.TITLE' | translate" [btn]="isHandset ? 'create' : 'none'"
-    [btnText]="'IP.PRODUCTS.BUTTONS.ADD' | translate" (clicked)="onAddNewScheme()">
+  <app-ip-title-mobile [title]="'IP.COMMISSIONS.SCHEME-INSTANCE.LIST.TITLE' | translate"
+    [btn]="isHandset ? 'create' : 'none'" [btnText]="'IP.PRODUCTS.BUTTONS.ADD' | translate"
+    (clicked)="onAddNewScheme()">
   </app-ip-title-mobile>
   <section class="schemes-instances-list__table" *ngIf="!isHandset">
     <app-ip-drag-scroll>
@@ -51,28 +52,32 @@
         <div class="scheme-card__body">
 
           <div class="scheme-card__row">
-            <span class="scheme-card__label">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.NAME' | translate }}:</span>
+            <span class="scheme-card__label">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.NAME' | translate
+              }}:</span>
             <span class="scheme-card__value">{{ s.name }}</span>
           </div>
           <div class="scheme-card__row">
-            <span class="scheme-card__label">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.SCHEME_TYPE' | translate }}:</span>
+            <span class="scheme-card__label">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.SCHEME_TYPE' | translate
+              }}:</span>
             <span class="scheme-card__value">{{ s.schemaType }}</span>
           </div>
           <div class="scheme-card__row">
-            <span class="scheme-card__label">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.RULE_SCOPE' | translate }}:</span>
+            <span class="scheme-card__label">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.RULE_SCOPE' | translate
+              }}:</span>
             <span class="scheme-card__value">{{ s.scope }}</span>
           </div>
 
           <div class="scheme-card__row">
-            <span class="scheme-card__label">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.PREMIUM_PERCENTAGE' | translate
+            <span class="scheme-card__label">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.PREMIUM_PERCENTAGE' |
+              translate
               }}:</span>
             <span class="scheme-card__value">{{ s.commissionPercentage }}%</span>
           </div>
 
           <div class="scheme-card__row">
-            <span class="scheme-card__label__status" >{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.IS_ACTIVE_TEXT' | translate }}:</span>
-            <span class="scheme-card__value" [class.status--active]="s.isActive" 
-            [class.status--inactive]="!s.isActive">
+            <span class="scheme-card__label__status">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.IS_ACTIVE_TEXT' |
+              translate }}:</span>
+            <span class="scheme-card__value" [class.status--active]="s.isActive" [class.status--inactive]="!s.isActive">
               {{ s.isActiveText }}
             </span>
           </div>
@@ -89,18 +94,13 @@
 
   <footer class="schemes-instances-list__paginator" *ngIf="!isHandset">
     <div class="page-size">
-      <app-ip-select-input 
-        [control]="itemsPerPageControl" 
-        [options]="pageOptions"
+      <app-ip-select-input [control]="itemsPerPageControl" [options]="pageOptions"
         (selectEmitter)="onPageSizeChange($event)">
       </app-ip-select-input>
     </div>
 
     <ng-container *ngIf="!paginatorReload">
-      <app-paginator 
-        [totalItems]="total" 
-        [itemsPerPage]="pageSize" 
-        [currentPages]="pageIndex + 1"
+      <app-paginator [totalItems]="total" [itemsPerPage]="pageSize" [currentPages]="pageIndex + 1"
         (pageChange)="onPageChange($event)">
       </app-paginator>
     </ng-container>
@@ -113,188 +113,263 @@
   </footer>
 
   <div class="overlay" *ngIf="isViewModalOpen" (click)="onViewModalClose()">
-  <div class="overlay__center" (click)="$event.stopPropagation()">
-    <app-ip-modal-mobile 
-      [title]="'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.VIEW' | translate" 
-      [showTitle]="true"
-      [showCloseModal]="true" 
-      (close)="onViewModalClose()">
-      
-      <ng-container *ngIf="selectedScheme as s">
-        <div class="scheme-details">
-          
-          <div class="scheme-details__header">
-            <div class="scheme-details__header-info">
-              <h3 class="scheme-details__name">{{ s.name }}</h3>
-              
-              <div class="scheme-details__status-container">
-                <span class="scheme-details__status-label">
-                  {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.IS_ACTIVE_TEXT' | translate }}:
-                </span>
-                <span class="scheme-details__status" 
-                      [class.status--active]="s.isActive"
-                      [class.status--inactive]="!s.isActive">
-                  {{ s.isActiveText }}
-                </span>
+    <div class="overlay__center" (click)="$event.stopPropagation()">
+      <app-ip-modal-mobile [title]="'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.VIEW' | translate" [showTitle]="true"
+        [showCloseModal]="true" (close)="onViewModalClose()">
+
+        <ng-container *ngIf="selectedScheme as s">
+          <div class="scheme-details">
+
+            <div class="scheme-details__header">
+              <div class="scheme-details__header-info">
+                <h3 class="scheme-details__name">{{ s.name }}</h3>
+
+                <div class="scheme-details__status-container">
+                  <span class="scheme-details__status-label">
+                    {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.IS_ACTIVE_TEXT' | translate }}:
+                  </span>
+                  <span class="scheme-details__status" [class.status--active]="s.isActive"
+                    [class.status--inactive]="!s.isActive">
+                    {{ s.isActiveText }}
+                  </span>
+                </div>
               </div>
             </div>
+
+            <div class="scheme-details__section">
+              <label>{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.SCHEME_TYPE' | translate }}</label>
+              <p class="scheme-details__value">{{ s.schemaType }}</p>
+            </div>
+
+            <div class="scheme-details__section">
+              <label>{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.RULE_SCOPE' | translate }}</label>
+              <p class="scheme-details__value">{{ s.scope }}</p>
+            </div>
+
+            <div class="scheme-details__section">
+              <label>{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.PREMIUM_PERCENTAGE' | translate }}</label>
+              <p class="scheme-details__value">{{ s.commissionPercentage }}%</p>
+            </div>
+
+          </div>
+
+          <div class="scheme-details__actions">
+            <app-ip-button-modal typeBtn="cancel" (clicked)="onViewModalClose()">
+              {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.CLOSE' | translate }}
+            </app-ip-button-modal>
+          </div>
+        </ng-container>
+
+      </app-ip-modal-mobile>
+    </div>
+  </div>
+
+  <div class="overlay" *ngIf="isCreateModalOpen" (click)="onCreateModalClose()">
+    <div class="overlay__center" (click)="$event.stopPropagation()">
+      <app-ip-modal-mobile [title]="'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.ADD' | translate" [showTitle]="true"
+        [showCloseModal]="true" (close)="onCreateModalClose()">
+
+        <form class="scheme-details" [formGroup]="createForm">
+
+          <div class="scheme-details__section__name">
+            <app-ip-input [formGroup]="createForm" controlName="name" inputId="create-name"
+              [label]="'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.NAME' | translate" type="text">
+            </app-ip-input>
           </div>
 
           <div class="scheme-details__section">
-            <label>{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.SCHEME_TYPE' | translate }}</label>
-            <p class="scheme-details__value">{{ s.schemaType }}</p>
+            <app-ip-select-input [formGroup]="createForm" controlName="schemaType" [options]="schemeOptions"
+              labelCode="IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.SCHEME_TYPE" [placeholder]="'Seleccione...'">
+            </app-ip-select-input>
           </div>
 
           <div class="scheme-details__section">
-            <label>{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.RULE_SCOPE' | translate }}</label>
-            <p class="scheme-details__value">{{ s.scope }}</p>
+            <app-ip-select-input [formGroup]="createForm" controlName="scope" [options]="scopeOptions"
+              labelCode="IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.RULE_SCOPE" [placeholder]="'Seleccione...'">
+            </app-ip-select-input>
+          </div>
+
+          <div class="scheme-details__section" *ngIf="showBrokersSection">
+            <app-ip-select-input [formGroup]="createForm" controlName="brokers" [options]="brokerOptions"
+              [isMultiple]="true" [label]="'Corredores'" [placeholder]="'Seleccione corredores...'">
+            </app-ip-select-input>
+          </div>
+
+          <div class="scheme-details__section" *ngIf="showProductsSection">
+            <app-ip-select-input [formGroup]="createForm" controlName="products" [options]="productsOptions"
+              [isMultiple]="true" [label]="'Productos'" [placeholder]="'Seleccione productos...'">
+            </app-ip-select-input>
           </div>
 
           <div class="scheme-details__section">
-            <label>{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.PREMIUM_PERCENTAGE' | translate }}</label>
-            <p class="scheme-details__value">{{ s.commissionPercentage }}%</p>
+            <app-ip-input [formGroup]="createForm" controlName="percentage" inputId="create-pct" type="number"
+              labelCode="IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.PREMIUM_PERCENTAGE">
+            </app-ip-input>
           </div>
 
-        </div>
+          <div class="scheme-details__section is-toggle">
+            <label for="create-isActive">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.IS_ACTIVE_TEXT' | translate
+              }}</label>
+            <input type="checkbox" id="create-isActive" class="form-check" formControlName="isActive">
+          </div>
 
-        <div class="scheme-details__actions">
-          <app-ip-button-modal typeBtn="cancel" (clicked)="onViewModalClose()">
-            {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.CLOSE' | translate }}
-          </app-ip-button-modal>
-        </div>
-      </ng-container>
+          <div class="scheme-details__section">
+            <app-ip-select-input [formGroup]="createForm" controlName="hasIncentiveCategory" [options]="yesNoOptions"
+              [label]="'¿Tiene Categoría de Incentivo?'" [placeholder]="'Seleccione...'">
+            </app-ip-select-input>
+          </div>
+          <div class="scheme-details__section" *ngIf="createForm.get('hasIncentiveCategory')?.value">
+            <app-ip-select-input [formGroup]="createForm" controlName="incentiveCategoryId"
+              [options]="incentiveCategoryOptions" [label]="'Categoría de Incentivo'" [placeholder]="'Seleccione...'">
+            </app-ip-select-input>
+          </div>
 
-    </app-ip-modal-mobile>
+          <div class="scheme-details__dynamic-section" *ngIf="showPoliciesSection">
+
+            <label class="scheme-details__dynamic-section-label">
+              Pólizas Seleccionadas ({{ selectedPoliciesList.length }})
+            </label>
+
+            <div class="scheme-details__table-container" *ngIf="selectedPoliciesList.length > 0">
+
+              <app-table [data]="paginatedPoliciesList" [propertyOrder]="['policyNumber', 'brokerName', 'amount']"
+                [titlesFile]="policyTitlesFile" [actions]="[]" [tableStyle]="'invopay'" [isForSelectItem]="false"
+                [initTable]="false" keyTranslate="">
+              </app-table>
+
+              <div class="schemes-instances-list__paginator" *ngIf="selectedPoliciesList.length > policiesPageSize">
+                <app-paginator [totalItems]="selectedPoliciesList.length" [itemsPerPage]="policiesPageSize"
+                  [currentPages]="policiesPageIndex + 1" (pageChange)="onPoliciesPageChange($event)">
+                </app-paginator>
+              </div>
+              <div class="empty-list-msg" *ngIf="selectedPoliciesList.length === 0">
+                Ninguna seleccionada.
+              </div>
+
+            </div>
+          </div>
+           <div class="scheme-details__actions"><app-ip-button-modal *ngIf="selectedPoliciesList.length > 0"
+                typeBtn="cancel" (clicked)="removeAllPolicies()">
+                Quitar las Polizas
+              </app-ip-button-modal>
+              <app-ip-button-modal typeBtn="action" (clicked)="openPolicyModal()">
+                + Agregar Póliza
+              </app-ip-button-modal>
+            </div>
+          <div class="scheme-details__actions">
+            <app-ip-button-modal typeBtn="cancel" (clicked)="onCreateModalClose()">
+              {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.CLOSE' | translate }}
+            </app-ip-button-modal>
+
+            <app-ip-button-modal typeBtn="action" (clicked)="onConfirmCreate()"
+              [disabled]="createForm.invalid || createBusy">
+              <ng-container *ngIf="!createBusy; else savingCreate">
+                {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.SAVE' | translate }}
+              </ng-container>
+              <ng-template #savingCreate>
+                {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.SAVING' | translate }}
+              </ng-template>
+            </app-ip-button-modal>
+          </div>
+        </form>
+      </app-ip-modal-mobile>
+    </div>
   </div>
-</div>
 
-<div class="overlay" *ngIf="isCreateModalOpen" (click)="onCreateModalClose()">
-  <div class="overlay__center" (click)="$event.stopPropagation()">
-    <app-ip-modal-mobile 
-      [title]="'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.ADD' | translate" 
-      [showTitle]="true"
-      [showCloseModal]="true" 
-      (close)="onCreateModalClose()">
 
-      <form class="scheme-details" [formGroup]="createForm">
+  <div class="overlay overlay--secondary" *ngIf="isPolicyModalOpen" (click)="onPolicyModalClose()">
+    <div class="overlay__center" (click)="$event.stopPropagation()">
 
-        <div class="scheme-details__section">
-          <label for="create-name">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.NAME' | translate }}</label>
-          <app-ip-input [formGroup]="createForm" controlName="name" inputId="create-name"
-            labelCode="IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.NAME">
-          </app-ip-input>
+      <app-ip-modal-mobile [title]="'Seleccionar Pólizas'" [showTitle]="true" [showCloseModal]="true"
+        (close)="onPolicyModalClose()">
+        <div class="policy-search-container">
+
+          <div class="filters-row">
+            <app-ip-search-input [placeholder]="'Nro. Póliza'" [isKeyUp]="false"
+              (onSearch)="onPolicySearch($event)"></app-ip-search-input>
+          </div>
+
+          <div class="results-table-wrapper">
+            <app-table [data]="policySearchResults" [propertyOrder]="['policyNumber', 'brokerName', 'amount']"
+              [titlesFile]="policyTitlesFile" [tableStyle]="'invopay'" [isForSelectItem]="false" [actions]="['select']"
+              keyTranslate="" [preSelectedItems]="tempSelectedPolicies" (action)="onPolicyTableAction($event)">
+            </app-table>
+          </div>
+
+          <div class="scheme-details__actions">
+            <app-ip-button-modal typeBtn="cancel" (clicked)="onPolicyModalClose()">Cancelar</app-ip-button-modal>
+            <app-ip-button-modal *ngIf="tempSelectedPolicies.length > 0" typeBtn="cancel"
+              (clicked)="clearPolicySelection()">
+              Quitar Pólizas
+            </app-ip-button-modal>
+            <app-ip-button-modal typeBtn="action" (clicked)="addSelectedPoliciesToForm()">
+              Agregar ({{ tempSelectedPolicies.length }})
+            </app-ip-button-modal>
+          </div>
         </div>
-
-        <div class="scheme-details__section">
-          <label for="create-type">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.SCHEME_TYPE' | translate }}</label>
-          <select id="create-type" class="form-control" formControlName="schemaType">
-            <option [ngValue]="null" disabled>Seleccione...</option>
-            <option *ngFor="let type of schemaTypes" [value]="type">{{ type }}</option>
-          </select>
-        </div>
-
-        <div class="scheme-details__section">
-          <label for="create-scope">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.RULE_SCOPE' | translate }}</label>
-          <select id="create-scope" class="form-control" formControlName="scope">
-            <option [ngValue]="null" disabled>Seleccione...</option>
-            <option *ngFor="let scope of scopeTypes" [value]="scope">{{ scope }}</option>
-          </select>
-        </div>
-
-        <div class="scheme-details__section">
-          <label for="create-pct">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.PREMIUM_PERCENTAGE' | translate }}</label>
-          <app-ip-input [formGroup]="createForm" controlName="commissionPercentage" inputId="create-pct" type="number"
-            labelCode="IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.PREMIUM_PERCENTAGE">
-          </app-ip-input>
-        </div>
-
-        <div class="scheme-details__section is-toggle">
-          <label for="create-isActive">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.IS_ACTIVE_TEXT' | translate }}</label>
-          <input type="checkbox" id="create-isActive" class="form-check" formControlName="isActive">
-        </div>
-
-        <div class="scheme-details__actions">
-          <app-ip-button-modal typeBtn="cancel" (clicked)="onCreateModalClose()" [disabled]="createBusy">
-            {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.CLOSE' | translate }}
-          </app-ip-button-modal>
-          
-          <app-ip-button-modal typeBtn="action" (clicked)="onConfirmCreate()"
-            [disabled]="createForm.invalid || createBusy">
-            <ng-container *ngIf="!createBusy; else savingCreate">
-              {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.SAVE' | translate }}
-            </ng-container>
-            <ng-template #savingCreate>
-              {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.SAVING' | translate }}
-            </ng-template>
-          </app-ip-button-modal>
-        </div>
-
-      </form>
-    </app-ip-modal-mobile>
+      </app-ip-modal-mobile>
+    </div>
   </div>
-</div>
 
-<div class="overlay" *ngIf="isEditModalOpen" (click)="onEditModalClose()">
-  <div class="overlay__center" (click)="$event.stopPropagation()">
-    <app-ip-modal-mobile 
-      [title]="'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.EDIT' | translate" 
-      [showTitle]="true"
-      [showCloseModal]="true" 
-      (close)="onEditModalClose()">
+  <div class="overlay" *ngIf="isEditModalOpen" (click)="onEditModalClose()">
+    <div class="overlay__center" (click)="$event.stopPropagation()">
+      <app-ip-modal-mobile [title]="'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.EDIT' | translate" [showTitle]="true"
+        [showCloseModal]="true" (close)="onEditModalClose()">
 
-      <form class="scheme-details" [formGroup]="editForm">
+        <form class="scheme-details" [formGroup]="editForm">
 
-        <div class="scheme-details__section">
-          <label for="edit-name">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.NAME' | translate }}</label>
-          <app-ip-input [formGroup]="editForm" controlName="name" inputId="edit-name"
-            labelCode="IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.NAME">
-          </app-ip-input>
-        </div>
+          <div class="scheme-details__section">
+            <label for="edit-name">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.NAME' | translate }}</label>
+            <app-ip-input [formGroup]="editForm" controlName="name" inputId="edit-name"
+              labelCode="IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.NAME">
+            </app-ip-input>
+          </div>
 
-        <div class="scheme-details__section">
-          <label for="edit-type">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.SCHEME_TYPE' | translate }}</label>
-          <select id="edit-type" class="form-control" formControlName="schemaType">
-            <option *ngFor="let type of schemaTypes" [value]="type">{{ type }}</option>
-          </select>
-        </div>
+          <div class="scheme-details__section">
+            <label for="edit-type">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.SCHEME_TYPE' | translate }}</label>
+            <select id="edit-type" class="form-control" formControlName="schemaType">
+              <option *ngFor="let type of schemaTypes" [value]="type">{{ type }}</option>
+            </select>
+          </div>
 
-        <div class="scheme-details__section">
-          <label for="edit-scope">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.RULE_SCOPE' | translate }}</label>
-          <select id="edit-scope" class="form-control" formControlName="scope">
-            <option *ngFor="let scope of scopeTypes" [value]="scope">{{ scope }}</option>
-          </select>
-        </div>
+          <div class="scheme-details__section">
+            <label for="edit-scope">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.RULE_SCOPE' | translate }}</label>
+            <select id="edit-scope" class="form-control" formControlName="scope">
+              <option *ngFor="let scope of scopeTypes" [value]="scope">{{ scope }}</option>
+            </select>
+          </div>
 
-        <div class="scheme-details__section">
-          <label for="edit-pct">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.PREMIUM_PERCENTAGE' | translate }}</label>
-          <app-ip-input [formGroup]="editForm" controlName="commissionPercentage" inputId="edit-pct" type="number"
-            labelCode="IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.PREMIUM_PERCENTAGE">
-          </app-ip-input>
-        </div>
+          <div class="scheme-details__section">
+            <label for="edit-pct">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.PREMIUM_PERCENTAGE' | translate
+              }}</label>
+            <app-ip-input [formGroup]="editForm" controlName="commissionPercentage" inputId="edit-pct" type="number"
+              labelCode="IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.PREMIUM_PERCENTAGE">
+            </app-ip-input>
+          </div>
 
-        <div class="scheme-details__section is-toggle">
-          <label for="edit-isActive">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.IS_ACTIVE_TEXT' | translate }}</label>
-          <input type="checkbox" id="edit-isActive" class="form-check" formControlName="isActive">
-        </div>
+          <div class="scheme-details__section is-toggle">
+            <label for="edit-isActive">{{ 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.IS_ACTIVE_TEXT' | translate
+              }}</label>
+            <input type="checkbox" id="edit-isActive" class="form-check" formControlName="isActive">
+          </div>
 
-        <div class="scheme-details__actions">
-          <app-ip-button-modal typeBtn="cancel" (clicked)="onEditModalClose()" [disabled]="editBusy">
-            {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.CLOSE' | translate }}
-          </app-ip-button-modal>
-          
-          <app-ip-button-modal typeBtn="action" (clicked)="onConfirmEdit()"
-            [disabled]="editForm.invalid || editBusy">
-            <ng-container *ngIf="!editBusy; else savingEdit">
-              {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.SAVE' | translate }}
-            </ng-container>
-            <ng-template #savingEdit>
-              {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.SAVING' | translate }}
-            </ng-template>
-          </app-ip-button-modal>
-        </div>
+          <div class="scheme-details__actions">
+            <app-ip-button-modal typeBtn="cancel" (clicked)="onEditModalClose()" [disabled]="editBusy">
+              {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.CLOSE' | translate }}
+            </app-ip-button-modal>
 
-      </form>
-    </app-ip-modal-mobile>
+            <app-ip-button-modal typeBtn="action" (clicked)="onConfirmEdit()" [disabled]="editForm.invalid || editBusy">
+              <ng-container *ngIf="!editBusy; else savingEdit">
+                {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.SAVE' | translate }}
+              </ng-container>
+              <ng-template #savingEdit>
+                {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.SAVING' | translate }}
+              </ng-template>
+            </app-ip-button-modal>
+          </div>
+
+        </form>
+      </app-ip-modal-mobile>
+    </div>
   </div>
-</div>
 </section>

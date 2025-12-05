@@ -171,6 +171,14 @@
         "PREMIUM_VALUE":"Prima",
         "COUNT":"Cantidad Cuotas",
         "PERCENTAGE":"Porcentagem utilizada"
+      },
+      "AUDIT":{
+        "TITLE":"Auditoria",
+        "CHANGEDATE":"Data Edição",
+        "CHANGEDBYUSERNAME":"Editor",
+        "PREVIOUSPERCENTAGE":"Porcentagem anterior",
+        "NEWPERCENTAGE":"Nova porcentagem",
+        "NOT_FOUND":"Não há auditoria registrada para esta apólice."
       }
     },
     "ADMIN_TABLE_ENTERPRISE": {

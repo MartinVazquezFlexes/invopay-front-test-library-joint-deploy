@@ -52,6 +52,7 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() showAddButtonInHeader: boolean = false;
   @Output() addAction = new EventEmitter<void>();
   @Input() addButtonTooltipText: string = '';
+  @Input() preSelectedItems: any[] = [];
 
   selectedItems: Set<any> = new Set();
   selectSomeChecked = false;
@@ -71,6 +72,7 @@ export class TableComponent implements OnInit, OnChanges {
     this.tableHeads = this.setTableHeads();
     this.onLangChange();
     this.showSelectAllChecked();
+    this.syncSelection();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -84,6 +86,10 @@ export class TableComponent implements OnInit, OnChanges {
     if (changes['selectAllChecked'] && !changes['selectAllChecked'].firstChange) {
       this.showSelectAllChecked();
       this.cdr.markForCheck();
+    }
+
+    if (changes['preSelectedItems'] && changes['preSelectedItems'].currentValue) {
+      this.syncSelection();
     }
   }
 
@@ -130,6 +136,9 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   onAction(action: string, dataField: any) {
+    if (action === 'select') {
+      this.toggleItemSelection(dataField);
+    }
     this.action.emit({ event: action, dataField });
   }
 
@@ -269,6 +278,7 @@ export class TableComponent implements OnInit, OnChanges {
       detail: this.translate.instant('IP.ACTIONS_TOOLTIP.DETAIL'),
       download: this.translate.instant('IP.ACTIONS_TOOLTIP.IMPORT'),
       status: this.translate.instant('IP.ACTIONS_TOOLTIP.STATUS'),
+      select: this.translate.instant('IP.ACTIONS_TOOLTIP.SELECT'),
       conciliate: this.translate.instant('IP.ACTIONS_TOOLTIP.CONCILIATE'),
       send_mail: this.translate.instant('IP.ACTIONS_TOOLTIP.SEND_MAIL'),
     };
@@ -348,6 +358,18 @@ export class TableComponent implements OnInit, OnChanges {
         //   extension = '-grey';
         //   pointerEvents = 'none';
         // }
+        break;
+      case 'select':
+        // Verificamos si el ítem ya está en el Set de seleccionados interno
+        if (this.isItemSelected(dataField)) {
+          // Si está seleccionado, mostramos ícono de "Check" o "Restar"
+          // Asegúrate de tener un icono 'select-checked.svg' en tus assets
+          extension = '-checked';
+        } else {
+          // Si NO está seleccionado, mostramos ícono de "Más" o "Unchecked"
+          // Asegúrate de tener un icono 'select.svg' (o 'select-unchecked.svg')
+          extension = '';
+        }
         break;
     }
     return {
@@ -481,5 +503,24 @@ export class TableComponent implements OnInit, OnChanges {
     }
     this.memoizedStyles[cacheKey] = baseStyles;
     return this.memoizedStyles[cacheKey];
+  }
+
+  private syncSelection() {
+    if (this.preSelectedItems) {
+      // Reemplazamos el Set con los items que vienen del padre
+      this.selectedItems = new Set(this.preSelectedItems);
+      this.updateSelectAllState(); // Actualiza el checkbox del header si se usa
+    }
+  }
+
+  private updateSelectAllState() {
+    // Si no hay datos, no puede estar "todo seleccionado"
+    if (!this.data || this.data.length === 0) {
+      this.selectAllChecked = false;
+      return;
+    }
+
+    // Verifica si CADA uno de los items visibles está en la lista de seleccionados
+    this.selectAllChecked = this.data.every((item: any) => this.isItemSelected(item));
   }
 }

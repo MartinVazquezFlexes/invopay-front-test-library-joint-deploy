@@ -26,6 +26,8 @@ import { InstanceComisionDetailComponent } from './views/instance-comision-detai
 import { SchemeInstanceComponent } from './views/scheme-instance/scheme-instance.component';
 import { PolicyDetailsComponent } from './views/policy-details/policy-details.component';
 import { PolicyListComponent } from './views/policy-list/policy-list.component';
+import { ObjectiveListComponent } from './views/objective-list/objective-list.component';
+import { GoalsListComponent } from './views/goals-list/goals-list.component';
 
 
 const routes: Routes = [
@@ -129,6 +131,14 @@ const routes: Routes = [
         path: 'policy-details',
         component: PolicyDetailsComponent,
       },
+      {
+        path: 'objective-list',
+        component: ObjectiveListComponent,
+      },
+      {
+        path: 'goals-list',
+        component: GoalsListComponent,
+      }
     ],
   },
   {

@@ -28,7 +28,7 @@
 .policy-details__sections-titles {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 7px;
   margin-bottom: 05px;
   padding: 0px 20px;
 }
@@ -37,9 +37,9 @@
   color: #0071ce;
   @include mainTabText();
   font-family: Poppins, Loos, Arial, sans-serif;
-  margin: 5px;
+  padding: 8px 16px;
   cursor: pointer;
-  margin-bottom: 05px;
+  margin: 5px 0px;
 }
 
 .policy-details__section-title:hover {
@@ -51,7 +51,7 @@
   color: #0071ce;
   background: #f0f7ff;
   padding: 8px 16px;
-  margin-bottom: 05px;
+  margin-bottom: 5px;
   border-bottom: 2px solid #0071ce;
 }
 

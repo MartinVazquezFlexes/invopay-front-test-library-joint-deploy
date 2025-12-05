@@ -1,0 +1,295 @@
+@import "../../../shared/mixins/generalText.scss";
+@import "../../../shared/mixins/sizes.scss";
+@import "../../../shared/mixins/utils.scss";
+
+body {
+  background: #f5f5f5;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.audits {
+  background: #f5f5f5;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+app-ip-title-mobile {
+  width: 100%;
+}
+
+.audits__not-found-text{
+    @include subTitleText();
+    font-family: Poppins, Loos, Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+}
+
+.audits__card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 100%;
+  padding: 20px 0px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 10px rgba(5, 5, 5, 0.1);
+}
+
+
+.audits__pagination {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-sizing: border-box;
+  min-height: 50px;
+  padding-top: 10px;
+
+  ::ng-deep {
+    app-paginator {
+      display: flex;
+      align-items: center;
+      height: auto;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .ip-paginator {
+      height: 2.5rem; // misma altura que el select
+      padding: 0 1.06rem;
+      align-items: center; //centrar verticalmente
+      justify-content: flex-end;
+    }
+  }
+}
+
+.audits__pagination-center {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
+}
+.audits__pagination-center {
+    ::ng-deep {
+    app-ip-select-input {
+      .form-floating {
+        margin: 11px;
+      }
+    }
+}
+}
+
+
+
+
+.audits__table-view {
+  display: block;
+}
+
+.audits__card-view {
+  display: none;
+}
+
+/* RESPONSIVE: MOBILE */
+@include sm {
+  .audits__table-view {
+    display: none;
+  }
+
+  .audits__card-view {
+    display: block;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2px 10px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 
+                0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .audits__card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 0px;
+    border-bottom: 1px solid #0071ce;
+  }
+
+  .audits__card-id {
+    @include cardText();
+    font-family: Poppins, Loos, Arial, sans-serif;
+    color: rgb(132, 129, 138);
+    font-weight: 600;
+    padding: 15px 0px;
+  }
+
+  .audits__image-container {
+    text-align: end;
+  }
+
+  .audits__card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+
+  .audits__card-label {
+    @include sidenavTextLabel();
+    font-family: Poppins, Loos, Arial, sans-serif;
+    color: rgb(132, 129, 138);
+    font-weight: 400;
+  }
+
+  .audits__card-label--status {
+    @include sidenavTextLabel();
+    font-family: Poppins, Loos, Arial, sans-serif;
+    color:#0071ce;
+    font-weight: 400;
+  }
+
+  .audits__card-value {
+    @include sidenavTextLabel();
+    font-family: Poppins, Loos, Arial, sans-serif;
+    color: rgb(132, 129, 138);
+    font-weight: 400;
+    text-align: end;
+  }
+
+  .audits__card-value--status {
+    @include sidenavTextLabel();
+    font-family: Poppins, Loos, Arial, sans-serif;
+    color: #0071ce;
+    font-weight: 400;
+    text-align: end;
+  }
+
+
+  body {
+    overflow-x: hidden;
+    width: 100vw;
+  }
+
+  .audits {
+    padding: 2px;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .audits__card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    box-shadow: 0 0px 0px rgb(255, 255, 255);
+  }
+ 
+  .audits__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 0px;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 14px;
+    max-width: 100%;
+    box-shadow: none;
+  }
+
+  .audits__title {
+    padding-left: 20px;
+    text-align: start;
+    width: 100%;
+    margin: 0;
+  }
+
+  .audits__pagination-center {
+    padding-left: 0px;
+    display: none;
+  }
+
+  .audits__pagination {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .audits__select {
+    width: 100%;
+  }
+
+  .audits__payment-channels {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+
+      .audits__menu {
+    position: relative;
+  }
+
+  .audits__menu-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px 8px;
+    color: #000000;
+    line-height: 1;
+  }
+
+.audits__menu-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 120px;
+  z-index: 10;
+  margin-top: 8px;
+  
+  // flecha
+  &::before {
+    content: "";
+    position: absolute;
+    top: -6px; // posición vertical (ajustá según necesites)
+    right: 5px; // alineación horizontal (ajustá según tu botón)
+    width: 10px;
+    height: 10px;
+    background: white;
+    transform: rotate(45deg);
+    box-shadow: -1px -1px 1px rgba(0,0,0,0.05);
+  }
+}
+
+  .audits__menu-item {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    @include itemsText();
+    color: rgb(132, 129, 138);
+    font-family:"Poppins", sans-serif;
+  }
+
+  .audits__menu-item:hover {
+    background: #f5f5f5;
+  }
+}

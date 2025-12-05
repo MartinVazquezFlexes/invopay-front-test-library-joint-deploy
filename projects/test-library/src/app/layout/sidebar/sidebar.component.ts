@@ -12,6 +12,7 @@ export class SidebarComponent implements OnInit {
   revenueSubmenuOpen = false;
   notificationsSubmenuOpen = false;
   schemeSubmenuOpen = false;
+  objectivesSubmenuOpen = false;
 
   constructor(private translate: TranslateService) {}
   ngOnInit(): void {
@@ -47,6 +48,11 @@ export class SidebarComponent implements OnInit {
   toggleSchemeSubmenu() {
     if (!this.isCollapsed) {
       this.schemeSubmenuOpen = !this.schemeSubmenuOpen;
+    }
+  }
+  toggleObjectivesSubmenu() {
+    if (!this.isCollapsed) {
+      this.objectivesSubmenuOpen = !this.objectivesSubmenuOpen;
     }
   }
 }

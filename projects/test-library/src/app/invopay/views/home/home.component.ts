@@ -1,8 +1,11 @@
+import { ProductService } from './../../services/product.service';
 import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import IpUserProfile from '../../interface/ip-user-profile';
 import { IpProfileService } from '../../services/ip-profile.service';
 import { SchemeService } from '../../services/scheme.service';
+import { IpInstanceDetailService } from '../../services/ip-instance-detail.service';
+
 
 @Component({
   selector: 'app-home',
@@ -13,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   private ipProfileService: IpProfileService = inject(IpProfileService);
   userProfile: Observable<IpUserProfile> = new Observable<IpUserProfile>();
-  constructor(private schemeService: SchemeService) { }
+  constructor(private schemeService: SchemeService, private productService: ProductService, private ipInstanceDetailService: IpInstanceDetailService) { }
 
   probarEndpoint() {
     console.log('🟡 Iniciando petición...');

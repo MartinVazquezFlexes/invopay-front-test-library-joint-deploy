@@ -16,14 +16,14 @@
           {{ 'IP.POLICY_DETAILS.SECTION_TITLE' | translate }}
         </h3>
         <!--se ven solo cuando la recaudacion esta consolidada-->
-        <!--<h3
-          *ngIf="ispolicyConsolidated"
+        <h3
+          *ngIf="userType == 'ENTERPRISE_USER' || userType == 'ENTERPRISE_MANAGER'"
           class="policy-details__section-title"
-          [class.policy-details__section-title--active]="activeSection === 'conciliation'"
-          (click)="showConciliationSection()"
+          [class.policy-details__section-title--active]="activeSection === 'section'"
+          (click)="showSectionSection()"
         >
-          {{ 'IP.TABLE.CONSOLIDATED.PAY_IN.CONCILIATION' | translate }}
-        </h3>-->
+          {{ 'IP.POLICY_DETAILS.AUDIT.TITLE' | translate }}
+        </h3>
     </div>
 
   <!--Esta seria la pestaña/seccion 1-->
@@ -276,5 +276,11 @@
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="showSection">
+    <!--Aca iria un componente con mas datos-->
+    <app-policy-audit-details
+      [policyAudits]="policyDetails?.commissionChangeAudits ?? []">
+    </app-policy-audit-details>
   </div>
 </div>
