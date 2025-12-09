@@ -206,7 +206,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     const formatted = new Intl.NumberFormat('es-AR', {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2
-}).format(Number(this.policyDetails.amount));
+}).format(Number(this.policyDetails.insurancePolicyPremium.amount));
 
     this.detailedInfoForm.patchValue({
       //client
