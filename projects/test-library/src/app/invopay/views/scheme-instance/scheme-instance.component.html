@@ -7,9 +7,9 @@
     <app-ip-drag-scroll>
       <div class="drag-scroll-container commission-list-table">
 
-        <app-table [data]="schemes" [propertyOrder]="tableProperties" [titlesFile]="titlesFile"
-          [actions]="['detail', 'edit']" [tableStyle]="'invopay'" [isForSelectItem]="false" [initTable]="false"
-          keyTranslate="" (sort)="onSort($event)" (action)="onRowAction($event)" [showAddButtonInHeader]="true"
+        <app-table [data]="schemes" [propertyOrder]="propertyOrder" [actions]="['detail', 'edit']"
+          [tableStyle]="'invopay'" [isForSelectItem]="false" [initTable]="false" [keyTranslate]="keyTranslate"
+          (sort)="onSort($event)" (action)="onRowAction($event)" [showAddButtonInHeader]="true"
           [addButtonTooltipText]="'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.ADD_TOOLTIP' | translate"
           (addAction)="onAddNewScheme()">
         </app-table>
@@ -230,6 +230,10 @@
               Pólizas Seleccionadas ({{ selectedPoliciesList.length }})
             </label>
 
+            <div class="empty-list-msg" *ngIf="selectedPoliciesList.length === 0">
+                Ninguna seleccionada.
+              </div>
+
             <div class="scheme-details__table-container" *ngIf="selectedPoliciesList.length > 0">
 
               <app-table [data]="paginatedPoliciesList" [propertyOrder]="['policyNumber', 'brokerName', 'amount']"
@@ -242,13 +246,9 @@
                   [currentPages]="policiesPageIndex + 1" (pageChange)="onPoliciesPageChange($event)">
                 </app-paginator>
               </div>
-              <div class="empty-list-msg" *ngIf="selectedPoliciesList.length === 0">
-                Ninguna seleccionada.
-              </div>
 
             </div>
-          </div>
-           <div class="scheme-details__actions"><app-ip-button-modal *ngIf="selectedPoliciesList.length > 0"
+            <div class="scheme-details__actions"><app-ip-button-modal *ngIf="selectedPoliciesList.length > 0"
                 typeBtn="cancel" (clicked)="removeAllPolicies()">
                 Quitar las Polizas
               </app-ip-button-modal>
@@ -256,6 +256,8 @@
                 + Agregar Póliza
               </app-ip-button-modal>
             </div>
+          </div>
+
           <div class="scheme-details__actions">
             <app-ip-button-modal typeBtn="cancel" (clicked)="onCreateModalClose()">
               {{ 'IP.COMMISSIONS.SCHEME-INSTANCE.BUTTONS.CLOSE' | translate }}

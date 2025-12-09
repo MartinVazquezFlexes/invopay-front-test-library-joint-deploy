@@ -133,7 +133,12 @@
       "USERSTATUS": "ESTADO",
       "SCHEMENAME": "Nome Esquema",
       "ISSCHEMAACTIVE": "Ativo",
-      "DESCRIPTION": "Descrição"
+      "DESCRIPTION": "Descrição",
+      "INSTANCENAME": "Nome Instância",
+      "SCHEMATYPE": "Tipo Esquema",
+      "SCOPE":"Âmbito da regra",
+      "COMMISSIONPERCENTAGE": "% Prémio",
+      "ISACTIVETEXT": "Ativo"
     },
     "SCHEMES": {
       "TITLE": "Esquemas",
@@ -1521,6 +1526,14 @@
         "PERCETANGE_PRODUCT":"Porcentgem por produto",
         "PERCETANGE_BROKER":"Porcentgem por corretor",
         "PERCETANGE_PRODUCT_BROKER":"Porcentgem por produto e corretor"
+      },
+      "SCHEMA-TYPES":{
+        "FIXED":"Fixo",
+        "MIXED":"Misto",
+        "PERCENTAGE":"Porcentagem",
+        "PERCENTAGE_BROKER":"Porcentagem por corretor",
+        "PERCENTAGE_PRODUCT":"Porcentagem por produto",
+        "PERCENTAGE_PRODUCT_BROKER":"Porcentagem por produto e corretor"
       }
     },
      "GOALS":{

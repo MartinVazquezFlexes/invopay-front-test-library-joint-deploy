@@ -569,21 +569,3 @@ $status-inactive-color: $primary-color;
   }
 }
 
-:host ::ng-deep .schemes-instances-list {
-  .table thead .table__head-row>th:last-child .table__head-row-item--text {
-
-    color: transparent;
-    position: relative;
-
-    &::after {
-      content: 'Acciones';
-      color: $table-header-text-color;
-      font-weight: 600;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 0;
-      white-space: nowrap;
-    }
-  }
-}

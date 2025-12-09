@@ -4,6 +4,7 @@ import { environment } from 'projects/test-library/src/environments/environment'
 import { map, Observable } from 'rxjs';
 import { PaginatedResponse, CommissionSchemeInstance } from '../interface/scheme';
 import { SelectOption } from '../interface/create-scheme-instance';
+import { TranslateService } from '@ngx-translate/core';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +18,7 @@ export class SchemeService {
   incentiveCategoriesApi: string = this.api + '/invopay/commission/incentive-categories/all';
   brokersApi: string = this.api + '/invopay/enterprises/brokers';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private translate: TranslateService) { }
 
   //GetAll
   getSchemes() {
@@ -68,19 +69,24 @@ export class SchemeService {
   getSchemesOptions(): Observable<SelectOption[]> {
     return this.http.get<any[]>(this.allSchemesApi).pipe(
       map(response => {
-        
-        // Paso 1: Extraemos solo los strings de schemaType (ej: ["FIXED", "PERCENTAGE", "FIXED"])
-        const allTypes = response.map(s => s.schemaType);
-        
-        // Paso 2: Usamos Set para eliminar duplicados (ej: {"FIXED", "PERCENTAGE"})
-        // Y lo convertimos de nuevo a Array
-        const uniqueTypes = Array.from(new Set(allTypes));
+        return response.map(scheme => {
+          
+          // 1. Construimos la key dinámica
+          // Ej: IP.COMISSION_SCHEME.SCHEMA-TYPES.FIXED
+          const i18nKey = `IP.COMISSION_SCHEME.SCHEMA-TYPES.${scheme.schemaType}`;
+          
+          // 2. Traducimos usando 'instant'
+          // Esto devuelve "Fijo", "Porcentaje", etc.
+          const translatedType = this.translate.instant(i18nKey);
 
-        // Paso 3: Mapeamos a la estructura del select
-        return uniqueTypes.map(type => ({
-          label: type, // Puedes aplicar formateo aquí si quieres (ej. Title Case)
-          value: type  // El valor que se enviará al formulario
-        }));
+          return {
+            // 3. Armamos el label final: "15 - Nombre Esquema (Fijo)"
+            label: `${scheme.id} - ${scheme.name} (${translatedType})`,
+            
+            // 4. El value es el ID
+            value: scheme.id
+          };
+        });
       })
     );
   }

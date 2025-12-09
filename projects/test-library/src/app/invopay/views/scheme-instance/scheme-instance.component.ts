@@ -29,8 +29,8 @@ export class SchemeInstanceComponent implements OnInit {
 
   schemes: CommissionSchemeInstance[] = [];
 
-  tableProperties = [
-    'name',
+  propertyOrder = [
+    'instanceName',
     'schemaType',
     'scope',
     'commissionPercentage',
@@ -39,7 +39,7 @@ export class SchemeInstanceComponent implements OnInit {
 
   titlesFile = new Map<string, string>();
   private readonly translationKeys = {
-    name: 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.NAME',
+    instanceName: 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.NAME',
     schemaType: 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.SCHEME_TYPE',
     scope: 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.RULE_SCOPE',
     commissionPercentage: 'IP.COMMISSIONS.SCHEME-INSTANCE.TABLE.HEADERS.PREMIUM_PERCENTAGE',
@@ -94,6 +94,8 @@ export class SchemeInstanceComponent implements OnInit {
   isPolicyModalOpen = false;
   isAllPoliciesSelected = false;
 
+  keyTranslate = 'IP.ADMIN_TABLE';
+
   policySearchTerm = '';
   policySelectedBroker: any = null;
   policySearchResults: any[] = [];
@@ -123,11 +125,6 @@ export class SchemeInstanceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.updateTableHeaders();
-
-    this.translate.onLangChange.subscribe(() => {
-      this.updateTableHeaders();
-    });
     this.breakpoint.observe(['(max-width: 768px)']).subscribe(state => {
       const enteringHandset = !!state.matches;
 
@@ -150,23 +147,23 @@ export class SchemeInstanceComponent implements OnInit {
         this.loadCatalogData();
       }
     });
+    this.translate.onLangChange.subscribe(() => {
+
+      if (this.originalSchemes && this.originalSchemes.length > 0) {
+        this.schemes = this.mapSchemeDisplayData(this.originalSchemes);
+      }
+    });
   }
 
-  /**
-   * Carga de datos MOCKEADA simulando comportamiento de API
-   */
   private loadPage(index: number, size: number): void {
     this.loadingService.setLoadingState(true);
 
     this.schemeService.getInstances(index, size).subscribe({
       next: (response) => {
-        // Transformamos los datos (boolean -> texto) antes de asignarlos
-        this.schemes = this.mapSchemeDisplayData(response.content);
+        this.originalSchemes = response.content; 
 
-        // Creamos la copia de seguridad (patrón inmutabilidad)
-        this.originalSchemes = [...this.schemes];
+        this.schemes = this.mapSchemeDisplayData(this.originalSchemes);
 
-        // Actualizamos variables de paginación
         this.total = response.totalElements;
         this.pageIndex = response.number;
         this.pageSize = response.size;
@@ -222,12 +219,12 @@ export class SchemeInstanceComponent implements OnInit {
 
   onAddNewScheme() {
     // 1. Reseteamos el formulario siempre
-    this.createForm.reset({ 
-      isActive: true, 
+    this.createForm.reset({
+      isActive: true,
       hasIncentiveCategory: false,
-      commissionPercentage: 0,   
-      schemaType: null,          
-      scope: null  
+      commissionPercentage: 0,
+      schemaType: null,
+      scope: null
     });
     // Limpiamos los arrays por si quedaron sucios
     (this.createForm.get('policies') as FormArray).clear();
@@ -311,15 +308,15 @@ export class SchemeInstanceComponent implements OnInit {
 
     // --- LÓGICA ESPECIAL PARA INCENTIVOS (Array de Objeto) ---
     let incentiveCategoriesPayload: any[] = [];
-    const hasIncentive = String(formVal.hasIncentiveCategory) === 'true'; 
+    const hasIncentive = String(formVal.hasIncentiveCategory) === 'true';
     const incentiveId = formVal.incentiveCategoryId;
 
     if (hasIncentive && incentiveId) {
       // Usamos '==' (doble igual) para encontrar el ID aunque uno sea string y el otro number
       const selectedOption = this.incentiveCategoryOptions.find(opt => opt.value == incentiveId);
-      
+
       if (selectedOption) {
-         incentiveCategoriesPayload = [{
+        incentiveCategoriesPayload = [{
           incentiveCategoryId: Number(incentiveId), // Aseguramos que se vaya como número
           commissionPercentage: formVal.percentage
         }];
@@ -331,21 +328,18 @@ export class SchemeInstanceComponent implements OnInit {
     // 4. Construir el Payload Final
     const payload = {
       name: formVal.name,
-      schemaType: formVal.schemaType,
       scope: formVal.scope,
-      commissionSchemeId: 7,
+      commissionSchemeId: formVal.schemaType,
       commissionPercentage: formVal.percentage,
       isActive: formVal.isActive,
 
-      // Enviamos el array construido arriba (puede estar vacío o tener 1 objeto)
       hasIncentiveCategory: hasIncentive,
       hasIncentiveScheme: hasIncentive,
       incentiveCategories: incentiveCategoriesPayload,
 
-      // --- TRANSFORMACIÓN A IDs (Listas) ---
       insurancePolicyIds: (formVal.policies || []).map((p: any) => p.id),
       productIds: formVal.products || [],
-      brokerIds: formVal.brokers || [] 
+      brokerIds: formVal.brokers || []
     };
 
     console.log('Payload Instancia:', payload); // Debug para verificar estructura
@@ -358,9 +352,10 @@ export class SchemeInstanceComponent implements OnInit {
         this.createBusy = false;
         this.onCreateModalClose();
         this.snackbarService.showSuccessMessage(
-          'La instancia ha sido creada correctamente.', 
+          'La instancia ha sido creada correctamente.',
           'Éxito'
         );
+        this.loadPage(0, this.pageSize);
       },
       error: (err) => {
         console.error('Error al crear:', err);
@@ -368,7 +363,7 @@ export class SchemeInstanceComponent implements OnInit {
         this.createBusy = false;
         const msg = err.error?.message || 'No se pudo guardar la instancia.';
         this.snackbarService.showCustomErrorMessage(
-          'Error al crear', 
+          'Error al crear',
           msg
         );
       }
@@ -406,11 +401,17 @@ export class SchemeInstanceComponent implements OnInit {
     }, 1000);
   }
 
-  private mapSchemeDisplayData(data: CommissionSchemeInstance[]): CommissionSchemeInstance[] {
-    return data.map(item => ({
-      ...item,
-      isActiveText: item.isActive ? 'Si' : 'No'
-    }));
+  private mapSchemeDisplayData(data: CommissionSchemeInstance[]): any[] {
+    return data.map(item => {
+      const i18nKey = `IP.COMISSION_SCHEME.SCHEMA-TYPES.${item.schemaType}`;
+
+      return {
+        ...item,
+        isActiveText: item.isActive ? 'Si' : 'No',
+        schemaType: this.translate.instant(i18nKey),
+        instanceName: item.name
+      };
+    });
   }
 
   private rebuildMobileSlice(): void {
@@ -442,19 +443,6 @@ export class SchemeInstanceComponent implements OnInit {
     this.openMenuId = null;
     this.onRowAction({ event: action, dataField: scheme });
   }
-  private updateTableHeaders(): void {
-    const keysToTranslate = Object.values(this.translationKeys);
-
-    this.translate.get(keysToTranslate).subscribe(translations => {
-      this.titlesFile = new Map<string, string>([
-        ['name', translations[this.translationKeys.name]],
-        ['schemaType', translations[this.translationKeys.schemaType]],
-        ['scope', translations[this.translationKeys.scope]],
-        ['commissionPercentage', translations[this.translationKeys.commissionPercentage]],
-        ['isActiveText', translations[this.translationKeys.isActiveText]]
-      ]);
-    });
-  }
 
   private initForm() {
     this.createForm = this.fb.group({
@@ -482,31 +470,22 @@ export class SchemeInstanceComponent implements OnInit {
       catCtrl?.updateValueAndValidity();
     });
 
-    // Listener: Limpiar Arrays al cambiar Scope
     this.createForm.get('scope')?.valueChanges.subscribe(scope => {
-       
-       // --- CORRECCIÓN ---
-       // Aseguramos que scope sea un string. Si es null, usamos ''
-       const safeScope = scope || ''; 
-       // ------------------
 
-       const brokersCtrl = this.createForm.get('brokers');
-       const productsArray = this.createForm.get('products');
-       const policiesArray = this.createForm.get('policies') as FormArray;
+      const safeScope = scope || '';
 
-       // 1. Lógica Brokers (Select Múltiple)
-       // Usamos safeScope en lugar de scope
-       if (safeScope === 'BROKER' || safeScope === 'BROKER_PRODUCT') { 
-          brokersCtrl?.setValidators(Validators.required);
-       } else {
-          brokersCtrl?.clearValidators();
-          brokersCtrl?.setValue([]); 
-       }
-       brokersCtrl?.updateValueAndValidity();
+      const brokersCtrl = this.createForm.get('brokers');
+      const productsArray = this.createForm.get('products');
+      const policiesArray = this.createForm.get('policies') as FormArray;
+      if (safeScope === 'BROKER' || safeScope === 'BROKER_PRODUCT') {
+        brokersCtrl?.setValidators(Validators.required);
+      } else {
+        brokersCtrl?.clearValidators();
+        brokersCtrl?.setValue([]);
+      }
+      brokersCtrl?.updateValueAndValidity();
 
-       // 2. Lógica Productos y Pólizas (Arrays)
-       // Usamos safeScope para que .includes() no falle
-       if (!safeScope.includes('POLICY')) policiesArray.clear();
+      if (!safeScope.includes('POLICY')) policiesArray.clear();
     });
   }
 
@@ -526,12 +505,12 @@ export class SchemeInstanceComponent implements OnInit {
         this.incentiveCategoryOptions = data.incentives;
 
         this.brokerOptions = data.brokers.map((b: any) => ({
-           label: b.username, // O b.name
-           value: b.id
+          label: b.username,
+          value: b.id
         }));
         this.productsOptions = data.products.map((b: any) => ({
-           label: `${b.id} - ${b.name}`, // O b.name
-           value: b.id
+          label: `${b.id} - ${b.name}`,
+          value: b.id
         }));
         this.allPolicies = data.policies;
 
@@ -544,7 +523,6 @@ export class SchemeInstanceComponent implements OnInit {
     });
   }
 
-  // --- GETTERS DE VISIBILIDAD (Según Scope) ---
   get currentScope(): string { return this.createForm.get('scope')?.value || ''; }
 
   get showProductsSection(): boolean {
@@ -557,20 +535,18 @@ export class SchemeInstanceComponent implements OnInit {
     return this.currentScope.includes('POLICY') || this.currentScope === 'INSURANCE_POLICY';
   }
 
-  // --- LÓGICA DEL MODAL DE PÓLIZAS ---
-
   openPolicyModal() {
     this.isPolicyModalOpen = true;
     this.policySearchTerm = '';
     this.policySelectedBroker = null;
-    this.policySearchResults = []; // O this.allPolicies si quieres mostrar todas al inicio
+    this.policySearchResults = [];
     this.tempSelectedPolicies = [...this.selectedPoliciesList];
 
     this.checkAllSelectedState();
   }
 
-  onPolicyModalClose() { 
-    this.isPolicyModalOpen = false; 
+  onPolicyModalClose() {
+    this.isPolicyModalOpen = false;
   }
 
   clearPolicySelection() {
@@ -583,11 +559,9 @@ export class SchemeInstanceComponent implements OnInit {
       this.isAllPoliciesSelected = false;
       return;
     }
-    // Si todos los resultados visibles están en tempSelectedPolicies, marcamos el header
     this.isAllPoliciesSelected = this.policySearchResults.every(p => this.isPolicySelected(p));
   }
-  // --- Búsqueda y Filtros (Se mantienen igual) ---
-  
+
   onPolicySearch(term: string) {
     this.policySearchTerm = term;
     this.executePolicySearch();
@@ -600,24 +574,20 @@ export class SchemeInstanceComponent implements OnInit {
 
   executePolicySearch() {
     this.policySearchResults = this.allPolicies.filter(policy => {
-      const matchNum = this.policySearchTerm 
-        ? policy.policyNumber.toLowerCase().includes(this.policySearchTerm.toLowerCase()) 
+      const matchNum = this.policySearchTerm
+        ? policy.policyNumber.toLowerCase().includes(this.policySearchTerm.toLowerCase())
         : true;
-      const matchBrok = this.policySelectedBroker 
-        ? policy.brokerId == this.policySelectedBroker 
+      const matchBrok = this.policySelectedBroker
+        ? policy.brokerId == this.policySelectedBroker
         : true;
       return matchNum && matchBrok;
     });
-    // Al filtrar, recalculamos si "todos los visibles" están seleccionados
     this.checkAllSelectedState();
   }
-
-  // --- NUEVA LÓGICA DE SELECCIÓN (Vía Action) ---
 
   onPolicyTableAction(evt: TableActionEvent) {
     if (!evt.dataField) return;
 
-    // Casteamos a 'any' o a tu interfaz 'Policy' si la tienes importada
     const policy = evt.dataField;
 
     if (evt.event === 'select') {
@@ -625,161 +595,65 @@ export class SchemeInstanceComponent implements OnInit {
     }
   }
 
-  /**
-   * Agrega o quita la póliza del array temporal.
-   * Esta función ahora es llamada por onPolicyTableAction.
-   */
   togglePolicySelection(p: any) {
     const idx = this.tempSelectedPolicies.findIndex(x => x.id === p.id);
-    
+
     if (idx > -1) {
-      this.tempSelectedPolicies.splice(idx, 1); // Si ya estaba, la sacamos (Desmarcar)
+      this.tempSelectedPolicies.splice(idx, 1);
     } else {
-      this.tempSelectedPolicies.push(p); // Si no estaba, la agregamos (Marcar)
+      this.tempSelectedPolicies.push(p);
     }
 
     this.checkAllSelectedState();
   }
   toggleSelectAllPolicies(ev: any) {
     const isChecked = ev.target.checked;
-    this.isAllPoliciesSelected = isChecked; // Actualizamos variable visual
+    this.isAllPoliciesSelected = isChecked;
 
     if (isChecked) {
-      // Agregar los visibles que no estén ya
       this.policySearchResults.forEach(p => {
         if (!this.isPolicySelected(p)) this.tempSelectedPolicies.push(p);
       });
     } else {
-      // Remover SOLO los visibles de la selección temporal
-      // (Mantenemos los que no se ven por el filtro, si esa es la lógica deseada)
       const visibleIds = this.policySearchResults.map(p => p.id);
       this.tempSelectedPolicies = this.tempSelectedPolicies.filter(p => !visibleIds.includes(p.id));
     }
   }
-  /**
-   * Verifica si está seleccionada (Útil si necesitas cambiar algo visualmente fuera de la tabla)
-   * Nota: La app-table ya maneja su propio ícono check/plus internamente con su lógica checkAction
-   */
-  isPolicySelected(p: any) { 
-    return this.tempSelectedPolicies.some(x => x.id === p.id); 
+  isPolicySelected(p: any) {
+    return this.tempSelectedPolicies.some(x => x.id === p.id);
   }
-
-  // --- CONFIRMACIÓN (Mover del temporal al formulario) ---
 
   addSelectedPoliciesToForm() {
     const formArray = this.createForm.get('policies') as FormArray;
     formArray.clear();
     this.tempSelectedPolicies.forEach(p => {
-      // Validamos duplicados para no agregar la misma póliza dos veces
       const exists = formArray.controls.some(ctrl => ctrl.value.id === p.id);
       if (!exists) {
         formArray.push(this.fb.control(p));
       }
     });
-    
+
     this.onPolicyModalClose();
   }
-
-  // --- LÓGICA DE PANTALLA PRINCIPAL (Sin cambios) ---
-  removePolicy(index: number) { 
-    (this.createForm.get('policies') as FormArray).removeAt(index); 
+  removePolicy(index: number) {
+    (this.createForm.get('policies') as FormArray).removeAt(index);
   }
 
   removeAllPolicies() {
     (this.createForm.get('policies') as FormArray).clear();
   }
-  
-  get selectedPoliciesList() { 
-    return (this.createForm.get('policies') as FormArray).value; 
+
+  get selectedPoliciesList() {
+    return (this.createForm.get('policies') as FormArray).value;
   }
-  
+
   get paginatedPoliciesList() {
-    const list = this.selectedPoliciesList; 
+    const list = this.selectedPoliciesList;
     const start = this.policiesPageIndex * this.policiesPageSize;
     const end = start + this.policiesPageSize;
     return list.slice(start, end);
   }
-
-  // 2. Función de cambio de página (Adaptada de tu onMobilePageChange)
   onPoliciesPageChange(page1Based: number) {
     this.policiesPageIndex = Math.max(0, page1Based - 1);
-    // No necesitamos llamar a una función rebuild porque el getter 'paginatedPoliciesList' 
-    // se actualiza automáticamente al cambiar policiesPageIndex.
   }
-  
 }
-
-const MOCK_FULL_DATA: any[] = [
-  {
-    "id": 12, "name": "Esquema Mixto Premium", "commissionSchemeId": 4, "byBroker": true, "byProduct": true,
-    "hasIncentiveScheme": true, "createdByUserId": 2, "creationDate": "2025-11-12T16:30:30", "lastUpdate": null,
-    "validFrom": "2024-01-01T00:00:00", "validUntil": "2024-12-31T23:59:59", "isActive": true, "enterpriseId": 1,
-    "deletable": true, "editable": true, "schemaType": "PERCENTAGE_PRODUCT_BROKER", "scope": "BROKER_PRODUCT", "commissionPercentage": 0
-  },
-  {
-    "id": 11, "name": "Esquema por Producto", "commissionSchemeId": 3, "byBroker": false, "byProduct": true,
-    "hasIncentiveScheme": false, "createdByUserId": 2, "creationDate": "2025-11-12T16:30:30", "lastUpdate": null,
-    "validFrom": "2024-01-01T00:00:00", "validUntil": "2024-12-31T23:59:59", "isActive": true, "enterpriseId": 1,
-    "deletable": true, "editable": true, "schemaType": "PERCENTAGE", "scope": "PRODUCT", "commissionPercentage": 0
-  },
-  {
-    "id": 10, "name": "Esquema por Corredor", "commissionSchemeId": 2, "byBroker": true, "byProduct": false,
-    "hasIncentiveScheme": true, "createdByUserId": 1, "creationDate": "2025-11-12T16:30:30", "lastUpdate": null,
-    "validFrom": "2024-01-01T00:00:00", "validUntil": "2024-12-31T23:59:59", "isActive": true, "enterpriseId": 1,
-    "deletable": true, "editable": true, "schemaType": "FIXED", "scope": "BROKER", "commissionPercentage": 0
-  },
-  {
-    "id": 9, "name": "Esquema Básico 2024", "commissionSchemeId": 1, "byBroker": false, "byProduct": false,
-    "hasIncentiveScheme": false, "createdByUserId": 1, "creationDate": "2025-11-12T16:30:30", "lastUpdate": null,
-    "validFrom": "2024-01-01T00:00:00", "validUntil": "2024-12-31T23:59:59", "isActive": true, "enterpriseId": 1,
-    "deletable": true, "editable": true, "schemaType": "PERCENTAGE", "scope": "GENERAL", "commissionPercentage": 0
-  },
-  {
-    "id": 8, "name": "Esquema Mixto Premium II", "commissionSchemeId": 4, "byBroker": true, "byProduct": true,
-    "hasIncentiveScheme": true, "createdByUserId": 2, "creationDate": "2025-11-12T16:18:21", "lastUpdate": null,
-    "validFrom": "2024-01-01T00:00:00", "validUntil": "2024-12-31T23:59:59", "isActive": true, "enterpriseId": 1,
-    "deletable": true, "editable": true, "schemaType": "PERCENTAGE_PRODUCT_BROKER", "scope": "BROKER_PRODUCT", "commissionPercentage": 0
-  },
-  {
-    "id": 7, "name": "Esquema por Producto II", "commissionSchemeId": 3, "byBroker": false, "byProduct": true,
-    "hasIncentiveScheme": false, "createdByUserId": 2, "creationDate": "2025-11-12T16:18:21", "lastUpdate": null,
-    "validFrom": "2024-01-01T00:00:00", "validUntil": "2024-12-31T23:59:59", "isActive": true, "enterpriseId": 1,
-    "deletable": true, "editable": true, "schemaType": "PERCENTAGE", "scope": "PRODUCT", "commissionPercentage": 0
-  },
-  {
-    "id": 6, "name": "Esquema por Corredor II", "commissionSchemeId": 2, "byBroker": true, "byProduct": false,
-    "hasIncentiveScheme": true, "createdByUserId": 1, "creationDate": "2025-11-12T16:18:21", "lastUpdate": null,
-    "validFrom": "2024-01-01T00:00:00", "validUntil": "2024-12-31T23:59:59", "isActive": true, "enterpriseId": 1,
-    "deletable": true, "editable": true, "schemaType": "FIXED", "scope": "BROKER", "commissionPercentage": 0
-  },
-  {
-    "id": 5, "name": "Esquema Básico 2024 II", "commissionSchemeId": 1, "byBroker": false, "byProduct": false,
-    "hasIncentiveScheme": false, "createdByUserId": 1, "creationDate": "2025-11-12T16:18:21", "lastUpdate": null,
-    "validFrom": "2024-01-01T00:00:00", "validUntil": "2024-12-31T23:59:59", "isActive": true, "enterpriseId": 1,
-    "deletable": true, "editable": true, "schemaType": "PERCENTAGE", "scope": "GENERAL", "commissionPercentage": 0
-  },
-  {
-    "id": 4, "name": "Esquema Mixto Premium III", "commissionSchemeId": 4, "byBroker": true, "byProduct": true,
-    "hasIncentiveScheme": true, "createdByUserId": 2, "creationDate": "2025-11-12T16:17:10", "lastUpdate": null,
-    "validFrom": "2024-01-01T00:00:00", "validUntil": "2024-12-31T23:59:59", "isActive": true, "enterpriseId": 1,
-    "deletable": true, "editable": true, "schemaType": "PERCENTAGE_PRODUCT_BROKER", "scope": "BROKER_PRODUCT", "commissionPercentage": 0
-  },
-  {
-    "id": 3, "name": "Esquema por Producto III", "commissionSchemeId": 3, "byBroker": false, "byProduct": true,
-    "hasIncentiveScheme": false, "createdByUserId": 2, "creationDate": "2025-11-12T16:17:10", "lastUpdate": null,
-    "validFrom": "2024-01-01T00:00:00", "validUntil": "2024-12-31T23:59:59", "isActive": true, "enterpriseId": 1,
-    "deletable": true, "editable": true, "schemaType": "PERCENTAGE", "scope": "PRODUCT", "commissionPercentage": 0
-  },
-  {
-    "id": 2, "name": "Esquema por Corredor III", "commissionSchemeId": 2, "byBroker": true, "byProduct": false,
-    "hasIncentiveScheme": true, "createdByUserId": 1, "creationDate": "2025-11-12T16:17:10", "lastUpdate": null,
-    "validFrom": "2024-01-01T00:00:00", "validUntil": "2024-12-31T23:59:59", "isActive": true, "enterpriseId": 1,
-    "deletable": true, "editable": true, "schemaType": "FIXED", "scope": "BROKER", "commissionPercentage": 10
-  },
-  {
-    "id": 1, "name": "Esquema Básico 2024 III", "commissionSchemeId": 1, "byBroker": false, "byProduct": false,
-    "hasIncentiveScheme": false, "createdByUserId": 1, "creationDate": "2025-11-12T16:17:10", "lastUpdate": null,
-    "validFrom": "2024-01-01T00:00:00", "validUntil": "2024-12-31T23:59:59", "isActive": true, "enterpriseId": 1,
-    "deletable": true, "editable": true, "schemaType": "PERCENTAGE", "scope": "GENERAL", "commissionPercentage": 0
-  }
-];
