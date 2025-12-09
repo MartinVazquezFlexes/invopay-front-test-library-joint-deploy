@@ -37,6 +37,10 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() scroll = false;
   @Input() forErrors = false;
   @Input() titlesFile?: Map<string,string>
+  @Input() showAddButtonInHeader: boolean = false;
+  @Output() addAction = new EventEmitter<void>();
+  @Input() addButtonTooltipText: string = '';
+  
 
   selectedItems: Set<any> = new Set();
   selectAllChecked = false;
@@ -63,6 +67,9 @@ export class TableComponent implements OnInit, OnChanges {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.tableHeads = this.setTableHeads();
     });
+  }
+  onAddClick(): void {
+    this.addAction.emit();
   }
 
   private setTableHeads(): any {    

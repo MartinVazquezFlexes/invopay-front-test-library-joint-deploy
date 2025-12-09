@@ -28,6 +28,7 @@ import { PolicyDetailsComponent } from './views/policy-details/policy-details.co
 import { PolicyListComponent } from './views/policy-list/policy-list.component';
 import { ObjectiveListComponent } from './views/objective-list/objective-list.component';
 import { GoalsListComponent } from './views/goals-list/goals-list.component';
+import { PolicyEditBrokerComissionComponent } from './views/policy-edit-broker-comission/policy-edit-broker-comission.component';
 
 
 const routes: Routes = [
@@ -138,6 +139,11 @@ const routes: Routes = [
       {
         path: 'goals-list',
         component: GoalsListComponent,
+      }
+      ,
+      {
+        path:'policy-edit-commission',
+        component:PolicyEditBrokerComissionComponent
       }
     ],
   },

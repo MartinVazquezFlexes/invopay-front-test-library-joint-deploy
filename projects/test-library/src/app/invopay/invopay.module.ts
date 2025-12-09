@@ -39,6 +39,7 @@ import { SchemeInstanceComponent } from './views/scheme-instance/scheme-instance
 import { PolicyListComponent } from './views/policy-list/policy-list.component';
 import { PolicyListFiltersModalDialogComponent } from './components/policy-list-filters-modal-dialog/policy-list-filters-modal-dialog.component';
 import { PolicyEditModalDialogComponent } from './components/policy-edit-modal-dialog/policy-edit-modal-dialog.component';
+import { PolicyEditBrokerComissionComponent } from './views/policy-edit-broker-comission/policy-edit-broker-comission.component';
 import { ObjectiveListComponent } from './views/objective-list/objective-list.component';
 import { GoalsListComponent } from './views/goals-list/goals-list.component';
 
@@ -62,7 +63,7 @@ import { GoalsListComponent } from './views/goals-list/goals-list.component';
         IpInstanceDetailInfoComponent,
         SchemeInstanceComponent,
         PolicyListFiltersModalDialogComponent,
-
+        PolicyEditModalDialogComponent,
         ObjectiveListComponent,
         GoalsListComponent,
     ],

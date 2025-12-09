@@ -2,13 +2,13 @@
   "NEW_VAR":{
       "INF_GENERAL":"Información general",
       "PAYMEN_CHANNEL": "Canal de pago",
-      "PAYMENT_DATE": "Fecha",
+      "DATE": "Fecha",
       "COLLECTED_AMOUNT": "Monto Recaudado",
       "PAYMENT_PROVIDER": "Proveedor Pago",
       "CONSOLIDATED": "Consolidada",
       "POLICY_NUMBER": "Nro Póliza",
       "POLICY_NUMER_EXTEND" :"Número de póliza",
-      "POLICY":"Póliza",
+      "POLICY":"Poliza",
       "POLICY_VALUE":"Valor de póliza",
       "DETAIL_RECAUDATION":"Detalles de la recaudacion",
       "TRANSACCION_DATA" :"Datos de la transacción",
@@ -26,6 +26,8 @@
       "PERCENTAJE_BROKER":"Comisión Broker",
       "AMOUNT_PAY": "Cantidad de pagos",
       "CLIENT_INF":"Información del cliente",
+      
+
 
       "ASSURANCE_NOTIF":"Notificaciones de la aseguradora",
 
@@ -55,7 +57,37 @@
       "SALE_AMOUNT":"Monto venta",
       "AMOUNT_INSTALLMENT":"Monto cuota",
       "POLICIES": "Polizas",
-      "FILTER_POLICIES":"Filtrar polizas"
+      "FILTER_POLICIES":"Filtrar polizas",
+      "AMOUNT":"Monto",
+      "CLIENT_DATA":"Datos del cliente",
+      "BROKER_DATA":"Datos del broker",
+      "FULL_NAME":"Nombre completo",
+      "CREATION_DATE":"Fecha Creación",
+      "EMISSION_DATE":"Fecha Emisión",
+      "END_VIGENCY_DATE":"Fecha Final Vigencia",
+      "BROKER_PREMIUM_AMOUNT":"Prima del broker",
+      "INSTALLMENTS_COUNT":"Cuotas",
+      "SQUEMA_COMISSIONS":"Esquema de comisiones",
+      "SQUEMA_APPLY":"Esquema aplicado",
+      "PERCENTAJE_USE":"Porcentaje utilizado",
+      "INSTALLMENT_PLAN":"Plan de cuotas",
+      "BROKER_COMMISSION":"Comisión broker",
+      "PAYMENT_DATE":"Fecha pago",
+      "EDIT_COMMISSION":"Editar comisión",
+      "NEW_PERCENTAJE_BROKER": "Nuevo porcentaje broker",
+      "NEW_COMMISION_PERCENTAGE":"Nuevo % comision",
+      "NEW_COMMISION_AMOUNT":"Nuevo monto comision",
+      "CURRENT_PERCENTAGE":"Porcentaje actual",
+      "NEW_PERCENTAGE":"Nuevo porcentaje",
+      "CANCEL":"Cancelar",
+      "SAVE":"Guardar",
+      "INSTALLMENT_WILL_BE_RECALCULATED":"Cuota sera recalculada",
+      "INSTALLMENTS_WILL_BE_RECALCULATED":"Cuotas seran recalculadas",
+      "CONFIRM_CHANGES":"Confirmar Cambios",
+      "PREVIEW":"Previsualización"
+
+      
+      
 
   },
   "IP": {

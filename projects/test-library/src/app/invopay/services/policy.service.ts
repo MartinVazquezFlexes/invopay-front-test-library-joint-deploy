@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/test-library/src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { PolicyResponse } from '../interface/policyResponse';
 import { Broker } from '../interface/broker';
 
@@ -9,6 +9,7 @@ import { Broker } from '../interface/broker';
   providedIn: 'root'
 })
 export class PolicyService {
+
 
   private readonly apiUrl = environment.api + '/invopay/insurance-policies'
   private readonly insurancePoliciesApi = environment.api + '/invopay/insurance-policies/all';
@@ -33,5 +34,15 @@ export class PolicyService {
   }
   getAllPolicies(): Observable<any> {
     return this.http.get<any>(this.insurancePoliciesApi);
+  }      
+  
+  updateBrokerCommission(policyId: number, newPercentage: number): Observable<any> {
+    return throwError(() => ({
+      error: {
+        message: 'Error al actualizar la comisión updateBrokerCommission no implementado',
+        code: 'UPDATE_FAILED'
+      }
+    }));
   }
+
 }

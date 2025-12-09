@@ -35,8 +35,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
        private readonly loadinService : LoadingService,
        private readonly auxFiltersService : AuxFiltersService,
        private readonly matDialog : MatDialog,
-      private readonly cdr: ChangeDetectorRef
-
+       private readonly cdr: ChangeDetectorRef,
 
       ) { }
 
@@ -80,7 +79,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
     disableClose: false, 
     autoFocus: true
   });
-
+  
   dialogRef.afterClosed().subscribe(result => {
         console.log("close modal")
         console.log(result)
@@ -138,7 +137,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
     // Si tiene las fechas, ya puede buscar (los otros filtros son opcionales)
     return true;
   }
-  
+
   get canSearch(): boolean {
   return this.hasAtLeastOneFilter();
   }
@@ -178,7 +177,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       { label: 'Seguro de Vida Total', value: 'Seguro de Vida Total' }
     ];
     
-    actions = ['detail','edit'];
+    actions = ['detail'];
     titlesMap: Map<string,string>|undefined;
   
     currentStart:string=''
@@ -196,6 +195,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       fields: []
     };
 
+    /* to use with component cards mobile
    handleCardAction(event: any): void {
       console.log('Evento recibido:', event);
       
@@ -212,22 +212,30 @@ export class PolicyListComponent implements OnInit , OnDestroy{
         }
       }
     }
- 
+  */
+   get userTypeToken(): string | null {
+    return sessionStorage.getItem('userType');
+  }
 
     ngOnInit(): void {
       
-      
         this.userType = this.route.snapshot.data['type'] || 'assurance';
+
         console.log(this.userType)
+        console.log(this.userTypeToken)
         this.loadinService.setLoadingState(true)
         this.loadTitleMap();
         this.checkScreenSize()
         this.loadControlsSubscriptions()
         this.loadSelects();
        // this.loadPolicies()
+   
+       if(this.userTypeToken ==='ENTERPRISE_MANAGER'&& this.userType==='assurance'){
+        this.actions.push('edit')
+       }
 
         setTimeout(() => {
-          window.scrollTo(0, 0);  // Va al top de la página
+          window.scrollTo(0, 0);  
         }, 300);  // Delay para que el DOM se renderice primero
       
         
@@ -318,7 +326,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
     }
      */
   
-      loadControlsSubscriptions() {
+    loadControlsSubscriptions() {
         
       this.subscriptions.add(
             this.controlsForm.controls.rowPaginator.valueChanges.subscribe(n => {
@@ -394,7 +402,6 @@ export class PolicyListComponent implements OnInit , OnDestroy{
         if(this.userType==='broker'){
           this.getPolicyForBroker(page)
         }
-
   }
 
 
@@ -548,13 +555,18 @@ export class PolicyListComponent implements OnInit , OnDestroy{
               }
         this.stateService.saveState(state)
         */
-
         //  this.router.navigate(['sales-detail', id], { state: { type: 'pending-sales-component' } });
         this.router.navigate(['/invopay/policy-details'], {
           state: { id: id }
         });
 
       }
+      if(event.event==='edit'){
+      this.router.navigate(['/invopay/policy-edit-commission'], {
+            state: { id: id }
+          });
+      }
+
     }
     onSelectedItems(items: any[]) {
       console.log('Selected', items);
@@ -697,15 +709,20 @@ export class PolicyListComponent implements OnInit , OnDestroy{
           this.showMobileMenuIndex = index; 
     }  
     }
-    onMobileMenuAction(accion: string, revenue: any) {
+    onMobileMenuAction(accion: string, item: any) {
       console.log('Action', accion);
-      console.log('Card :', revenue);
-      const id = revenue.id
+      console.log('Card :', item);
+      const id = item.id
       console.log(id)
       if (accion === 'detail') {
         this.router.navigate(['/invopay/policy-details'], {
           state: { id: id }
         });
+      }
+      if(accion==='edit'){
+        this.router.navigate(['/invopay/policy-edit-commission'], {
+            state: { id: id }
+          });
       }
     }
   
@@ -752,7 +769,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
               headerLabel: '#',
               headerKey: 'id',
               showActionButton: true,
-              actions: ['detail','edit'],
+              actions: ['detail'],
               fields: [
                 { label: translations['NEW_VAR.CLIENT'], key: 'cliente' }, 
                 { label: translations['NEW_VAR.PRODUCT_NAME'], key: 'producto' }, 
@@ -762,7 +779,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
               ]
             }
 
-            if (this.userType === 'assurance') {
+            if (this.userType === 'assurance'&& this.userTypeToken==='ENTERPRISE_MANAGER') {
                 this.columnsHeaders.push('corredor')
 
                 this.titlesMap.set(
@@ -777,6 +794,10 @@ export class PolicyListComponent implements OnInit , OnDestroy{
                   key: 'corredor'
                 });
               }
+                const existAction = this.configCardMobile.actions?.some(f => f === 'edit');
+                if (!existAction) {
+                  this.configCardMobile.actions?.push('edit');
+                  }
              }
 
             });

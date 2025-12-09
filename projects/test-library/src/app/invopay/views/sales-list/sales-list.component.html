@@ -106,10 +106,17 @@
             </div>
         </div>
         <div class="card-table" *ngIf="!isMobile">
-            <app-table [keyTranslate]="'IP.ADMIN_TABLE'" [propertyOrder]="columnsHeaders" [data]="tableSalesDto"
-                [actions]="['detail']" [tableStyle]="'invopay'" [isForSelectItem]="false" [scroll]="true"
-                [titlesFile]="titlesMap" (action)="onTableAction($event)"
-                (selectedItemsChange)="onSelectedItems($event)"></app-table>
+            <app-table [keyTranslate]="'IP.ADMIN_TABLE'" 
+            [propertyOrder]="columnsHeaders"
+            [data]="tableSalesDto"
+            [actions]="['detail']"
+            [tableStyle]="'invopay'"
+            [isForSelectItem]="false" 
+            [scroll]="true"
+            [titlesFile]="titlesMap" 
+            (action)="onTableAction($event)"
+            (selectedItemsChange)="onSelectedItems($event)">
+            </app-table>
             <app-no-data *ngIf="sales.length<1"></app-no-data>
         </div>
         <div *ngIf="isMobile" class="card-mobile">
@@ -131,7 +138,7 @@
                     <div class="card-body-mobile">
 
                         <div class="info-row-mobile">
-                            <span class="info-label-mobile">{{'NEW_VAR.PAYMENT_DATE' | translate}}</span>
+                            <span class="info-label-mobile">{{'NEW_VAR.DATE' | translate}}</span>
                             <span class="info-value-mobile">{{ sale.fecha }}</span>
                         </div>
                         <div class="info-row-mobile">

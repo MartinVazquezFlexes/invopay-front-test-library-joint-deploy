@@ -1,0 +1,372 @@
+@import "../../../shared/mixins/sizes.scss";
+@import "../../../shared/mixins/variables/color.scss";
+@import "../../../shared/mixins/generalText.scss";
+
+.modal-dialog-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  overflow: hidden;
+  background-color: #ffffff;
+  border-radius: 1rem;
+}
+
+// ============================================
+// HEADER DEL MODAL
+// ============================================
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid #e0e0e0;
+  background-color: #fafafa;
+  border-radius: 1rem 1rem 0 0;
+
+  .modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0071ce;
+    margin: 0;
+    font-family: Poppins, Loos, Arial, sans-serif;
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    span {
+      line-height: 1;
+    }
+  }
+}
+
+// ============================================
+// CONTENIDO DEL MODAL
+// ============================================
+.modal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+}
+
+// ============================================
+// CARD DE RESUMEN
+// ============================================
+.summary-card {
+  background-color: #f8f9fa;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 2px solid #e3f2fd;
+
+  .summary-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+
+    @media (max-width: 768px) {
+      gap: 1rem;
+    }
+  }
+
+  .summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    label {
+      font-size: 0.875rem;
+      color: #666;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .current-value {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #666;
+    }
+
+    .new-value {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #0071ce;
+    }
+  }
+
+  .arrow-icon {
+    font-size: 2rem;
+    color: #0071ce;
+    font-weight: 600;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .affected-info {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+
+    p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #333;
+
+      strong {
+        color: #0071ce;
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+// ============================================
+// TABLA DE PREVIEW - DESKTOP
+// ============================================
+.preview-table-container {
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+
+// TODO PARA LA CARD MOBILE
+.card-mobile {
+width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.payment-card-mobile-container{
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  transition: box-shadow 0.2s ease;
+  margin-bottom: 3vh;
+}
+
+.payment-card-mobile-data {
+  display: block;              // asegura que no se comporte como inline o flex item raro
+  width: 100% !important;      // ocupa todo el ancho del padre
+  max-width: 100% !important;  // evita que se pase del padre
+  flex: 1 1 auto;              // si está dentro de un flex, se adapta
+  align-self: stretch;         // si el padre tiene display:flex, se estira al ancho total
+  box-sizing: border-box;      // incluye padding/border dentro del ancho
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-header-mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1vh;
+    position: relative;
+    
+    &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1vh; //  Mismo valor que el padding
+    right: 1vh; //  Mismo valor que el padding
+    height: 1px;
+    background-color: #257fe7;
+    }
+
+    .card-id-mobile {
+      color: #666;
+      font-size: 0.8125rem;
+      font-weight: 400;
+
+    }
+
+    .menu-icon-mobile {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: #666;
+      padding: 0;
+      line-height: 1;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+
+  .card-body-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1vh;
+
+  }
+
+.info-row-mobile {
+  display: grid;
+  grid-template-columns: 1fr 1fr; // ✅ dos columnas iguales
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem;
+
+.info-label-mobile {
+    justify-self: start; // alinea a la izquierda
+    @include sidenavTextLabel();
+    font-family: 'Inter', sans-serif;
+    color: rgb(132, 129, 138);
+    font-weight: 400;
+  }
+  .info-label-mobile__status {
+    justify-self: start; // alinea a la izquierda
+    @include sidenavTextLabel();
+    font-family: 'Inter', sans-serif;
+    color: rgb(43, 148, 233);
+    font-weight: 400;
+  }
+  .info-label-mobile__money{
+    justify-self: start; // alinea a la izquierda
+    font-size: 0.95rem;
+    font-family: "Inter", sans-serif;
+    color: #3e3e3e;
+    font-weight: 600;
+    line-height: 1rem
+  }
+
+  .info-value-mobile {
+    justify-self: end; //  alinea a la derecha
+    @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
+    color: rgb(132, 129, 138);
+    font-weight: 400;
+  }
+    .info-value-mobile__status__true {
+    justify-self: end; //  alinea a la derecha
+    @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
+    color: rgb(46, 145, 231);
+    font-weight: 400;
+  }
+      .info-value-mobile__status__false {
+    justify-self: end; //  alinea a la derecha
+    @include sidenavTextLabel();
+    font-family: 'Poppins', sans-serif;
+    color: rgb(227, 36, 15);
+    font-weight: 400;
+  }
+    .info-value-mobile__money{
+    justify-self: end; // alinea a la derecha
+    font-size: 0.95rem;
+    font-family: "Inter", sans-serif;
+    color: #3e3e3e;
+    font-weight: 600;
+    line-height: 1rem;
+  }
+}
+}
+
+.card-2 .card-mobile{
+  margin-top: 2rem;
+}
+
+
+
+// ============================================
+// FOOTER DEL MODAL
+// ============================================
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  border-top: 2px solid #e0e0e0;
+  border-radius: 0 0 1rem 1rem;
+
+}
+
+
+// ============================================
+// PAGINADOR
+// ============================================
+
+.card-paginator {
+  display: flex;
+  flex-direction: column; // Cambio a columna para alineación vertical
+  align-items: center;
+  background-color: #fff;
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  max-height: 1rem;
+
+  @include sm() {
+     background-color: transparent;
+     justify-content: center;
+     border: none;
+     padding: 0%;
+     margin-bottom: 0%;
+    }
+
+  .paginator-controls {
+    display: flex;
+    align-items: end;
+    width: 100%; // Ancho completo
+    justify-content: flex-start; // Alinea al inicio
+    max-height: 3rem;
+
+  }
+  app-ip-select-input{
+    padding-top: 1.06rem;
+    width: 5rem
+  }
+  
+  app-paginator {
+    width: 100%; //Ancho completo para el paginador
+    display: flex;
+    justify-content: flex-end; // Alinea al final
+  }
+}

@@ -12,7 +12,8 @@
     &-row {
       &-item:last-child {
         min-width: 7.5rem;
-        text-align: center;
+        align-items: center;
+        justify-content: center;
       }
       &-item:first-child {
         padding-left: 1.5rem;
@@ -67,6 +68,35 @@
           &-down--fill {
             fill: #d2d9de;
             transition: all 0.2s;
+          }
+        }
+         &__actions-content { 
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        &__actions-add {
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          margin: 0;
+          line-height: 1;
+
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          
+          margin-left: 0.35rem;
+
+          img {
+            width: 12px;
+            height: 12px;
+            filter: brightness(0);
+          }
+
+          &:hover {
+            opacity: 0.7;
           }
         }
         &:hover &-sort path {

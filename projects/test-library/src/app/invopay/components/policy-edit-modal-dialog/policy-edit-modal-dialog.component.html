@@ -1,1 +1,134 @@
-<p>policy-edit-modal-dialog works!</p>
+<app-ip-modal-mobile
+  [title]="'NEW_VAR.PREVIEW' | translate"
+  [showTitle]="true"
+  [showCloseModal]="true"
+  (close)="onCancel()"
+> 
+
+<div class="modal-dialog-container">
+
+  <!-- CONTENIDO DEL MODAL -->
+  <div class="modal-content">
+    
+    <!-- RESUMEN DE CAMBIOS -->
+    <div class="summary-card">
+      <div class="summary-row">
+        <div class="summary-item">
+          <label>{{'NEW_VAR.CURRENT_PERCENTAGE' | translate}}</label>
+          <span class="current-value">{{ data.currentPercentage | number:'1.2-2' }}%</span>
+        </div>
+        
+        <div class="arrow-icon">
+          <span>→</span>
+        </div>
+        
+        <div class="summary-item">
+          <label>{{'NEW_VAR.NEW_PERCENTAGE' | translate}}</label>
+          <span class="new-value">{{ data.newPercentage | number:'1.2-2' }}%</span>
+        </div>
+      </div>
+
+      <div class="affected-info">
+        <p>
+          <strong>{{ data.previewInstallments.length }}</strong> 
+          {{ data.previewInstallments.length === 1 
+             ? ('NEW_VAR.INSTALLMENT_WILL_BE_RECALCULATED' | translate) 
+             : ('NEW_VAR.INSTALLMENTS_WILL_BE_RECALCULATED' | translate) }}
+        </p>
+      </div>
+    </div>
+
+    <!-- TABLA CON APP-TABLE - DESKTOP -->
+    <div class="preview-table-container" *ngIf="!isMobile">
+      <app-table 
+        [keyTranslate]="'IP.ADMIN_TABLE'" 
+        [propertyOrder]="columnsHeaders" 
+        [data]="displayedInstallments"
+        [actions]="[]" 
+        [tableStyle]="'invopay'" 
+        [isForSelectItem]="false" 
+        [scroll]="true"
+        [titlesFile]="titlesMap"
+      ></app-table>
+      <app-no-data *ngIf="displayedInstallments.length < 1"></app-no-data>
+    </div>
+
+    <!-- CARDS MOBILE -->
+    <div class="card-mobile" *ngIf="isMobile">
+      <div class="payment-card-mobile-container" *ngFor="let item of displayedInstallments">
+        <div class="payment-card-mobile-data">
+          
+          <div class="card-header-mobile">
+            <span class="card-id-mobile">{{ item.installmentNumber }}</span>
+          </div>
+          
+          <div class="card-body-mobile">
+            
+            <div class="info-row-mobile">
+              <span class="info-label-mobile">{{'NEW_VAR.EXPIRATION' | translate}}</span>
+              <span class="info-value-mobile">{{ item.dueDate }}</span>
+            </div>
+            
+            <div class="info-row-mobile">
+              <span class="info-label-mobile">{{'NEW_VAR.NEW_COMMISION_PERCENTAGE' | translate}}</span>
+              <span class="info-value-mobile">{{ item.commissionPercentage }}</span>
+            </div>
+
+            <div class="info-row-mobile">
+              <span class="info-label-mobile__money">{{'NEW_VAR.AMOUNT_INSTALLMENT' | translate}}</span>
+              <span class="info-value-mobile__money">{{ item.amount }}</span>
+            </div>
+            
+            <div class="info-row-mobile">
+              <span class="info-label-mobile__money">{{'NEW_VAR.NEW_COMMISION_AMOUNT' | translate}}</span>
+              <span class="info-value-mobile__money">{{ item.commissionAmount }}</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <app-no-data *ngIf="displayedInstallments.length < 1"></app-no-data>
+    </div>
+
+    <!-- PAGINADOR -->
+    <div class="card-paginator" *ngIf="data.previewInstallments.length > 5">
+      <div class="paginator-controls">
+        <app-ip-select-input 
+          [placeholder]="itemsPerpage.toString()"
+          [control]="this.controlsForm.controls.rowPaginator"
+          [options]="rowsCombo"
+        ></app-ip-select-input>  
+
+        <ng-container *ngIf="!paginatorReload">
+          <app-paginator 
+            (pageChange)="onPageChange($event)" 
+            [totalItems]="data.previewInstallments.length"
+            [itemsPerPage]="itemsPerpage" 
+            [currentPages]="currentPages"
+          ></app-paginator>
+        </ng-container>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER CON BOTONES -->
+  <div class="modal-footer">
+    <app-ip-button-modal 
+      [typeBtn]="'cancel'"
+      [size]="'normal'"
+      (click)="onCancel()">
+      {{'NEW_VAR.CANCEL' | translate}}
+    </app-ip-button-modal>
+    
+    <app-ip-button-modal 
+      [typeBtn]="'action'"
+      [size]="'normal'"
+      [disabled]="data.previewInstallments.length === 0"
+      (click)="onConfirm()">
+      {{'NEW_VAR.SAVE' | translate}}
+    </app-ip-button-modal>
+  </div>
+
+</div>
+</app-ip-modal-mobile>

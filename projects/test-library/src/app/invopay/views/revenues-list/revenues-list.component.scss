@@ -510,17 +510,7 @@ ul.menu-movil li:active {
     width: 200px;
     max-width: 200px;
     }
-          //  AGREGAR ESTO AQUÍ, AL MISMO NIVEL
-    @media (max-width: 1200px) {
-          .select-wrapper,
-          .date-wrapper {
 
-            flex: 0 0 calc(50% - 0.4375rem);  
-            min-width: unset;
-            width: auto;
-            max-width: calc(50% - 0.4375rem);
-          }
-         }
   
   }
 

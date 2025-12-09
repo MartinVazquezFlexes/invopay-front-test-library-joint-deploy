@@ -70,7 +70,7 @@
                 [keyTranslate]="'IP.ADMIN_TABLE'" 
                 [propertyOrder]="columnsHeaders" 
                 [data]="tableDto"
-                [actions]="['detail','edit']" 
+                [actions]="actions" 
                 [tableStyle]="'invopay'" 
                 [isForSelectItem]="false" 
                 [scroll]="true"
@@ -92,6 +92,9 @@
                             <ul *ngIf="showMobileMenuIndex === i" class="menu-movil">
                                 <li (click)="onMobileMenuAction('detail', sale)">
                                     {{'IP.ACTIONS_TOOLTIP.SEARCH' | translate}}
+                                </li>
+                                 <li (click)="onMobileMenuAction('edit', sale)">
+                                    {{'IP.ACTIONS_TOOLTIP.EDIT' | translate}}
                                 </li>
                             </ul>
                         </div>
@@ -167,7 +170,7 @@
   
   <div class="modal-filters-content">
     <p style="margin-bottom: 6vh;margin-left: 3vh; color: rgb(110, 109, 106);" class="modal-title">
-      {{'IP.FILTERS_MODAL.FILTER' | translate}} {{'IP.SIDENAV.OPTIONS.PAY_IN' | translate | lowercase}}
+      {{'IP.FILTERS_MODAL.FILTER' | translate}} {{'NEW_VAR.POLICIES' | translate | lowercase}}
     </p>
 
         <!-- Select Producto -->

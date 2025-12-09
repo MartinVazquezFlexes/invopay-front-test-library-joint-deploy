@@ -44,12 +44,35 @@ import { PolicyListComponent } from './invopay/views/policy-list/policy-list.com
 import { PolicyDetailsComponent } from './invopay/views/policy-details/policy-details.component';
 import { IpFiltersComponent } from "./invopay/components/ip-filters/ip-filters.component";
 import { PolicyAuditDetailsComponent } from './invopay/views/policy-audit-details/policy-audit-details.component';
+import { PolicyEditBrokerComissionComponent } from './invopay/views/policy-edit-broker-comission/policy-edit-broker-comission.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent,NavbarComponent,SidebarComponent,MainLayoutComponent, PaymentsEntitiesListComponent, InsuranceNotificationTrayComponent, NotificationTrayComponent, NotificationTrayComponent, BrokerNotificationTrayComponent, SchemesListComponent, ModalSchemaComponent,TitlePageComponent,FilterModalMobileComponent,RevenueDetailComponent,RevenuesListComponent,SalesListComponent,SalesDetailsComponent,PendingSalesComponent, PolicyDetailsComponent, PolicyListComponent, PolicyAuditDetailsComponent]
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    SidebarComponent,
+    MainLayoutComponent,
+    PaymentsEntitiesListComponent,
+    InsuranceNotificationTrayComponent,
+    NotificationTrayComponent,
+    NotificationTrayComponent,
+    BrokerNotificationTrayComponent,
+    SchemesListComponent,
+    ModalSchemaComponent,
+    TitlePageComponent,
+    FilterModalMobileComponent,
+    RevenueDetailComponent,
+    RevenuesListComponent,
+    SalesListComponent,
+    SalesDetailsComponent,
+    PendingSalesComponent, 
+    PolicyDetailsComponent,
+    PolicyListComponent,
+    PolicyAuditDetailsComponent,
+    PolicyEditBrokerComissionComponent]
 ,
 
   imports: [

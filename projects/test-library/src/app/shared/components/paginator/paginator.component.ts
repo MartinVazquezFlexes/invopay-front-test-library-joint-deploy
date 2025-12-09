@@ -49,6 +49,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
     }
   }
   ngOnChanges(change: SimpleChanges) {
+    console.log(change)
     if (this.originalItems) {
       this.items = this.itemsPerPage;
       this.originalItems = false;
@@ -64,6 +65,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
     // // This was calling it's parent ip-table's "executeService" method twice.
     // // Double-check
     // this.pageChange.emit(this.currentPage);
+
 
     this.viewItems();
   }

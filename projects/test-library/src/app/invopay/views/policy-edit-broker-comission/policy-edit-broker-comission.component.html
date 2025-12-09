@@ -1,0 +1,233 @@
+<form>
+  <!-- HEADER -->
+  <app-title-page 
+    [title]="'NEW_VAR.POLICY' | translate">
+  </app-title-page>
+
+
+
+  <!-- INFORMACIÓN GENERAL -->
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">{{'NEW_VAR.CLIENT_DATA'|translate}}</span>
+      </div>
+      <div class="card-body-1" *ngIf="policyDetail">
+        
+        <!-- Datos del Cliente -->
+        <div class="inner-card">
+          <label>{{'NEW_VAR.FULL_NAME' | translate}}</label>
+          <span>{{ policyDetail.customer.firstName }} {{ policyDetail.customer.lastName }}</span>
+        </div>
+        <div class="inner-card">
+          <label>{{'NEW_VAR.EMAIL' | translate}}</label>
+          <span>{{ policyDetail.customer.email }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATOS DEL BROKER -->
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">{{'NEW_VAR.BROKER_DATA' | translate}}</span>
+      </div>
+      <div class="card-body-1">
+        
+        <div class="inner-card">
+          <label>{{'NEW_VAR.FULL_NAME' | translate}}</label>
+          <span>{{ policyDetail?.broker?.username }}</span>
+        </div>
+        <div class="inner-card">
+          <label>{{'NEW_VAR.EMAIL' | translate}}</label>
+          <span>{{ policyDetail?.broker?.userEmail }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATOS DE LA PÓLIZA -->
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">{{'NEW_VAR.POLICY_DATA' | translate}}</span>
+      </div>
+      <div class="card-body">
+        
+        <div class="inner-card">
+          <label>{{'NEW_VAR.POLICY_NUMBER' | translate}}</label>
+          <span>{{ policyDetail?.policyNumber }}</span>
+        </div>
+        <div class="inner-card">
+          <label>{{'NEW_VAR.PRODUCT_NAME' | translate}}</label>
+          <span>{{ policyDetail?.insuranceName || policyDetail?.name }}</span>
+        </div>
+        <div class="inner-card">
+          <label>{{'NEW_VAR.CREATION_DATE' | translate}}</label>
+          <span>{{ policyDetail?.creationAt}}</span>
+        </div>
+        <div class="inner-card">
+          <label>{{'NEW_VAR.EMISSION_DATE' | translate}}</label>
+          <span>{{policyDetail?.emissionDate }}</span>
+        </div>
+        <div class="inner-card">
+          <label>{{'NEW_VAR.END_VIGENCY_DATE' | translate}}</label>
+          <span>{{ policyDetail?.endDate}}</span>
+        </div>
+
+        <div class="inner-card">
+          <label>{{'NEW_VAR.BROKER_PREMIUM_AMOUNT' | translate}}</label>
+          <span>falta en back</span>
+        </div>
+        <div class="inner-card">
+          <label>{{'NEW_VAR.INSTALLMENTS_COUNT' | translate}}</label>
+          <span>{{ policyDetail?.installments?.length}}</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- INFORMACIÓN DE ESQUEMA -->
+  <div class="card-container" *ngIf="policyDetail?.insurancePolicyPremium">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">{{'NEW_VAR.SQUEMA_COMISSIONS' | translate}}</span>
+      </div>
+      <div class="card-body-1">
+        
+        <div class="inner-card">
+          <label>{{'NEW_VAR.SQUEMA_APPLY' | translate}}</label>
+          <span>falta dato back</span>
+        </div>
+        <div class="inner-card">
+          <label>{{'NEW_VAR.PERCENTAJE_USE' | translate}}</label>
+          <span>falta dato back</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- PLAN DE CUOTAS - Usando card-2 como en revenues-detail -->
+  <div class="card-container">
+
+    <div *ngIf="!isMobile" class="card-2">
+      <div class="card-header">
+        <span class="card-title">{{'NEW_VAR.INSTALLMENT_PLAN' | translate}}</span>
+      </div>
+      <div class="card-table">
+        <app-table 
+          [keyTranslate]="'IP.ADMIN_TABLE'" 
+          [propertyOrder]="columnsHeaders" 
+          [data]="tableDto"
+          [actions]="[]" 
+          [tableStyle]="'invopay'" 
+          [isForSelectItem]="false" 
+          [scroll]="true"
+          [titlesFile]="titlesMap"
+        ></app-table>
+        <app-no-data *ngIf="tableDto.length < 1"></app-no-data>
+      </div>
+    </div>
+
+    <!-- Vista móvil -->
+    <div *ngIf="isMobile" class="card-2">
+     <div class="card-header">
+        <span class="card-title">{{'NEW_VAR.INSTALLMENT_PLAN' | translate}}</span>
+      </div>
+      <div class="card-table">
+        <div class="card-mobile">
+          <div class="payment-card-mobile-container" *ngFor="let item of tableDto; let i = index">
+            <div class="payment-card-mobile-data">
+              <div class="card-header-mobile">
+                <span class="card-id-mobile">{{item?.installmentNumber}}</span>
+              </div>
+              <div class="card-body-mobile">
+
+                <div class="info-row-mobile">
+                  <span class="info-label-mobile">{{'NEW_VAR.PAYMENT_DATE'|translate}}</span>
+                  <span class="info-value-mobile">{{ item?.paymentDate }}</span>
+                </div>
+                <div class="info-row-mobile">
+                  <span class="info-label-mobile__status">{{'NEW_VAR.STATUS'|translate}}</span>
+                  <span  
+                   [ngClass]="{ 'info-value-mobile__status__true': item?.status !==  'Pendiente',
+                                'info-value-mobile__status__false': item?.status === 'Pendiente'}">
+                                {{ item?.status }}
+                  </span>
+                </div>
+                <div class="info-row-mobile">
+                  <span class="info-label-mobile">{{'NEW_VAR.BROKER_COMMISSION'|translate}}</span>
+                  <span class="info-value-mobile">{{ item?.brokerCommission }}</span>
+                </div>
+                <div class="info-row-mobile">
+                  <span class="info-label-mobile">{{'NEW_VAR.EXPIRATION'|translate}}</span>
+                  <span class="info-value-mobile">{{ item?.dueDate }}</span>
+                </div>
+                <div class="info-row-mobile">
+                  <span class="info-label-mobile__money">{{'NEW_VAR.AMOUNT'|translate}}</span>
+                  <span class="info-value-mobile__money">{{ item?.amount }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <app-no-data *ngIf="tableDto.length < 1"></app-no-data>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- EDICIÓN DE COMISIÓN -->
+  <div class="card-container">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">{{'NEW_VAR.EDIT_COMMISSION' | translate}}</span>
+      </div>
+      <div class="card-body-1">  
+
+          <div class="inner-card" >
+            <form [formGroup]="editForm">
+              <app-ip-input 
+                [label]="'NEW_VAR.NEW_PERCENTAJE_BROKER' | translate"
+                [type]="'number'" 
+                [control]="this.editForm.controls.newBrokerPercentage"
+                  />
+            </form>
+          </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTONES DE ACCIÓN -->
+  <div class="card-container">
+    <div style="display: flex; gap: 1rem; justify-content: flex-end; padding: 1rem 0;">
+      <app-ip-button-modal 
+        [typeBtn]="'cancel'"
+        [size]="'large'"
+        (click)="onCancel()"
+        >
+        {{'NEW_VAR.CANCEL' | translate}}
+      </app-ip-button-modal>
+      
+      <app-ip-button-modal 
+        [typeBtn]="'action'"
+        [size]="'large'"
+        [disabled]="!canSave"
+        (click)="onSave()"
+        >
+        {{'NEW_VAR.SAVE' | translate}}
+      </app-ip-button-modal>
+    </div>
+  </div>
+
+</form>
