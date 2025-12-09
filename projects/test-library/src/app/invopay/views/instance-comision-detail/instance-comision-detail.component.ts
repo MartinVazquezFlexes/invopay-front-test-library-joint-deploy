@@ -132,6 +132,7 @@ export class InstanceComisionDetailComponent implements OnInit,OnDestroy {
   private loadInstanceData(id: number): void {
     const sub = this.instanceService.getInstance(id).subscribe({
       next: (instance) => {
+        console.log(instance)
         try {
           this.instance = instance;
           this.isTrueInsance = instance.hasIncentiveCategory;

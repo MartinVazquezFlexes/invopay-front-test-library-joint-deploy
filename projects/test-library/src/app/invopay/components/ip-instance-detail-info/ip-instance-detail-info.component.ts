@@ -160,6 +160,45 @@ export class IpInstanceDetailInfoComponent implements OnInit {
     }
   }
 
+  private formatLastLoginDate(dateString: string | null | Date): string {
+    if (!dateString) return '';
+    
+    try {
+      if (dateString instanceof Date) {
+        // Format Date with UTC-3 adjustment
+        const utcHours = dateString.getUTCHours();
+        const argentinaHours = (utcHours - 3 + 24) % 24; // UTC-3
+        
+        const day = String(dateString.getUTCDate()).padStart(2, '0');
+        const month = String(dateString.getUTCMonth() + 1).padStart(2, '0');
+        const year = dateString.getUTCFullYear();
+        const hours = String(argentinaHours).padStart(2, '0');
+        const minutes = String(dateString.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(dateString.getUTCSeconds()).padStart(2, '0');
+        
+        return `${day}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
+      }
+      
+      if (typeof dateString === 'string') {
+        // Parse ISO string and format directly with UTC-3
+        const isoMatch = dateString.match(/(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/);
+        if (isoMatch) {
+          const [, year, month, day, hours, minutes, seconds] = isoMatch;
+          
+          // Convert to UTC-3 directly
+          const utcHour = parseInt(hours);
+          const argentinaHour = (utcHour - 3 + 24) % 24;
+          
+          return `${day}/${month}/${year} - ${String(argentinaHour).padStart(2, '0')}:${minutes}:${seconds}`;
+        }
+      }
+      
+      return '';
+    } catch (error) {
+      return '';
+    }
+  }
+
   getCurrentData() {
     
     switch (this.activeTab) {
@@ -174,7 +213,7 @@ export class IpInstanceDetailInfoComponent implements OnInit {
           brokerName: broker.username,
           brokerEmail: broker.userEmail,
           creationDate: this.customDatePipe.transform(broker.userCreationDate),
-          lastLogin: this.customDatePipe.transformDateTime(broker.lastLoginDate),
+          lastLogin: this.formatLastLoginDate(broker.lastLoginDate),
           id: broker.id
         }));
       case 'policies': 

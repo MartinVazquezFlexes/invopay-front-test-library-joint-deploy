@@ -1,6 +1,6 @@
 <app-navbar (toggleSidebarEvent)="toggleSidebar()"></app-navbar>
 <app-loader *ngIf="loadingService.isLoading$ | async"></app-loader>
-<app-sidebar [isCollapsed]="isSidebarCollapsed"></app-sidebar>
+<app-sidebar [isCollapsed]="isSidebarCollapsed" (closeSidebar)="onCloseSidebar()"></app-sidebar>
 <main class="main-content" [class.sidebar-collapsed]="isSidebarCollapsed">
   <router-outlet></router-outlet>
 </main>

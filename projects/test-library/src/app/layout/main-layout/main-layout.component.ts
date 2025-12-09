@@ -17,4 +17,11 @@ export class MainLayoutComponent implements OnInit{
   toggleSidebar() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }
+
+  onCloseSidebar() {
+    // Close sidebar on mobile when navigation occurs
+    if (window.innerWidth <= 768) {
+      this.isSidebarCollapsed = true;
+    }
+  }
 }

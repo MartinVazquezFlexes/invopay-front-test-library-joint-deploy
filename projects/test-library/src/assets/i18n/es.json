@@ -2872,7 +2872,7 @@
         "ACTIVE": "Activo",
         "TYPE":"Tipo",
         "CREATION_DATE":"Fecha de alta",
-        "LAST_LOGIN":"Ultimo inicio",
+        "LAST_LOGIN":"Ultimo inicio de sesión",
         "BROKER":"Corredor",
         "AMOUNT":"Monto",
         "INACTIVE":"Inactivo",

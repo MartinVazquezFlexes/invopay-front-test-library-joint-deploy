@@ -1513,7 +1513,7 @@
         "ACTIVE": "Ativo",
         "TYPE":"Tipo",
         "CREATION_DATE":"Data da alta",
-        "LAST_LOGIN":"Ultimo inicialização"
+        "LAST_LOGIN":"Data do último login"
       },
       "PERCENTAGES":{
         "FIXED":"Fixo",

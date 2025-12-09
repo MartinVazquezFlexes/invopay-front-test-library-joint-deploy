@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from '../../shared/models/MenuItem';
 
@@ -9,6 +9,8 @@ import { MenuItem } from '../../shared/models/MenuItem';
 })
 export class SidebarComponent implements OnInit {
   @Input() isCollapsed = false;
+  @Output() closeSidebar = new EventEmitter<void>();
+  
   revenueSubmenuOpen = false;
   notificationsSubmenuOpen = false;
   schemeSubmenuOpen = false;
@@ -18,7 +20,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.userType)
   }
-
 
   get userType(): string | null {
     return sessionStorage.getItem('userType');
@@ -34,6 +35,7 @@ export class SidebarComponent implements OnInit {
     { label: 'Resumen Ejecutivo', route: '/resumen-ejecutivo' },
     { label: 'Facturas', route: '/facturas' }
   ];
+
   toggleRevenueSubmenu() {
     if (!this.isCollapsed) {
       this.revenueSubmenuOpen = !this.revenueSubmenuOpen;
@@ -45,14 +47,23 @@ export class SidebarComponent implements OnInit {
       this.notificationsSubmenuOpen = !this.notificationsSubmenuOpen;
     }
   }
+
   toggleSchemeSubmenu() {
     if (!this.isCollapsed) {
       this.schemeSubmenuOpen = !this.schemeSubmenuOpen;
     }
   }
+
   toggleObjectivesSubmenu() {
     if (!this.isCollapsed) {
       this.objectivesSubmenuOpen = !this.objectivesSubmenuOpen;
+    }
+  }
+
+  onNavigationClick() {
+    // Close sidebar on mobile when navigation occurs
+    if (window.innerWidth <= 768) {
+      this.closeSidebar.emit();
     }
   }
 }
