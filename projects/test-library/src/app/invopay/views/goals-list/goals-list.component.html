@@ -1,4 +1,4 @@
-  <div class="objective-list" *ngIf="config">
+  <div class="objective-list" *ngIf="config && !(loader.isLoading$ | async)">
   <app-ip-title-mobile 
     [title]="config.title | translate"
     [back]="false">

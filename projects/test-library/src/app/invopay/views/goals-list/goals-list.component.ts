@@ -4,6 +4,7 @@ import { Subscription, combineLatest } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { GoalsItem } from '../../interface/objective-list.models';
 import IpSelectInputOption from '../../interface/ip-select-input-option';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-goals-list',
@@ -125,6 +126,7 @@ export class GoalsListComponent implements OnInit, OnDestroy {
 
   private readonly translate = inject(TranslateService);
   private readonly cdr = inject(ChangeDetectorRef);
+  public readonly loader=inject(LoadingService);
   subscription = new Subscription();
 
   titlesFile = new Map<string, string>();
@@ -146,8 +148,12 @@ export class GoalsListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.setupTranslations();
     if (this.data && this.data.length > 0) {
-      this.originalData = [...this.data];
-      this.applyCurrentFilters();
+      this.loader.setLoadingState(true);
+      
+      setTimeout(() => {
+        this.originalData = [...this.data];
+        this.applyCurrentFilters();
+      }, 100);
     }
     
     this.itemsPerPageControl.setValue(this.itemsPerPage.toString(), { emitEvent: false });
@@ -224,6 +230,7 @@ export class GoalsListComponent implements OnInit, OnDestroy {
     this.totalItems = this.data.length;
     this.currentPages = 1;
     this.updatePaginatedData();
+    this.loader.setLoadingState(false);
   }
 
   onItemsPerPageChange(event: any): void {

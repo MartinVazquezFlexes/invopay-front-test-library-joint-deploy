@@ -165,9 +165,8 @@ export class IpInstanceDetailInfoComponent implements OnInit {
     
     try {
       if (dateString instanceof Date) {
-        // Format Date with UTC-3 adjustment
         const utcHours = dateString.getUTCHours();
-        const argentinaHours = (utcHours - 3 + 24) % 24; // UTC-3
+        const argentinaHours = (utcHours - 3 + 24) % 24; 
         
         const day = String(dateString.getUTCDate()).padStart(2, '0');
         const month = String(dateString.getUTCMonth() + 1).padStart(2, '0');
@@ -180,12 +179,10 @@ export class IpInstanceDetailInfoComponent implements OnInit {
       }
       
       if (typeof dateString === 'string') {
-        // Parse ISO string and format directly with UTC-3
         const isoMatch = dateString.match(/(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/);
         if (isoMatch) {
           const [, year, month, day, hours, minutes, seconds] = isoMatch;
           
-          // Convert to UTC-3 directly
           const utcHour = parseInt(hours);
           const argentinaHour = (utcHour - 3 + 24) % 24;
           
@@ -251,7 +248,6 @@ export class IpInstanceDetailInfoComponent implements OnInit {
   setActiveTab(tab: 'products' | 'brokers' | 'policies'): void {
     this.activeTab = tab;
     
-    // Limpiar títulos para forzar recarga
     this.titlesFile = new Map<string, string>();
     
     
@@ -259,7 +255,6 @@ export class IpInstanceDetailInfoComponent implements OnInit {
     this.updateTranslations();
     this.setupMobileConfig();
     
-    // Forzar detección de cambios
     this.cdr.detectChanges();
   }
 

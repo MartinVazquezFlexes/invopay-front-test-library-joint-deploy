@@ -1523,7 +1523,20 @@
         "PERCETANGE_PRODUCT_BROKER":"Porcentgem por produto e corretor"
       }
     },
-    
+     "GOALS":{
+      "TITLE": "Metas",
+      "TABLE": {
+       "NAME": "Nome",
+       "PERIOD": "Período",
+       "CATEGORY": "Categoria de Corretor",
+       "START_DATE": "Data de início",
+       "END_DATE": "Data de fim",
+       "POLICES": "Apólices novas",
+       "NEW_PRUIMUM": "Prêmio novo",
+       "WALLET": "Cres. da carteira",
+       "GRADE": "Grau de Cumprimento"
+  }
+    },
     "COMMISSIONS": {
     "SCHEME-INSTANCE": {
       "TITLE": "Instâncias",
