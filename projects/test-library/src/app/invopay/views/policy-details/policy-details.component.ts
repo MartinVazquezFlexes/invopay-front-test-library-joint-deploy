@@ -21,9 +21,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     public loadingService: LoadingService,
     public router: Router
   ) {}
-  ngOnDestroy(): void {
-
-  }
+  ngOnDestroy(): void {}
 
   policyId: number = 0;
   /*policyDetails : any = {
@@ -203,6 +201,13 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
 
     const fullName = `${this.policyDetails.customer.firstName} ${this.policyDetails.customer.lastName}`;
 
+    const schemeName = 'N/A'; //no viene del back
+
+    const formatted = new Intl.NumberFormat('es-AR', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+}).format(Number(this.policyDetails.amount));
+
     this.detailedInfoForm.patchValue({
       //client
       clientFullName: fullName,
@@ -219,14 +224,13 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
       creationDate: this.policyDetails.creationAt?.split('T')[0] || '',
       emissionDate: this.policyDetails.emissionDate?.split('T')[0] || '',
       expirationDate: this.policyDetails.endDate?.split('T')[0] || '',
-      brokerPremiumValue: `${this.policyDetails.currency} ${Math.round(
-        Number(this.policyDetails.amount)
-      ).toLocaleString()}`,
+      brokerPremiumValue: `${this.policyDetails.currency} ${formatted}` || '',
       installmentsCount: this.policyDetails.installments.length || '',
 
       //commission Scheme - ajusta según tu lógica
-      commissionSchemeName: 'N/A', //no viene en el backend
-      percentageUsed: this.calculateCommissionPercentage()
+      commissionSchemeName: schemeName,
+      percentageUsed:
+        schemeName === 'N/A' ? 'N/A' : this.calculateCommissionPercentage(),
     });
   }
 
@@ -243,9 +247,10 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
         const isPaid =
           installment.status === 'paid' || installment.paymentDate !== null;
 
-        const formattedAmount = `${currency} ${Math.round(
-          Number(installment.amount)
-        ).toLocaleString()}`;
+        const formatted = new Intl.NumberFormat('es-AR', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+}).format(Number(installment.amount));
 
         const formattedCommission = isPaid
           ? `${currency} ${Math.round(
@@ -255,7 +260,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
 
         return {
           installmentNumber: installment.installmentNumber,
-          installmentValue: formattedAmount,
+          installmentValue: `${currency} ${formatted}`,
           dueDate: installment.dueDate?.split('T')[0] || '',
           status: isPaid
             ? 'Pagada'
@@ -279,15 +284,19 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
   }
 
   private calculateCommissionPercentage(): string {
-  if (!this.policyDetails?.installments || this.policyDetails.installments.length === 0) {
-    return 'N/A';
+    if (
+      !this.policyDetails?.installments ||
+      this.policyDetails.installments.length === 0
+    ) {
+      return 'N/A';
+    }
+
+    const firstInstallment = this.policyDetails.installments[0];
+    const percentage =
+      (firstInstallment.brokerCommission / firstInstallment.amount) * 100;
+
+    return `${percentage.toFixed(2)}%`;
   }
-  
-  const firstInstallment = this.policyDetails.installments[0];
-  const percentage = (firstInstallment.brokerCommission / firstInstallment.amount) * 100;
-  
-  return `${percentage.toFixed(2)}%`;
-}
 
   //Encabezados
   propertyOrder = [
@@ -351,11 +360,10 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     if (
       this.userType == 'ENTERPRISE_USER' ||
       this.userType == 'ENTERPRISE_MANAGER'
-    ){
+    ) {
       this.router.navigate(['invopay/policy-list/assurance']);
-    }
-    else {
-      this.router.navigate(['invopay/policy-list/broker']);      
+    } else {
+      this.router.navigate(['invopay/policy-list/broker']);
     }
   }
 }
