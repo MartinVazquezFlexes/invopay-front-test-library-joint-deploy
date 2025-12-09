@@ -166,7 +166,7 @@ export class InstanceComisionDetailComponent implements OnInit,OnDestroy {
   private buildFormValues(instance: Instance): any {
     return {
       name: instance.name || '',
-      schemeType: instance.schemaType || '',
+      schemeType: this.translate.instant('IP.COMISSION_SCHEME.PERCENTAGES.' + instance.schemaType) || instance.schemaType || '',
       ruleScope: instance.scope || '',
       hasIncentiveCategory: instance.hasIncentiveCategory ? this.translate.instant('IP.YES') : this.translate.instant('IP.NO'),
       brokerCategory: 'No aplica',

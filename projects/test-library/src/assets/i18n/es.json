@@ -2847,6 +2847,13 @@
         "STATUS":"Estado",
         "CUSTOMER_NAME":"Nombre cliente",
         "EMISSION_DATE":"Fecha Emisión"
+      },
+      "PERCENTAGES":{
+        "FIXED":"Fijo",
+        "MIXED":"Mixto",
+        "PERCETANGE_PRODUCT":"Porcentaje por producto",
+        "PERCETANGE_BROKER":"Porcentaje por broker",
+        "PERCETANGE_PRODUCT_BROKER":"Porcentaje por producto y corredor"
       }
     },
     "OBJECTIVES":{

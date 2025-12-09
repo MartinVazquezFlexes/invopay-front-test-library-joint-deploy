@@ -1514,6 +1514,13 @@
         "TYPE":"Tipo",
         "CREATION_DATE":"Data da alta",
         "LAST_LOGIN":"Ultimo inicialização"
+      },
+      "PERCENTAGES":{
+        "FIXED":"Fixo",
+        "MIXED":"Misto",
+        "PERCETANGE_PRODUCT":"Porcentgem por produto",
+        "PERCETANGE_BROKER":"Porcentgem por corretor",
+        "PERCETANGE_PRODUCT_BROKER":"Porcentgem por produto e corretor"
       }
     },
     
