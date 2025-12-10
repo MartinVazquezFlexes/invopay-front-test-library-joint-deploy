@@ -15,6 +15,9 @@ import { FiltersDialogData } from '../../components/policy-list-filters-modal-di
 import { PolicyListFiltersModalDialogComponent } from '../../components/policy-list-filters-modal-dialog/policy-list-filters-modal-dialog.component';
 import { NotificationInsuranceService } from '../../services/notification-insurance.service';
 import { Broker } from '../../interface/broker';
+import { PolicyListState } from '../../interface/policyListState';
+import { PolicyListStateService } from '../../services/policy-list-state.service';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-policy-list',
@@ -36,6 +39,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
        private readonly auxFiltersService : AuxFiltersService,
        private readonly matDialog : MatDialog,
        private readonly cdr: ChangeDetectorRef,
+       private readonly stateService: PolicyListStateService
 
       ) { }
 
@@ -167,15 +171,9 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       
     brokers: IpSelectInputOption[] = []
 
-    products: IpSelectInputOption[] = [
-      { label: 'Seguro de Vida Total', value: 'Seguro de Vida Total' },
-      { label: 'Seguro de Hogar Premium', value: 'Seguro de Hogar Premium'},
-      { label: 'Seguro Automotor Plus', value: 'Seguro Automotor Plus'},
-      { label: 'Seguro de Accidentes Personales', value: 'Seguro de Accidentes Personales'}];
+    products: IpSelectInputOption[] = []
     
-    clients: IpSelectInputOption[] = [
-      { label: 'Seguro de Vida Total', value: 'Seguro de Vida Total' }
-    ];
+    clients: IpSelectInputOption[] = [];
     
     actions = ['detail'];
     titlesMap: Map<string,string>|undefined;
@@ -228,11 +226,20 @@ export class PolicyListComponent implements OnInit , OnDestroy{
         this.checkScreenSize()
         this.loadControlsSubscriptions()
         this.loadSelects();
-       // this.loadPolicies()
+        // this.loadPolicies()
+        const stateSaved = this.stateService.getState()
+        console.log("STETATE IN ONINIT")
+        console.log(stateSaved)
+        if(stateSaved  && stateSaved.enabled){
+          this.loadPreviusState(stateSaved)
+        }
+        else{
+          this.stateService.clearState()
+        }
    
-       if(this.userTypeToken ==='ENTERPRISE_MANAGER'&& this.userType==='assurance'){
-        this.actions.push('edit')
-       }
+        if(this.userTypeToken ==='ENTERPRISE_MANAGER'&& this.userType==='assurance'){
+          this.actions.push('edit')
+        }
 
         setTimeout(() => {
           window.scrollTo(0, 0);  
@@ -242,13 +249,41 @@ export class PolicyListComponent implements OnInit , OnDestroy{
        
     }
 
-  loadSelects() {
+  loadPreviusState(stateSaved:PolicyListState) {
+        this.loadinService.setLoadingState(true)
+    console.log("PREVIUS STATE")
+    console.log(stateSaved)
+        this.itemsPerpage=stateSaved.itemsXPage
+        this.controlsForm.controls.rowPaginator.setValue(this.itemsPerpage)
+        this.currentStart=stateSaved.startFilterValue
+        this.controlsForm.controls.dateStart.setValue(this.currentStart)
+        this.currentEnd=stateSaved.endFilterValue
+        this.controlsForm.controls.dateEnd.setValue(this.currentEnd)
+        this.currentPages=stateSaved.currentPage
+        //more fitlers load previus state
+         if (this.userType === 'assurance'&& this.userTypeToken==='ENTERPRISE_MANAGER') {
+          this.currentBroker=stateSaved.brokerFitler
+          this.controlsForm.controls.brokerFilter.setValue(this.currentBroker)
+        }
+        this.currentClient= stateSaved.clientFilter
+        this.currentProduct=stateSaved.productFilter
+        this.controlsForm.controls.productFilter.setValue(this.currentProduct)
+        this.controlsForm.controls.clientFilter.setValue(this.currentClient)
+        
+        this.onApplyFilter(this.currentPages)
+        setTimeout(() => {
+          window.scrollTo(0, stateSaved.scrollPosition);
+          this.stateService.clearState()
+          this.loadinService.setLoadingState(false)
+          }, 300);
 
- if(this.userType==='assurance'){
+  }
+
+  loadSelects() {
+  if(this.userType==='assurance'){
    this.auxFiltersService.getAuxBrokers().subscribe({
         next: (value: any[]) => {
           console.log("Respuesta brokers:", value);
-
           this.brokers = value.map((item: any) => ({
             label: item.username,
             value: item.username
@@ -301,30 +336,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       this.loadinService.setLoadingState(false)
   }
   
-  /*
-    loadPreviusState(stateSaved : SaleListState){
-  
-  
-          this.itemsPerpage=stateSaved.itemsXPage
-          this.controlsForm.controls.rowPaginator.setValue(this.itemsPerpage)
-          this.currentStart=stateSaved.startFilterValue
-          this.controlsForm.controls.dateStart.setValue(this.currentStart)
-          this.currentEnd=stateSaved.endFilterValue
-          this.controlsForm.controls.dateEnd.setValue(this.currentEnd)
-          this.currentPages=stateSaved.currentPage
-          this.currentBroker= stateSaved.brokerFitler
-          this.controlsForm.controls.brokerFilter.setValue(this.currentBroker)
-          this.currentProduct= stateSaved.productFilter
-          this.controlsForm.controls.productFilter.setValue(this.currentProduct)
-          this.onApplyFilter(this.currentPages)
-  
-              setTimeout(() => {
-                window.scrollTo(0, stateSaved.scrollPosition);
-                this.stateService.clearState()
-  
-               }, 100);
-    }
-     */
+
   
     loadControlsSubscriptions() {
         
@@ -343,8 +355,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
           this.controlsForm.controls.brokerFilter.valueChanges.subscribe(value => {
            console.log("NEW")
            console.log(value)
-
-            this.currentBroker = value ?? '';
+           this.currentBroker = value ?? '';
           })
         );
 
@@ -478,6 +489,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
         this.policyService.getPolicies().pipe(
         map(response => {
           this.policyData = response;
+
           
           return this.policyData.content.filter((x, index) => {
             const revDate = this.normalizeStart(x.endDate);
@@ -521,6 +533,8 @@ export class PolicyListComponent implements OnInit , OnDestroy{
         this.currentPages=1
         this.loadTable(1);
         this.isModalOpen = false;
+        console.log("FILTRADOS:-----------")
+        console.log(this.policies)
       });
   }
 
@@ -541,27 +555,15 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       console.log('Fila afectada:', event.dataField);
       const id = event.dataField?.realSale.id
       console.log(id)
-      if (event.event === 'detail') {
-        /*
-            const state: SaleListState={
-            scrollPosition:window.scrollY,
-            startFilterValue: this.currentStart,
-            endFilterValue: this.currentEnd,
-            productFilter:this.currentProduct,
-            brokerFitler:this.currentBroker,
-            currentPage:this.currentPages,
-            itemsXPage:this.itemsPerpage,
-            enabled:false
-              }
-        this.stateService.saveState(state)
-        */
-        //  this.router.navigate(['sales-detail', id], { state: { type: 'pending-sales-component' } });
+      if (event.event === 'detail' && id) {
+        this.savePreviusState()
         this.router.navigate(['/invopay/policy-details'], {
           state: { id: id }
         });
 
       }
-      if(event.event==='edit'){
+      if(event.event==='edit'&& id){
+      this.savePreviusState()
       this.router.navigate(['/invopay/policy-edit-commission'], {
             state: { id: id }
           });
@@ -588,6 +590,8 @@ export class PolicyListComponent implements OnInit , OnDestroy{
             ).subscribe({
                   next: (filtered) => {
                     this.policies = filtered;
+                    console.log("response")
+
                     this.auxSetInitialValues();
                   },
                   error: (err) => {
@@ -681,12 +685,12 @@ export class PolicyListComponent implements OnInit , OnDestroy{
           console.log(filteredSales)
           this.tableDto = [...filteredSales.map((item, index) => ({
                     id: item.id,
-                    vencimiento: item.endDate ? this.formatDateYYYYmmDD(item.endDate) : '-',
+                    vencimiento: item.endDate ? this.formatDateddMMyyyy(item.endDate) : '-',
                     producto: item.insuranceName ?? '-',
                     corredor: item.brokerName ?? '-',
                     cliente: item.customerName ?? '-',
                     nroPoliza: item.policyNumber ?? '-',
-                    valorPoliza: item.amount ? item.currency + " " + this.formatNumberToArg(item.amount) : '-',
+                    valorPrima: item.amount ? item.currency + " " + this.formatNumberToArg(item.primeAmount) : '-',
                     realSale: item
           }))];
           console.log(this.tableDto)
@@ -730,7 +734,22 @@ export class PolicyListComponent implements OnInit , OnDestroy{
     onResize(event: any) {
     this.checkScreenSize();
     }
-      
+
+    savePreviusState(){
+        const state: PolicyListState = {
+                  scrollPosition: window.scrollY,
+                  startFilterValue: this.currentStart,
+                  endFilterValue: this.currentEnd,
+                  currentPage: this.currentPages,
+                  itemsXPage: this.itemsPerpage,
+                  productFilter:this.currentProduct,
+                  clientFilter:this.currentClient,
+                  brokerFitler:this.userType === 'assurance'&& this.userTypeToken==='ENTERPRISE_MANAGER' ? this.currentBroker:'',
+                  enabled: false
+                };
+      this.stateService.saveState(state)
+
+   }
     private checkScreenSize() {
       this.isMobile = window.innerWidth <= 768;
       if(this.isMobile){
@@ -817,15 +836,12 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       return `${year}-${month}-${day}`;
     }
  
-  
-
-  
     ngOnDestroy(): void {
       this.subscriptions.unsubscribe()
     }
 
 
-    formatDateYYYYmmDD(dateParam: string | Date){
+      formatDateddMMyyyy(dateParam: string | Date){
       let date: Date;
       
       if (typeof dateParam === 'string') {
@@ -836,7 +852,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       const yyyy = date.getFullYear();
       const mm = String(date.getMonth() + 1).padStart(2, '0');
       const dd = String(date.getDate()).padStart(2, '0');
-      return `${yyyy}-${mm}-${dd}`
+      return `${dd}-${mm}-${yyyy}`
       ;
     }
     

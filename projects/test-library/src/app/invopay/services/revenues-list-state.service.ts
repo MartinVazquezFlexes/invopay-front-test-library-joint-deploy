@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { RevenueListState } from './revenueListState';
+import { RevenueListState } from '../interface/revenueListState';
+
 
 @Injectable({
   providedIn: 'root'

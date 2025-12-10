@@ -125,7 +125,7 @@ export class PolicyEditModalDialogComponent implements OnInit, OnDestroy {
   prepareTableData(): void {
     this.tableDto = this.data.previewInstallments.map(inst => ({
       id: inst.installmentNumber,
-      installmentNumber: `#${inst.installmentNumber}`,
+      installmentNumber: inst.installmentNumber,
       dueDate: inst.dueDate,
       amount: this.formatCurrency(inst.amount),
       commissionPercentage: `${inst.newCommissionPercentage}%`,

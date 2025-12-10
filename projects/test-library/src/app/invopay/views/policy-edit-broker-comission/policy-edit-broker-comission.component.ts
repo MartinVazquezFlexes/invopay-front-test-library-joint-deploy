@@ -12,6 +12,7 @@ import { LoadingService } from '../../../shared/services/loading.service';
 import { IpSnackbarService } from '../../services/ip-snackbar.service';
 import { PolicyEditModalDialogComponent } from '../../components/policy-edit-modal-dialog/policy-edit-modal-dialog.component';
 import { PreviewInstallment } from '../../interface/previewInstallment';
+import { PolicyListStateService } from '../../services/policy-list-state.service';
 
 @Component({
   selector: 'app-policy-edit-broker-comission',
@@ -52,7 +53,8 @@ export class PolicyEditBrokerComissionComponent {
     private readonly loadingService: LoadingService,
     private readonly notificationService: NotificationInsuranceService,
     private readonly policyService: PolicyService,
-    private snackbarService: IpSnackbarService
+    private snackbarService: IpSnackbarService,
+    private readonly policyListState: PolicyListStateService
   ) {}
 
   @HostListener('window:resize', ['$event'])
@@ -143,7 +145,7 @@ export class PolicyEditBrokerComissionComponent {
         this.loadingService.setLoadingState(false);
       },
       error: (err) => {
-        console.error('Error al cargar datos de póliza:', err);
+        console.error('Error al cargar datos de pólizaa:', err);
         this.loadingService.setLoadingState(false);
         this.router.navigate(['/invopay/policy-list/assurance']);
       },
@@ -331,7 +333,12 @@ export class PolicyEditBrokerComissionComponent {
   }
 
   onCancel(): void {
-    this.router.navigate(['/invopay/policy-list/assurance']);
+     const state = this.policyListState.getState()
+        if(state){
+        state.enabled=true
+        this.policyListState.saveState(state)
+        }
+      this.router.navigate(['invopay/policy-list/assurance']);
   }
 
   loadTitleMap(): void {

@@ -9,6 +9,7 @@ import {
   PolicyDetailsResponse,
   PolicyTableDetails,
 } from '../../interface/policyData';
+import { PolicyListStateService } from '../../services/policy-list-state.service';
 
 @Component({
   selector: 'app-policy-details',
@@ -19,7 +20,8 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private policyService: PolicyService,
     public loadingService: LoadingService,
-    public router: Router
+    public router: Router,
+    private readonly policyListState: PolicyListStateService
   ) {}
   ngOnDestroy(): void {}
 
@@ -361,8 +363,19 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
       this.userType == 'ENTERPRISE_USER' ||
       this.userType == 'ENTERPRISE_MANAGER'
     ) {
+        const state = this.policyListState.getState()
+        if(state){
+        state.enabled=true
+        this.policyListState.saveState(state)
+        }
       this.router.navigate(['invopay/policy-list/assurance']);
-    } else {
+    } else 
+      {
+        const state = this.policyListState.getState()
+        if(state){
+        state.enabled=true
+        this.policyListState.saveState(state)
+        }
       this.router.navigate(['invopay/policy-list/broker']);
     }
   }

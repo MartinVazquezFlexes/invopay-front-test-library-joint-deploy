@@ -8,10 +8,10 @@ import { RevenueService } from '../../services/revenue.service';
 import { RevenuesListStateService } from '../../services/revenues-list-state.service';
 import { RevenuesResponse } from '../../interface/revenueResponse';
 import { Revenue } from '../../interface/revenue';
-import { RevenueListState } from '../../services/revenueListState';
 import { LoadingService } from '../../../shared/services/loading.service';
 import IpSelectInputOption from '../../interface/ip-select-input-option';
 import { CardConfig } from '../../../shared/components/mobile-card-list/mobile-card-list.component';
+import { RevenueListState } from '../../interface/revenueListState';
 @Component({
   selector: 'app-revenues-list',
   templateUrl: './revenues-list.component.html',

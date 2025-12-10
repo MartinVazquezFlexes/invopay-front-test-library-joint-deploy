@@ -93,7 +93,7 @@
                                 <li (click)="onMobileMenuAction('detail', sale)">
                                     {{'IP.ACTIONS_TOOLTIP.SEARCH' | translate}}
                                 </li>
-                                 <li (click)="onMobileMenuAction('edit', sale)">
+                                 <li *ngIf="userType==='assurance'" (click)="onMobileMenuAction('edit', sale)">
                                     {{'IP.ACTIONS_TOOLTIP.EDIT' | translate}}
                                 </li>
                             </ul>

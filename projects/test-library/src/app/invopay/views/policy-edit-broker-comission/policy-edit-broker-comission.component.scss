@@ -144,11 +144,16 @@ form {
   font-size: 1rem; /* 👈 achica el texto */
   font-family: Poppins, Loos, Arial, sans-serif;
 }
-
-
-
-
-
+.footer-buttons {
+  display: flex;
+  justify-content: flex-end; // Alinea a la derecha
+  align-items: flex-start; // Alinea al inicio cuando se apilan
+  gap: 1rem; // Espacio entre botones
+  flex-wrap: wrap; // Permite que se apilen cuando no hay espacio
+  width: 100%;
+  padding: 1rem 0;
+  box-sizing: border-box;
+}
 
 
 /* Móviles - 1 columna */
@@ -181,121 +186,6 @@ form {
 
   }
 }
-
-
-
-
-
-
-/* NUEVOS ESTILOS PARA LA card de la TABLA -*/
-
-/* Contenedor de tabla dentro de inner-card */
-.inner-card:has(app-table) {
-  min-width: 100%; /* la tabla ocupa todo el ancho */
-  max-width: 100%;
-  flex: 0 1 100%;
-  padding: 0; /* sin padding para que la tabla use todo el espacio */
-  background-color: transparent; /* sin fondo gris */
-  display: flex;
-  flex-direction: column;
-}
-
-/* Ajustar el label cuando hay una tabla */
-.inner-card:has(app-table) label {
-  position: relative; /* cambiar a relativo */
-  top: auto;
-  left: auto;
-  margin-bottom: 1rem;
-  background-color: #ffffff;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  color: #000;
-  font-weight: 600;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: inline-block;
-  align-self: flex-start;
-  margin-left: 1rem;
-  margin-top: 1rem;
-}
-
-/* Estilos para la tabla */
-.inner-card app-table {
-  width: 100%;
-  overflow-x: auto; /* scroll horizontal si es necesario */
-}
-
-/* Estilos para que la tabla se vea como en la imagen */
-.inner-card app-table ::ng-deep table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background-color: #ffffff;
-}
-
-.inner-card app-table ::ng-deep thead {
-  background-color: #f8f9fa;
-}
-
-.inner-card app-table ::ng-deep thead th {
-  padding: 0.75rem 1rem;
-  text-align: left;
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: #555;
-  border-bottom: 2px solid #e0e0e0;
-}
-
-.inner-card app-table ::ng-deep tbody tr {
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.inner-card app-table ::ng-deep tbody tr:last-child {
-  border-bottom: none;
-}
-
-.inner-card app-table ::ng-deep tbody td {
-  padding: 1rem;
-  font-size: 0.875rem;
-  color: #333;
-  background-color: #fafafa;
-}
-
-.inner-card app-table ::ng-deep tbody tr:nth-child(even) td {
-  background-color: #f5f5f5;
-}
-
-/* Ajustar app-no-data */
-.inner-card app-no-data {
-  padding: 2rem;
-  text-align: center;
-}
-
-/* RESPONSIVIDAD PARA LA TABLA */
-@media (max-width: 768px) {
-  .inner-card:has(app-table) {
-    padding: 0.5rem;
-  }
-  
-  .inner-card app-table ::ng-deep table {
-    font-size: 0.75rem;
-  }
-  
-  .inner-card app-table ::ng-deep thead th,
-  .inner-card app-table ::ng-deep tbody td {
-    padding: 0.5rem;
-  }
-}
-
-
-
-
-
-
-
-
-
-
 
 
 

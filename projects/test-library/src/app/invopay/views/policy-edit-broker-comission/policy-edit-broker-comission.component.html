@@ -1,7 +1,9 @@
 <form>
   <!-- HEADER -->
   <app-title-page 
-    [title]="'NEW_VAR.POLICY' | translate">
+    (backButtonClick)="onCancel()"
+    [title]="'NEW_VAR.POLICY' | translate"
+    [showBackButton]="true">
   </app-title-page>
 
 
@@ -210,7 +212,7 @@
 
   <!-- BOTONES DE ACCIÓN -->
   <div class="card-container">
-    <div style="display: flex; gap: 1rem; justify-content: flex-end; padding: 1rem 0;">
+    <div class="footer-buttons">
       <app-ip-button-modal 
         [typeBtn]="'cancel'"
         [size]="'large'"
