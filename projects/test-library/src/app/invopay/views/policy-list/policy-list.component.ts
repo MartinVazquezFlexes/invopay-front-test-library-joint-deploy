@@ -269,7 +269,6 @@ export class PolicyListComponent implements OnInit , OnDestroy{
         this.currentProduct=stateSaved.productFilter
         this.controlsForm.controls.productFilter.setValue(this.currentProduct)
         this.controlsForm.controls.clientFilter.setValue(this.currentClient)
-        
         this.onApplyFilter(this.currentPages)
         setTimeout(() => {
           window.scrollTo(0, stateSaved.scrollPosition);
@@ -530,8 +529,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
         })
       ).subscribe(filtered => {
         this.policies = filtered;
-        this.currentPages=1
-        this.loadTable(1);
++        this.loadTable(page);
         this.isModalOpen = false;
         console.log("FILTRADOS:-----------")
         console.log(this.policies)
@@ -659,7 +657,6 @@ export class PolicyListComponent implements OnInit , OnDestroy{
     
 
     loadTable(pagina:number) {
-
     console.log("---------------------LOAD TABLE-------------------------------")
       const totalPages = Math.ceil(this.policies.length / this.itemsPerpage);
       console.log("POLICIES LENGTH",this.policies.length)
@@ -748,6 +745,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
                   enabled: false
                 };
       this.stateService.saveState(state)
+      console.log(this.currentPages)
 
    }
     private checkScreenSize() {
@@ -852,7 +850,7 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       const yyyy = date.getFullYear();
       const mm = String(date.getMonth() + 1).padStart(2, '0');
       const dd = String(date.getDate()).padStart(2, '0');
-      return `${dd}-${mm}-${yyyy}`
+      return `${dd}/${mm}/${yyyy}`
       ;
     }
     

@@ -93,7 +93,7 @@
     <!-- PAGINADOR -->
     <div class="card-paginator" *ngIf="data.previewInstallments.length > 5">
       <div class="paginator-controls">
-        <app-ip-select-input 
+        <app-ip-select-input *ngIf="!isMobile"
           [placeholder]="itemsPerpage.toString()"
           [control]="this.controlsForm.controls.rowPaginator"
           [options]="rowsCombo"

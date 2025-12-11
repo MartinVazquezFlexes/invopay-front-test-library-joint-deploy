@@ -32,13 +32,13 @@ export class PolicyEditModalDialogComponent implements OnInit, OnDestroy {
 
   // Variables para paginación
   currentPages: number = 1;
-  itemsPerpage: number = 5;
+  itemsPerpage: number = 6;
   paginatorReload: boolean = false;
   displayedInstallments: any[] = []; // Array que se mostrará en la tabla/cards
 
   // FormGroup para el paginador
   controlsForm = new FormGroup({
-    rowPaginator: new FormControl<number>(5)
+    rowPaginator: new FormControl<number>(6)
   });
 
   // Opciones del combo de filas por página

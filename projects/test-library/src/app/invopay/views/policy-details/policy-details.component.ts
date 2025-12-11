@@ -95,6 +95,9 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     }
 
     this.getPolicyDetails(this.policyId);
+        console.log("this.policyListState.getState()")
+
+    console.log(this.policyListState.getState())
   }
 
   detailedInfoForm: FormGroup = new FormGroup({
