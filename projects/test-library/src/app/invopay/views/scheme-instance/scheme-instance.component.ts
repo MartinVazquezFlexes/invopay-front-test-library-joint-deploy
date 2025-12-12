@@ -403,12 +403,13 @@ export class SchemeInstanceComponent implements OnInit {
 
   private mapSchemeDisplayData(data: CommissionSchemeInstance[]): any[] {
     return data.map(item => {
-      const i18nKey = `IP.COMISSION_SCHEME.SCHEMA-TYPES.${item.schemaType}`;
+      const schemaTypesTranslations = `IP.COMISSION_SCHEME.SCHEMA-TYPES.${item.schemaType}`;
+      const scopeTranslations = `IP.COMISSION_SCHEME.SCOPE.${item.scope}`;
 
       return {
         ...item,
         isActiveText: item.isActive ? 'Si' : 'No',
-        schemaType: this.translate.instant(i18nKey),
+        schemaType: this.translate.instant(schemaTypesTranslations),
         instanceName: item.name
       };
     });

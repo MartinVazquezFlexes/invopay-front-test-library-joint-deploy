@@ -2899,6 +2899,10 @@
         "PERCENTAGE_BROKER":"Porcentaje por corredor",
         "PERCENTAGE_PRODUCT":"Porcentaje por producto",
         "PERCENTAGE_PRODUCT_BROKER":"Porcentaje por producto y corredor"
+      },
+      "SCOPES":{
+        "GENERAL":"Póliza",
+        "PRODUCT":"Producto"
       }
     },
     "OBJECTIVES":{

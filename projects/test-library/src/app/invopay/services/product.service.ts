@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, of, forkJoin, EMPTY, Subject } from 'rxjs';
+import { Observable, of, forkJoin, EMPTY, Subject, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { IpAuthService } from './ip-auth.service';
+import { AbstractControl, ValidationErrors, ValidatorFn, FormArray } from '@angular/forms';
 import { environment } from '../../../environments/environment';
 
 import {
@@ -14,6 +15,10 @@ import {
   ApiDocument
 } from '../interface/product-interfaces';
 
+export interface DocumentUploadPayload {
+  file: File;
+  description: string;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -21,6 +26,7 @@ export class ProductService {
 
   private serverBaseUrl = environment.api;
   private apiUrl = `${this.serverBaseUrl}/invopay/insurance-products`;
+  private documentsUrl=this.apiUrl + '/documents';
   private readonly productsApi = this.serverBaseUrl + '/invopay/insurance-products/all';
 
   constructor(private http: HttpClient, private authService: IpAuthService) { }
@@ -256,4 +262,149 @@ export class ProductService {
     reader.readAsDataURL(blob);
     return subject.asObservable();
   }
+
+createProductWithBatchUpload(productData: any, logoFile: File, documents: DocumentUploadPayload[]): Observable<any> {
+    
+    if (!documents || documents.length === 0) {
+      return this.createProductFinalStep(productData, logoFile, []);
+    }
+
+    const uploadTasks = documents.map(doc => 
+      this.uploadDocumentFile(doc.file).pipe(
+        map(response => ({
+          fileName: doc.description,
+          filePath: response.filePath
+        }))
+      )
+    );
+
+    return forkJoin(uploadTasks).pipe(
+      switchMap((uploadedDocs) => {
+        return this.createProductFinalStep(productData, logoFile, uploadedDocs);
+      }),
+      catchError(err => {
+        console.error('Error en la subida de archivos', err);
+        return throwError(() => err);
+      })
+    );
+  }
+  private uploadSingleDocument(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<any>(this.documentsUrl, formData);
+  }
+  private createProductFinalStep(productData: any, logoFile: File, uploadedDocs: any[]): Observable<any> {
+    const formData = new FormData();
+    formData.append('logoFile', logoFile, logoFile.name);
+    formData.append('name', productData.name);
+    formData.append('description', productData.description);
+    formData.append('code', productData.code);
+    formData.append('type', productData.type);
+
+    formData.append('isActive', productData.isActive.toString());
+
+    if (productData.longDescription) {
+      formData.append('longDescription', productData.longDescription);
+    }
+    if (productData.externalId) {
+      formData.append('externalId', productData.externalId);
+    }
+    if (productData.insuranceEnterprise) {
+      formData.append('insuranceEnterprise', productData.insuranceEnterprise);
+    }
+
+    if (uploadedDocs && uploadedDocs.length > 0) {
+      formData.append('documents', JSON.stringify(uploadedDocs));
+    }
+
+    console.log('📦 Enviando POST Producto con docs:', uploadedDocs);
+    
+    return this.http.post<any>(this.apiUrl, formData);
+  }
+
+  updateProductWithBatchUpload(productData: any, logoFile: File | null, allDocuments: any[]): Observable<any> {
+    
+    const oldDocs = allDocuments.filter(d => d.filePath && !d.fileRaw);
+    console.log('📦 Enviando PUT Producto con docs:', oldDocs);
+    const newDocs = allDocuments.filter(d => d.fileRaw && d.fileRaw instanceof File);
+    console.log('📦 Enviando PUT Producto con docs:', newDocs);
+    if (newDocs.length === 0) {
+      const cleanData = { ...productData, documents: [] };
+      console.log('📦 Enviando PUT Producto sin docs:', cleanData);
+      return this.updateProductBase(cleanData, logoFile);
+    }
+
+    const uploadTasks = newDocs.map(doc => 
+      this.uploadDocumentFile(doc.fileRaw).pipe(
+        map(response => ({
+          fileName: doc.description,
+          filePath: response.filePath
+        }))
+      )
+    );
+
+    return forkJoin(uploadTasks).pipe(
+      switchMap((uploadedNewDocs) => {
+        const finalDocsList = [...uploadedNewDocs];
+        
+        console.log('📦 Lista fusionada de docs para Update:', finalDocsList);
+
+        const cleanData = { ...productData, documents: finalDocsList };
+        return this.updateProductBase(cleanData, logoFile);
+      }),
+      catchError(err => {
+        console.error('Error subiendo documentos nuevos', err);
+        return throwError(() => err);
+      })
+    );
+  }
+
+  private updateProductBase(productData: any, logoFile: File | null): Observable<any> {
+    const formData = new FormData();
+
+    if (logoFile) {
+      formData.append('logoFile', logoFile, logoFile.name);
+    }
+    formData.append('id', productData.id.toString());
+    formData.append('name', productData.name);
+    formData.append('description', productData.description);
+    formData.append('code', productData.code);
+    formData.append('type', productData.type);
+    formData.append('isActive', productData.isActive.toString());
+
+    if (productData.longDescription) formData.append('longDescription', productData.longDescription);
+    if (productData.externalId) formData.append('externalId', productData.externalId);
+    if (productData.insuranceEnterprise) formData.append('insuranceEnterprise', productData.insuranceEnterprise);
+
+    if (productData.documents && productData.documents.length > 0) {
+      const docsPayload = productData.documents.map((doc: any) => ({
+        fileName: doc.fileName || doc.description,
+        filePath: doc.filePath
+      }));
+      formData.append('documents', JSON.stringify(docsPayload));
+    }
+
+    return this.http.put<any>(this.apiUrl, formData); 
+  }
+
+  deleteProduct2(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+}
+
+export function uniqueDocumentNamesValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const formArray = control as FormArray;
+    if (!formArray || !formArray.controls) return null;
+
+    const names = formArray.controls
+      .map(group => group.get('description')?.value?.trim().toLowerCase())
+      .filter(name => name); 
+
+    const hasDuplicates = new Set(names).size !== names.length;
+
+    return hasDuplicates ? { duplicateNames: true } : null;
+  };
+
+  
 }

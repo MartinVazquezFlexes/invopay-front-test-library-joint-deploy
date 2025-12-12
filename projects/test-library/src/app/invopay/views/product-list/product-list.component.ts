@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
-import { ProductService } from '../../services/product.service';
+import { ProductService, uniqueDocumentNamesValidator } from '../../services/product.service';
 import { LoadingService } from '../../../shared/services/loading.service';
 import IpSelectInputOption from '../../interface/ip-select-input-option';
 
@@ -12,6 +12,11 @@ import {
   CreateProductDTO,
   UpdateProductDTO
 } from '../../interface/product-interfaces';
+
+export interface DocumentUploadPayload {
+  file: File;
+  description: string;
+}
 
 type TableActionEvent = {
   event: string;
@@ -69,7 +74,7 @@ export class ProductListComponent implements OnInit {
   isCreateModalOpen = false;
   createBusy = false;
   createForm!: FormGroup;
-  
+
 
   private logoFileToUpload: File | null = null;
 
@@ -109,7 +114,7 @@ export class ProductListComponent implements OnInit {
       longDescription: [''],
       externalId: [''],
       insuranceEnterprise: [''],
-      documents: this.formBuilder.array([]),
+      documents: this.formBuilder.array([], uniqueDocumentNamesValidator()),
       isActive: [true]
     });
 
@@ -174,23 +179,36 @@ export class ProductListComponent implements OnInit {
       return;
     }
     if (!this.logoFileToUpload) {
-      alert('Por favor, seleccione un archivo de logo.');
-      return;
+      alert('Falta el logo'); return;
     }
+
     this.loadingService.setLoadingState(true);
     this.createBusy = true;
 
-    this.productService.createProduct(this.createForm.value, this.logoFileToUpload).subscribe({
-      next: (createdItem: ProductItem) => {
-        this.loadPage(this.pageIndex, this.pageSize);
-        this.onCreateModalClose();
+    const docsPayload: DocumentUploadPayload[] = this.documentationFormArray(this.createForm).controls
+      .map(c => ({
+        file: c.get('fileRaw')?.value,
+        description: c.get('description')?.value
+      }))
+      .filter(d => d.file && d.description);
 
-        this.createBusy = false;
-        this.loadingService.setLoadingState(false);
+    this.productService.createProductWithBatchUpload(
+      this.createForm.value,
+      this.logoFileToUpload,
+      docsPayload
+    ).subscribe({
+      next: (res) => {
+        console.log('✅ Éxito total:', res);
+        alert('Producto creado exitosamente');
+        this.onCreateModalClose();
+        this.loadPage(this.pageIndex, this.pageSize);
       },
-      error: (err: any) => {
+      error: (err) => {
         console.error(err);
-        alert('Error al crear el producto: ' + (err.error?.message || err.message));
+        const msg = err.error?.message || err.message || 'Error al crear producto';
+        alert(msg);
+      },
+      complete: () => {
         this.createBusy = false;
         this.loadingService.setLoadingState(false);
       }
@@ -202,21 +220,35 @@ export class ProductListComponent implements OnInit {
       this.editForm.markAllAsTouched();
       return;
     }
+
     this.loadingService.setLoadingState(true);
     this.editBusy = true;
-    const payload: any = this.editForm.getRawValue();
 
-    this.productService.updateProduct(payload, this.logoFileToUpload).subscribe({
-      next: (updatedItem: ProductItem) => {
-        this.updateLocalData(this.withDisplayStatus([updatedItem])[0]);
+    const rawDocs = this.documentationFormArray(this.editForm).controls.map(c => ({
+      description: c.get('description')?.value,
+      filePath: c.get('filePath')?.value,
+      fileRaw: c.get('fileRaw')?.value
+    }));
+
+    const formValue = { ...this.editForm.getRawValue(), id: this.selectedProduct!.id };
+
+    this.productService.updateProductWithBatchUpload(
+      formValue,
+      this.logoFileToUpload,
+      rawDocs
+    ).subscribe({
+      next: (updatedProduct) => {
+        console.log('✅ Producto editado correctamente:', updatedProduct);
+
         this.onEditModalClose();
-
-        this.editBusy = false;
-        this.loadingService.setLoadingState(false);
+        this.loadPage(this.pageIndex, this.pageSize);
       },
-      error: (err: any) => {
+      error: (err) => {
         console.error(err);
-        alert('Error al editar el producto: ' + (err.error?.message || err.message));
+        const msg = err.error?.message || err.message || 'Error al editar producto';
+        alert(msg);
+      },
+      complete: () => {
         this.editBusy = false;
         this.loadingService.setLoadingState(false);
       }
@@ -240,9 +272,9 @@ export class ProductListComponent implements OnInit {
         }])[0];
 
         this.updateLocalData(updatedItem);
-
         this.deleteBusy = false;
         this.loadingService.setLoadingState(false);
+        this.loadPage(this.pageIndex, this.pageSize);
         this.onDeleteModalClose();
       },
       error: (err: any) => {
@@ -345,20 +377,20 @@ export class ProductListComponent implements OnInit {
     }
 
     if (confirm(`¿Desea eliminar el documento "${docValue.description}"?`)) {
-      
+
       this.loadingService.setLoadingState(true);
-      
+
       this.productService.deleteDocument(this.selectedProduct!.id, docValue.description)
         .subscribe({
           next: () => {
             formArray.removeAt(index);
-            
+
             if (this.selectedProduct && this.selectedProduct.documents) {
-               this.selectedProduct.documents = this.selectedProduct.documents.filter(
-                 d => d.description !== docValue.description
-               );
+              this.selectedProduct.documents = this.selectedProduct.documents.filter(
+                d => d.description !== docValue.description
+              );
             }
-            
+
             this.loadingService.setLoadingState(false);
           },
           error: (err) => {
@@ -372,31 +404,40 @@ export class ProductListComponent implements OnInit {
 
   onDocumentFileSelected(event: Event, formGroup: FormGroup, index: number): void {
     const input = event.target as HTMLInputElement;
-    if (!input.files || input.files.length === 0) return;
-    
+
+    console.log(`📂 [DEBUG] Evento disparado en fila índice: ${index}`);
+
+    if (!input.files || input.files.length === 0) {
+      console.log('   ❌ Cancelado: No se seleccionó ningún archivo.');
+      return;
+    }
+
     const file = input.files[0];
-    
-    this.loadingService.setLoadingState(true);
-
-    this.productService.uploadDocumentFile(file).subscribe({
-      next: (response) => {
-        const formArray = this.documentationFormArray(formGroup);
-        const rowGroup = formArray.at(index);
-        const currentDescription = rowGroup.get('description')?.value;
-        rowGroup.patchValue({
-          filePath: response.filePath, 
-          description: currentDescription ? currentDescription : file.name
-        });
-
-        this.loadingService.setLoadingState(false);
-      },
-      error: (err) => {
-        console.error('Error subiendo documento:', err);
-        alert('Error al subir el documento.');
-        this.loadingService.setLoadingState(false);
-        input.value = '';
-      }
+    console.log('   ✅ Archivo capturado:', {
+      nombreFisico: file.name,
+      tamano: `${(file.size / 1024).toFixed(2)} KB`,
+      tipo: file.type
     });
+
+    const formArray = this.documentationFormArray(formGroup);
+    const rowGroup = formArray.at(index);
+    const descripcionActual = rowGroup.get('description')?.value;
+
+    console.log(`   📝 Asociando a descripción: "${descripcionActual}"`);
+
+    rowGroup.patchValue({
+      fileRaw: file,
+      filePath: 'pendiente_de_subida',
+      description: descripcionActual || file.name
+    });
+
+    rowGroup.get('fileRaw')?.markAsTouched();
+
+    console.log('   💾 Estado final de la fila:', {
+      valido: rowGroup.valid,
+      fileRawValue: rowGroup.get('fileRaw')?.value
+    });
+    input.value = '';
   }
 
   onFileSelected(event: Event, formGroup: FormGroup, controlName: string): void {
@@ -417,6 +458,32 @@ export class ProductListComponent implements OnInit {
     };
     reader.readAsDataURL(file);
     input.value = '';
+  }
+
+  addDocumentRow(form: FormGroup): void {
+    console.log('➕ Agregando nueva fila de documento...');
+    const docGroup = this.formBuilder.group({
+
+      description: ['', Validators.required],
+      fileRaw: [null],
+      filePath: ['']
+    });
+
+    this.documentationFormArray(form).push(docGroup);
+    console.log(`   Total de filas actuales: ${this.documentationFormArray(this.createForm).length}`);
+  }
+  private setDocumentationFormArray(form: FormGroup, docs: ProductDocument[]): void {
+    const formArray = this.documentationFormArray(form);
+    formArray.clear();
+    if (docs && docs.length > 0) {
+      docs.forEach(doc => {
+        formArray.push(this.formBuilder.group({
+          description: [doc.description, Validators.required],
+          filePath: [doc.filePath],
+          url: [doc.url]
+        }));
+      });
+    }
   }
 
   onSort(event: any): void {
@@ -475,22 +542,7 @@ export class ProductListComponent implements OnInit {
       url: ['']
     });
   }
-  addDocumentRow(form: FormGroup): void {
-    this.documentationFormArray(form).push(this.newDocumentGroup());
-  }
-  private setDocumentationFormArray(form: FormGroup, docs: ProductDocument[]): void {
-    const formArray = this.documentationFormArray(form);
-    formArray.clear();
-    if (docs && docs.length > 0) {
-      docs.forEach(doc => {
-        formArray.push(this.formBuilder.group({
-          description: [doc.description, Validators.required],
-          filePath: [doc.filePath],
-          url: [doc.url]
-        }));
-      });
-    }
-  }
+
   private rebuildMobileSlice(): void {
     this.loadPage(this.mobilePageIndex, this.mobilePageSize);
   }
@@ -506,5 +558,34 @@ export class ProductListComponent implements OnInit {
     if (!container || !container.contains(event.target as Node)) {
       this.openMenuId = null;
     }
+  }
+
+  isDuplicateDescription(index: number): boolean {
+    let formArray: FormArray;
+    if (this.isCreateModalOpen) {
+      if (!this.createForm) return false;
+      formArray = this.documentationFormArray(this.createForm);
+    } else {
+      if (!this.editForm) return false;
+      formArray = this.documentationFormArray(this.editForm);
+    }
+
+    const currentControl = formArray.at(index);
+    if (!currentControl) return false;
+
+    const currentDesc = currentControl.get('description')?.value?.trim().toLowerCase();
+
+    if (!currentDesc) return false;
+
+    const duplicateCount = formArray.controls.filter(control =>
+      control.get('description')?.value?.trim().toLowerCase() === currentDesc
+    ).length;
+
+    return duplicateCount > 1;
+  }
+
+  isUploadDisabled(index: number): boolean {
+    const row = this.documentationFormArray(this.createForm).at(index);
+    return row.get('description')?.invalid || this.isDuplicateDescription(index);
   }
 }

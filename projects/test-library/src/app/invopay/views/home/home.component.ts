@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   probarEndpoint() {
     console.log('🟡 Iniciando petición...');
 
-    this.schemeService.getAllInstances().subscribe({
+    this.productService.getAllProducts().subscribe({
       next: (response) => {
         console.log('✅ RESPUESTA DE LA API (Raw JSON):');
         console.dir(response);
