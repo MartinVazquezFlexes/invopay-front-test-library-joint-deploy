@@ -35,6 +35,7 @@ import { LastFourDigitsPipe } from './Utils/lastFourDigits-pipe';
 import { CustomDatePipe } from './Utils/pipeCustomDate';
 import { TransformDataTablePipe } from './Utils/transform-data-table.pipe';
 import { TruncatePipe } from './Utils/truncate.pipe';
+import { DisabledInputComponent } from "../invopay/components/disabled-input/disabled-input.component";
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { TruncatePipe } from './Utils/truncate.pipe';
     BackNavigateButtonComponent,
     SafePipe,
     NoDataComponent,
-    TruncatePipe
+    TruncatePipe,
+
   ],
   imports: [
     CommonModule,

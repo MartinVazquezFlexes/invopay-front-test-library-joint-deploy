@@ -91,10 +91,10 @@ import { PolicyEditBrokerComissionComponent } from './invopay/views/policy-edit-
             deps: [HttpClient],
         },
     }),
-    InvopayModule,
     AdditionalFiltersModalComponent,
     SharedModule,
     IpSearchInputComponent,
+    InvopayModule
 ],
   providers: [DatePipe,AmountFormatPipe,CurrencySymbolPipe,CustomDatePipe,DecryptionService,
   {provide:HTTP_INTERCEPTORS,

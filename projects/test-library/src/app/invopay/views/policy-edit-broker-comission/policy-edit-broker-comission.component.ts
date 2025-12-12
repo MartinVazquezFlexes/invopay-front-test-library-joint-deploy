@@ -143,6 +143,8 @@ export class PolicyEditBrokerComissionComponent {
         this.editForm.controls.newBrokerPercentage.setValue(this.currentBrokerPercentage);
         this.prepareTableData();
         this.loadingService.setLoadingState(false);
+        console.log("POLICY DETAIL")
+        console.log(this.policyDetail)
       },
       error: (err) => {
         console.error('Error al cargar datos de pólizaa:', err);

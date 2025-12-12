@@ -42,6 +42,7 @@ import { PolicyEditModalDialogComponent } from './components/policy-edit-modal-d
 import { PolicyEditBrokerComissionComponent } from './views/policy-edit-broker-comission/policy-edit-broker-comission.component';
 import { ObjectiveListComponent } from './views/objective-list/objective-list.component';
 import { GoalsListComponent } from './views/goals-list/goals-list.component';
+import { DisabledInputComponent } from './components/disabled-input/disabled-input.component';
 
 
 
@@ -66,6 +67,8 @@ import { GoalsListComponent } from './views/goals-list/goals-list.component';
         PolicyEditModalDialogComponent,
         ObjectiveListComponent,
         GoalsListComponent,
+        DisabledInputComponent
+
     ],
     imports: [
         CommonModule,
@@ -95,7 +98,8 @@ import { GoalsListComponent } from './views/goals-list/goals-list.component';
         IpLoginComponent,
         IpTextAreaInputComponent,
         MobileCardListComponent,
-        NotificationModalComponent
+        NotificationModalComponent,
+        DisabledInputComponent
     ]
 })
 export class InvopayModule { }

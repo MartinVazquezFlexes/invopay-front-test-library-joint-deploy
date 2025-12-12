@@ -7,23 +7,28 @@
   </app-title-page>
 
 
-
-  <!-- INFORMACIÓN GENERAL -->
+  <div class="two-columns">  <!-- INFORMACIÓN GENERAL -->
   <div class="card-container">
     <div class="card">
       <div class="card-header">
         <span class="card-title">{{'NEW_VAR.CLIENT_DATA'|translate}}</span>
       </div>
-      <div class="card-body-1" *ngIf="policyDetail">
+      <div class="card-body-2" *ngIf="policyDetail">
         
         <!-- Datos del Cliente -->
-        <div class="inner-card">
-          <label>{{'NEW_VAR.FULL_NAME' | translate}}</label>
-          <span>{{ policyDetail.customer.firstName }} {{ policyDetail.customer.lastName }}</span>
+          <div class="inner-card">
+          <app-disabled-input
+          inputId="clientFullName"
+          [label]="'NEW_VAR.FULL_NAME' | translate"
+          [value]="policyDetail.customer.firstName +' '+policyDetail.customer.lastName"
+        ></app-disabled-input>
         </div>
-        <div class="inner-card">
-          <label>{{'NEW_VAR.EMAIL' | translate}}</label>
-          <span>{{ policyDetail.customer.email }}</span>
+          <div class="inner-card">
+          <app-disabled-input
+          inputId="clientEmail"
+          [label]="'NEW_VAR.EMAIL' | translate"
+          [value]="policyDetail.customer.email"
+        ></app-disabled-input>
         </div>
       </div>
     </div>
@@ -35,58 +40,83 @@
       <div class="card-header">
         <span class="card-title">{{'NEW_VAR.BROKER_DATA' | translate}}</span>
       </div>
-      <div class="card-body-1">
-        
+      <div class="card-body-2">
         <div class="inner-card">
-          <label>{{'NEW_VAR.FULL_NAME' | translate}}</label>
-          <span>{{ policyDetail?.broker?.username }}</span>
+         <app-disabled-input
+          inputId="brokerFullName"
+          [label]="'NEW_VAR.FULL_NAME' | translate"
+          [value]="policyDetail?.broker?.username||'-'"
+        ></app-disabled-input>
         </div>
         <div class="inner-card">
-          <label>{{'NEW_VAR.EMAIL' | translate}}</label>
-          <span>{{ policyDetail?.broker?.userEmail }}</span>
+         <app-disabled-input
+          inputId="brokerEmail"
+          [label]="'NEW_VAR.EMAIL' | translate"
+          [value]=" policyDetail?.broker?.userEmail "
+        ></app-disabled-input>
         </div>
+
       </div>
     </div>
   </div>
-
+</div>
   <!-- DATOS DE LA PÓLIZA -->
   <div class="card-container">
     <div class="card">
       <div class="card-header">
         <span class="card-title">{{'NEW_VAR.POLICY_DATA' | translate}}</span>
       </div>
-      <div class="card-body">
-        
+      <div class="card-body-3">
         <div class="inner-card">
-          <label>{{'NEW_VAR.POLICY_NUMBER' | translate}}</label>
-          <span>{{ policyDetail?.policyNumber }}</span>
+         <app-disabled-input
+          inputId="policyNumber"
+          [label]="'NEW_VAR.POLICY_NUMBER' | translate"
+          [value]=" policyDetail?.policyNumber  "
+         ></app-disabled-input>   
+         </div>
+        <div class="inner-card">
+          <app-disabled-input
+            inputId="productName"
+            [label]="'NEW_VAR.PRODUCT_NAME' | translate"
+            [value]="  policyDetail?.insuranceName || policyDetail?.name"
+          ></app-disabled-input> 
+        </div> 
+        <div class="inner-card">
+          <app-disabled-input
+            inputId="creationDate"
+            [label]="'NEW_VAR.CREATION_DATE' | translate"
+            [value]="policyDetail?.creationAt"
+          ></app-disabled-input>
         </div>
         <div class="inner-card">
-          <label>{{'NEW_VAR.PRODUCT_NAME' | translate}}</label>
-          <span>{{ policyDetail?.insuranceName || policyDetail?.name }}</span>
+          <app-disabled-input
+            inputId="emissionDate"
+            [label]="'NEW_VAR.EMISSION_DATE' | translate"
+            [value]="policyDetail?.emissionDate"
+          ></app-disabled-input>
+        </div>
+       <div class="inner-card">
+          <app-disabled-input
+            inputId="endVigencyDate"
+            [label]="'NEW_VAR.END_VIGENCY_DATE' | translate"
+            [value]="policyDetail?.endDate"
+          ></app-disabled-input>
         </div>
         <div class="inner-card">
-          <label>{{'NEW_VAR.CREATION_DATE' | translate}}</label>
-          <span>{{ policyDetail?.creationAt}}</span>
-        </div>
+          <app-disabled-input
+            inputId="brokerPremiumAmount"
+            [label]="'NEW_VAR.BROKER_PREMIUM_AMOUNT' | translate"
+            [value]="'N/A'"
+          ></app-disabled-input>
+          </div>
         <div class="inner-card">
-          <label>{{'NEW_VAR.EMISSION_DATE' | translate}}</label>
-          <span>{{policyDetail?.emissionDate }}</span>
-        </div>
-        <div class="inner-card">
-          <label>{{'NEW_VAR.END_VIGENCY_DATE' | translate}}</label>
-          <span>{{ policyDetail?.endDate}}</span>
-        </div>
 
-        <div class="inner-card">
-          <label>{{'NEW_VAR.BROKER_PREMIUM_AMOUNT' | translate}}</label>
-          <span>N/A</span>
-        </div>
-        <div class="inner-card">
-          <label>{{'NEW_VAR.INSTALLMENTS_COUNT' | translate}}</label>
-          <span>{{ policyDetail?.installments?.length}}</span>
-        </div>
-
+          <app-disabled-input
+            inputId="installmentsCount"
+            [label]="'NEW_VAR.INSTALLMENTS_COUNT' | translate"
+            [value]="policyDetail?.installments?.length"
+          ></app-disabled-input>
+          </div>
       </div>
     </div>
   </div>
@@ -97,16 +127,24 @@
       <div class="card-header">
         <span class="card-title">{{'NEW_VAR.SQUEMA_COMISSIONS' | translate}}</span>
       </div>
-      <div class="card-body-1">
+      <div class="card-body-2">
         
         <div class="inner-card">
-          <label>{{'NEW_VAR.SQUEMA_APPLY' | translate}}</label>
-          <span>N/A</span>
+          <app-disabled-input
+            inputId="schemaApply"
+            [label]="'NEW_VAR.SQUEMA_APPLY' | translate"
+            [value]="'N/A'"
+          ></app-disabled-input>
         </div>
+
         <div class="inner-card">
-          <label>{{'NEW_VAR.PERCENTAJE_USE' | translate}}</label>
-          <span>N/A</span>
+          <app-disabled-input
+            inputId="percentageUse"
+            [label]="'NEW_VAR.PERCENTAJE_USE' | translate"
+            [value]="'N/A'"
+          ></app-disabled-input>
         </div>
+
 
       </div>
     </div>
@@ -192,7 +230,7 @@
       <div class="card-header">
         <span class="card-title">{{'NEW_VAR.EDIT_COMMISSION' | translate}}</span>
       </div>
-      <div class="card-body-1">  
+      <div class="card-body-2">  
 
           <div class="inner-card" >
             <form [formGroup]="editForm">
