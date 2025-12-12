@@ -12,39 +12,62 @@
     <div class="card-header">
       <span class="card-title">{{'NEW_VAR.INF_GENERAL' | translate}}</span>
     </div>
-    <div class="card-body">
+    <div class="card-body-4">
       <div class="inner-card">
-        <label>{{'NEW_VAR.DATE' | translate}}</label>
-        <span>{{dataShow.saleDate}}</span>
-      </div>
-      
-      <div class="inner-card">
-        <label>{{'NEW_VAR.PRODUCT_NAME' | translate}}</label>
-        <span>{{dataShow.productName}}</span>
+           <app-disabled-input
+            inputId="date"
+            [label]="'NEW_VAR.DATE' | translate"
+            [value]="dataShow.saleDate"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'NEW_VAR.POLICY_NUMER_EXTEND' | translate}}</label>
-        <span>{{dataShow.policyNumber}}</span>
+           <app-disabled-input
+            inputId="productName"
+            [label]="'NEW_VAR.PRODUCT_NAME' | translate"
+            [value]="dataShow.productName"
+          ></app-disabled-input>
+      </div>
+      <div class="inner-card">   
+            <app-disabled-input
+            inputId="policyNumber"
+            [label]="'NEW_VAR.POLICY_NUMER_EXTEND' | translate"
+            [value]="dataShow.policyNumber"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'NEW_VAR.POLICY_VALUE' | translate}}</label>
-        <span>{{dataShow.policyValue}}</span>
+          <app-disabled-input
+            inputId="policyValue"
+            [label]="'NEW_VAR.POLICY_VALUE' | translate"
+            [value]="dataShow.policyValue"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'NEW_VAR.PREMIUM_AMOUNT' | translate}}</label>
-        <span>{{dataShow.premiumValue}}</span>
+           <app-disabled-input
+            inputId="policyPremiumValue"
+            [label]="'NEW_VAR.PREMIUM_AMOUNT' | translate"
+            [value]="dataShow.premiumValue"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'NEW_VAR.PERCENTAJE_BROKER' | translate}}</label>
-        <span> {{dataShow.brokerCommissionPercent}}</span>
+           <app-disabled-input
+            inputId="brokerCommissionPercentage"
+            [label]="'NEW_VAR.PERCENTAJE_BROKER' | translate"
+            [value]="dataShow.brokerCommissionPercent"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'NEW_VAR.PERCENTAJE_BROKER' | translate}}</label>
-        <span>{{dataShow.brokerCommissionARS}} </span>
+         <app-disabled-input
+            inputId="brokerCommissionPercentage"
+            [label]="'NEW_VAR.PERCENTAJE_BROKER' | translate"
+            [value]="dataShow.brokerCommissionARS"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'NEW_VAR.AMOUNT_PAY' | translate}}</label>
-        <span>{{dataShow.premiumInstallments}}</span>
+          <app-disabled-input
+            inputId="brokerCommissionPercentage"
+            [label]="'NEW_VAR.AMOUNT_PAY' | translate"
+            [value]="dataShow.premiumInstallments"
+          ></app-disabled-input>
       </div>
     </div>
   </div>
@@ -56,18 +79,27 @@
     <div class="card-header">
       <span class="card-title">{{'NEW_VAR.CLIENT_INF' | translate}}</span>
     </div>
-    <div class="card-body">
+    <div class="card-body-3">
       <div class="inner-card">
-        <label>{{'IP.COST_CENTER.NAME' | translate}}</label>
-        <span>{{dataShow.customerName}}</span>
+           <app-disabled-input
+            inputId="cutomerName"
+            [label]="'IP.COST_CENTER.NAME' | translate"
+            [value]="dataShow.customerName"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'NEW_VAR.EMAIL' | translate}}</label>
-        <span>{{dataShow.customerEmail}}</span>
+            <app-disabled-input
+            inputId="cutomerEmail"
+            [label]="'NEW_VAR.EMAIL' | translate"
+            [value]="dataShow.customerEmail"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'NEW_VAR.TELEPHONE' | translate}}</label>
-        <span>{{dataShow.customerPhone}}</span>
+          <app-disabled-input
+            inputId="customerPhone"
+            [label]="'NEW_VAR.TELEPHONE' | translate"
+            [value]="dataShow.customerPhone"
+          ></app-disabled-input>
       </div>
       
     </div>

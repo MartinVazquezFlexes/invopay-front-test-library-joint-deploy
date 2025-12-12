@@ -11,36 +11,48 @@
     <div class="card-header">
       <span class="card-title">{{'NEW_VAR.INF_GENERAL'|translate}}</span>
     </div>
-    <div *ngIf="dataShow?.transactionData" class="card-body">
+    <div *ngIf="dataShow?.transactionData" class="card-body-3">
       <div class="inner-card">
-        <label>{{'NEW_VAR.DATE'|translate}}</label>
-        <span>{{dataShow?.transactionData?.revenueDate}}</span>
+           <app-disabled-input
+            inputId="revenueDate"
+            [label]="'NEW_VAR.DATE' | translate"
+            [value]="dataShow?.transactionData?.revenueDate"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'NEW_VAR.PAYMEN_CHANNEL'|translate}}</label>
-        <span>{{dataShow?.transactionData?.paymentChannel}}</span>
+           <app-disabled-input
+            inputId="paymentChanel"
+            [label]="'NEW_VAR.PAYMEN_CHANNEL' | translate"
+            [value]="dataShow?.transactionData?.paymentChannel"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'NEW_VAR.PAYMENT_PROVIDER'|translate}}</label>
-        <span>{{dataShow?.transactionData?.paymentProvider}}</span>
+          <app-disabled-input
+            inputId="paymentProvider"
+            [label]="'NEW_VAR.PAYMENT_PROVIDER' | translate"
+            [value]="dataShow?.transactionData?.paymentProvider"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'IP.CURRENCY'|translate}}</label>
-        <span>{{dataShow?.transactionData?.currency}}</span>
+           <app-disabled-input
+            inputId="currency"
+            [label]="'IP.CURRENCY' | translate"
+            [value]="dataShow?.transactionData?.currency"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'NEW_VAR.COLLECTED_AMOUNT'|translate}}</label>
-        <span>{{dataShow?.transactionData?.amount}}</span>
+         <app-disabled-input
+            inputId="collectedAmount"
+            [label]="'NEW_VAR.COLLECTED_AMOUNT' | translate"
+            [value]="dataShow?.transactionData?.amount"
+          ></app-disabled-input>
       </div>
       <div *ngIf="dataShow?.transactionData?.transactionObservations?.length!=0" class="inner-card">
-        <label >{{'IP.OBSERVATIONS.TITLE'|translate}}</label>
-          <!-- si se quiere scrolleable
-          <textarea class="floating-textarea" readonly tabindex="0" aria-label="Observaciones" readonly>
-            Observaciones de la transaccion
-          </textarea> 
-          -->
-
-        <span> {{dataShow?.transactionData?.transactionObservations}}</span>
+           <app-disabled-input
+            inputId="observations"
+            [label]="'IP.OBSERVATIONS.TITLE' | translate"
+            [value]="dataShow?.transactionData?.transactionObservations"
+          ></app-disabled-input>
       </div>
     </div>
   </div>
@@ -52,37 +64,56 @@
     <div class="card-header">
       <span class="card-title">{{'NEW_VAR.CONSILIATION_DATA'|translate}} </span>
     </div>
-    <div class="card-body">
+    <div class="card-body-4">
       <div class="inner-card">
-        <label>{{'NEW_VAR.CONSOLIDATED'|translate}}</label>
-        <span>{{dataShow?.conciliationData?.isConsolidated}}</span>
+          <app-disabled-input
+            inputId="consolidated"
+            [label]="'NEW_VAR.CONSOLIDATED' | translate"
+            [value]="dataShow?.conciliationData?.isConsolidated"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME'|translate}}</label>
-        <span>{{dataShow?.conciliationData?.productName}}</span>
+           <app-disabled-input
+            inputId="consolidatedProductName"
+            [label]="'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate"
+            [value]="dataShow?.conciliationData?.productName"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label>{{'NEW_VAR.POLICY_NUMBER'|translate}}</label>
-        <span>{{dataShow?.policyData?.number}}</span>
+           <app-disabled-input
+            inputId="policyNumber"
+            [label]="'NEW_VAR.POLICY_NUMBER' | translate"
+            [value]="dataShow?.policyData?.number"
+          ></app-disabled-input>
       </div>
        <div class="inner-card">
-        <label>{{'NEW_VAR.COLLECTED_AMOUNT'|translate}}</label>
-        <span>{{dataShow?.transactionData?.currency}} {{dataShow?.policyData?.amount}}</span>
+           <app-disabled-input
+            inputId="collectedAmount"
+            [label]="'NEW_VAR.COLLECTED_AMOUNT' | translate"
+            [value]="dataShow?.transactionData?.currency+' '+dataShow?.policyData?.amount"
+          ></app-disabled-input>
       </div>
       <div class="inner-card">
-        <label> {{'IP.CONSOLIDATED.PAYMENT_NUMBER'|translate}}</label>
-        <span>{{dataShow?.conciliationData?.paymentNumber}}</span>
+          <app-disabled-input
+            inputId="paymmentNumber"
+            [label]="'IP.CONSOLIDATED.PAYMENT_NUMBER' | translate"
+            [value]="dataShow?.conciliationData?.paymentNumber"
+          ></app-disabled-input>
       </div>
        <div class="inner-card">
-        <label> {{'NEW_VAR.PAYMENT_VALUE'|translate}}</label>
-        <span>{{dataShow?.transactionData?.currency}} {{dataShow?.conciliationData?.paymentValue}}</span>
+            <app-disabled-input
+            inputId="paymmentValue"
+            [label]="'NEW_VAR.PAYMENT_VALUE' | translate"
+            [value]="dataShow?.transactionData?.currency+' '+dataShow?.conciliationData?.paymentValue"
+          ></app-disabled-input>
       </div>
 
       <div class="inner-card">
-        <label> 
-          {{'IP.CARD_TABLE.INVOICE.BROKERFULLNAME'|translate}}
-        </label>
-        <span>{{dataShow?.conciliationData?.brokerName}}</span>
+           <app-disabled-input
+            inputId="brokerFullname"
+            [label]="'IP.CARD_TABLE.INVOICE.BROKERFULLNAME' | translate"
+            [value]="dataShow?.conciliationData?.brokerName"
+          ></app-disabled-input>
       </div>
     </div>
   </div>
@@ -94,25 +125,41 @@
     <div class="card-header">
       <span class="card-title">{{'NEW_VAR.POLICY_DATA'|translate}}</span>
     </div>
-    <div class="card-body">
+    <div class="card-body-3">
       <div class="inner-card">
-        <label>  {{'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME'|translate}} </label>
-        <span> {{dataShow?.policyData?.productName}}</span>
+            <app-disabled-input
+            inputId="productName"
+            [label]="'IP.SETTLEMENTS.DETAILS.PRODUCT_NAME' | translate"
+            [value]="dataShow?.policyData?.productName"
+          ></app-disabled-input>
       </div>
          <div class="inner-card">
-        <label>{{'NEW_VAR.POLICY_NUMBER'|translate}}</label>
-        <span> {{dataShow?.policyData?.number}}</span>
+         <app-disabled-input
+            inputId="policyNumber"
+            [label]="'NEW_VAR.POLICY_NUMBER' | translate"
+            [value]="dataShow?.policyData?.number"
+          ></app-disabled-input>
       </div>   
       <div class="inner-card">
-        <label>{{'IP.SETTLEMENTS.DETAILS.DATE_SALE'|translate}}</label>
-        <span> {{dataShow?.policyData?.saleDate}}</span>
-      </div>   <div class="inner-card">
-        <label>{{'NEW_VAR.POLICY_AMOUNT'|translate}}</label>
-        <span> {{dataShow?.policyData?.amount}}</span>
+           <app-disabled-input
+            inputId="dateSale"
+            [label]="'IP.SETTLEMENTS.DETAILS.DATE_SALE' | translate"
+            [value]="dataShow?.policyData?.saleDate"
+          ></app-disabled-input>
+      </div> 
+        <div class="inner-card">
+          <app-disabled-input
+            inputId="policyAmount"
+            [label]="'NEW_VAR.POLICY_AMOUNT' | translate"
+            [value]="dataShow?.policyData?.amount"
+          ></app-disabled-input>
       </div> 
      <div class="inner-card">
-        <label> {{'NEW_VAR.PREMIUM_AMOUNT'|translate}}</label>
-        <span> {{dataShow?.policyData?.premiumAmount}}</span>
+          <app-disabled-input
+            inputId="premiumAmount"
+            [label]="'NEW_VAR.PREMIUM_AMOUNT' | translate"
+            [value]="dataShow?.policyData?.premiumAmount"
+          ></app-disabled-input>
      </div>
           <div *ngIf="!isMobile"  class="card-2">
              <div class="card-table">
