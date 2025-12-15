@@ -226,9 +226,9 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
       //policy
       policyNumber: this.policyDetails.policyNumber || '',
       productName: this.policyDetails.name || '',
-      creationDate: this.policyDetails.creationAt?.split('T')[0] || '',
-      emissionDate: this.policyDetails.emissionDate?.split('T')[0] || '',
-      expirationDate: this.policyDetails.endDate?.split('T')[0] || '',
+      creationDate: this.formatDate(this.policyDetails.creationAt),
+      emissionDate: this.formatDate(this.policyDetails.emissionDate),
+      expirationDate: this.formatDate(this.policyDetails.endDate),
       brokerPremiumValue: `${this.policyDetails.currency} ${formatted}` || '',
       installmentsCount: this.policyDetails.installments.length || '',
 
@@ -237,6 +237,13 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
       percentageUsed:
         schemeName === 'N/A' ? 'N/A' : this.calculateCommissionPercentage(),
     });
+  }
+
+  private formatDate(date?: string): string {
+    if (!date) return '';
+
+    const [year, month, day] = date.split('T')[0].split('-');
+    return `${day}/${month}/${year}`;
   }
 
   setTableData() {
