@@ -43,7 +43,7 @@
           class="mobile-card-list__value"
           [class.mobile-card-list__value--status]="field.isStatus"
           [class.mobile-card-list__value--amount-bold]="field.isAmountBold">
-          {{ item[field.key] }}
+          {{ field.isDate ? (config.formatDate ? config.formatDate(item[field.key]) : item[field.key]) : item[field.key] }}
         </span>
       </div>
     </div>

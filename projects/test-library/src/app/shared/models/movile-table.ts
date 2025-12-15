@@ -5,6 +5,7 @@ export interface CardField {
   isAmount?: boolean;
   isStatus?: boolean;
   isAmountBold?: boolean;
+  isDate?: boolean;
 }
 
 export interface CardConfig {
@@ -14,4 +15,5 @@ export interface CardConfig {
   showActionButton?: boolean;
   actionIcon?: 'eye' | 'edit' | 'delete';
   actions?: string[];
+  formatDate?: (dateString: string) => string;
 }

@@ -2,10 +2,12 @@ import { Component, OnInit, ChangeDetectorRef, inject, OnDestroy } from '@angula
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription, combineLatest } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 import { Category, ObjectiveItem, ObjectiveListConfig } from '../../interface/objective-list.models';
 import IpSelectInputOption from '../../interface/ip-select-input-option';
 import { LoadingService } from '../../../shared/services/loading.service';
 import { IpObjectiveService } from '../../services/ip-objective.service';
+import { AmountFormatPipe } from '../../../shared/Utils/amount-format-pipe.pipe';
 
 @Component({
   selector: 'app-objective-list',
@@ -45,6 +47,8 @@ export class ObjectiveListComponent implements OnInit, OnDestroy {
   private readonly cdr = inject(ChangeDetectorRef);
   public readonly loader=inject(LoadingService)
   private readonly objectiveService=inject(IpObjectiveService)
+  private readonly datePipe = inject(DatePipe);
+ 
   subscription = new Subscription();
 
   titlesFile = new Map<string, string>();
@@ -162,7 +166,8 @@ export class ObjectiveListComponent implements OnInit, OnDestroy {
             }
           ],
           showActionButton: true,
-          actions: ['detail', 'edit', 'delete']
+          actions: ['detail', 'edit', 'delete'],
+          formatDate: this.formatDateForMobile.bind(this)
         };
 
         this.cdr.detectChanges();
@@ -250,6 +255,11 @@ export class ObjectiveListComponent implements OnInit, OnDestroy {
     });
     
     this.updatePaginatedData();
+  }
+
+  formatDateForMobile(dateString: string): string {
+    if (!dateString) return '-';
+    return this.datePipe.transform(dateString, 'dd/MM/yy') || dateString;
   }
 
   private parseDateFromString(dateString: string): Date {

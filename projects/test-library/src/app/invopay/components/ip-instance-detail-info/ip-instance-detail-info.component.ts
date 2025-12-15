@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subscription, combineLatest } from 'rxjs';
 import { CustomDatePipe } from '../../../shared/Utils/pipeCustomDate';
 import { CurrencySymbolPipe } from '../../../shared/Utils/currency-simbol-pipe';
+import { AmountFormatPipe } from '../../../shared/Utils/amount-format-pipe.pipe';
 
 @Component({
   selector: 'app-ip-instance-detail-info',
@@ -26,6 +27,7 @@ export class IpInstanceDetailInfoComponent implements OnInit {
   private cdr=inject(ChangeDetectorRef)
   private customDatePipe = inject(CustomDatePipe);
   private currencySymbolPipe = inject(CurrencySymbolPipe);
+   private readonly amountPipe=inject(AmountFormatPipe)
   constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
@@ -217,7 +219,8 @@ export class IpInstanceDetailInfoComponent implements OnInit {
         return this.policies.map(policy => ({
           name: policy.name,
           brokerName: policy.brokerName,
-          amount: this.currencySymbolPipe.transform(policy.currency) + ' ' + policy.amount.toLocaleString(),
+          amount: this.amountPipe.transform(policy.amount,true,'',policy.currency
+          ) ,
           status: this.statusTranslate(policy.status),
           policyNumber: policy.policyNumber,
           customerName: policy.customerName,

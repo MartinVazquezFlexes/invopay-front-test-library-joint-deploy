@@ -2888,6 +2888,7 @@
       "PERCENTAGES":{
         "FIXED":"Fijo",
         "MIXED":"Mixto",
+        "PERCENTAGE":"Porcentaje",
         "PERCETANGE_PRODUCT":"Porcentaje por producto",
         "PERCETANGE_BROKER":"Porcentaje por broker",
         "PERCETANGE_PRODUCT_BROKER":"Porcentaje por producto y corredor"
