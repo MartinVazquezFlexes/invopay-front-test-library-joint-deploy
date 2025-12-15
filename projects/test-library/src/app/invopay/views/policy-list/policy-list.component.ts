@@ -118,6 +118,10 @@ export class PolicyListComponent implements OnInit , OnDestroy{
     this.currentBroker = '';
     this.currentStart = '';
     this.currentEnd = '';
+
+    this.tableDto=[]
+    this.policies=[]
+    
   }
 
 
@@ -716,11 +720,13 @@ export class PolicyListComponent implements OnInit , OnDestroy{
       const id = item.id
       console.log(id)
       if (accion === 'detail') {
+        this.savePreviusState()
         this.router.navigate(['/invopay/policy-details'], {
           state: { id: id }
         });
       }
       if(accion==='edit'){
+        this.savePreviusState()
         this.router.navigate(['/invopay/policy-edit-commission'], {
             state: { id: id }
           });

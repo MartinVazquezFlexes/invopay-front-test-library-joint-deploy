@@ -231,7 +231,7 @@
     <button [disabled]="!canSearch" class="search" style="margin-right: 6px;" (click)="onClickFiltredSearch()">
         <img src="../../../assets/new-styles/icons/buttons/search-icon-white.svg">
       </button>
-      <button  class="clean" (click)="onClearFilters('modal')">
+      <button [disabled]="!canSearch" class="clean" (click)="onClearFilters('modal')">
         <img src="../../../../assets/new-styles/icons/cleaning.svg">
       </button>
     </div>
