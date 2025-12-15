@@ -2889,7 +2889,7 @@
         "FIXED":"Fijo",
         "MIXED":"Mixto",
         "PERCENTAGE":"Porcentaje",
-        "PERCETANGE_PRODUCT":"Porcentaje por producto",
+        "PERCENTAGE_PRODUCT":"Porcentaje por producto",
         "PERCETANGE_BROKER":"Porcentaje por broker",
         "PERCETANGE_PRODUCT_BROKER":"Porcentaje por producto y corredor"
       },
@@ -2902,8 +2902,12 @@
         "PERCENTAGE_PRODUCT_BROKER":"Porcentaje por producto y corredor"
       },
       "SCOPES":{
-        "GENERAL":"Póliza",
-        "PRODUCT":"Producto"
+        "GENERAL":"General",
+        "PRODUCT":"Producto",
+        "BROKER":"Corredor",
+        "BROKER_PRODUCT":"Corredor-Producto",
+        "INSURANCE_POLICY":"Poliza",
+        "BROKER_INSURANCE_POLICY":"Poliza de Corredor"
       }
     },
     "OBJECTIVES":{

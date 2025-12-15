@@ -219,8 +219,7 @@ export class IpInstanceDetailInfoComponent implements OnInit {
         return this.policies.map(policy => ({
           name: policy.name,
           brokerName: policy.brokerName,
-          amount: this.amountPipe.transform(policy.amount,true,'',policy.currency
-          ) ,
+          amount: this.amountPipe.transform(policy.amount,true,'',policy.currency) ,
           status: this.statusTranslate(policy.status),
           policyNumber: policy.policyNumber,
           customerName: policy.customerName,

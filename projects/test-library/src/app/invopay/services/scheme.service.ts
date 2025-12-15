@@ -55,10 +55,17 @@ export class SchemeService {
 
   getScopesOptions(): Observable<SelectOption[]> {
     return this.http.get<string[]>(this.allScopesApi).pipe(
-      map(scopes => scopes.map(scope => ({
-        label: scope.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, l => l.toUpperCase()),
-        value: scope
-      })))
+      map(response => {
+        return response.map(scheme => {
+          const i18nKey = `IP.COMISSION_SCHEME.SCOPES.${scheme}`;
+          const translatedType = this.translate.instant(i18nKey);
+
+          return {
+            label: `${translatedType}`,
+            value: scheme
+          };
+        });
+      })
     );
   }
 
@@ -70,20 +77,11 @@ export class SchemeService {
     return this.http.get<any[]>(this.allSchemesApi).pipe(
       map(response => {
         return response.map(scheme => {
-          
-          // 1. Construimos la key dinámica
-          // Ej: IP.COMISSION_SCHEME.SCHEMA-TYPES.FIXED
           const i18nKey = `IP.COMISSION_SCHEME.SCHEMA-TYPES.${scheme.schemaType}`;
-          
-          // 2. Traducimos usando 'instant'
-          // Esto devuelve "Fijo", "Porcentaje", etc.
           const translatedType = this.translate.instant(i18nKey);
 
           return {
-            // 3. Armamos el label final: "15 - Nombre Esquema (Fijo)"
             label: `${scheme.id} - ${scheme.name} (${translatedType})`,
-            
-            // 4. El value es el ID
             value: scheme.id
           };
         });

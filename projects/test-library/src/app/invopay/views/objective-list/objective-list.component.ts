@@ -82,6 +82,7 @@ export class ObjectiveListComponent implements OnInit, OnDestroy {
     const sub1=this.loader.setLoadingState(true)
     const sub=this.objectiveService.getAllObjectives({page:0,size:10,sort:''}).subscribe({
       next:(data)=>{
+        
         this.data=data.content;
         this.loadCategories()
         this.isLoading=false;

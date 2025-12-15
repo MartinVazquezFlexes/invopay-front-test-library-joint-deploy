@@ -183,14 +183,11 @@ export class SchemeInstanceComponent implements OnInit {
 
     const direction = event.event;
 
-    // Si limpia el orden, volvemos a la copia original de la página actual
     if (direction === 'clean') {
       this.schemes = [...this.originalSchemes];
       return;
     }
 
-    // Ordenamiento Cliente (Solo de la página actual)
-    // NOTA: Con API real, aquí deberíamos llamar a loadPage pasando parámetros de sort
     const sorted = [...this.schemes].sort((a, b) => {
       const aVal = a.name.toLowerCase();
       const bVal = b.name.toLowerCase();
@@ -404,12 +401,13 @@ export class SchemeInstanceComponent implements OnInit {
   private mapSchemeDisplayData(data: CommissionSchemeInstance[]): any[] {
     return data.map(item => {
       const schemaTypesTranslations = `IP.COMISSION_SCHEME.SCHEMA-TYPES.${item.schemaType}`;
-      const scopeTranslations = `IP.COMISSION_SCHEME.SCOPE.${item.scope}`;
+      const scopeTranslations = `IP.COMISSION_SCHEME.SCOPES.${item.scope}`;
 
       return {
         ...item,
         isActiveText: item.isActive ? 'Si' : 'No',
         schemaType: this.translate.instant(schemaTypesTranslations),
+        scope: this.translate.instant(scopeTranslations),
         instanceName: item.name
       };
     });

@@ -1534,6 +1534,14 @@
         "PERCENTAGE_BROKER":"Porcentagem por corretor",
         "PERCENTAGE_PRODUCT":"Porcentagem por produto",
         "PERCENTAGE_PRODUCT_BROKER":"Porcentagem por produto e corretor"
+      },
+      "SCOPES":{
+        "GENERAL":"General",
+        "PRODUCT":"Produto",
+        "BROKER":"Corretor",
+        "BROKER_PRODUCT":"Corretor-Produto",
+        "INSURANCE_POLICY":"Apólice",
+        "BROKER_INSURANCE_POLICY":"Apólice de Corretor"
       }
     },
      "GOALS":{
