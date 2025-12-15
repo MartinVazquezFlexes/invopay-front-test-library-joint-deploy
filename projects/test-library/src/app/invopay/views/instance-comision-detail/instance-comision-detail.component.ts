@@ -168,7 +168,7 @@ export class InstanceComisionDetailComponent implements OnInit,OnDestroy {
     return {
       name: instance.name || '',
       schemeType: this.translate.instant('IP.COMISSION_SCHEME.PERCENTAGES.' + instance.schemaType) || instance.schemaType || '',
-      ruleScope: instance.scope || '',
+      ruleScope: this.translate.instant('IP.COMISSION_SCHEME.SCOPES.' + instance.scope) || '',
       hasIncentiveCategory: instance.hasIncentiveCategory ? this.translate.instant('IP.YES') : this.translate.instant('IP.NO'),
       brokerCategory: 'No aplica',
       isActive: instance.isActive ? this.translate.instant('IP.YES') : this.translate.instant('IP.NO'),
