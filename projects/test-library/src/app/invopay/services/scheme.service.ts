@@ -81,7 +81,7 @@ export class SchemeService {
           const translatedType = this.translate.instant(i18nKey);
 
           return {
-            label: `${scheme.id} - ${scheme.name} (${translatedType})`,
+            label: `${scheme.name} (${translatedType})`,
             value: scheme.id
           };
         });

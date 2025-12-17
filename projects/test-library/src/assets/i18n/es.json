@@ -2838,6 +2838,8 @@
         "LABEL": "Documentos",
         "UPLOAD_BUTTON": "Subir...",
         "UPLOAD_CONFIRMED": "✓ Cargado",
+        "ALREADY_UPLOADED": "Cargado",
+        "DUPLICATE": "Nombre duplicado",
         "ADD_BUTTON": "+ Agregar Documento"
       }
     }

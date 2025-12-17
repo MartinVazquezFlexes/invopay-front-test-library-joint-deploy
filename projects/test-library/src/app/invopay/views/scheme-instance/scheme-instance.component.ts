@@ -223,16 +223,13 @@ export class SchemeInstanceComponent implements OnInit {
       schemaType: null,
       scope: null
     });
-    // Limpiamos los arrays por si quedaron sucios
     (this.createForm.get('policies') as FormArray).clear();
 
-    // 2. Verificamos si ya tenemos los catálogos cargados (Caché simple)
     if (this.schemeOptions.length > 0) {
       this.isCreateModalOpen = true;
       return;
     }
 
-    // 3. Si no hay datos, los cargamos
     this.loadCatalogData();
   }
 
@@ -508,7 +505,7 @@ export class SchemeInstanceComponent implements OnInit {
           value: b.id
         }));
         this.productsOptions = data.products.map((b: any) => ({
-          label: `${b.id} - ${b.name}`,
+          label: `${b.name}`,
           value: b.id
         }));
         this.allPolicies = data.policies;

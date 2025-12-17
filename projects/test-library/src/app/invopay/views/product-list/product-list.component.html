@@ -276,7 +276,7 @@
                   <img src="../../../../assets/icons/unassing.svg" alt="Eliminar fila">
                 </button>
                 <small *ngIf="isDuplicateDescription(i)" style="color: red; display: block;">
-                  Nombre ya utilizado en otro documento.
+                  {{ 'IP.PRODUCTS.FORM.DOCUMENTS.DUPLICATE' | translate }}
                 </small>
               </div>
             </div>
@@ -382,7 +382,7 @@
                       {{ 'IP.PRODUCTS.FORM.DOCUMENTS.UPLOAD_BUTTON' | translate }}
                     </ng-container>
                     <ng-template #loadedText>
-                      Cargado
+                      {{ 'IP.PRODUCTS.FORM.DOCUMENTS.ALREADY_UPLOADED' | translate }}
                     </ng-template>
 
                   </button>
@@ -401,7 +401,7 @@
                 </button>
 
                 <small *ngIf="isDuplicateDescription(i)" style="color: red; display: block;">
-                  Nombre ya utilizado en otro documento.
+                  {{ 'IP.PRODUCTS.FORM.DOCUMENTS.DUPLICATE' | translate }}
                 </small>
               </div>
             </div>
