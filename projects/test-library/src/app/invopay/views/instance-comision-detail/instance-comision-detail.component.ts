@@ -137,17 +137,13 @@ export class InstanceComisionDetailComponent implements OnInit,OnDestroy {
           this.instance = instance;
           this.isTrueInsance = instance.hasIncentiveCategory;
           this.general=instance.scope
-          // Batch form updates for better performance
           const formValues = this.buildFormValues(instance);
           this.form.patchValue(formValues, { emitEvent: false });
           
-          // Assign arrays separately to avoid deep form processing
           this.assignInstanceData(instance);
           
-          // Set broker category safely
           this.setBrokerCategory(instance);
           
-          // Final validation
           this.form.updateValueAndValidity();
           
         } catch (error) {

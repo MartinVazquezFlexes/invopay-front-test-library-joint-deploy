@@ -2,9 +2,12 @@ import { Component, OnInit, ChangeDetectorRef, inject, OnDestroy } from '@angula
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription, combineLatest } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { GoalsItem } from '../../interface/objective-list.models';
+import { IpGoalItem } from '../../interface/ip-goals-response';
+import { Category } from '../../interface/objective-list.models';
 import IpSelectInputOption from '../../interface/ip-select-input-option';
 import { LoadingService } from '../../../shared/services/loading.service';
+import { IpGoalsService } from '../../services/ip-goals.service';
+import { IpObjectiveService } from '../../services/ip-objective.service';
 
 @Component({
   selector: 'app-goals-list',
@@ -15,103 +18,25 @@ export class GoalsListComponent implements OnInit, OnDestroy {
 
   config = {
     title: 'IP.GOALS.TITLE',
-    columns: ['name', 'period', 'categoryBroker', 'startDate', 'endDate', 'newPolicies', 'newPrimus', 'wallet', 'grade'],
+    columns: ['name', 'period', 'categoryName', 'startDate', 'endDate', 'newPoliciesPercentage', 'newPremiumsPercentage', 'portfolioGrowthPercentage', 'degreeOfGoalName'],
     actions: ['detail', 'edit', 'delete'],
     tableStyle: 'invopay'
   };
 
-  data: GoalsItem[] = [
-    {
-      id: 1,
-      name: 'Meta de Ventas Q1 2024',
-      period: 'Q1 2024',
-      categoryBroker: 'Premium',
-      startDate: '01/01/2024',
-      endDate: '31/03/2024',
-      newPolicies: 85,
-      newPrimus: 92,
-      wallet: 78,
-      grade: 'Alcanzado',
-      status: 'active'
-    },
-    {
-      id: 2,
-      name: 'Objetivo de Producción',
-      period: 'Q1 2024',
-      categoryBroker: 'Estándar',
-      startDate: '15/01/2024',
-      endDate: '15/04/2024',
-      newPolicies: 65,
-      newPrimus: 70,
-      wallet: 60,
-      grade: 'Parcialmente alcanzado',
-      status: 'active'
-    },
-    {
-      id: 3,
-      name: 'Meta de Crecimiento Q2',
-      period: 'Q2 2024',
-      categoryBroker: 'Premium',
-      startDate: '01/04/2024',
-      endDate: '30/06/2024',
-      newPolicies: 110,
-      newPrimus: 105,
-      wallet: 95,
-      grade: 'Sobrepasado',
-      status: 'active'
-    },
-    {
-      id: 4,
-      name: 'Objetivo de Renovación',
-      period: 'Q3 2024',
-      categoryBroker: 'Básico',
-      startDate: '01/07/2024',
-      endDate: '30/09/2024',
-      newPolicies: 45,
-      newPrimus: 50,
-      wallet: 40,
-      grade: 'No alcanzado',
-      status: 'pending'
-    },
-    {
-      id: 5,
-      name: 'Meta Anual 2024',
-      period: 'Año 2024',
-      categoryBroker: 'Premium Plus',
-      startDate: '01/01/2024',
-      endDate: '31/12/2024',
-      newPolicies: 95,
-      newPrimus: 88,
-      wallet: 90,
-      grade: 'Alcanzado',
-      status: 'active'
-    },
-    {
-      id: 6,
-      name: 'Objetivo de Expansión',
-      period: 'Q4 2024',
-      categoryBroker: 'Estándar',
-      startDate: '01/10/2024',
-      endDate: '30/12/2024',
-      newPolicies: 75,
-      newPrimus: 80,
-      wallet: 72,
-      grade: 'Parcialmente alcanzado',
-      status: 'active'
-    }
-  ];
+  data: IpGoalItem[] = [];
+  category: Category[] = [];
 
-  originalData: GoalsItem[] = [];
+  originalData: IpGoalItem[] = [];
   columnWidths = {
     'name': '200px',
     'period': '100px',
-    'categoryBroker': '120px',
+    'categoryName': '120px',
     'startDate': '110px',
     'endDate': '110px',
-    'newPolicies': '100px',
-    'newPrimus': '100px',
-    'wallet': '100px',
-    'grade': '120px',
+    'newPoliciesPercentage': '100px',
+    'newPremiumsPercentage': '100px',
+    'portfolioGrowthPercentage': '100px',
+    'degreeOfGoalName': '120px',
     'actions': '100px'
   };
   
@@ -127,12 +52,14 @@ export class GoalsListComponent implements OnInit, OnDestroy {
   private readonly translate = inject(TranslateService);
   private readonly cdr = inject(ChangeDetectorRef);
   public readonly loader=inject(LoadingService);
+  private readonly goalsService=inject(IpGoalsService);
+  private readonly objectiveService=inject(IpObjectiveService);
   subscription = new Subscription();
 
   titlesFile = new Map<string, string>();
   currentPages: number = 1;
   itemsPerPage: number = 10;
-  paginatedData: GoalsItem[] = [];
+  paginatedData: IpGoalItem[] = [];
   totalItems: number = 0;
   showPaginator: boolean = true;
 
@@ -146,17 +73,58 @@ export class GoalsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.loadData();
     this.setupTranslations();
-    if (this.data && this.data.length > 0) {
-      this.loader.setLoadingState(true);
-      
-      setTimeout(() => {
-        this.originalData = [...this.data];
-        this.applyCurrentFilters();
-      }, 100);
-    }
-    
     this.itemsPerPageControl.setValue(this.itemsPerPage.toString(), { emitEvent: false });
+  }
+
+  loadData(): void {
+    const sub1 = this.loader.setLoadingState(true);
+    const sub = this.goalsService.getAllGoals({page: 0, size: 10, sort: ''}).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.data = data.content;
+        this.loadCategories();
+        this.isLoading = false;
+        this.subscription.add(this.loader.setLoadingState(false));
+        this.subscription.add(sub1);
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.subscription.add(this.loader.setLoadingState(false));
+      }
+    });
+    this.subscription.add(sub);
+  }
+
+  loadCategories(): void {
+    const sub = this.objectiveService.getAllCategories().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.category = response;
+        this.processDataWithCategories();
+      },
+      error: (error) => {
+        console.log(error);
+        this.processDataWithCategories();
+      }
+    });
+    this.subscription.add(sub);
+  }
+
+  private processDataWithCategories(): void {
+    this.data = this.data.map(item => ({
+      ...item,
+      categoryName: this.getCategoryName(item.incentiveCategoryId)
+    }));
+    
+    this.originalData = [...this.data];
+    this.applyCurrentFilters();
+  }
+
+  private getCategoryName(categoryId: number): string {
+    const category = this.category.find(cat => cat.id === categoryId);
+    return category ? category.name : '-';
   }
 
   private setupTranslations(): void {
@@ -179,13 +147,13 @@ export class GoalsListComponent implements OnInit, OnDestroy {
         const titlesMap = new Map<string, string>([
           ['name', translations[0]],
           ['period', translations[1]],
-          ['categoryBroker', translations[2]],
+          ['categoryName', translations[2]],
           ['startDate', translations[3]],
           ['endDate', translations[4]],
-          ['newPolicies', translations[5] + ' (%)'],
-          ['newPrimus', translations[6] + ' (%)'],
-          ['wallet', translations[7] + ' (%)'],
-          ['grade', translations[8]]
+          ['newPoliciesPercentage', translations[5] + ' (%)'],
+          ['newPremiumsPercentage', translations[6] + ' (%)'],
+          ['portfolioGrowthPercentage', translations[7] + ' (%)'],
+          ['degreeOfGoalName', translations[8]]
         ]);
 
         this.titlesFile = titlesMap;
@@ -196,7 +164,7 @@ export class GoalsListComponent implements OnInit, OnDestroy {
           fields: [
             { label: translations[0], key: 'name' },
             { label: translations[1], key: 'period' },
-            { label: translations[2], key: 'categoryBroker' },
+            { label: translations[2], key: 'categoryName' },
             { 
               label: translations[3],
               key: 'startDate',
@@ -207,10 +175,10 @@ export class GoalsListComponent implements OnInit, OnDestroy {
               key: 'endDate',
               isDate: true
             },
-            { label: translations[5] + ' (%)', key: 'newPolicies' },
-            { label: translations[6] + ' (%)', key: 'newPrimus' },
-            { label: translations[7] + ' (%)', key: 'wallet' },
-            { label: translations[8], key: 'grade' }
+            { label: translations[5] + ' (%)', key: 'newPoliciesPercentage' },
+            { label: translations[6] + ' (%)', key: 'newPremiumsPercentage' },
+            { label: translations[7] + ' (%)', key: 'portfolioGrowthPercentage' },
+            { label: translations[8], key: 'degreeOfGoalName' }
           ],
           showActionButton: false
         };
@@ -282,7 +250,7 @@ export class GoalsListComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.data.sort((a: GoalsItem, b: GoalsItem) => {
+    this.data.sort((a: IpGoalItem, b: IpGoalItem) => {
       let aValue: any = (a as any)[key];
       let bValue: any = (b as any)[key];
 

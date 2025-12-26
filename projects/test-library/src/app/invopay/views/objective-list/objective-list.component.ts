@@ -18,7 +18,7 @@ export class ObjectiveListComponent implements OnInit, OnDestroy {
 
   config: ObjectiveListConfig = {
     title: 'IP.OBJECTIVES.TITLE',
-    columns: ['name', 'category', 'startDate', 'endDate'],
+    columns: ['name', 'categoryName', 'startDate', 'endDate'],
     actions: ['detail', 'edit', 'delete'],
     tableStyle: 'invopay'
   };
@@ -28,7 +28,7 @@ export class ObjectiveListComponent implements OnInit, OnDestroy {
   originalData: ObjectiveItem[] = [];
   columnWidths = {
     'name': '250px',
-    'category': '150px',
+    'categoryName': '150px',
     'startDate': '120px',
     'endDate': '120px',
     'actions': '100px'
@@ -82,7 +82,7 @@ export class ObjectiveListComponent implements OnInit, OnDestroy {
     const sub1=this.loader.setLoadingState(true)
     const sub=this.objectiveService.getAllObjectives({page:0,size:10,sort:''}).subscribe({
       next:(data)=>{
-        
+        console.log(data)
         this.data=data.content;
         this.loadCategories()
         this.isLoading=false;
@@ -142,7 +142,7 @@ export class ObjectiveListComponent implements OnInit, OnDestroy {
       combineLatest(translationObservables).subscribe((translations: string[]) => {
         const titlesMap = new Map<string, string>([
           ['name', translations[0]],
-          ['category', translations[1]],
+          ['categoryName', translations[1]],
           ['startDate', translations[2]],
           ['endDate', translations[3]]
         ]);
@@ -154,7 +154,7 @@ export class ObjectiveListComponent implements OnInit, OnDestroy {
           headerLabel: '#',
           fields: [
             { label: translations[0], key: 'name' },
-            { label: translations[1], key: 'category' },
+            { label: translations[1], key: 'categoryName' },
             { 
               label: translations[2],
               key: 'startDate',
