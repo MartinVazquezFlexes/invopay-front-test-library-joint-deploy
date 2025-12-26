@@ -219,18 +219,18 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
       clientEmail: this.policyDetails.customer.email || 'N/A',
 
       //broker
-      brokerFullName: this.policyDetails.broker.username || '',
-      brokerEmail: this.policyDetails.broker.userEmail || '',
+      brokerFullName: this.policyDetails.broker.username || 'N/A',
+      brokerEmail: this.policyDetails.broker.userEmail || 'N/A',
       brokerCategory: 'N/A', //no viene en el backend
 
       //policy
-      policyNumber: this.policyDetails.policyNumber || '',
-      productName: this.policyDetails.name || '',
+      policyNumber: this.policyDetails.policyNumber || 'N/A',
+      productName: this.policyDetails.insuranceName || 'N/A', 
       creationDate: this.formatDate(this.policyDetails.creationAt),
       emissionDate: this.formatDate(this.policyDetails.emissionDate),
       expirationDate: this.formatDate(this.policyDetails.endDate),
-      brokerPremiumValue: `${this.policyDetails.currency} ${formatted}` || '',
-      installmentsCount: this.policyDetails.installments.length || '',
+      brokerPremiumValue: `${this.policyDetails.currency} ${formatted}` || 'N/A',
+      installmentsCount: this.policyDetails.installments.length || 'N/A',
 
       //commission Scheme - ajusta según tu lógica
       commissionSchemeName: schemeName,
